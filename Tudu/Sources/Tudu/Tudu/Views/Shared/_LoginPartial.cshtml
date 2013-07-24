@@ -1,0 +1,7 @@
+﻿@if (Request.IsAuthenticated) {
+    <li><a href="/Manage/Account"><img src="imagens/icones/usuario.png" alt="Usuário" /> <span>Usuário</span></a></li>
+    <li><a href="javascript:document.getElementById('logoutForm').submit()"><img src="imagens/icones/entrar.png" alt="Sair" /> <span>Sair</span></a></li>
+} else {
+    <li><a href="#"><img src="imagens/icones/entrar.png" alt="Entrar" /> <span>Entrar</span></a></li>
+    <li><a href="#"><img src="imagens/icones/registrar.png" alt="Registrar" /> <span>Registrar</span></a></li>
+}

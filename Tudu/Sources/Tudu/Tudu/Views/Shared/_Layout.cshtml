@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="iso-8859-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <title>@(ViewBag.Title != null ? String.Format("{0} | Tudu", ViewBag.Title) : "Tudu")</title>
+
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/tudu.css" />
+
+    </head>
+    <body>
+
+        <header>
+
+            <figure id="logo">
+                <img src="imagens/logo.png" alt="Tudu" />
+            </figure>
+
+            <nav>
+
+                <ul id="menu">
+                    <li><a href="#"><img src="imagens/icones/inicio.png" alt="Início" /> <span>Início</span></a></li>
+                    <li><a href="#"><img src="imagens/icones/iteracoes.png" alt="Iterações" /> <span>Iterações</span></a></li>
+                    <li><a href="#"><img src="imagens/icones/pedidos.png" alt="Pedidos" /> <span>Pedidos</span></a></li>
+                    <li><a href="#"><img src="imagens/icones/mantis.png" alt="Mantis" /> <span>Mantis</span></a></li>
+                    <li><a href="#"><img src="imagens/icones/versoes.png" alt="Versões" /> <span>Versões</span></a></li>
+                    <li><a href="#"><img src="imagens/icones/homologados.png" alt="Homologados" /> <span>Homologados</span></a></li>
+                </ul>
+                
+                <ul id="usuario">
+                    <li><a href="#"><img src="imagens/icones/pesquisar.png" alt="Pesquisar" /> <span>Pesquisar</span></a></li>
+                    @Html.Partial("_LoginPartial")
+                </ul>
+
+            </nav>
+
+        </header>
+
+        <!-- Layout de 1 + 1 + 1 colunas -->
+
+        <article class="layout-111-col">
+
+            <section>
+                <header>Iteração</header>
+                <h2>Projeto Controle do Caos - Iteração #2</h2>
+                <ul class="issues">
+                    <li class="pedido novo"><a href="#">P:17867</a> Vendas Mobile</li>
+                    <li class="pedido novo"><a href="#">P:16349</a> Personalização de relatório</li>
+                    <li class="pedido andamento"><a href="#">P:12823</a> Leitora Escolar</li>
+                    <li class="pedido concluido"><a href="#">P:12321</a> SixCard Web</li>
+                    <li class="pedido versao-disponivel"><a href="#">P:18933</a> Relatório de integrações consecutivas</li>
+                    <li class="pedido cancelado"><a href="#">P:15865</a> Biometria Facial</li>
+                </ul>
+                <h2>Burn Up</h2>
+                <figure class="grafico">
+                    <img src="imagens/burnup.png" alt="Burn up da iteração" />
+                </figure>
+            </section>
+
+            <section>
+                <header>Atribuídos</header>
+                <ul class="issues">
+                    <li class="mantis retorno-dsv"><a href="#">M:8974</a> Saldo negativo no relatório saldo de cartões por lote</li>
+                    <li class="pedido andamento"><a href="#">P:12823</a> Leitora Escolar</li>
+                    <li class="mantis atribuido"><a href="#">M:9864</a> Timeout no relatório prestação de contas</li>
+                    <li class="mantis retorno-sup"><a href="#">M:6574</a> Revalidação de estudantes grava quantidade incorreta de acessos</li>
+                    <li class="pedido concluido"><a href="#">P:12321</a> SixCard Web</li>
+                    <li class="mantis implementado"><a href="#">M:9864</a> Erro de interpretação de movimento</li>
+                    <li class="mantis testar"><a href="#">M:7653</a> Fix 8000ABCD não executa</li>
+                    <li class="pedido cancelado"><a href="#">P:15865</a> Biometria Facial</li>
+                    <li class="mantis fechado"><a href="#">M:7847</a> Atualização via coleta não funciona</li>
+                </ul>
+            </section>
+
+            <section>
+                <header>Relacionados</header>
+                <ul class="issues">
+                    <li class="pedido novo"><a href="#">P:17867</a> Biometria Facial</li>
+                    <li class="mantis novo"><a href="#">M:10075</a> Relatório de revalidação de estudantes não é exibido no menu</li>
+                    <li class="mantis novo"><a href="#">M:9898</a> Relatório de cartões por empresa exibindo saldo negativo</li>
+                    <li class="mantis novo"><a href="#">M:9864</a> Leitura de cartões desconfigurada no IE7</li>
+                </ul>
+            </section>
+
+            <!--
+                Critérios para selecionar issues relacionados:
+                    - Contém 2 palavras iguais e próximas
+                    - Mantis relacionado a pedido
+                    - Mesma aplicação e datas próximas
+                    - Casos relacionados
+            -->
+
+        </article>
+        
+        <!-- Layout de 1 + 2 colunas -->
+
+        <article class="layout-12-col">
+
+            <section>
+                <header>Homologação</header>
+                <p>Mauris interdum ac felis eu tincidunt. Duis iaculis purus sem, et egestas sem imperdiet eget. Ut ac lobortis sem. Quisque egestas tortor faucibus nulla cursus, sit amet molestie enim fermentum. In lacinia tincidunt nibh ut sollicitudin. Proin luctus nulla eget diam ultricies adipiscing sit amet vel nisi.</p>
+                <p>In ut urna ac erat rutrum luctus. Aliquam feugiat augue a diam consequat, ac venenatis risus facilisis. Vestibulum enim nisl, pretium sed leo id, imperdiet tempor dolor. Proin ac tincidunt magna, ut pellentesque dolor. Maecenas at lacinia erat.</p>
+            </section>
+
+            <section>
+                <header>Changelog</header>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas eleifend risus at varius. In ac rhoncus neque, nec venenatis lorem. Curabitur tincidunt ante eget lacus volutpat placerat.</p>
+                <p>Aliquam feugiat, velit eget ultrices hendrerit, sapien magna euismod tellus, eu imperdiet enim mauris ut leo. Mauris interdum ac felis eu tincidunt. Duis iaculis purus sem, et egestas sem imperdiet eget.</p>
+                <p>Ut ac lobortis sem. Quisque egestas tortor faucibus nulla cursus, sit amet molestie enim fermentum. In lacinia tincidunt nibh ut sollicitudin. Proin luctus nulla eget diam ultricies adipiscing sit amet vel nisi. Sed ipsum nunc, vehicula at blandit vel, vestibulum in turpis. Aliquam erat volutpat. Vivamus sed tempor libero, non molestie leo. Sed iaculis, erat a condimentum adipiscing, orci sem viverra diam, sed ultrices neque lectus in mi. Quisque vel tortor a nibh suscipit hendrerit.</p>
+            </section>
+
+        </article>
+
+        <!-- Layout de 2 + 1 colunas -->
+
+        <article class="layout-21-col">
+
+            <section>
+                <header>Resultados da Pesquisa</header>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas eleifend risus at varius. In ac rhoncus neque, nec venenatis lorem. Curabitur tincidunt ante eget lacus volutpat placerat.</p>
+                <p>Aliquam feugiat, velit eget ultrices hendrerit, sapien magna euismod tellus, eu imperdiet enim mauris ut leo. Mauris interdum ac felis eu tincidunt. Duis iaculis purus sem, et egestas sem imperdiet eget.</p>
+                <p>Ut ac lobortis sem. Quisque egestas tortor faucibus nulla cursus, sit amet molestie enim fermentum. In lacinia tincidunt nibh ut sollicitudin. Proin luctus nulla eget diam ultricies adipiscing sit amet vel nisi. Sed ipsum nunc, vehicula at blandit vel, vestibulum in turpis. Aliquam erat volutpat. Vivamus sed tempor libero, non molestie leo. Sed iaculis, erat a condimentum adipiscing, orci sem viverra diam, sed ultrices neque lectus in mi. Quisque vel tortor a nibh suscipit hendrerit.</p>
+            </section>
+
+            <section>
+                <header>Links Sugeridos</header>
+                <p>Mauris interdum ac felis eu tincidunt. Duis iaculis purus sem, et egestas sem imperdiet eget. Ut ac lobortis sem. Quisque egestas tortor faucibus nulla cursus, sit amet molestie enim fermentum. In lacinia tincidunt nibh ut sollicitudin. Proin luctus nulla eget diam ultricies adipiscing sit amet vel nisi.</p>
+                <p>In ut urna ac erat rutrum luctus. Aliquam feugiat augue a diam consequat, ac venenatis risus facilisis. Vestibulum enim nisl, pretium sed leo id, imperdiet tempor dolor. Proin ac tincidunt magna, ut pellentesque dolor. Maecenas at lacinia erat.</p>
+            </section>
+
+        </article>
+
+        <!-- Layout de 3 colunas -->
+
+        <article class="layout-3-col">
+
+            <section>
+                <header>Requisito Detalhado</header>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec egestas eleifend risus at varius. In ac rhoncus neque, nec venenatis lorem. Curabitur tincidunt ante eget lacus volutpat placerat. Aliquam feugiat, velit eget ultrices hendrerit, sapien magna euismod tellus, eu imperdiet enim mauris ut leo.</p>
+                <p>Mauris interdum ac felis eu tincidunt. Duis iaculis purus sem, et egestas sem imperdiet eget. Ut ac lobortis sem. Quisque egestas tortor faucibus nulla cursus, sit amet molestie enim fermentum. In lacinia tincidunt nibh ut sollicitudin. Proin luctus nulla eget diam ultricies adipiscing sit amet vel nisi.</p>
+                <p>Sed ipsum nunc, vehicula at blandit vel, vestibulum in turpis. Aliquam erat volutpat. Vivamus sed tempor libero, non molestie leo. Sed iaculis, erat a condimentum adipiscing, orci sem viverra diam, sed ultrices neque lectus in mi. Quisque vel tortor a nibh suscipit hendrerit.</p>
+            </section>
+
+        </article>
+
+        <!--
+        @RenderBody()
+        -->
+
+        @*
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+                </div>
+            </div>
+        </footer>
+        *@
+
+    </body>
+</html>
