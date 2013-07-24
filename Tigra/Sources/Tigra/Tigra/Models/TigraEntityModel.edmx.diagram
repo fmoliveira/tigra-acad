@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="02c714d193bc4261919b422e92671de2" Name="TigraDiagram" >
+        <EntityTypeShape EntityType="TigraModel.Baseline" Width="1.5" PointX="8.28548297485592" PointY="12.346670275715493" />
+        <EntityTypeShape EntityType="TigraModel.DiagramAttribute" Width="1.5" PointX="2.7096773175102085" PointY="11.211072330927044" />
+        <EntityTypeShape EntityType="TigraModel.Log" Width="1.5" PointX="6.1828644863250037" PointY="3.7699849772127276" />
+        <EntityTypeShape EntityType="TigraModel.Membership" Width="1.5" PointX="9.4545936404981621" PointY="29.250735832960686" />
+        <EntityTypeShape EntityType="TigraModel.Module" Width="1.5" PointX="9.5164969682304648" PointY="3.99556192941757" />
+        <EntityTypeShape EntityType="TigraModel.Project" Width="1.5" PointX="10.391278439383617" PointY="11.36662163369666" />
+        <EntityTypeShape EntityType="TigraModel.Rating" Width="1.5" PointX="5.7740201995587075" PointY="1.620955885211451" />
+        <EntityTypeShape EntityType="TigraModel.RequirementRelation" Width="1.5" PointX="0.23614612418978762" PointY="26.659303752081144" />
+        <EntityTypeShape EntityType="TigraModel.RequirementRevision" Width="1.5" PointX="11.776224821701751" PointY="7.8935404456656153" />
+        <EntityTypeShape EntityType="TigraModel.Requirement" Width="1.5" PointX="0.16530587159344268" PointY="9.5506298288473062" />
+        <EntityTypeShape EntityType="TigraModel.RequirementText" Width="1.5" PointX="7.9026975892031093" PointY="24.786813300469337" />
+        <EntityTypeShape EntityType="TigraModel.Role" Width="1.5" PointX="10.147315832854861" PointY="27.386059878108121" />
+        <EntityTypeShape EntityType="TigraModel.StrongType" Width="1.5" PointX="10.2333349186151" PointY="1.2986080354538783" />
+        <EntityTypeShape EntityType="TigraModel.TemplateField" Width="1.5" PointX="1.0270202965601443" PointY="26.890476999287717" />
+        <EntityTypeShape EntityType="TigraModel.Template" Width="1.5" PointX="8.4655980320952828" PointY="24.463946413464818" />
+        <EntityTypeShape EntityType="TigraModel.UseCaseFlow" Width="1.5" PointX="3.3407700244992835" PointY="0.43184408565603388" />
+        <EntityTypeShape EntityType="TigraModel.UseCas" Width="1.5" PointX="8.4935394080791333" PointY="23.267819177018396" />
+        <EntityTypeShape EntityType="TigraModel.User" Width="1.5" PointX="2.7615885896429369" PointY="26.037102249468258" />
+        <EntityTypeShape EntityType="TigraModel.ActionType" Width="1.5" PointX="4.4293254932525219" PointY="13.229225313863356" />
+        <EntityTypeShape EntityType="TigraModel.FieldType" Width="1.5" PointX="4.4168205207292086" PointY="24.266921293114741" />
+        <EntityTypeShape EntityType="TigraModel.RelationType" Width="1.5" PointX="10.413299811265105" PointY="29.391542463280047" />
+        <EntityTypeShape EntityType="TigraModel.RequirementType" Width="1.5" PointX="11.753394786153638" PointY="18.227463447594765" />
+        <AssociationConnector Association="TigraModel.fk_TigraBaseline_Mid" />
+        <AssociationConnector Association="TigraModel.fk_TigraBaseline_Pjid" />
+        <AssociationConnector Association="TigraModel.fk_TigraDiagramAttributes_Rev" />
+        <AssociationConnector Association="TigraModel.fk_TigraMemberships_ProjectId" />
+        <AssociationConnector Association="TigraModel.fk_TigraMemberships_RoleId" />
+        <AssociationConnector Association="TigraModel.fk_TigraMemberships_UserId" />
+        <AssociationConnector Association="TigraModel.fk_TigraModules_Pjid" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirements_Pjid" />
+        <AssociationConnector Association="TigraModel.fk_TigraStrongTypes_Pjid" />
+        <AssociationConnector Association="TigraModel.fk_TigraTemplates_Pjid" />
+        <AssociationConnector Association="TigraModel.pk_TigraRatings_Uid" />
+        <AssociationConnector Association="TigraModel.fk_RequirementRelations_Destid" />
+        <AssociationConnector Association="TigraModel.fk_RequirementRelations_Srcid" />
+        <AssociationConnector Association="TigraModel.fk_RequirementRelations_Uid" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirementRevisions_Reqid" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirementRevisions_Tmplid" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirementRevisions_Uid" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirements_Rev" />
+        <AssociationConnector Association="TigraModel.fk_TigraUseCases_Rev" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirements_Uid" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirements_Field" />
+        <AssociationConnector Association="TigraModel.fk_TigraRequirements_Tmplid" />
+        <AssociationConnector Association="TigraModel.fk_TigraTemplateFields_Templ" />
+        <AssociationConnector Association="TigraModel.fk_TigraUseCaseFlows_Pfid" />
+        <AssociationConnector Association="TigraModel.fk_TigraUseCaseFlows_Rev" />
+        <AssociationConnector Association="TigraModel.History" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
