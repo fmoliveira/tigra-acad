@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tigra", "Tigra\Tigra.csproj", "{BBE900DB-BD2E-44D2-BDEB-48A04821565C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tigra.Tests", "Tigra.Tests\Tigra.Tests.csproj", "{DA756294-1BA1-4F2B-8811-507AB5D22EEA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBE900DB-BD2E-44D2-BDEB-48A04821565C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBE900DB-BD2E-44D2-BDEB-48A04821565C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBE900DB-BD2E-44D2-BDEB-48A04821565C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBE900DB-BD2E-44D2-BDEB-48A04821565C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA756294-1BA1-4F2B-8811-507AB5D22EEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA756294-1BA1-4F2B-8811-507AB5D22EEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA756294-1BA1-4F2B-8811-507AB5D22EEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA756294-1BA1-4F2B-8811-507AB5D22EEA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
