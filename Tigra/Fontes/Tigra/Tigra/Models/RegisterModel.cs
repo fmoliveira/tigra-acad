@@ -7,13 +7,9 @@ using System.Web;
 
 namespace Tigra.Models
 {
+    [DisplayName("Registrar")]
     public class RegisterModel
     {
-
-        [DisplayName("Nome de Usuário")]
-        [DataType(DataType.Text)]
-        [StringLength(20)]
-        public string UserName { get; set; }
 
         [DisplayName("Email")]
         [DataType(DataType.EmailAddress)]

@@ -10,10 +10,10 @@ namespace Tigra.Models
     public class LoginModel
     {
 
-        [DisplayName("Nome de Usuário")]
-        [DataType(DataType.Text)]
+        [DisplayName("Email")]
+        [DataType(DataType.EmailAddress)]
         [StringLength(80)]
-        public string UserName { get; set; }
+        public string Email { get; set; }
 
         [DisplayName("Senha")]
         [DataType(DataType.Password)]

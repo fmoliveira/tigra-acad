@@ -19,6 +19,9 @@ namespace Tigra
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            var formatters = GlobalConfiguration.Configuration.Formatters;
+            formatters.Remove(formatters.XmlFormatter);
         }
     }
 }

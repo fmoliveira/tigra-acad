@@ -23,7 +23,7 @@ namespace Tigra.Controllers
         public ActionResult Register()
         {
             RegisterModel model = new RegisterModel();
-            return View("Create", model);
+            return View(model);
         }
 
     }

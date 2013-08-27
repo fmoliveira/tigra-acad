@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a7a8642c70ea4344a0e50b7a40a2cdf9" Name="Diagram1">
-        <EntityTypeShape EntityType="TigraModel.UserAccount" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="TigraModel.UserProfile" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_UserProfiles_Usr" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TigraModel.UserAccount" Width="1.5" PointX="11.533351426726835" PointY="27.490685222433267" />
+        <EntityTypeShape EntityType="TigraModel.UserProfile" Width="1.5" PointX="2.2132668691749062" PointY="0.407354459356216" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_UserProfiles_Usr" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

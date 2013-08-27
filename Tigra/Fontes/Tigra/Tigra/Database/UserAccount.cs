@@ -15,9 +15,8 @@ namespace Tigra.Database
     public partial class UserAccount
     {
         public int UserID { get; set; }
-        public string UserName { get; set; }
-        public byte[] Password { get; set; }
         public string Email { get; set; }
+        public byte[] Password { get; set; }
         public System.DateTime RegisterDate { get; set; }
     
         public virtual UserProfile UserProfile { get; set; }

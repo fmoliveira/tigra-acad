@@ -122,7 +122,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\LoginController.cs" />
     <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
+    <Compile Include="BootstrapSupport\Utils.cs" />
     <Compile Include="BootstrapSupport\HtmlHelpers\GlyphIcons.cs" />
     <Compile Include="BootstrapSupport\HtmlHelpers\Paging.cs" />
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
@@ -207,6 +209,7 @@
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\respond.min.js" />
     <Content Include="scripts\respond.js" />
+    <Content Include="scripts\tigra.login.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
