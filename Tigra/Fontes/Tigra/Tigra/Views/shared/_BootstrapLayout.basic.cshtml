@@ -3,15 +3,16 @@
 @using NavigationRoutes
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta charset="iso-8859-1">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
+		<meta name="description" content="O Tigra é uma aplicação CASE com foco nos processos de gestão de requisitos e gestão de configuração.">
+		<meta name="author" content="Filipe Moreira de Oliveira, Jéssica de Morais Oliveira Lopes">
 		<link rel="shortcut icon" href="ico/favicon.png">
 		
-		<title>@ViewBag.Title | Tigra</title>
+		<title>@(ViewBag.Title != null && ViewBag.Title.Length != 0 ? String.Format("{0} | ", ViewBag.Title) : "") Tigra</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="@Styles.Url("~/Content/bootstrap/bootstrap.min.css")" rel="stylesheet">
@@ -41,11 +42,22 @@
 		<div class="navbar-collapse collapse">
 		  <ul class="nav navbar-nav">
 			<li class="active"><a href="#">Início</a></li>
+			<li><a href="#about">Baseline</a></li>
 			<li><a href="#about">Requisitos</a></li>
 			<li><a href="#contact">Casos de Uso</a></li>
 			<li><a href="#contact">Casos de Teste</a></li>
-			<li><a href="#contact">Guidelines</a></li>
 		  </ul>
+		  <form class="navbar-form navbar-right">
+			  <div class="form-group">
+				  <div class="input-group">
+					  <input class="form-control" type="text" placeholder="Pesquisar">
+					  <button type="submit" class="btn">
+						  <b class="glyphicon glyphicon-search"></b>
+					  </button>
+					  @*<span class="input-group-addon"><b class="glyphicon glyphicon-search"></b></span>*@
+				  </div>
+			  </div>
+		  </form>
 		  <ul class="nav navbar-nav navbar-right">
 			<li class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-cog"></b> &nbsp; Administração <b class="caret"></b></a>
@@ -72,9 +84,19 @@
 	  </div>
 	</div>
 
-	@RenderSection("Jumbotron", required: false)
+	@if (true == IsSectionDefined("Jumbotron"))
+	{
+		@RenderSection("Jumbotron", required: false);
+	}
 
 	<div class="container">
+		@if (false == IsSectionDefined("Jumbotron"))
+		{
+			<div class="page-header">
+				<h1>@ViewBag.Title</h1>
+			</div>
+		}
+
 		@Html.Partial("_alerts")
 		@Html.Partial("_validationSummary")
 
