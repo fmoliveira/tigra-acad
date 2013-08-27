@@ -1,6 +1,4 @@
-@using System.Web.Optimization
 @using BootstrapSupport
-@using NavigationRoutes
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,14 +13,14 @@
 		<title>@(ViewBag.Title != null && ViewBag.Title.Length != 0 ? String.Format("{0} | ", ViewBag.Title) : "") Tigra</title>
 
 		<!-- Bootstrap core CSS -->
-		<link href="@Styles.Url("~/Content/bootstrap/bootstrap.min.css")" rel="stylesheet">
-		<link href="@Styles.Url("~/Content/bootstrap/bootstrap-theme.min.css")" rel="stylesheet">
-		<link href="@Styles.Url("~/Content/bootstrap/jumbotron.css")" rel="stylesheet">
+		<link href="@Url.Content("~/Content/bootstrap/bootstrap.min.css")" rel="stylesheet">
+		<link href="@Url.Content("~/Content/bootstrap/bootstrap-theme.min.css")" rel="stylesheet">
+		<link href="@Url.Content("~/Content/bootstrap/jumbotron.css")" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
-		  <script src="@Scripts.Url("~/Scripts/html5shiv.js")"></script>
-		  <script src="@Scripts.Url("~/Scripts/respond.min.js")"></script>
+		<script src="@Url.Content("~/Scripts/html5shiv.js")"></script>
+		<script src="@Url.Content("~/Scripts/respond.min.js")"></script>
 		<![endif]-->
 
 		@RenderSection("head", required: false)
@@ -30,58 +28,35 @@
 	<body>
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
-	  <div class="container-fluid">
-		<div class="navbar-header">
-		  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		  </button>
-		  <a class="navbar-brand" href="#">Tigra</a>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">Tigra</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-bookmark"></b> &nbsp; Células <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">Células</li>
+							<li><a href="#">Office</a></li>
+							<li><a href="#">Skype</a></li>
+							<li><a href="#">Windows</a></li>
+						</ul>
+					</li>
+					<li class="active"><a href="#">Início</a></li>
+					<li><a href="#about">Elicitação</a></li>
+					<li><a href="#contact">Documentação</a></li>
+					<li><a href="#contact">Revisão</a></li>
+					<li><a href="#contact">Baseline</a></li>
+				</ul>
+				@Html.Partial("_login")
+			</div>
 		</div>
-		<div class="navbar-collapse collapse">
-		  <ul class="nav navbar-nav">
-			<li class="active"><a href="#">Início</a></li>
-			<li><a href="#about">Baseline</a></li>
-			<li><a href="#about">Requisitos</a></li>
-			<li><a href="#contact">Casos de Uso</a></li>
-			<li><a href="#contact">Casos de Teste</a></li>
-		  </ul>
-		  <form class="navbar-form navbar-right">
-			  <div class="form-group">
-				  <div class="input-group">
-					  <input class="form-control" type="text" placeholder="Pesquisar">
-					  <button type="submit" class="btn">
-						  <b class="glyphicon glyphicon-search"></b>
-					  </button>
-					  @*<span class="input-group-addon"><b class="glyphicon glyphicon-search"></b></span>*@
-				  </div>
-			  </div>
-		  </form>
-		  <ul class="nav navbar-nav navbar-right">
-			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-cog"></b> &nbsp; Administração <b class="caret"></b></a>
-			  <ul class="dropdown-menu">
-				<li><a href="#">Células</a></li>
-				<li><a href="#">Equipes</a></li>
-				<li class="divider"></li>
-				<li class="dropdown-header">Configurações</li>
-				<li><a href="#">Preferências</a></li>
-				<li><a href="#">Padrões</a></li>
-			  </ul>
-			</li>
-			<li class="dropdown">
-			  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-user"></b> &nbsp; Filipe Oliveira <b class="caret"></b></a>
-			  <ul class="dropdown-menu">
-				<li><a href="#">Meu Perfil</a></li>
-				<li><a href="#">Alterar Senha</a></li>
-				<li class="divider"></li>
-				<li><a href="#">Sair</a></li>
-			  </ul>
-			</li>
-		  </ul>
-		</div><!--/.navbar-collapse -->
-	  </div>
 	</div>
 
 	@if (true == IsSectionDefined("Jumbotron"))
@@ -104,22 +79,21 @@
 		<hr>
 
 		<footer>
-		<p>&copy; Tigra @DateTime.Now.ToString("yyyy")</p>
+			<p>&copy; Tigra @DateTime.Now.ToString("yyyy")</p>
 		</footer>
-	</div> <!-- /container -->
+	</div>
 
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="@Scripts.Url("~/Scripts/jquery-1.9.1.min.js")"></script>
-	<script src="@Scripts.Url("~/Scripts/jquery-migrate-1.1.1.min.js")"></script>
-	<script src="@Scripts.Url("~/Scripts/jquery.validate.min.js")"></script>
-	<script src="@Scripts.Url("~/Scripts/jquery.validate-unobstrusive.min.js")"></script>
-	<script src="@Scripts.Url("~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js")"></script>
-	<script src="@Scripts.Url("~/Scripts/bootstrap.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery-1.9.1.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery-migrate-1.1.1.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery.validate-unobstrusive.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js")"></script>
+	<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 	@RenderSection("Scripts", required: false)
 
 	</body>
 </html>
-

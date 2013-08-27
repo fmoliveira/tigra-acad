@@ -17,7 +17,7 @@ namespace BootstrapSupport.HtmlHelpers
             string tooltip = "",
             IDictionary<string, object> htmlAttributes = null)
         {
-            var glyph = new TagBuilder("i");
+            var glyph = new TagBuilder("b");
             glyph.MergeAttribute("class", glyphs);
 
             var anchor = new TagBuilder("a");

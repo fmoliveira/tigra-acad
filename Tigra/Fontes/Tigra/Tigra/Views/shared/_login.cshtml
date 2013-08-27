@@ -1,0 +1,33 @@
+﻿@if (HttpContext.Current.User.Identity.IsAuthenticated) {
+	<ul class="nav navbar-nav navbar-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-cog"></b> &nbsp; Administração <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="#">Células</a></li>
+				<li><a href="#">Equipes</a></li>
+				<li><a href="#">Padrões</a></li>
+				<li><a href="#">Preferências</a></li>
+			</ul>
+		</li>
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-user"></b> &nbsp; Filipe Oliveira <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li><a href="#">Meu Perfil</a></li>
+				<li><a href="#">Alterar Senha</a></li>
+				<li class="divider"></li>
+				<li><a href="#">Sair</a></li>
+			</ul>
+		</li>
+	</ul>
+} else {
+	<form class="navbar-form navbar-right">
+		<div class="form-group">
+			<input type="text" placeholder="Nome de Usuário" class="form-control">
+		</div>
+		<div class="form-group">
+			<input type="password" placeholder="Senha" class="form-control">
+		</div>
+		<button type="submit" class="btn btn-primary">Entrar</button>
+		@Html.ActionLink("Registrar", "Register", "Account", null, new { @class = "btn btn-info" })
+	</form>
+}

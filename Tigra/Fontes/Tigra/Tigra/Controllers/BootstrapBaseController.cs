@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using BootstrapSupport;
 
-namespace BootstrapMvcSample.Controllers
+namespace Tigra.Controllers
 {
     public class BootstrapBaseController: Controller
     {
