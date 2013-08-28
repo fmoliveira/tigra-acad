@@ -33,13 +33,34 @@ function ValidateEmail(email) {
 	return re.test(email);
 }
 
-/* Shows popver message below an invalid input. */
-function Error(elem, msg) {
-	$('#login-menu form').prepend('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + msg + '</div>');
+/* Shows alert message. */
+function Alert(type, msg, elem) {
+	$('#login-menu form').find('.alert').remove();
+	$('#login-menu form').prepend('<div class="alert alert-' + type + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + msg + '</div>');
 
 	if (elem != null) {
 		$('#' + elem).focus();
 	}
+}
+
+/* Shows errors alert. */
+function Error(msg, elem) {
+	Alert('danger', msg, elem);
+}
+
+/* Shows warning alert. */
+function Warning(msg, elem) {
+	Alert('warning', msg, elem);
+}
+
+/* Shows errors alert. */
+function Success(msg, elem) {
+	Alert('success', msg, elem);
+}
+
+/* Shows info alert. */
+function Info(msg, elem) {
+	Alert('info', msg, elem);
 }
 
 /* Handles login form button clicks. */
@@ -47,41 +68,62 @@ $('#login-menu button').click(function () {
 	var $action = $(this).data('action');
 	var $email = $('#email');
 	var $password = $('#password');
+	var $remember = $('#remember-me').is(':checked');
 	$('#login-menu form').find('.alert').remove();
 
 	/* Validate login form. */
 	if ($email.val().length == 0) {
-	    Error('email', 'Digite seu email!');
+		Error('Digite seu email!', 'email');
 	} else if ($email.val().length > 80) {
-	    Error('email', 'Email deve ter no máximo 80 caracteres!');
+		Error('Email deve ter no máximo 80 caracteres!');
 	} else if (false == ValidateEmail($email.val())) {
-	    Error('email', 'Endereço de email inválido!');
+		Error('Endereço de email inválido!');
 	} else if ($password.val().length == 0) {
-	    Error('password', 'Digite sua senha!');
+		Error('Digite sua senha!', 'password');
 	} else if ($action == "Register" && $password.val().length < 6) {
-	    Error('password', 'Senha deve ter no mínimo 6 caracteres!');
+		Error('Senha deve ter no mínimo 6 caracteres!', 'password');
 	} else if ($action == "Register" && $password.val().length > 32) {
-	    Error('password', 'Senha deve ter no máximo 32 caracteres!');
+		Error('Senha deve ter no máximo 32 caracteres!', 'password');
 	} else {
-	    /* Post login data. */
-	    // { email: $email.val(), password: $password.val() }
+		/* Make post URI and get login data. */
+		var $uri = $(this).parent().data('api') + $action;
+		var $data = JSON.stringify({ "Email": $email.val(), "Password": $password.val(), "RememberMe" : $remember });
 
-	    var $uri = $(this).parent().data('api') + $action;
-	    var $data = JSON.stringify({ "Email": $email.val(), "Password": $password.val() });
+		/* Post login data. */
+		$.ajax({
+			url: $uri,
+			type: 'POST',
+			dataType: 'json',
+			data: $data,
+			contentType: 'application/json; charset=utf-8',
+			complete: function (x, y, z) {
+				switch (x.status)
+				{
+					case 201:
+						Success('Registro efetuado com sucesso!<br/>Você já pode entrar.');
+						break;
 
-	    $.ajax({
-	        url: $uri,
-	        type: 'POST',
-	        dataType: 'json',
-	        data: $data,
-	        contentType: 'application/json; charset=utf-8',
-	        success: function (data) {
-	            Error(null, 'Sucesso! ' + data);
-	        },
-	        error: function (x, y, z) {
-	            alert(x + '\n' + y + '\n' + z);
-	            Error('Erro inesperado: ' + z + '!');
-	        }
-	    });
+				    case 202:
+				        location.reload();
+				        break;
+
+					case 401:
+						Error('Acesso negado!<br/><a href="#" data-action="LostPassword">Você esqueceu sua senha?</a>');
+						break;
+
+					case 409:
+						Warning('Email já está registrado!');
+						break;
+
+					case 500:
+						Error('Erro no servidor!');
+						break;
+
+					default:
+						Error('Erro inesperado (código ' + x.status + ')!');
+						break;
+				}
+			}
+		});
 	}
 });

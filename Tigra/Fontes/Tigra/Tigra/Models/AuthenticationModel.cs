@@ -7,19 +7,14 @@ using System.Web;
 
 namespace Tigra.Models
 {
-    [DisplayName("Registrar")]
-    public class RegisterModel
+    public class AuthenticationModel
     {
 
-        [DisplayName("Email")]
-        [DataType(DataType.EmailAddress)]
-        [StringLength(80)]
         public string Email { get; set; }
 
-        [DisplayName("Senha")]
-        [DataType(DataType.Password)]
-        [StringLength(50)]
         public string Password { get; set; }
+
+        public bool RememberMe { get; set; }
 
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Tigra.Models;
 
 namespace Tigra.Controllers
@@ -22,8 +23,14 @@ namespace Tigra.Controllers
 
         public ActionResult Register()
         {
-            RegisterModel model = new RegisterModel();
+            AuthenticationModel model = new AuthenticationModel();
             return View(model);
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
     }

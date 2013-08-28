@@ -4,27 +4,26 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Security;
 using Tigra.Database;
 using Tigra.Models;
 
 namespace Tigra.Api
 {
-    public class LoginController : ApiController
+    public class RegisterController : ApiController
     {
-        // GET api/login
+        // GET api/register
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/login/5
+        // GET api/register/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/login
+        // POST api/register
         public HttpResponseMessage Post(AuthenticationModel value)
         {
             try
@@ -32,15 +31,22 @@ namespace Tigra.Api
                 using (var ctx = new Entities())
                 {
                     UserAccount ua = ctx.UserAccounts.Where(i => i.Email == value.Email).FirstOrDefault();
-                    if (ua != null)
+                    if (ua == null)
                     {
-                        if (Authentication.ValidatePassword(ua, value.Password))
+                        ua = new UserAccount() { Email = value.Email, RegisterDate = DateTime.Now };
+                        ua.Password = Authentication.MakePassword(ua, value.Password);
+                        ctx.UserAccounts.Add(ua);
+
+                        if (ctx.SaveChanges() != 0)
                         {
-                            FormsAuthentication.SetAuthCookie(ua.Email, value.RememberMe);
-                            return new HttpResponseMessage(HttpStatusCode.Accepted);
+                            return new HttpResponseMessage(HttpStatusCode.Created);
+                        }
+                        else
+                        {
+                            return new HttpResponseMessage(HttpStatusCode.InternalServerError);
                         }
                     }
-                    return new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                    return new HttpResponseMessage(HttpStatusCode.Conflict);
                 }
             }
             catch
@@ -49,12 +55,12 @@ namespace Tigra.Api
             }
         }
 
-        // PUT api/login/5
+        // PUT api/register/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/login/5
+        // DELETE api/register/5
         public void Delete(int id)
         {
         }
