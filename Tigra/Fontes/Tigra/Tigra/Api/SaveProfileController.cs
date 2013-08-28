@@ -36,11 +36,13 @@ namespace Tigra.Api
 
                     if (profile == null)
                     {
-                        profile = new UserProfile() { UserID = value.UserID };
+                        profile = ctx.UserProfiles.Add(new UserProfile() { UserID = userid });
                     }
 
                     profile.FullName = value.FullName;
                     ctx.SaveChanges();
+                    Authentication.RefreshCookie();
+
                     return new HttpResponseMessage(HttpStatusCode.OK);
                 }
             }

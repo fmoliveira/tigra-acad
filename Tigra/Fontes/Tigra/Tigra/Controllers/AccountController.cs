@@ -33,5 +33,10 @@ namespace Tigra.Controllers
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult MyProfile()
+        {
+            return View();
+        }
+
     }
 }

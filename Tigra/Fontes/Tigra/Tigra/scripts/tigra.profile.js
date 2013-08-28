@@ -1,11 +1,10 @@
 ﻿$('#MyProfile button').click(function () {
     var $action = $(this).data('action');
     var $fullname = $('#fullname');
-    console.log($action);
 
     if ($action == "SaveProfile") {
         /* Make post URI and get login data. */
-        var $uri = $(this).parent().data('api') + $action;
+        var $uri = $('#MyProfile').data('api') + $action;
         var $data = JSON.stringify({ "FullName": $fullname.val() });
 
         /* Post login data. */
@@ -18,7 +17,7 @@
             complete: function (x, y, z) {
                 switch (x.status) {
                     case 200:
-                        location.relo();
+                        location.reload();
                         break;
 
                     case 500:

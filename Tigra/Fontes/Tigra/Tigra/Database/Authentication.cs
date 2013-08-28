@@ -36,9 +36,12 @@ namespace Tigra.Database
 
         private static string MakeAuthCookie(UserAccount user, bool remember)
         {
-            dynamic data = new ExpandoObject();
-            data.UserID = user.UserID;
-            data.Email = user.Email;
+            AuthCookieModel data = new AuthCookieModel()
+            {
+                UserID = user.UserID,
+                Email = user.Email,
+                RememberMe = remember
+            };
 
             data.FullName = 
                 (user.UserProfile != null) 
@@ -49,27 +52,41 @@ namespace Tigra.Database
 
             FormsAuthenticationTicket ticket =
                 new FormsAuthenticationTicket(1, data.FullName, DateTime.Now, DateTime.Now.AddMinutes(240)
-                    , remember, json, FormsAuthentication.FormsCookiePath);
+                    , data.RememberMe, json, FormsAuthentication.FormsCookiePath);
 
             return FormsAuthentication.Encrypt(ticket);
         }
 
-        public static UserAccount GetLoggedUser()
+        public static AuthCookieModel GetLoggedUser()
         {
-            HttpCookie ck = HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName];
-
-            if (ck != null)
+            if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                var ticket = FormsAuthentication.Decrypt(ck.Value);
-
-                try
-                {
-                    UserAccount user = (UserAccount)(new JavaScriptSerializer().Deserialize(ticket.UserData, typeof(UserAccount)));
-                    return user;
-                }
-                catch { }
+                var id = (FormsIdentity)HttpContext.Current.User.Identity;
+                var data = id.Ticket.UserData;
+                AuthCookieModel user = (AuthCookieModel)new JavaScriptSerializer().Deserialize(data, typeof(AuthCookieModel));
+                return user;
             }
             return null;
+        }
+
+        public static void RefreshCookie()
+        {
+            AuthCookieModel user = GetLoggedUser();
+
+            if (user != null)
+            {
+                using (var ctx = new Entities())
+                {
+                    UserAccount ua = ctx.UserAccounts.FirstOrDefault(i => i.UserID == user.UserID);
+
+                    if (ua != null)
+                    {
+                        var ticket = MakeAuthCookie(ua, user.RememberMe);
+                        HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
+                        HttpContext.Current.Response.Cookies.Set(ck);
+                    }
+                }
+            }
         }
 
         public static bool Login(AuthenticationModel model)
@@ -84,7 +101,7 @@ namespace Tigra.Database
                     {
                         var ticket = MakeAuthCookie(user, model.RememberMe);
                         HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
-                        HttpContext.Current.Response.Cookies.Add(ck);
+                        HttpContext.Current.Response.Cookies.Set(ck);
 
                         return true;
                     }
