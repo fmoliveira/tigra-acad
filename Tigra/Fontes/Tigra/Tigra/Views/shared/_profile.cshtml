@@ -1,5 +1,5 @@
 ﻿@if (HttpContext.Current.User.Identity.IsAuthenticated) {
-	<div class="modal fade" id="MyProfile" tabindex="-1" role="dialog" aria-label="Meu Perfil" aria-hidden="true">
+	<div class="modal fade" id="MyProfile" data-api="@Url.Content("~/Api/")" tabindex="-1" role="dialog" aria-label="Meu Perfil" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -9,29 +9,41 @@
 				<div class="modal-body">
 					<p>Preencha o seu perfil para que seus colegas saibam um pouco mais sobre você!</p>
 
-					<p>
-                        <label class="control-label">Nome:</label>
-					    <input type="text" class="form-control" placeholder="Digite seu nome e sobrenome">
-                    </p>
-                    
-					<p>
-					    <label class="control-label">Data de nascimento:</label>
-					    <input type="text" class="form-control" placeholder="Informe sua data de nascimento">
-                    </p>
+					<div class="row">
+						<div class="col-sm-4">
+							<p>
+								<label class="control-label">Foto de perfil:</label>
+								<img src="@Url.Content("~/Scripts/holder.js/160x200")" class="img-thumbnail" alt="Foto de perfil.">
+							</p>
+							<button class="btn btn-primary btn-block" style="width:160px" type="button" data-action="UploadPicture">Alterar</button>
+							<button class="btn btn-danger btn-block" style="width:160px" type="button" data-action="RemovePicture">Remover</button>
+						</div>
+						<div class="col-sm-8">
+							<p>
+								<label class="control-label">Nome:</label>
+								<input name="fullname" id="fullname" type="text" class="form-control" placeholder="Digite seu nome e sobrenome">
+							</p>
 					
-					<p>
-					    <label class="control-label">Localização:</label>
-					    <input type="text" class="form-control" placeholder="Em que cidade você mora?">
-                    </p>
+							<p>
+								<label class="control-label">Data de nascimento:</label>
+								<input name="birthdate" id="birthdate" type="text" class="form-control" placeholder="Informe sua data de nascimento">
+							</p>
 					
-					<p>
-					    <label class="control-label">Auto biografia:</label>
-					    <input type="text" class="form-control" placeholder="Escreva um pouco sobre você...">
-                    </p>
+							<p>
+								<label class="control-label">Localização:</label>
+								<input name="location" id="location" type="text" class="form-control" placeholder="Em que cidade você mora?">
+							</p>
+					
+							<p>
+								<label class="control-label">Auto biografia:</label>
+								<textarea name="biography" id="biography" class="form-control" rows="3" placeholder="Escreva um pouco sobre você..."></textarea>
+							</p>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
-					<button type="button" class="btn btn-primary">Salvar</button>
+					<button type="button" class="btn btn-primary" data-action="SaveProfile">Salvar</button>
 				</div>
 			</div>
 		</div>

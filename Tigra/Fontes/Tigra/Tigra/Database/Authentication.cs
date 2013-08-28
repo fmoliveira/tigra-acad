@@ -54,6 +54,24 @@ namespace Tigra.Database
             return FormsAuthentication.Encrypt(ticket);
         }
 
+        public static UserAccount GetLoggedUser()
+        {
+            HttpCookie ck = HttpContext.Current.Response.Cookies[FormsAuthentication.FormsCookieName];
+
+            if (ck != null)
+            {
+                var ticket = FormsAuthentication.Decrypt(ck.Value);
+
+                try
+                {
+                    UserAccount user = (UserAccount)(new JavaScriptSerializer().Deserialize(ticket.UserData, typeof(UserAccount)));
+                    return user;
+                }
+                catch { }
+            }
+            return null;
+        }
+
         public static bool Login(AuthenticationModel model)
         {
             using (var ctx = new Entities())

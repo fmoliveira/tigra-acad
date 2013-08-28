@@ -107,7 +107,7 @@ $('#login-menu button').click(function () {
 						break;
 
 					case 401:
-						Error('Acesso negado!<br/><a href="#" data-action="LostPassword">Você esqueceu sua senha?</a>');
+						Error('Acesso negado!<br/><a href="#" class="alert-link" data-action="LostPassword">Você esqueceu sua senha?</a>');
 						break;
 
 					case 409:
