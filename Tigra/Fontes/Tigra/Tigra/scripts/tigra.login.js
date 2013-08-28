@@ -51,30 +51,37 @@ $('#login-menu button').click(function () {
 
 	/* Validate login form. */
 	if ($email.val().length == 0) {
-		Error('email', 'Digite seu email!');
+	    Error('email', 'Digite seu email!');
 	} else if ($email.val().length > 80) {
-		Error('email', 'Email deve ter no máximo 80 caracteres!');
+	    Error('email', 'Email deve ter no máximo 80 caracteres!');
 	} else if (false == ValidateEmail($email.val())) {
-		Error('email', 'Endereço de email inválido!');
+	    Error('email', 'Endereço de email inválido!');
 	} else if ($password.val().length == 0) {
-		Error('password', 'Digite sua senha!');
+	    Error('password', 'Digite sua senha!');
 	} else if ($action == "Register" && $password.val().length < 6) {
-		Error('password', 'Senha deve ter no mínimo 6 caracteres!');
+	    Error('password', 'Senha deve ter no mínimo 6 caracteres!');
 	} else if ($action == "Register" && $password.val().length > 32) {
-		Error('password', 'Senha deve ter no máximo 32 caracteres!');
+	    Error('password', 'Senha deve ter no máximo 32 caracteres!');
 	} else {
 	    /* Post login data. */
 	    // { email: $email.val(), password: $password.val() }
 
-		var $uri = $(this).parent().data('api') + $action;
-	    $.post($uri, { '': JSON.stringify({ "Email": $email.val(), "Password": $password.val() }) }, function (data) {
-		    Error(null, 'Sucesso! ' + data);
-		})
-		.done(function () {
-		    //Error(null, 'Sucesso denovo!');
-		})
-		.fail(function () {
-		    Error(null, 'Login falhou!');
-		});
+	    var $uri = $(this).parent().data('api') + $action;
+	    var $data = JSON.stringify({ "Email": $email.val(), "Password": $password.val() });
+
+	    $.ajax({
+	        url: $uri,
+	        type: 'POST',
+	        dataType: 'json',
+	        data: $data,
+	        contentType: 'application/json; charset=utf-8',
+	        success: function (data) {
+	            Error(null, 'Sucesso! ' + data);
+	        },
+	        error: function (x, y, z) {
+	            alert(x + '\n' + y + '\n' + z);
+	            Error('Erro inesperado: ' + z + '!');
+	        }
+	    });
 	}
 });
