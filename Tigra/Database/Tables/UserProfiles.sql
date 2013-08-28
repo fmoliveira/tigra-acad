@@ -5,6 +5,7 @@ BEGIN
 	(
 		[UserID] INT NOT NULL,
 		[FullName] VARCHAR(50) NULL,
+		[BirthDate] DATE NULL,
 		[Picture] VARBINARY(MAX) NULL,
 		[Location] VARCHAR(50) NULL,
 		[Biography] VARCHAR(500) NULL

@@ -1,9 +1,7 @@
-﻿@using BootstrapSupport
-
-@if (HttpContext.Current.User.Identity.IsAuthenticated) {
+﻿@if (User.Identity.IsAuthenticated) {
 	<ul class="nav navbar-nav navbar-right">
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-cog"></b> &nbsp; Administração <b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" accesskey="A" data-toggle="dropdown"><b class="glyphicon glyphicon-wrench"></b> &nbsp; Administração <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				<li><a href="#">Células</a></li>
 				<li><a href="#">Equipes</a></li>
@@ -12,9 +10,9 @@
 			</ul>
 		</li>
 		<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-user"></b> &nbsp; Filipe Oliveira <b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" accesskey="P" data-toggle="dropdown"><b class="glyphicon glyphicon-user"></b> &nbsp; @User.Identity.Name <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">Meu Perfil</a></li>
+				<li><a href="#MyProfile" data-toggle="modal">Meu Perfil</a></li>
 				<li><a href="#">Alterar Senha</a></li>
 				<li class="divider"></li>
 				<li>@Html.ActionLink("Sair", "Logout", "Account")</li>
@@ -24,13 +22,19 @@
 } else {
 	<ul class="nav navbar-nav navbar-right">
 		<li id="login-menu" class="dropdown">
-			<a href="#" class="dropdown-toggle" accesskey="L" data-toggle="dropdown"><b class="glyphicon glyphicon-lock"></b> &nbsp; Entrar <b class="caret"></b></a>
+			<a href="#" class="dropdown-toggle" accesskey="N" data-toggle="dropdown"><b class="glyphicon glyphicon-log-in"></b> &nbsp; Entrar <b class="caret"></b></a>
 			<div class="dropdown-menu" style="width:300px; padding:15px">
 				<form class="form-signin" data-api="@Url.Content("~/Api/")">
-					<input name="email" id="email" type="email" class="form-control" placeholder="Endereço de email" maxlength="80" autofocus>
-					<input name="password" id="password" type="password" class="form-control" maxlength="32" placeholder="Senha">
+					<div class="input-group">
+						<span class="input-group-addon"><b class="glyphicon glyphicon-user"></b></span>
+						<input name="email" id="email" type="email" class="form-control" placeholder="Endereço de email" maxlength="80" autofocus>
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon"><b class="glyphicon glyphicon-lock"></b></span>
+						<input name="password" id="password" type="password" class="form-control" maxlength="32" placeholder="Senha">
+					</div>
 					<label class="checkbox">
-						<input name="remember-me" id="remember-me" type="checkbox" value="remember-me"> Lembre-se de mim
+						<input name="remember-me" id="remember-me" accesskey="L" type="checkbox" value="remember-me"> Lembre-se de mim
 					</label>
 					<button class="btn btn-lg btn-primary btn-block" type="button" data-action="Login">Entrar</button>
 					<button class="btn btn-lg btn-info btn-block" type="button" data-action="Register">Registrar</button>

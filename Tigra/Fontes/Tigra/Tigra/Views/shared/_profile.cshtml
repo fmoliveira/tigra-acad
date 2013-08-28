@@ -1,0 +1,39 @@
+﻿@if (HttpContext.Current.User.Identity.IsAuthenticated) {
+	<div class="modal fade" id="MyProfile" tabindex="-1" role="dialog" aria-label="Meu Perfil" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Meu Perfil</h4>
+				</div>
+				<div class="modal-body">
+					<p>Preencha o seu perfil para que seus colegas saibam um pouco mais sobre você!</p>
+
+					<p>
+                        <label class="control-label">Nome:</label>
+					    <input type="text" class="form-control" placeholder="Digite seu nome e sobrenome">
+                    </p>
+                    
+					<p>
+					    <label class="control-label">Data de nascimento:</label>
+					    <input type="text" class="form-control" placeholder="Informe sua data de nascimento">
+                    </p>
+					
+					<p>
+					    <label class="control-label">Localização:</label>
+					    <input type="text" class="form-control" placeholder="Em que cidade você mora?">
+                    </p>
+					
+					<p>
+					    <label class="control-label">Auto biografia:</label>
+					    <input type="text" class="form-control" placeholder="Escreva um pouco sobre você...">
+                    </p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+					<button type="button" class="btn btn-primary">Salvar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+}

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Security;
 using Tigra.Database;
 using Tigra.Models;
 
@@ -29,17 +28,12 @@ namespace Tigra.Api
         {
             try
             {
-                using (var ctx = new Entities())
+                if (Authentication.Login(value))
                 {
-                    UserAccount ua = ctx.UserAccounts.Where(i => i.Email == value.Email).FirstOrDefault();
-                    if (ua != null)
-                    {
-                        if (Authentication.ValidatePassword(ua, value.Password))
-                        {
-                            FormsAuthentication.SetAuthCookie(ua.Email, value.RememberMe);
-                            return new HttpResponseMessage(HttpStatusCode.Accepted);
-                        }
-                    }
+                    return new HttpResponseMessage(HttpStatusCode.Accepted);
+                }
+                else
+                {
                     return new HttpResponseMessage(HttpStatusCode.Unauthorized);
                 }
             }

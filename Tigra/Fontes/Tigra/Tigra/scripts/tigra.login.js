@@ -12,12 +12,11 @@ $('#login-menu').on('hidden.bs.dropdown', function () {
 /* Handles return key to swap input fields and login, and escape key to cancel. */
 $('#login-menu input').keyup(function (event) {
 	if (event.which == 13) {
-		var $prox = $(this).next();
-		if ($prox.prop('tagName') == "INPUT") {
-			$prox.focus();
-		}
-		else
-		{
+	    var $id = $(this).attr('id');
+
+		if ($id == "email") {
+			$('#password').focus();
+		} else if ($id == "password" || $id == "remember-me") {
 			$('#login-menu :button[data-action="Login"]').click();
 		}
 	}
@@ -103,9 +102,9 @@ $('#login-menu button').click(function () {
 						Success('Registro efetuado com sucesso!<br/>Você já pode entrar.');
 						break;
 
-				    case 202:
-				        location.reload();
-				        break;
+					case 202:
+						location.reload();
+						break;
 
 					case 401:
 						Error('Acesso negado!<br/><a href="#" data-action="LostPassword">Você esqueceu sua senha?</a>');

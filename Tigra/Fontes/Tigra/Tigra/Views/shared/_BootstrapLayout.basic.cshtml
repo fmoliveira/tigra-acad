@@ -48,11 +48,19 @@
 							<li><a href="#">Windows</a></li>
 						</ul>
 					</li>
-					<li class="active"><a href="#">Início</a></li>
-					<li><a href="#about">Elicitação</a></li>
-					<li><a href="#contact">Documentação</a></li>
-					<li><a href="#contact">Revisão</a></li>
-					<li><a href="#contact">Baseline</a></li>
+					<li class="active"><a href="#"><b class="glyphicon glyphicon-home"></b> &nbsp; Início</a></li>
+					<li><a href="#about"><b class="glyphicon glyphicon-asterisk"></b> &nbsp; Elicitação</a></li>
+					<li><a href="#contact"><b class="glyphicon glyphicon-file"></b> &nbsp; Documentação</a></li>
+					<li><a href="#contact"><b class="glyphicon glyphicon-check"></b> &nbsp; Revisão</a></li>
+					<li><a href="#contact"><b class="glyphicon glyphicon-signal"></b> &nbsp; Baseline</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" accesskey="U" data-toggle="dropdown"><b class="glyphicon glyphicon-question-sign"></b> &nbsp; Ajuda <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Introdução</a></li>
+							<li><a href="#">Documentação</a></li>
+							<li><a href="#">Perguntas frequentes</a></li>
+						</ul>
+					</li>
 				</ul>
 				@Html.Partial("_login")
 			</div>
@@ -83,6 +91,7 @@
 		</footer>
 	</div>
 
+	@Html.Partial("_profile")
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
