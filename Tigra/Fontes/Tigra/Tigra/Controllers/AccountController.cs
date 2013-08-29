@@ -35,7 +35,19 @@ namespace Tigra.Controllers
 
         public ActionResult MyProfile()
         {
-            return View();
+            using (var ctx = new Entities())
+            {
+                int userid = Authentication.GetLoggedUser().UserID;
+                UserProfile up = ctx.UserProfiles.FirstOrDefault(i => i.UserID == userid);
+
+                if (up == null)
+                {
+                    up = new UserProfile();
+                }
+
+                var profile = new MyProfileModel(up);
+                return View(profile);
+            }
         }
 
     }

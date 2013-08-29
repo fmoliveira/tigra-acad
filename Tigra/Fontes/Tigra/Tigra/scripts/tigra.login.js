@@ -85,7 +85,7 @@ $('#login-menu button').click(function () {
 		Error('Senha deve ter no máximo 32 caracteres!', 'password');
 	} else {
 		/* Make post URI and get login data. */
-		var $uri = $(this).parent().data('api') + $action;
+	    var $uri = $('body').data('api') + $action;
 		var $data = JSON.stringify({ "Email": $email.val(), "Password": $password.val(), "RememberMe" : $remember });
 
 		/* Post login data. */

@@ -12,7 +12,6 @@
 		<li class="dropdown">
 			<a href="#" class="dropdown-toggle" accesskey="P" data-toggle="dropdown"><b class="glyphicon glyphicon-user"></b> &nbsp; @User.Identity.Name <b class="caret"></b></a>
 			<ul class="dropdown-menu">
-				<li><a href="#MyProfile" data-toggle="modal">Modal Antiga</a></li>
 				<li><a href="@Url.Content("~/Account/MyProfile")" data-tigra="modal">Meu Perfil</a></li>
 				<li><a href="#">Alterar Senha</a></li>
 				<li class="divider"></li>
@@ -25,7 +24,7 @@
 		<li id="login-menu" class="dropdown">
 			<a href="#" class="dropdown-toggle" accesskey="N" data-toggle="dropdown"><b class="glyphicon glyphicon-log-in"></b> &nbsp; Entrar <b class="caret"></b></a>
 			<div class="dropdown-menu" style="width:300px; padding:15px">
-				<form class="form-signin" data-api="@Url.Content("~/Api/")">
+				<form class="form-signin">
 					<div class="input-group">
 						<span class="input-group-addon"><b class="glyphicon glyphicon-user"></b></span>
 						<input name="email" id="email" type="email" class="form-control" placeholder="Endereço de email" maxlength="80" autofocus>

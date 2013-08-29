@@ -25,7 +25,7 @@
 
 		@RenderSection("head", required: false)
 	</head>
-	<body>
+	<body data-api="@Url.Content("~/Api/")">
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
@@ -90,8 +90,6 @@
 			<p>&copy; Tigra @DateTime.Now.ToString("yyyy")</p>
 		</footer>
 	</div>
-
-	@Html.Partial("_profile")
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
