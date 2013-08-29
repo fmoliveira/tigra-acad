@@ -176,8 +176,6 @@
     <Content Include="Content\bootstrap\jumbotron.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="scripts\angular-strap.min.js" />
-    <Content Include="scripts\angular.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\holder.js" />
@@ -218,7 +216,7 @@
     <Content Include="scripts\respond.min.js" />
     <Content Include="scripts\respond.js" />
     <Content Include="scripts\tigra.login.js" />
-    <Content Include="scripts\tigra.profile.js" />
+    <Content Include="scripts\tigra.modal.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -239,6 +237,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\shared\_login.cshtml" />
     <Content Include="Views\shared\_profile.cshtml" />
+    <Content Include="Views\Account\MyProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
