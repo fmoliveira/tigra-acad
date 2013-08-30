@@ -1,4 +1,5 @@
-﻿@model Tigra.Models.MyProfileModel
+﻿@using BootstrapSupport
+@model Tigra.Models.MyProfileModel
 
 @{
 	Layout = null;
@@ -21,25 +22,17 @@
 			<button class="btn btn-danger btn-block" style="width:160px" type="button" data-action="RemovePicture">Remover</button>
 		</div>
 		<div class="col-sm-8">
-			<p>
-				<label class="control-label">Nome:</label>
-				<input type="text" class="form-control" data-field="fullname" value="@Html.Raw(Model.FullName)" placeholder="Digite seu nome e sobrenome" autofocus>
-			</p>
-					
-			<p>
-				<label class="control-label">Data de nascimento:</label>
-				<input type="text" class="form-control" data-field="birthdate" placeholder="Informe sua data de nascimento">
-			</p>
-					
-			<p>
-				<label class="control-label">Localização:</label>
-				<input type="text" class="form-control" data-field="location" placeholder="Em que cidade você mora?">
-			</p>
-					
-			<p>
-				<label class="control-label">Auto biografia:</label>
-				<textarea class="form-control" rows="3" data-field="biography" placeholder="Escreva um pouco sobre você..."></textarea>
-			</p>
+			@foreach (var property in Model.VisibleProperties())
+			{
+				using(Html.ControlGroupFor(property.Name))
+				{
+					@Html.Label(property.Name.ToSeparatedWords(), new { @class = "control-label" })
+					<div class="controls">
+						@Html.Editor(property.Name, new { @placeholder = property.GetDescription() })
+						@Html.ValidationMessage(property.Name, null, new { @class = "help-inline" })
+					</div>
+				}
+			}
 		</div>
 	</div>
 </div>
@@ -54,9 +47,19 @@
 
 		if ($action == "SaveProfile") {
 			/* Make post URI and get login data. */
-			var $fullname = $('input[data-field="fullname"]');
+			var $b = $('input[data-field="BirthDate"]').val().split('/');
+			var $d = new Date().getTimezoneOffset();
+			var $birthdate = new Date(Date.UTC($b[2], $b[1] - 1, $b[0], ($d / 60), ($d % 60), 0));
+
 			var $uri = $('body').data('api') + $action;
-			var $data = JSON.stringify({ "FullName": $fullname.val() });
+			var $data = JSON.stringify({
+				"FullName": $('input[data-field="FullName"]').val(),
+				"BirthDate": $birthdate,
+				"Location": $('input[data-field="Location"]').val(),
+				"Biography": $('textarea[data-field="Biography"]').val()
+			});
+			console.log($uri);
+			console.log($data);
 
 			/* Post login data. */
 			$.ajax({
@@ -68,7 +71,8 @@
 				complete: function (x, y, z) {
 					switch (x.status) {
 						case 200:
-							location.reload();
+						    $('#LoggedUserName').html($('input[data-field="FullName"]').val());
+							$('button[data-dismiss="modal"]').click();
 							break;
 
 						case 500:

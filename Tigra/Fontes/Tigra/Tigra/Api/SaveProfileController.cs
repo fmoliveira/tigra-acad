@@ -40,6 +40,9 @@ namespace Tigra.Api
                     }
 
                     profile.FullName = value.FullName;
+                    profile.BirthDate = value.BirthDate;
+                    profile.Location = value.Location;
+                    profile.Biography = value.Biography;
                     ctx.SaveChanges();
                     Authentication.RefreshCookie();
 

@@ -173,9 +173,12 @@
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\datepicker.css" />
     <Content Include="Content\bootstrap\jumbotron.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="scripts\bootstrap-datepicker.js" />
+    <Content Include="scripts\bootstrap-datepicker.pt-BR.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\holder.js" />
@@ -237,6 +240,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\shared\_login.cshtml" />
     <Content Include="Views\Account\MyProfile.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\string.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\MultilineText.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -261,7 +267,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12224</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

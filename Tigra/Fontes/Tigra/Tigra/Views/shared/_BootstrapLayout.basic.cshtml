@@ -16,6 +16,7 @@
 		<link href="@Url.Content("~/Content/bootstrap/bootstrap.min.css")" rel="stylesheet">
 		<link href="@Url.Content("~/Content/bootstrap/bootstrap-theme.min.css")" rel="stylesheet">
 		<link href="@Url.Content("~/Content/bootstrap/jumbotron.css")" rel="stylesheet">
+		<link href="@Url.Content("~/Content/bootstrap/datepicker.css")" rel="stylesheet">
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -68,17 +69,17 @@
 	</div>
 
 	@if (true == IsSectionDefined("Jumbotron"))
-	{
+ {
 		@RenderSection("Jumbotron", required: false);
-	}
+ }
 
 	<div class="container">
 		@if (false == IsSectionDefined("Jumbotron"))
-		{
+  {
 			<div class="page-header">
 				<h1>@ViewBag.Title</h1>
 			</div>
-		}
+  }
 
 		@Html.Partial("_alerts")
 		@Html.Partial("_validationSummary")
@@ -91,6 +92,8 @@
 		</footer>
 	</div>
 
+    <div id="modal"></div>
+
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -100,6 +103,8 @@
 	<script src="@Url.Content("~/Scripts/jquery.validate-unobstrusive.min.js")"></script>
 	<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js")"></script>
 	<script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/bootstrap-datepicker.js")"></script>
+	<script src="@Url.Content("~/Scripts/bootstrap-datepicker.pt-BR.js")"></script>
 	<script src="@Url.Content("~/Scripts/holder.js")"></script>
 	<script src="@Url.Content("~/Scripts/tigra.login.js")"></script>
 	<script src="@Url.Content("~/Scripts/tigra.modal.js")"></script>

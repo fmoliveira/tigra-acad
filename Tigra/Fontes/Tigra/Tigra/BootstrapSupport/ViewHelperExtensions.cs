@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -83,6 +84,12 @@ namespace BootstrapSupport
         public static string ToSeparatedWords(this string value)
         {
             return Regex.Replace(value, "([A-Z][a-z])", " $1").Trim();
+        }
+
+        public static string GetDescription(this PropertyInfo propertyInfo)
+        {
+            var attrib = (DescriptionAttribute)Attribute.GetCustomAttribute(propertyInfo, typeof(DescriptionAttribute));
+            return (attrib != null) ? attrib.Description : null;
         }
 
     }

@@ -19,6 +19,7 @@ namespace Tigra.Database
         public byte[] Picture { get; set; }
         public string Location { get; set; }
         public string Biography { get; set; }
+        public Nullable<System.DateTime> BirthDate { get; set; }
     
         public virtual UserAccount UserAccount { get; set; }
     }

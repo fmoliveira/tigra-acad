@@ -1,0 +1,10 @@
+﻿@model DateTime?
+<div class="input-group date">
+    @Html.TextBoxFor(model => model, new { @class = "form-control", @placeholder = ViewData["placeholder"], @data_field = @ViewData.TemplateInfo.GetFullHtmlFieldName(""), @data_provide = "datepicker", @data_date_language = "pt-BR", @data_date_format = "dd/mm/yyyy", @data_date_autoclose = "true" })
+    <label for="@ViewData.TemplateInfo.GetFullHtmlFieldName("")" class="input-group-addon"><b class="glyphicon glyphicon-calendar"></b></label>
+</div>
+<script type="text/javascript">
+    $('input[data-provide="datepicker"]').each(function () {
+        $(this).val($(this).val().substring(0, 10));
+    });
+</script>
