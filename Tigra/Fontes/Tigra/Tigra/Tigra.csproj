@@ -125,6 +125,7 @@
     <Compile Include="Api\LoginController.cs" />
     <Compile Include="Api\SaveProfileController.cs" />
     <Compile Include="Api\RegisterController.cs" />
+    <Compile Include="BootstrapSupport\AutoFocusAttribute.cs" />
     <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
     <Compile Include="BootstrapSupport\Utils.cs" />
     <Compile Include="BootstrapSupport\HtmlHelpers\GlyphIcons.cs" />

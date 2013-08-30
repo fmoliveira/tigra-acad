@@ -12,6 +12,7 @@ namespace Tigra.Models
     {
         [DisplayName("Nome:")]
         [Description("Digite seu nome e sobrenome")]
+        [AutoFocus]
         public string FullName { get; set; }
 
         [DisplayName("Data de nascimento:")]
