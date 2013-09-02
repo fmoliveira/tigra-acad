@@ -8,7 +8,11 @@
 		$('body').append($modal);
 		Holder.run({ images: '.img-thumbnail' });
 		$('#TigraModal').modal();
-		setTimeout(function () { $('.modal-body :input[autofocus="autofocus"]').focus() }, 500);
+
+		var $foc = $('.modal-body :input[autofocus="autofocus"]');
+		if ($foc.length != 0) {
+		    setTimeout(function () { $foc[0].focus() }, 500);
+		}
 	});
 	return false;
 });

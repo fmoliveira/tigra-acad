@@ -20,11 +20,11 @@ namespace Tigra.Models
         [DataType(DataType.Date)]
         public DateTime? BirthDate { get; set; }
 
-        [DisplayName("Localização")]
+        [DisplayName("Localização:")]
         [Description("Em que cidade você mora?")]
         public string Location { get; set; }
 
-        [DisplayName("Auto biografia")]
+        [DisplayName("Auto biografia:")]
         [Description("Escreva um pouco sobre você...")]
         [DataType(DataType.MultilineText)]
         [StringLength(500)]
