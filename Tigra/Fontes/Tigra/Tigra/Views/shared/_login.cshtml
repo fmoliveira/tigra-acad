@@ -6,11 +6,13 @@
 			<a href="#" class="dropdown-toggle" accesskey="A" data-toggle="dropdown"><b class="glyphicon glyphicon-wrench"></b> &nbsp; Administração <b class="caret"></b></a>
 			<ul class="dropdown-menu">
 				@Html.MenuLink("Cells", "Index", "Células")
-				<li><a href="#">Equipes</a></li>
-				<li><a href="#">Permissões</a></li>
+				@Html.MenuLink("Teams", "Index", "Equipes")
+				@Html.MenuLink("Roles", "Index", "Permissões")
+				@Html.MenuLink("Templates", "Index", "Templates")
 				<li class="divider"></li>
-				<li><a href="#">Padrões</a></li>
-				<li><a href="#">Preferências</a></li>
+				@Html.MenuLink("Defaults", "Index", "Padrões")
+				@Html.MenuLink("Preferences", "Index", "Preferências")
+				@Html.MenuLink("Settings", "Index", "Configurações")
 			</ul>
 		</li>
 		<li class="dropdown">
@@ -19,7 +21,7 @@
 				<li><a href="@Url.Content("~/Account/MyProfile")" data-tigra="modal">Meu Perfil</a></li>
 				<li><a href="#">Alterar Senha</a></li>
 				<li class="divider"></li>
-				<li>@Html.ActionLink("Sair", "Logout", "Account")</li>
+				@Html.MenuLink("Account", "Logout", "Sair")
 			</ul>
 		</li>
 	</ul>
