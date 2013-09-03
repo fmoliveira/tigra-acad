@@ -1,4 +1,12 @@
-﻿$('a[data-tigra="modal"]').click(function () {
+﻿$(document).ajaxSend(function (event, request, settings) {
+	$('#loading').show();
+});
+
+$(document).ajaxComplete(function (event, request, settings) {
+	$('#loading').fadeOut();
+});
+
+$('a[data-tigra="modal"]').click(function () {
 	$.get($(this).attr('href'), function (data) {
 		$('#TigraModal').remove();
 		var $div = $("<div>", { id: "foo", class: "a" });
@@ -11,7 +19,7 @@
 
 		var $foc = $('.modal-body :input[autofocus="autofocus"]');
 		if ($foc.length != 0) {
-		    setTimeout(function () { $foc[0].focus() }, 500);
+			setTimeout(function () { $foc[0].focus() }, 500);
 		}
 	});
 	return false;
