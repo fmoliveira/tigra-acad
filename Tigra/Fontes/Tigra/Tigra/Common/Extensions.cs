@@ -24,5 +24,17 @@ namespace Tigra
 
             return true;
         }
+
+        public static Exception GetInnerstException(this Exception exception)
+        {
+            Exception e = exception;
+
+            while (e.InnerException != null)
+            {
+                e = e.InnerException;
+            }
+
+            return e;
+        }
     }
 }
