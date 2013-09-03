@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="TigraModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="TigraModelStoreContainer">
+          <EntitySet Name="Cells" EntityType="TigraModel.Store.Cells" store:Type="Tables" Schema="Tigra" />
           <EntitySet Name="UserAccounts" EntityType="TigraModel.Store.UserAccounts" store:Type="Tables" Schema="Tigra" />
           <EntitySet Name="UserProfiles" EntityType="TigraModel.Store.UserProfiles" store:Type="Tables" Schema="Tigra" />
           <AssociationSet Name="fk_Tigra_UserProfiles_Usr" Association="TigraModel.Store.fk_Tigra_UserProfiles_Usr">
@@ -13,6 +14,15 @@
             <End Role="UserProfiles" EntitySet="UserProfiles" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Cells">
+          <Key>
+            <PropertyRef Name="CellID" />
+          </Key>
+          <Property Name="CellID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CellName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Tag" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="UserAccounts">
           <Key>
             <PropertyRef Name="UserID" />
@@ -56,6 +66,7 @@
             <End Role="UserAccount" EntitySet="UserAccounts" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
+          <EntitySet Name="Cells" EntityType="TigraModel.Cell" />
         </EntityContainer>
         <EntityType Name="UserAccount">
           <Key>
@@ -91,6 +102,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Cell">
+          <Key>
+            <PropertyRef Name="CellID" />
+          </Key>
+          <Property Type="Int32" Name="CellID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="CellName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Tag" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -116,6 +136,16 @@
                 <ScalarProperty Name="Picture" ColumnName="Picture" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cells">
+            <EntityTypeMapping TypeName="TigraModel.Cell">
+              <MappingFragment StoreEntitySet="Cells">
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CellName" ColumnName="CellName" />
+                <ScalarProperty Name="CellID" ColumnName="CellID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

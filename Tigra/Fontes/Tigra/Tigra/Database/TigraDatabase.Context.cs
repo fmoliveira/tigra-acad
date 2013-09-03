@@ -27,5 +27,6 @@ namespace Tigra.Database
     
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Cell> Cells { get; set; }
     }
 }

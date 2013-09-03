@@ -1,6 +1,10 @@
 @using BootstrapSupport
-@model System.Collections.IEnumerable   
-    <h4>@Model.GetLabel() <small>Listing</small></h4>
+@model System.Collections.IEnumerable
+
+@{
+    ViewBag.Title = @Model.GetLabel();
+}
+
 <table class="table table-striped">
     <caption></caption>
     <thead>
@@ -8,7 +12,7 @@
             @foreach (var property in Model.VisibleProperties())
             {
                 <th>
-                    @property.GetLabel().ToSeparatedWords()
+                    @property.GetLabel()
                 </th>
             }
             <th></th>
@@ -27,19 +31,18 @@
             }
             <td>
                 <div class="btn-group">
-                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                        Action
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                        Ação
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         @{
                             @Html.TryPartial("_actions", model)                            
                             var routevalues = model.GetIdValue();  
-                            <li>@Html.ActionLink("Edit", "Edit", routevalues)</li>
-                            <li>@Html.ActionLink("Details", "Details", routevalues)</li>
+                            <li>@Html.ActionLink("Editar", "Edit", routevalues)</li>
+                            <li>@Html.ActionLink("Detalhes", "Details", routevalues)</li>
                             <li class="divider"></li>
-                            <li>@Html.ActionLink("Delete", "Delete", routevalues)</li>
-                               
+                            <li>@Html.ActionLink("Excluir", "Delete", routevalues)</li>
                         }
                     </ul>
                 </div>
@@ -51,6 +54,6 @@
 
 </table>
 <p>
-    @Html.ActionLink("Create New", "Create", null, new {@class = "btn"})
+    @Html.ActionLink("Criar novo", "Create", null, new {@class = "btn btn-primary btn-lg"})
 </p>
 

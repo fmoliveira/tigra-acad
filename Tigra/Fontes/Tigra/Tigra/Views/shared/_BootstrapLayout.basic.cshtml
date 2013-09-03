@@ -1,4 +1,6 @@
 @using BootstrapSupport
+@using Tigra.Database
+@using Tigra.Models
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -36,7 +38,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Tigra</a>
+				@Html.ActionLink("Tigra", "Index", "Home", null, new { @class = "navbar-brand" })
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
@@ -44,22 +46,22 @@
 						<a href="#" class="dropdown-toggle" accesskey="C" data-toggle="dropdown"><b class="glyphicon glyphicon-book"></b> &nbsp; Células <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Células</li>
-							<li><a href="#">Office</a></li>
-							<li><a href="#">Skype</a></li>
-							<li><a href="#">Windows</a></li>
+							@foreach (Cell model in CellModel.GetCellTags()) {
+								<li>@Html.ActionLink(model.CellName, "Index", "Home", new { @id = model.Tag }, null)</li>
+							}
 						</ul>
 					</li>
-					<li class="active"><a href="#"><b class="glyphicon glyphicon-home"></b> &nbsp; Início</a></li>
-					<li><a href="#about"><b class="glyphicon glyphicon-asterisk"></b> &nbsp; Elicitação</a></li>
-					<li><a href="#contact"><b class="glyphicon glyphicon-file"></b> &nbsp; Documentação</a></li>
-					<li><a href="#contact"><b class="glyphicon glyphicon-check"></b> &nbsp; Revisão</a></li>
-					<li><a href="#contact"><b class="glyphicon glyphicon-signal"></b> &nbsp; Baseline</a></li>
+					@Html.MenuLink("Home", "Index", "Início", "home")
+					@Html.MenuLink("Elicitation", "Index", "Início", "asterisk")
+					@Html.MenuLink("Documentation", "Index", "Início", "file")
+					@Html.MenuLink("Revision", "Index", "Início", "check")
+					@Html.MenuLink("Baseline", "Index", "Início", "signal")
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" accesskey="U" data-toggle="dropdown"><b class="glyphicon glyphicon-question-sign"></b> &nbsp; Ajuda <b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Introdução</a></li>
-							<li><a href="#">Documentação</a></li>
-							<li><a href="#">Perguntas frequentes</a></li>
+							@Html.MenuLink("Help", "Intro", "Introdução")
+							@Html.MenuLink("Help", "Index", "Documentação")
+							@Html.MenuLink("Help", "Faq", "Perguntas frequentes")
 						</ul>
 					</li>
 				</ul>
@@ -92,7 +94,7 @@
 		</footer>
 	</div>
 
-    <div id="modal"></div>
+	<div id="modal"></div>
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->

@@ -10,21 +10,23 @@ namespace Tigra.Models
 {
     public class MyProfileModel
     {
-        [DisplayName("Nome:")]
+        [DisplayName("Nome")]
         [Description("Digite seu nome e sobrenome")]
+        [StringLength(50)]
         [AutoFocus]
         public string FullName { get; set; }
 
-        [DisplayName("Data de nascimento:")]
+        [DisplayName("Data de nascimento")]
         [Description("Informe sua data de nascimento")]
         [DataType(DataType.Date)]
         public DateTime? BirthDate { get; set; }
 
-        [DisplayName("Localização:")]
+        [DisplayName("Localização")]
         [Description("Em que cidade você mora?")]
+        [StringLength(50)]
         public string Location { get; set; }
 
-        [DisplayName("Auto biografia:")]
+        [DisplayName("Auto biografia")]
         [Description("Escreva um pouco sobre você...")]
         [DataType(DataType.MultilineText)]
         [StringLength(500)]

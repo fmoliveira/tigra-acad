@@ -96,7 +96,7 @@ namespace BootstrapSupport
 		public static string GetAutoFocus(this PropertyInfo propertyInfo)
 		{
 			var attrib = (AutoFocusAttribute)Attribute.GetCustomAttribute(propertyInfo, typeof(AutoFocusAttribute));
-            return (attrib != null) ? "autofocus" : null;
+			return (attrib != null) ? "autofocus" : null;
 		}
 
 	}
