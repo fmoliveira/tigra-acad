@@ -5,8 +5,17 @@ using System.Web;
 
 namespace Tigra
 {
+    /// <summary>
+    /// Helper extensions.
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Compare two arrays of bytes.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="buf"></param>
+        /// <returns></returns>
         public static bool CompareTo(this byte[] obj, byte[] buf)
         {
             if (obj.Length != buf.Length)
@@ -25,6 +34,11 @@ namespace Tigra
             return true;
         }
 
+        /// <summary>
+        /// Gets the most inner exception of a given exception, so we have the most detailed error.
+        /// </summary>
+        /// <param name="exception"></param>
+        /// <returns></returns>
         public static Exception GetInnerstException(this Exception exception)
         {
             Exception e = exception;

@@ -9,19 +9,11 @@ using Tigra.Models;
 
 namespace Tigra.Api
 {
+    /// <summary>
+    /// API class for user registral.
+    /// </summary>
     public class RegisterController : ApiController
     {
-        // GET api/register
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/register/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/register
         public HttpResponseMessage Post(AuthenticationModel value)
@@ -31,12 +23,16 @@ namespace Tigra.Api
                 using (var ctx = new Entities())
                 {
                     UserAccount ua = ctx.UserAccounts.Where(i => i.Email == value.Email).FirstOrDefault();
+
+                    /* Check if user isn't registered yet. */
                     if (ua == null)
                     {
+                        /* Create the new user and salt the password. */
                         ua = new UserAccount() { Email = value.Email, RegisterDate = DateTime.Now };
                         ua.Password = Authentication.MakePassword(ua, value.Password);
                         ctx.UserAccounts.Add(ua);
 
+                        /* Save changes. */
                         if (ctx.SaveChanges() != 0)
                         {
                             return new HttpResponseMessage(HttpStatusCode.Created);
@@ -55,14 +51,5 @@ namespace Tigra.Api
             }
         }
 
-        // PUT api/register/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/register/5
-        public void Delete(int id)
-        {
-        }
     }
 }

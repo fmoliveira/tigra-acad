@@ -5,8 +5,17 @@ using System.Web.Routing;
 
 namespace BootstrapSupport
 {
+    /// <summary>
+    /// Util helper methods.
+    /// </summary>
     public static class Utils
     {
+        /// <summary>
+        /// Creates a submit button.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public static MvcHtmlString SubmitButton(this HtmlHelper helper, string text)
         {
             var btn = new TagBuilder("button");
@@ -18,6 +27,15 @@ namespace BootstrapSupport
             return MvcHtmlString.Create(btn.ToString());
         }
 
+        /// <summary>
+        /// Creates a menu link and automatically make it active if it's the current page.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="controllerName"></param>
+        /// <param name="actionName"></param>
+        /// <param name="linkText"></param>
+        /// <param name="glyphIcon"></param>
+        /// <returns></returns>
         public static MvcHtmlString MenuLink(this HtmlHelper helper, string controllerName, string actionName, string linkText, string glyphIcon = null)
         {
             TagBuilder a, b, li;

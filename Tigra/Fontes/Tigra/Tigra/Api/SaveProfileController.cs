@@ -10,19 +10,11 @@ using Tigra.Models;
 
 namespace Tigra.Api
 {
+    /// <summary>
+    /// API class for saving user profile changes.
+    /// </summary>
     public class SaveProfileController : ApiController
     {
-        // GET api/profile
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/profile/5
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST api/profile
         public HttpResponseMessage Post(MyProfileModel value)
@@ -31,18 +23,23 @@ namespace Tigra.Api
             {
                 using (var ctx = new Entities())
                 {
+                    /* Get logged user ID. That won't be fetched from the form to avoid XSS atacks. */
                     int userid = Authentication.GetLoggedUser().UserID;
                     UserProfile profile = ctx.UserProfiles.FirstOrDefault(i => i.UserID == userid);
 
+                    /* If there isn't a profile for this user yet, create it. */
                     if (profile == null)
                     {
                         profile = ctx.UserProfiles.Add(new UserProfile() { UserID = userid });
                     }
 
+                    /* Set user profile info. */
                     profile.FullName = value.FullName;
                     profile.BirthDate = value.BirthDate;
                     profile.Location = value.Location;
                     profile.Biography = value.Biography;
+
+                    /* Save changes and refresh user's full name in the cookie. */
                     ctx.SaveChanges();
                     Authentication.RefreshCookie();
 
@@ -55,14 +52,5 @@ namespace Tigra.Api
             }
         }
 
-        // PUT api/profile/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/profile/5
-        public void Delete(int id)
-        {
-        }
     }
 }

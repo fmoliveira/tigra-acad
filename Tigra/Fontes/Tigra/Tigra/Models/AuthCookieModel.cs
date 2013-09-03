@@ -7,6 +7,7 @@ namespace Tigra.Models
 {
     public class AuthCookieModel
     {
+
         public int UserID { get; set; }
 
         public string Email { get; set; }
@@ -14,5 +15,6 @@ namespace Tigra.Models
         public string FullName { get; set; }
 
         public bool RememberMe { get; set; }
+
     }
 }

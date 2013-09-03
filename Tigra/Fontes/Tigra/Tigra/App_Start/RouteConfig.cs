@@ -13,6 +13,7 @@ namespace Tigra
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            /* Default page routing. */
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -9,6 +9,7 @@ namespace Tigra
     {
         public static void Register(HttpConfiguration config)
         {
+            /* Default API routing. */
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

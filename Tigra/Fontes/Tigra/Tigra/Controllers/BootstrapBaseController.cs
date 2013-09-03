@@ -10,21 +10,37 @@ namespace Tigra.Controllers
 {
     public class BootstrapBaseController: Controller
     {
+        /// <summary>
+        /// Sets a warning message.
+        /// </summary>
+        /// <param name="message"></param>
         public void Warning(string message)
         {
             TempData.Add(Alerts.WARNING, message);
         }
 
+        /// <summary>
+        /// Sets a success message.
+        /// </summary>
+        /// <param name="message"></param>
         public void Success(string message)
         {
             TempData.Add(Alerts.SUCCESS, message);
         }
 
+        /// <summary>
+        /// Sets an information message.
+        /// </summary>
+        /// <param name="message"></param>
         public void Information(string message)
         {
             TempData.Add(Alerts.INFORMATION, message);
         }
 
+        /// <summary>
+        /// Sets an error message.
+        /// </summary>
+        /// <param name="message"></param>
         public void Error(string message)
         {
             TempData.Add(Alerts.DANGER, message);
