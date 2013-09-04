@@ -8,23 +8,19 @@
 @using (Html.BeginForm())
 {
 	@Html.ValidationSummary(true)
-	<div class="form-horizontal">
-	    @foreach (var property in Model.VisibleProperties())
-	    {
-		    using(Html.ControlGroupFor(property.Name))
-		    {
-				@Html.Label(property.GetLabel() + ":", new { @class = "control-label" })
-				<div class="controls">
-					@Html.Editor(property.Name, new { @placeholder = property.GetDescription(), @autofocus = property.GetAutoFocus() })
-					@Html.ValidationMessage(property.Name, null, new { @class = "help-inline" })
-				</div>
-		    }
-	    }
-	    <div class="form-actions">
-			@Html.SubmitButton("Salvar")
-			@Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-default" })
-	    </div>
-	</div>
+	foreach (var property in Model.VisibleProperties())
+	{
+		using(Html.ControlGroupFor(property.Name))
+		{
+			@Html.Label(property.GetLabel() + ":", new { @class = "control-label" })
+			@Html.Editor(property.Name, new { @placeholder = property.GetDescription(), @autofocus = property.GetAutoFocus() })
+			@Html.ValidationMessage(property.Name, null, new { @class = "help-inline" })
+		}
+	}
+	<p>
+		@Html.SubmitButton()
+		@Html.CancelButton()
+	</p>
 }
 <div>
 	@Html.ActionLink("Retornar à listagem", "Index")

@@ -44,7 +44,7 @@ namespace BootstrapSupport
         }
 
         public static IHtmlString BeginControlGroupFor<T>(this HtmlHelper<T> html,string propertyName,IDictionary<string, object> htmlAttributes){
-            var controlGroupWrapper = new TagBuilder("div");
+            var controlGroupWrapper = new TagBuilder("p");
             controlGroupWrapper.MergeAttributes(htmlAttributes);
             controlGroupWrapper.AddCssClass("control-group");
             string partialFieldName = propertyName;
@@ -58,7 +58,7 @@ namespace BootstrapSupport
         }
 
         public static IHtmlString EndControlGroup(this HtmlHelper html){
-            return MvcHtmlString.Create("</div>");
+            return MvcHtmlString.Create("</p>");
         }
 
         public static ControlGroup ControlGroupFor<T>(this HtmlHelper<T> html,Expression<Func<T, object>> modelProperty){

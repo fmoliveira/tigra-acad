@@ -16,15 +16,56 @@ namespace BootstrapSupport
         /// <param name="helper"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static MvcHtmlString SubmitButton(this HtmlHelper helper, string text)
+        public static MvcHtmlString SubmitButton(this HtmlHelper helper, string text = "Salvar")
         {
             var btn = new TagBuilder("button");
             btn.MergeAttribute("type", "submit");
             btn.AddCssClass("btn");
+            btn.AddCssClass("btn-lg");
             btn.AddCssClass("btn-primary");
             btn.SetInnerText(text);
 
             return MvcHtmlString.Create(btn.ToString());
+        }
+
+        /// <summary>
+        /// Creates an action button.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static MvcHtmlString ActionButton(this HtmlHelper helper, string text, string context, string action, string controller = null)
+        {
+            if (controller == null)
+            {
+                controller = helper.ViewContext.RouteData.GetRequiredString("controller");
+            }
+
+            UrlHelper h = new UrlHelper(helper.ViewContext.RequestContext);
+            var btn = new TagBuilder("a");
+            btn.MergeAttribute("href", h.Action(action, controller));
+            btn.AddCssClass("btn");
+            btn.AddCssClass("btn-lg");
+            btn.AddCssClass("btn-" + context);
+            btn.SetInnerText(text);
+
+            return MvcHtmlString.Create(btn.ToString());
+        }
+
+        /// <summary>
+        /// Creates a cancel button.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        public static MvcHtmlString CancelButton(this HtmlHelper helper, string text = "Cancelar", string action = null)
+        {
+            if (action == null)
+            {
+                action = "Index";
+            }
+
+            return ActionButton(helper, text, "default", action);
         }
 
         /// <summary>

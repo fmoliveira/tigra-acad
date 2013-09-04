@@ -17,11 +17,13 @@ namespace Tigra.Models
 
         [DisplayName("Nome da célula")]
         [StringLength(50)]
+        [Required]
         public string CellName { get; set; }
 
         [DisplayName("Descrição")]
         [DataType(DataType.MultilineText)]
         [StringLength(250)]
+        [Required]
         public string Description { get; set; }
 
         public CellModel()
