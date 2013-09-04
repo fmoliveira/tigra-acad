@@ -17,5 +17,11 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            var model = new ElicitationCreateModel();
+            return View(model);
+        }
+
     }
 }
