@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using Tigra.Database;
 
-namespace Tigra.Models
+namespace Tigra.Areas.Admin.Models
 {
     [DisplayName("Células")]
     public class CellModel

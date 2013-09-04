@@ -6,8 +6,10 @@ using System.Web;
 using System.Web.Mvc;
 using Tigra.Database;
 using Tigra.Models;
+using Tigra.Controllers;
+using Tigra.Areas.Admin.Models;
 
-namespace Tigra.Controllers
+namespace Tigra.Areas.Admin.Controllers
 {
     public class CellsController : BootstrapBaseController
     {

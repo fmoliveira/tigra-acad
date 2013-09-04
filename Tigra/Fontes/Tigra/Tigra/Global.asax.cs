@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Tigra.Controllers;
 
 namespace Tigra
 {
@@ -22,6 +23,19 @@ namespace Tigra
 
             var formatters = GlobalConfiguration.Configuration.Formatters;
             formatters.Remove(formatters.XmlFormatter);
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            Server.ClearError();
+            var routeData = new RouteData();
+            routeData.Values["controller"] = "Error";
+            routeData.Values["action"] = "Index";
+            Response.TrySkipIisCustomErrors = true;
+            IController errorsController = new ErrorController();
+            HttpContextWrapper wrapper = new HttpContextWrapper(Context);
+            var rc = new System.Web.Routing.RequestContext(wrapper, routeData);
+            errorsController.Execute(rc);
         }
     }
 }

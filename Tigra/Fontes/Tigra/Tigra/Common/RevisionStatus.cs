@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tigra.Models
+namespace Tigra
 {
     /// <summary>
     /// Possible status of any requirement revision.

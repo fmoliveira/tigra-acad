@@ -7,7 +7,7 @@ using System.Text;
 using System.Web;
 using Tigra.Database;
 
-namespace Tigra.Models
+namespace Tigra.Areas.Admin.Models
 {
     [DisplayName("Equipes")]
     public class TeamsModel

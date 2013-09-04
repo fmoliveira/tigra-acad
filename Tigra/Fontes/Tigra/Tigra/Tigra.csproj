@@ -125,6 +125,7 @@
     <Compile Include="Api\LoginController.cs" />
     <Compile Include="Api\SaveProfileController.cs" />
     <Compile Include="Api\RegisterController.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="BootstrapSupport\AutoFocusAttribute.cs" />
     <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
     <Compile Include="BootstrapSupport\Utils.cs" />
@@ -134,10 +135,11 @@
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
-    <Compile Include="Controllers\CellsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CellsController.cs" />
     <Compile Include="Controllers\ElicitationController.cs" />
-    <Compile Include="Controllers\TeamsController.cs" />
-    <Compile Include="Controllers\RolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TeamsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\Authentication.cs" />
     <Compile Include="Database\Authorisation.cs" />
@@ -191,14 +193,14 @@
     </Compile>
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
-    <Compile Include="Models\CellModel.cs" />
+    <Compile Include="Areas\Admin\Models\CellModel.cs" />
     <Compile Include="Models\ElicitationIndexModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
-    <Compile Include="Models\RevisionStatus.cs" />
-    <Compile Include="Models\TeamMember.cs" />
-    <Compile Include="Models\TeamsModel.cs" />
+    <Compile Include="Common\RevisionStatus.cs" />
+    <Compile Include="Areas\Admin\Models\TeamMember.cs" />
+    <Compile Include="Areas\Admin\Models\TeamsModel.cs" />
     <Compile Include="Models\MyProfileModel.cs" />
-    <Compile Include="Models\RoleModel.cs" />
+    <Compile Include="Areas\Admin\Models\RoleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +243,7 @@
       <DependentUpon>TigraDatabase.edmx</DependentUpon>
       <LastGenOutput>TigraDatabase.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\Admin\Views\Web.config" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
@@ -282,9 +285,11 @@
     <Content Include="Views\shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\shared\EditorTemplates\MultilineText.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\List_TeamMember.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

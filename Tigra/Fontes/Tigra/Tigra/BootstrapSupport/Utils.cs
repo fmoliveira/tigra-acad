@@ -1,7 +1,10 @@
+using System;
 using System.Globalization;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Tigra.Database;
+using Tigra;
 
 namespace BootstrapSupport
 {
@@ -68,6 +71,14 @@ namespace BootstrapSupport
             return ActionButton(helper, text, "default", action);
         }
 
+        private static MenuArea _menuArea = null;
+
+        public static MenuArea MenuAreaFor(this HtmlHelper helper, string areaName)
+        {
+            _menuArea = new MenuArea(areaName);
+            return _menuArea;
+        }
+
         /// <summary>
         /// Creates a menu link and automatically make it active if it's the current page.
         /// </summary>
@@ -96,7 +107,21 @@ namespace BootstrapSupport
                 a.InnerHtml = linkText;
             }
 
-            a.MergeAttribute("href", url.Action(actionName, controllerName));
+            object route = null;
+
+            if (_menuArea != null)
+            {
+                route = new { @area = _menuArea.AreaName };
+            }
+            else
+            {
+                if (helper.ViewContext.RouteData.Values.ContainsKey("cell"))
+                {
+                    route = new { @cell = helper.ViewContext.RouteData.Values["cell"].ToString() };
+                }
+            }
+
+            a.MergeAttribute("href", url.Action(actionName, controllerName, route));
 
             li = new TagBuilder("li");
             li.InnerHtml = a.ToString();
@@ -114,6 +139,67 @@ namespace BootstrapSupport
             return MvcHtmlString.Create(li.ToString());
         }
 
+        /// <summary>
+        /// Returns display name for currently selected cell.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="defaultStr"></param>
+        /// <returns></returns>
+        public static MvcHtmlString CurrentCell(this HtmlHelper helper, string defaultStr)
+        {
+            string s = defaultStr;
+
+            if (helper.ViewContext.RouteData.Values["cell"] != null)
+            {
+                Cell item = helper.ViewContext.RouteData.Values["cell"].GetCell();
+
+                if (item != null)
+                {
+                    s = item.CellName;
+                }
+            }
+
+            return MvcHtmlString.Create(s);
+        }
+
+        /// <summary>
+        /// Creates a link to change to another cell.
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <param name="cellName"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public static MvcHtmlString ChangeCellLink(this HtmlHelper helper, string cellName, string description)
+        {
+            var ctrl = helper.ViewContext.RouteData.GetRequiredString("controller");
+            var act = helper.ViewContext.RouteData.GetRequiredString("action");
+
+            TagBuilder a, li;
+            UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
+
+            a = new TagBuilder("a");
+            a.MergeAttribute("href", url.Action(act, ctrl, new { @cell = cellName }));
+            a.SetInnerText(description);
+
+            li = new TagBuilder("li");
+            li.InnerHtml = a.ToString();
+
+            if (helper.ViewContext.RouteData.Values["cell"] != null)
+            {
+                if (helper.ViewContext.RouteData.Values["cell"].ToString() == cellName)
+                {
+                    li.AddCssClass("active");
+                }
+            }
+
+            return MvcHtmlString.Create(li.ToString());
+        }
+        
+        /// <summary>
+        /// Format a tag to be used in links.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static string FormatLinkTag(string value)
         {
             value = value.Replace(" ", "_");
@@ -131,6 +217,24 @@ namespace BootstrapSupport
             }
 
             return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
+        }
+    }
+
+    /// <summary>
+    /// Wrap inner links to a controller area.
+    /// </summary>
+    public class MenuArea : IDisposable
+    {
+        public string AreaName { get; private set; }
+
+        public MenuArea(string areaName)
+        {
+            this.AreaName = areaName;
+        }
+
+        public void Dispose()
+        {
+            this.AreaName = null;
         }
     }
 }

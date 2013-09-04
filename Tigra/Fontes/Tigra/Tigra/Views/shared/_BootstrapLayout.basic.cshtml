@@ -1,6 +1,6 @@
 @using BootstrapSupport
 @using Tigra.Database
-@using Tigra.Models
+@using Tigra.Areas.Admin.Models
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -44,13 +44,13 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" accesskey="C" data-toggle="dropdown"><b class="glyphicon glyphicon-book"></b> &nbsp; Células <b class="caret"></b></a>
+						<a href="./" class="dropdown-toggle" accesskey="C" data-toggle="dropdown"><b class="glyphicon glyphicon-book"></b> &nbsp; @Html.CurrentCell("Células") <b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Células</li>
 							@foreach (Cell model in CellModel.GetCellTags())
-	   {
-								<li>@Html.ActionLink(model.CellName, "Index", "Home", new { @cell = model.Tag }, null)</li>
-	   }
+							{
+								@Html.ChangeCellLink(model.Tag, model.CellName)
+							}
 						</ul>
 					</li>
 					@Html.MenuLink("Home", "Index", "Início", "home")
@@ -58,7 +58,6 @@
 					@Html.MenuLink("Documentation", "Index", "Documentação", "file")
 					@Html.MenuLink("Revision", "Index", "Revisão", "check")
 					@Html.MenuLink("Baseline", "Index", "Baseline", "signal")
-					@Html.MenuLink("Ranking", "Index", "Ranking", "star")
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" accesskey="U" data-toggle="dropdown"><b class="glyphicon glyphicon-question-sign"></b> &nbsp; Ajuda <b class="caret"></b></a>
 						<ul class="dropdown-menu">

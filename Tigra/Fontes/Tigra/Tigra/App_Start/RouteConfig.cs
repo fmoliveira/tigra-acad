@@ -13,10 +13,10 @@ namespace Tigra
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            /* Cell page routing. */
+            /* Cells routing. */
             routes.MapRoute(
                 name: "Cells",
-                url: "{controller}/{cell}/{action}/{id}",
+                url: "{cell}/{controller}/{action}/{id}",
                 defaults: new { controller = "Home", cell = "", action = "Index", id = UrlParameter.Optional }
             );
 
@@ -24,7 +24,7 @@ namespace Tigra
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", cell = "", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

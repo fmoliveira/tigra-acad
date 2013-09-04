@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Tigra.Database;
 
-namespace Tigra.Models
+namespace Tigra.Areas.Admin.Models
 {
     public class TeamMember : IComparable
     {
