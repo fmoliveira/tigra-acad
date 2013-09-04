@@ -17,7 +17,8 @@ namespace Tigra
             routes.MapRoute(
                 name: "Cells",
                 url: "{cell}/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", cell = "", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", cell = "", action = "Index", id = UrlParameter.Optional },
+                constraints: new { cell = "^(?!.*(?i:Elicitation|Documentation|Revision|Baseline)).*$" }
             );
 
             /* Default page routing. */

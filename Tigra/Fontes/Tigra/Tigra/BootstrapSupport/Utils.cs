@@ -121,7 +121,8 @@ namespace BootstrapSupport
                 }
             }
 
-            a.MergeAttribute("href", url.Action(actionName, controllerName, route));
+            string href = url.Action(actionName, controllerName, route).Replace("//", "/");
+            a.MergeAttribute("href", href);
 
             li = new TagBuilder("li");
             li.InnerHtml = a.ToString();
@@ -145,7 +146,7 @@ namespace BootstrapSupport
         /// <param name="helper"></param>
         /// <param name="defaultStr"></param>
         /// <returns></returns>
-        public static MvcHtmlString CurrentCell(this HtmlHelper helper, string defaultStr)
+        public static MvcHtmlString CurrentCell(this HtmlHelper helper, string defaultStr = "")
         {
             string s = defaultStr;
 

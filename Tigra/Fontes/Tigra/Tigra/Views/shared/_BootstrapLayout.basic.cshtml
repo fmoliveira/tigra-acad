@@ -2,6 +2,20 @@
 @using Tigra.Database
 @using Tigra.Areas.Admin.Models
 
+@{
+	string pageTitle = Html.CurrentCell().ToString();
+
+	if (pageTitle.Length != 0) {
+		pageTitle += " | ";
+	}
+
+	if (ViewBag.Title != null && ViewBag.Title.Length != 0) {
+		pageTitle = String.Format("{0} | {1}", ViewBag.Title, pageTitle);
+	}
+
+	pageTitle += "Tigra";
+}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
@@ -12,7 +26,7 @@
 		<meta name="author" content="Filipe Moreira de Oliveira, Jéssica de Morais Oliveira Lopes">
 		<link rel="shortcut icon" href="ico/favicon.png">
 		
-		<title>@(ViewBag.Title != null && ViewBag.Title.Length != 0 ? String.Format("{0} | ", ViewBag.Title) : "") Tigra</title>
+		<title>@Html.Raw(pageTitle)</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="@Url.Content("~/Content/bootstrap/bootstrap.min.css")" rel="stylesheet">
