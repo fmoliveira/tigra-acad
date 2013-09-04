@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Tigra.Database;
 
 namespace Tigra.Models
@@ -12,6 +13,7 @@ namespace Tigra.Models
     public class ElicitationCreateModel
     {
         
+        [Required]
         public int Id { get; set; }
 
         [DisplayName("Descrição")]
@@ -19,7 +21,7 @@ namespace Tigra.Models
         [StringLength(100)]
         [Required]
         public string Summary { get; set; }
-        
+
         [DisplayName("Texto")]
         [DataType(DataType.Html)]
         [Required]

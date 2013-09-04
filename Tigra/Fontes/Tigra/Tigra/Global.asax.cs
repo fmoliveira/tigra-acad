@@ -27,6 +27,10 @@ namespace Tigra
 
         protected void Application_Error(object sender, EventArgs e)
         {
+#if DEBUG
+            return;
+#endif
+
             Server.ClearError();
             var routeData = new RouteData();
             routeData.Values["controller"] = "Error";
