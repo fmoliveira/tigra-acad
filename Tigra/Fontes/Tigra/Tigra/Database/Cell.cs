@@ -14,9 +14,16 @@ namespace Tigra.Database
     
     public partial class Cell
     {
+        public Cell()
+        {
+            this.Teams = new HashSet<Team>();
+        }
+    
         public int CellID { get; set; }
         public string CellName { get; set; }
         public string Description { get; set; }
         public string Tag { get; set; }
+    
+        public virtual ICollection<Team> Teams { get; set; }
     }
 }

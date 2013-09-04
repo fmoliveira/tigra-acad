@@ -2,42 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Tigra.Common;
 
 namespace Tigra.Database
 {
     public class Authorisation
     {
-        public enum Modules
+        public enum Modules : short
         {
-            [Acronym("CELL")]
             Cells,
-
-            [Acronym("TEAM")]
             Teams,
-
-            [Acronym("ROLE")]
             Roles,
-
-            [Acronym("TMPL")]
             Templates,
-
-            [Acronym("DEFA")]
             Defaults,
-
-            [Acronym("PREF")]
             Preferences,
-
-            [Acronym("SETT")]
             Settings,
-
-            [Acronym("REQU")]
             Requirements,
-
-            [Acronym("USCA")]
             UseCases,
-
-            [Acronym("TECA")]
             TestCases
         }
 

@@ -5,7 +5,7 @@ BEGIN
 	(
 		[RoleID] INT IDENTITY(1,1) NOT NULL,
 		[RoleName] VARCHAR(50) NOT NULL,
-		[Authorisations] VARBINARY(1024) NOT NULL DEFAULT 0,
+		[Authorisations] VARBINARY(4096) NOT NULL DEFAULT 0,
 		CONSTRAINT [pk_Tigra_Roles_Key] PRIMARY KEY ([RoleID]),
 		CONSTRAINT [un_Tigra_Roles_Name] UNIQUE ([RoleName])
 	);

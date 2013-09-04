@@ -1,0 +1,13 @@
+﻿@model List<Tigra.Models.TeamMember>
+@if (Model.Count() == 0) {
+    @:-
+} else {
+    <div class="list-group">
+    @foreach (var m in Model) {
+        <a href="#" class="list-group-item">
+            <h5 class="list-group-item-heading"><strong>@Html.Raw(m.DisplayName)</strong></h5>
+            <p class="list-group-item-text">@Html.Raw(m.RoleName)</p>
+        </a>
+    }
+    </div>
+}

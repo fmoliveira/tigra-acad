@@ -12,19 +12,17 @@ namespace Tigra.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class UserAccount
+    public partial class Role
     {
-        public UserAccount()
+        public Role()
         {
             this.Teams = new HashSet<Team>();
         }
     
-        public int UserID { get; set; }
-        public string Email { get; set; }
-        public byte[] Password { get; set; }
-        public System.DateTime RegisterDate { get; set; }
+        public int RoleID { get; set; }
+        public string RoleName { get; set; }
+        public byte[] Authorisations { get; set; }
     
-        public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
     }
 }
