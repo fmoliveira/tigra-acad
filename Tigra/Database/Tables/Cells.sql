@@ -8,7 +8,7 @@ BEGIN
 		[Tag] VARCHAR(50) NOT NULL,
 		[Description] VARCHAR(250) NULL,
 		CONSTRAINT [pk_Tigra_Cells_Key] PRIMARY KEY ([CellID]),
-		CONSTRAINT [un_Tigra_Cells_Cell] UNIQUE ([Tag])
+		CONSTRAINT [un_Tigra_Cells_Tag] UNIQUE ([Tag])
 	);
 
 END
