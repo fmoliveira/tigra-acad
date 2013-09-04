@@ -1,20 +1,19 @@
-﻿using BootstrapSupport;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Tigra.Database;
 using Tigra.Models;
 
 namespace Tigra.Controllers
 {
-    public class TeamsController : BootstrapBaseController
+    public class ElicitationController : BootstrapBaseController
     {
 
         public ActionResult Index()
         {
-            var model = TeamsModel.GetTeams();
+            var cell = RouteData.Values["cell"];
+            var model = ElicitationIndexModel.GetModels(cell);
             return View(model);
         }
 

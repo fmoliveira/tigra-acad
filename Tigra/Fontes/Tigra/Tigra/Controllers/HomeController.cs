@@ -12,7 +12,16 @@ namespace Tigra.Controllers
 
 		public ActionResult Index()
 		{
-			return View();
+			try
+			{
+				HomeModel model = new HomeModel(RouteData.Values["cell"].GetCell());
+				return View(model);
+			}
+			catch (NullReferenceException)
+			{
+				HomeModel m = new HomeModel() { CellName = "Teste", Description = "Nenhuma célula selecionada." };
+				return View(m);
+			}
 		}
 
 	}

@@ -1,13 +1,15 @@
-﻿@{
+﻿@model Tigra.Models.HomeModel
+
+@{
 	ViewBag.Title = "Início";
 }
 
 @section Jumbotron {
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Lorem ipsum</h1>
-			<p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-			<p><a class="btn btn-primary btn-lg">Mais dicas &raquo;</a></p>
+			<h1>@Html.Raw(Model.CellName)</h1>
+			<p>@Html.Raw(Model.Description)</p>
+			<p><a class="btn btn-primary btn-lg">Introdução &raquo;</a></p>
 		</div>
 	</div>
 }

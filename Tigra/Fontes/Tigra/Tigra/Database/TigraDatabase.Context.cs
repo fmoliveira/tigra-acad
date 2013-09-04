@@ -30,5 +30,10 @@ namespace Tigra.Database
         public DbSet<Cell> Cells { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Baseline> Baselines { get; set; }
+        public DbSet<RequirementRevision> RequirementRevisions { get; set; }
+        public DbSet<Requirement> Requirements { get; set; }
+        public DbSet<RequirementText> RequirementTexts { get; set; }
+        public DbSet<Elicitation> Elicitations { get; set; }
     }
 }

@@ -17,6 +17,8 @@ namespace Tigra.Database
         public UserAccount()
         {
             this.Teams = new HashSet<Team>();
+            this.RequirementRevisions = new HashSet<RequirementRevision>();
+            this.Elicitations = new HashSet<Elicitation>();
         }
     
         public int UserID { get; set; }
@@ -26,5 +28,7 @@ namespace Tigra.Database
     
         public virtual UserProfile UserProfile { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
+        public virtual ICollection<RequirementRevision> RequirementRevisions { get; set; }
+        public virtual ICollection<Elicitation> Elicitations { get; set; }
     }
 }

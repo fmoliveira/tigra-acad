@@ -18,16 +18,7 @@ namespace Tigra.Models
         public TeamMember(Team item)
         {
             this.Id = item.UserID;
-
-            if (item.UserAccount.UserProfile != null && item.UserAccount.UserProfile.FullName.Trim().Length != 0)
-            {
-                this.DisplayName = item.UserAccount.UserProfile.FullName;
-            }
-            else
-            {
-                this.DisplayName = item.UserAccount.Email;
-            }
-
+            this.DisplayName = item.UserAccount.GetDisplayName();
             this.RoleName = item.Role.RoleName;
         }
 
@@ -37,12 +28,8 @@ namespace Tigra.Models
 
             using (var ctx = new Entities())
             {
-                var list = ctx.Teams.Where(i => i.CellID == cellId);
-
-                foreach (var item in list)
-                {
-                    ret.Add(new TeamMember(item));
-                }
+                var list = ctx.Teams.Where(i => i.CellID == cellId).ToList();
+                list.ForEach(i => ret.Add(new TeamMember(i)));
             }
 
             ret.Sort();

@@ -14,11 +14,8 @@ namespace Tigra.Controllers
 
         public ActionResult Index()
         {
-            using (var ctx = new Entities())
-            {
-                var model = RoleModel.GetRoles();
-                return View(model);
-            }
+            var model = RoleModel.GetRoles();
+            return View(model);
         }
 
         public ActionResult Create()

@@ -135,12 +135,28 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Controllers\CellsController.cs" />
+    <Compile Include="Controllers\ElicitationController.cs" />
     <Compile Include="Controllers\TeamsController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Database\Authentication.cs" />
     <Compile Include="Database\Authorisation.cs" />
+    <Compile Include="Database\Baseline.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Cell.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Elicitation.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Requirement.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\RequirementRevision.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\RequirementText.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Role.cs">
@@ -176,6 +192,9 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Models\CellModel.cs" />
+    <Compile Include="Models\ElicitationIndexModel.cs" />
+    <Compile Include="Models\HomeModel.cs" />
+    <Compile Include="Models\RevisionStatus.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\TeamsModel.cs" />
     <Compile Include="Models\MyProfileModel.cs" />
