@@ -18,7 +18,7 @@ namespace Tigra
                 name: "Cells",
                 url: "{cell}/{controller}/{action}/{id}",
                 defaults: new { controller = "Home", cell = "", action = "Index", id = UrlParameter.Optional },
-                constraints: new { cell = "^(?!.*(?i:Elicitation|Documentation|Revision|Baseline)).*$" }
+                constraints: new { cell = "^(?!.*(?i:Elicitation|Documentation|Revision|Baseline|Account)).*$" }
             );
 
             /* Default page routing. */
