@@ -254,6 +254,9 @@ namespace BootstrapSupport
                 case "Details":
                     return "Detalhes";
 
+                case "View":
+                    return "Visualizar";
+
                 default:
                     return actionName;
             }

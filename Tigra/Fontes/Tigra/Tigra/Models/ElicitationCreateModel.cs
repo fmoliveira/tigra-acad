@@ -16,13 +16,13 @@ namespace Tigra.Models
         [Required]
         public int Id { get; set; }
 
-        [DisplayName("Descrição")]
+        [DisplayName("Título")]
         [DataType(DataType.Text)]
         [StringLength(100)]
         [Required]
         public string Summary { get; set; }
 
-        [DisplayName("Texto")]
+        [DisplayName("Descrição")]
         [DataType(DataType.Html)]
         [Required]
         public string Text { get; set; }

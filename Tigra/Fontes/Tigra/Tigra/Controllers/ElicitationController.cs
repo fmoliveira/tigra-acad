@@ -18,6 +18,16 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        public ActionResult View(int id)
+        {
+            using (var ctx = new Entities())
+            {
+                var model = new ElicitationViewModel(ctx.Elicitations.FirstOrDefault(i => i.ElicitationID == id));
+                RouteData.Values["title"] = model.Summary;
+                return View(model);
+            }
+        }
+
         public ActionResult Create()
         {
             var model = new ElicitationCreateModel();

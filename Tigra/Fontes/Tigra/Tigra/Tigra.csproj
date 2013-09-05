@@ -194,6 +194,7 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
+    <Compile Include="Models\ElicitationViewModel.cs" />
     <Compile Include="Models\ElicitationCreateModel.cs" />
     <Compile Include="Models\ElicitationIndexModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
@@ -386,6 +387,8 @@
     <Content Include="scripts\ckeditor\samples\assets\posteddata.php" />
     <Content Include="scripts\ckeditor\samples\sample_posteddata.php" />
     <Content Include="scripts\ckeditor\skins\moono\readme.md" />
+    <Content Include="Areas\Admin\Views\Shared\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
@@ -414,7 +417,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\shared\Index.cshtml" />
-    <Content Include="Views\shared\Details.cshtml" />
+    <Content Include="Views\shared\View.cshtml" />
     <Content Include="Views\shared\Create.cshtml" />
     <Content Include="Views\shared\_validationSummary.cshtml" />
     <Content Include="Views\shared\_BootstrapLayout.empty.cshtml" />
@@ -434,7 +437,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -13,6 +13,8 @@ namespace Tigra.Models
 
         public string CellName { get; set; }
 
+        public string Tag { get; set; }
+
         public string Description { get; set; }
 
         public HomeListModel[] Lists { get; set; }
@@ -25,12 +27,13 @@ namespace Tigra.Models
         public HomeModel(Cell item)
         {
             this.CellName = item.CellName;
+            this.Tag = item.Tag;
             this.Description = item.Description;
             this.Lists = new HomeListModel[]
             {
-                new HomeListModel("Elicitação"),
-                new HomeListModel("Documentação"),
-                new HomeListModel("Revisão"),
+                new HomeListModel("Elicitação", "Elicitation"),
+                new HomeListModel("Documentação", "Documentation"),
+                new HomeListModel("Revisão", "Revision"),
             };
 
             using (var ctx = new Entities())
@@ -39,7 +42,7 @@ namespace Tigra.Models
 
                 items = new List<HomeListItemModel>();
                 var list = (from i in ctx.Elicitations where i.CellID == item.CellID orderby i.RequestDate descending select i).Take(HomeModel.LIST_ITEMS_QUANTITY).ToList();
-                list.ForEach(i => items.Add(new HomeListItemModel(i.Summary, i.Text)));
+                list.ForEach(i => items.Add(new HomeListItemModel(i.ElicitationID, i.Summary, i.Text)));
                 this.Lists[0].Items = items.ToArray();
             }
         }
@@ -50,11 +53,14 @@ namespace Tigra.Models
 
         public string Title { get; set; }
 
+        public string Controller { get; set; }
+
         public HomeListItemModel[] Items { get; set; }
 
-        public HomeListModel(string title)
+        public HomeListModel(string title, string controller)
         {
             this.Title = title;
+            this.Controller = controller;
             this.Items = new HomeListItemModel[0];
         }
 
@@ -63,12 +69,15 @@ namespace Tigra.Models
     public class HomeListItemModel
     {
 
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public string Description { get; set; }
 
-        public HomeListItemModel(string title, string description)
+        public HomeListItemModel(int id, string title, string description)
         {
+            this.Id = id;
             this.Title = title;
             this.Description = description.Replace("<p>", "").Replace("</p>", " ");
         }

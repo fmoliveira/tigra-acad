@@ -20,7 +20,7 @@
 			<h2>@Html.Raw(i.Title)</h2>
 			<div class="list-group">
 				@foreach (var j in i.Items) {
-					<a href="#" class="list-group-item">
+					<a href="@Url.Action("View", i.Controller, new { @id = j.Id })" class="list-group-item">
 						<p class="list-group-item-heading"><strong>@Html.Raw(j.Title)</strong></p>
 						<p class="list-group-item-text word-clamp" data-word-clamp="12">@Html.Raw(j.Description)</p>
 					</a>

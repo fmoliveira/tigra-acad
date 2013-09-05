@@ -31,21 +31,18 @@
             }
             <td>
                 <div class="btn-group">
-
-                    @{
-                        var routevalues = model.GetIdValue();
-                        <a class="btn btn-default" href="@Url.Action("View", routevalues)">Visualizar</a>
-                    }
-
-                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
-                        <b class="glyphicon glyphicon-cog"></b>
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                        Ação
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Editar", "Edit", routevalues)</li>
-                        <li>@Html.ActionLink("Histórico", "History", routevalues)</li>
-                        <li class="divider"></li>
-                        <li>@Html.ActionLink("Excluir", "Delete", routevalues)</li>
+                        @{
+                            var routevalues = model.GetIdValue();  
+                            <li>@Html.ActionLink("Editar", "Edit", routevalues)</li>
+                            <li>@Html.ActionLink("Detalhes", "Details", routevalues)</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Excluir", "Delete", routevalues)</li>
+                        }
                     </ul>
                 </div>
 

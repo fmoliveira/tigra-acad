@@ -4,14 +4,15 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Tigra.Database;
 
 namespace Tigra.Models
 {
     [DisplayName("Elicitação")]
-    public class ElicitationIndexModel
+    public class ElicitationViewModel
     {
-
+        
         [Required]
         public int Id { get; set; }
 
@@ -22,28 +23,28 @@ namespace Tigra.Models
         public DateTime RequestDate { get; set; }
 
         [DisplayName("Título")]
+        [DataType(DataType.Text)]
+        [StringLength(100)]
+        [Required]
         public string Summary { get; set; }
 
-        public ElicitationIndexModel(Elicitation item)
+        [DisplayName("Descrição")]
+        [DataType(DataType.Html)]
+        [Required]
+        public string Text { get; set; }
+
+        public ElicitationViewModel()
+        {
+            //
+        }
+
+        public ElicitationViewModel(Elicitation item)
         {
             this.Id = item.ElicitationID;
             this.UserName = item.UserAccount.GetDisplayName();
             this.RequestDate = item.RequestDate;
             this.Summary = item.Summary;
-        }
-
-        public static List<ElicitationIndexModel> GetModels(object cell)
-        {
-            List<ElicitationIndexModel> ret = new List<ElicitationIndexModel>();
-
-            using (var ctx = new Entities())
-            {
-                int id = ctx.GetCellID(cell);
-                var list = (from i in ctx.Elicitations where i.CellID == id select i).ToList();
-                list.ForEach(i => ret.Add(new ElicitationIndexModel(i)));
-            }
-
-            return ret;
+            this.Text = item.Text;
         }
 
     }
