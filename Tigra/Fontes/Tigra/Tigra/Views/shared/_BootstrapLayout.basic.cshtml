@@ -3,7 +3,7 @@
 @using Tigra.Areas.Admin.Models
 
 @{
-	string pageTitle = Html.CurrentCell().ToString();
+	string pageTitle = Html.CurrentCell();
 
 	if (pageTitle.Length != 0) {
 		pageTitle += " | ";
@@ -95,8 +95,17 @@
 		@if (false == IsSectionDefined("Jumbotron"))
   {
 			<div class="page-header">
-				<h1>@ViewBag.Title</h1>
+				@if (ViewContext.RouteData.Values["title"] != null && ViewContext.RouteData.Values["title"].ToString().Length != 0)
+				{
+					<h1>@ViewContext.RouteData.Values["title"].ToString()</h1>
+				}
+				else
+				{
+					<h1>@ViewBag.Title</h1>
+				}
 			</div>
+	  
+			@Html.Breadcrumb()
   }
 
 		@Html.Partial("_alerts")

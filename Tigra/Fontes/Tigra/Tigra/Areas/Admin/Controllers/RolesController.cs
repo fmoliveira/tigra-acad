@@ -35,6 +35,7 @@ namespace Tigra.Areas.Admin.Controllers
                 if (item != null)
                 {
                     var model = new RoleModel(item);
+                    RouteData.Values["title"] = model.RoleName;
                     return View("Create", model);
                 }
                 else

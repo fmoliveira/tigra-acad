@@ -35,6 +35,7 @@ namespace Tigra.Areas.Admin.Controllers
                 if (item != null)
                 {
                     var model = new CellModel(item);
+                    RouteData.Values["title"] = model.CellName;
                     return View("Create", model);
                 }
                 else
