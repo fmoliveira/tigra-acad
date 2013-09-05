@@ -401,6 +401,7 @@
     <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\respond.min.js" />
     <Content Include="scripts\respond.js" />
+    <Content Include="scripts\tigra.clamp.js" />
     <Content Include="scripts\tigra.login.js" />
     <Content Include="scripts\tigra.modal.js" />
     <Content Include="Web.config" />

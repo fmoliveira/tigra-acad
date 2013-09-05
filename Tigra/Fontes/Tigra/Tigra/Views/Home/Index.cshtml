@@ -15,40 +15,18 @@
 }
 
 <div class="row">
-	<div class="col-lg-4">
-		<h2>Elicitação</h2>
-		<div class="list-group">
-			@for(int i = 0; i < 3; i++) {
+	@foreach (var i in Model.Lists) {
+		<div class="col-lg-4">
+			<h2>@Html.Raw(i.Title)</h2>
+			<div class="list-group">
+				@foreach (var j in i.Items) {
 					<a href="#" class="list-group-item">
-						<p class="list-group-item-heading"><strong>Item @Html.Raw(i + 1)</strong></p>
-						<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
+						<p class="list-group-item-heading"><strong>@Html.Raw(j.Title)</strong></p>
+						<p class="list-group-item-text word-clamp" data-word-clamp="12">@Html.Raw(j.Description)</p>
 					</a>
-			}
+				}
+			</div>
+			<p><a class="btn btn-lg btn-default" href="#">Listar todos &raquo;</a></p>
 		</div>
-		<p><a class="btn btn-lg btn-default" href="#">Listar todos &raquo;</a></p>
-	</div>
-	<div class="col-lg-4">
-		<h2>Documentação</h2>
-		<div class="list-group">
-			@for(int i = 0; i < 3; i++) {
-					<a href="#" class="list-group-item">
-						<p class="list-group-item-heading"><strong>Item @Html.Raw(i + 1)</strong></p>
-						<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
-					</a>
-			}
-		</div>
-		<p><a class="btn btn-lg btn-default" href="#">Listar todos &raquo;</a></p>
-	</div>
-	<div class="col-lg-4">
-		<h2>Revisão</h2>
-		<div class="list-group">
-			@for(int i = 0; i < 3; i++) {
-					<a href="#" class="list-group-item">
-						<p class="list-group-item-heading"><strong>Item @Html.Raw(i + 1)</strong></p>
-						<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus.</p>
-					</a>
-			}
-		</div>
-		<p><a class="btn btn-lg btn-default" href="#">Listar todos &raquo;</a></p>
-	</div>
+	}
 </div>

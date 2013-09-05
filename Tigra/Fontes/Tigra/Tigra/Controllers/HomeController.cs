@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Tigra.Database;
 using Tigra.Models;
 
 namespace Tigra.Controllers
@@ -12,16 +13,29 @@ namespace Tigra.Controllers
 
 		public ActionResult Index()
 		{
+			HomeModel model = null;
+
 			try
 			{
-				HomeModel model = new HomeModel(RouteData.Values["cell"].GetCell());
-				return View(model);
+				model = new HomeModel(RouteData.Values["cell"].GetCell());
 			}
 			catch (NullReferenceException)
 			{
-				HomeModel m = new HomeModel() { CellName = "Teste", Description = "Nenhuma célula selecionada." };
-				return View(m);
+				model = new HomeModel
+				(
+					new Cell()
+					{
+						CellID = 0,
+						CellName = "Teste",
+						Description = "Nenhuma célula selecionada."
+					}
+				);
 			}
+			catch (Exception)
+			{
+				return RedirectToAction("Index", "Error");
+			}
+			return View(model);
 		}
 
 	}
