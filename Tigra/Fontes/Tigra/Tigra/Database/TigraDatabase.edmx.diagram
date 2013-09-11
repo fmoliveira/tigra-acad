@@ -22,10 +22,10 @@
         <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRevisions_User" />
         <AssociationConnector Association="TigraModel.fk_Tigra_RequirementTexts_User" />
         <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRevisions_Req" />
-        <EntityTypeShape EntityType="TigraModel.Elicitation" Width="1.5" PointX="3.5954444965326435" PointY="3.3703704641062631" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_Elicitations_Cell" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_Elicitations_User" />
-      </Diagram>
+        <EntityTypeShape EntityType="TigraModel.Story" Width="1.5" PointX="9.3248597333789149" PointY="24.368813898586115" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_Stories_Cell" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_Stories_User" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -9,8 +9,8 @@ using Tigra.Database;
 
 namespace Tigra.Models
 {
-    [DisplayName("Elicitação")]
-    public class ElicitationCreateModel
+    [DisplayName("Histórias")]
+    public class StoriesCreateModel
     {
         
         [Required]
@@ -27,14 +27,14 @@ namespace Tigra.Models
         [Required]
         public string Text { get; set; }
 
-        public ElicitationCreateModel()
+        public StoriesCreateModel()
         {
             //
         }
 
-        public ElicitationCreateModel(Elicitation item)
+        public StoriesCreateModel(Story item)
         {
-            this.Id = item.ElicitationID;
+            this.Id = item.StoryID;
             this.Summary = item.Summary;
             this.Text = item.Text;
         }

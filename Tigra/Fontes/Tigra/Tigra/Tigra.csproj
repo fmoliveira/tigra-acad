@@ -136,7 +136,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CellsController.cs" />
-    <Compile Include="Controllers\ElicitationController.cs" />
+    <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -149,9 +149,6 @@
     <Compile Include="Database\Cell.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\Elicitation.cs">
-      <DependentUpon>TigraDatabase.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\Requirement.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
@@ -162,6 +159,9 @@
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Role.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Story.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Team.cs">
@@ -194,9 +194,9 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
-    <Compile Include="Models\ElicitationViewModel.cs" />
-    <Compile Include="Models\ElicitationCreateModel.cs" />
-    <Compile Include="Models\ElicitationIndexModel.cs" />
+    <Compile Include="Models\StoriesViewModel.cs" />
+    <Compile Include="Models\StoriesCreateModel.cs" />
+    <Compile Include="Models\StoriesIndexModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Common\RevisionStatus.cs" />
     <Compile Include="Areas\Admin\Models\TeamMember.cs" />
@@ -363,6 +363,15 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Admin\Views\Web.config" />
+    <Content Include="scripts\ckeditor\CHANGES.md" />
+    <Content Include="scripts\ckeditor\LICENSE.md" />
+    <Content Include="scripts\ckeditor\README.md" />
+    <Content Include="scripts\ckeditor\samples\assets\posteddata.php" />
+    <Content Include="scripts\ckeditor\samples\sample_posteddata.php" />
+    <Content Include="scripts\ckeditor\skins\moono\readme.md" />
+    <Content Include="Areas\Admin\Views\Shared\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <EntityDeploy Include="Database\TigraDatabase.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TigraDatabase.Designer.cs</LastGenOutput>
@@ -380,15 +389,6 @@
       <DependentUpon>TigraDatabase.edmx</DependentUpon>
       <LastGenOutput>TigraDatabase.cs</LastGenOutput>
     </Content>
-    <Content Include="Areas\Admin\Views\Web.config" />
-    <Content Include="scripts\ckeditor\CHANGES.md" />
-    <Content Include="scripts\ckeditor\LICENSE.md" />
-    <Content Include="scripts\ckeditor\README.md" />
-    <Content Include="scripts\ckeditor\samples\assets\posteddata.php" />
-    <Content Include="scripts\ckeditor\samples\sample_posteddata.php" />
-    <Content Include="scripts\ckeditor\skins\moono\readme.md" />
-    <Content Include="Areas\Admin\Views\Shared\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />

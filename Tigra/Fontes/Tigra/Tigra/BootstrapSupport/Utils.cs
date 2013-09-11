@@ -215,8 +215,8 @@ namespace BootstrapSupport
                 case "Home":
                     return "Início";
 
-                case "Elicitation":
-                    return "Elicitação";
+                case "Stories":
+                    return "Histórias";
 
                 case "Documentation":
                     return "Documentação";

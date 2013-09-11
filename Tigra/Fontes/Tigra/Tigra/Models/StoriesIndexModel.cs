@@ -8,8 +8,8 @@ using Tigra.Database;
 
 namespace Tigra.Models
 {
-    [DisplayName("Elicitação")]
-    public class ElicitationIndexModel
+    [DisplayName("Histórias")]
+    public class StoriesIndexModel
     {
 
         [Required]
@@ -24,23 +24,23 @@ namespace Tigra.Models
         [DisplayName("Título")]
         public string Summary { get; set; }
 
-        public ElicitationIndexModel(Elicitation item)
+        public StoriesIndexModel(Story item)
         {
-            this.Id = item.ElicitationID;
+            this.Id = item.StoryID;
             this.UserName = item.UserAccount.GetDisplayName();
             this.RequestDate = item.RequestDate;
             this.Summary = item.Summary;
         }
 
-        public static List<ElicitationIndexModel> GetModels(object cell)
+        public static List<StoriesIndexModel> GetModels(object cell)
         {
-            List<ElicitationIndexModel> ret = new List<ElicitationIndexModel>();
+            List<StoriesIndexModel> ret = new List<StoriesIndexModel>();
 
             using (var ctx = new Entities())
             {
                 int id = ctx.GetCellID(cell);
-                var list = (from i in ctx.Elicitations where i.CellID == id select i).ToList();
-                list.ForEach(i => ret.Add(new ElicitationIndexModel(i)));
+                var list = (from i in ctx.Stories where i.CellID == id select i).ToList();
+                list.ForEach(i => ret.Add(new StoriesIndexModel(i)));
             }
 
             return ret;

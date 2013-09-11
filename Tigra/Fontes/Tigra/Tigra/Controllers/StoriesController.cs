@@ -8,13 +8,13 @@ using Tigra.Models;
 
 namespace Tigra.Controllers
 {
-    public class ElicitationController : BootstrapBaseController
+    public class StoriesController : BootstrapBaseController
     {
 
         public ActionResult Index()
         {
             var cell = RouteData.Values["cell"];
-            var model = ElicitationIndexModel.GetModels(cell);
+            var model = StoriesIndexModel.GetModels(cell);
             return View(model);
         }
 
@@ -22,7 +22,7 @@ namespace Tigra.Controllers
         {
             using (var ctx = new Entities())
             {
-                var model = new ElicitationViewModel(ctx.Elicitations.FirstOrDefault(i => i.ElicitationID == id));
+                var model = new StoriesViewModel(ctx.Stories.FirstOrDefault(i => i.StoryID == id));
                 RouteData.Values["title"] = model.Summary;
                 return View(model);
             }
@@ -30,34 +30,34 @@ namespace Tigra.Controllers
 
         public ActionResult Create()
         {
-            var model = new ElicitationCreateModel();
+            var model = new StoriesCreateModel();
             return View(model);
         }
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Create(ElicitationCreateModel model)
+        public ActionResult Create(StoriesCreateModel model)
         {
             if (ModelState.IsValid)
             {
                 using (var ctx = new Entities())
                 {
-                    Elicitation item = new Elicitation();
+                    Story item = new Story();
                     item.CellID = RouteData.Values["cell"].GetCellID();
                     item.UserID = Authentication.GetLoggedUser().UserID;
                     item.RequestDate = DateTime.Now;
                     item.Summary = model.Summary;
                     item.Text = model.Text;
-                    ctx.Elicitations.Add(item);
+                    ctx.Stories.Add(item);
 
                     if (SaveChanges(ctx) != 0)
                     {
-                        Success("Elicitação inserida com sucesso!");
+                        Success("História inserida com sucesso!");
                         return RedirectToAction("Index");
                     }
                     else
                     {
-                        Error("Erro ao tentar inserir a nova elicitação!");
+                        Error("Erro ao tentar inserir a nova história!");
                     }
                 }
             }
@@ -72,7 +72,7 @@ namespace Tigra.Controllers
         {
             using (var ctx = new Entities())
             {
-                var model = new ElicitationCreateModel(ctx.Elicitations.FirstOrDefault(i => i.ElicitationID == id));
+                var model = new StoriesCreateModel(ctx.Stories.FirstOrDefault(i => i.StoryID == id));
                 RouteData.Values["title"] = model.Summary;
                 return View("Create", model);
             }
@@ -80,13 +80,13 @@ namespace Tigra.Controllers
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Edit(ElicitationCreateModel model)
+        public ActionResult Edit(StoriesCreateModel model)
         {
             if (ModelState.IsValid)
             {
                 using (var ctx = new Entities())
                 {
-                    Elicitation item = ctx.Elicitations.FirstOrDefault(i => i.ElicitationID == model.Id);
+                    Story item = ctx.Stories.FirstOrDefault(i => i.StoryID == model.Id);
 
                     if (item != null)
                     {
@@ -98,17 +98,17 @@ namespace Tigra.Controllers
 
                         if (SaveChanges(ctx) != 0)
                         {
-                            Success("Elicitação alterada com sucesso!");
+                            Success("História alterada com sucesso!");
                             return RedirectToAction("Index");
                         }
                         else
                         {
-                            Error("Erro ao tentar alterar a elicitação!");
+                            Error("Erro ao tentar alterar a história!");
                         }
                     }
                     else
                     {
-                        Error("Elicitação inválida!");
+                        Error("História inválida!");
                     }
                 }
             }

@@ -34,6 +34,6 @@ namespace Tigra.Database
         public DbSet<RequirementRevision> RequirementRevisions { get; set; }
         public DbSet<Requirement> Requirements { get; set; }
         public DbSet<RequirementText> RequirementTexts { get; set; }
-        public DbSet<Elicitation> Elicitations { get; set; }
+        public DbSet<Story> Stories { get; set; }
     }
 }

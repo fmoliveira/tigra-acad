@@ -9,8 +9,8 @@ using Tigra.Database;
 
 namespace Tigra.Models
 {
-    [DisplayName("Elicitação")]
-    public class ElicitationViewModel
+    [DisplayName("Histórias")]
+    public class StoriesViewModel
     {
         
         [Required]
@@ -33,14 +33,14 @@ namespace Tigra.Models
         [Required]
         public string Text { get; set; }
 
-        public ElicitationViewModel()
+        public StoriesViewModel()
         {
             //
         }
 
-        public ElicitationViewModel(Elicitation item)
+        public StoriesViewModel(Story item)
         {
-            this.Id = item.ElicitationID;
+            this.Id = item.StoryID;
             this.UserName = item.UserAccount.GetDisplayName();
             this.RequestDate = item.RequestDate;
             this.Summary = item.Summary;

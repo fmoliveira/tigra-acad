@@ -12,22 +12,16 @@ namespace Tigra.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Cell
+    public partial class Story
     {
-        public Cell()
-        {
-            this.Teams = new HashSet<Team>();
-            this.Requirements = new HashSet<Requirement>();
-            this.Stories = new HashSet<Story>();
-        }
-    
+        public int StoryID { get; set; }
         public int CellID { get; set; }
-        public string CellName { get; set; }
-        public string Description { get; set; }
-        public string Tag { get; set; }
+        public int UserID { get; set; }
+        public System.DateTime RequestDate { get; set; }
+        public string Summary { get; set; }
+        public string Text { get; set; }
     
-        public virtual ICollection<Team> Teams { get; set; }
-        public virtual ICollection<Requirement> Requirements { get; set; }
-        public virtual ICollection<Story> Stories { get; set; }
+        public virtual Cell Cell { get; set; }
+        public virtual UserAccount UserAccount { get; set; }
     }
 }
