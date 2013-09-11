@@ -13,6 +13,8 @@
     }
 </dl>
 <p>
-    @Html.ActionLink("Retornar à listagem", "Index", null, new { @class = "btn btn-lg btn-primary" })
+    @Html.ActionLink("Retornar à listagem", "Index", null, new { @class = "btn btn-lg btn-default" })
     @Html.ActionLink("Editar", "Edit", Model.GetIdValue(), new { @class = "btn btn-lg btn-default" })
+    @Html.ActionLink("Excluir", "Delete", Model.GetIdValue(), new { @class = "btn btn-lg btn-danger" })
+    @Html.ActionLink("Documentar", "Document", Model.GetIdValue(), new { @class = "btn btn-lg btn-primary" })
 </p>
