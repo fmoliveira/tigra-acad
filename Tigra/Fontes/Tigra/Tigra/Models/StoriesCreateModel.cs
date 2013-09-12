@@ -14,28 +14,29 @@ namespace Tigra.Models
     {
         
         [Required]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        [DisplayName("Título")]
-        [DataType(DataType.Text)]
-        [StringLength(100)]
+        [DisplayName("Título"), DataType(DataType.Text), StringLength(100)]
         [Required]
         public string Summary { get; set; }
 
-        [DisplayName("Descrição")]
-        [DataType(DataType.Html)]
+        [DisplayName("Descrição"), DataType(DataType.Html)]
         [Required]
         public string Text { get; set; }
+
+        [DisplayName("Motivo da edição"), DataType(DataType.Text), StringLength(250)]
+        [Required]
+        public string Message { get; set; }
 
         public StoriesCreateModel()
         {
             //
         }
 
-        public StoriesCreateModel(Story item)
+        public StoriesCreateModel(GetRequirementDetails_Result item)
         {
-            this.Id = item.StoryID;
-            this.Summary = item.Summary;
+            this.Id = item.RevisionID;
+            this.Summary = item.Title;
             this.Text = item.Text;
         }
 

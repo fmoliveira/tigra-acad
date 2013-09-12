@@ -22,7 +22,7 @@ namespace Tigra.Controllers
         {
             using (var ctx = new Entities())
             {
-                var model = new StoriesViewModel(ctx.Stories.FirstOrDefault(i => i.StoryID == id));
+                StoriesViewModel model = new StoriesViewModel(ctx.GetRequirementDetails(id, null).FirstOrDefault());
                 RouteData.Values["title"] = model.Summary;
                 return View(model);
             }
@@ -42,13 +42,9 @@ namespace Tigra.Controllers
             {
                 using (var ctx = new Entities())
                 {
-                    Story item = new Story();
-                    item.CellID = RouteData.Values["cell"].GetCellID();
-                    item.UserID = Authentication.GetLoggedUser().UserID;
-                    item.RequestDate = DateTime.Now;
-                    item.Summary = model.Summary;
-                    item.Text = model.Text;
-                    ctx.Stories.Add(item);
+                    int cellID = RouteData.Values["cell"].GetCellID();
+                    int userID = Authentication.GetLoggedUser().UserID;
+                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Summary, model.Text);
 
                     if (SaveChanges(ctx) != 0)
                     {
@@ -72,7 +68,7 @@ namespace Tigra.Controllers
         {
             using (var ctx = new Entities())
             {
-                var model = new StoriesCreateModel(ctx.Stories.FirstOrDefault(i => i.StoryID == id));
+                StoriesCreateModel model = new StoriesCreateModel(ctx.GetRequirementDetails(id, null).FirstOrDefault());
                 RouteData.Values["title"] = model.Summary;
                 return View("Create", model);
             }
@@ -86,29 +82,18 @@ namespace Tigra.Controllers
             {
                 using (var ctx = new Entities())
                 {
-                    Story item = ctx.Stories.FirstOrDefault(i => i.StoryID == model.Id);
+                    int cellID = RouteData.Values["cell"].GetCellID();
+                    int userID = Authentication.GetLoggedUser().UserID;
+                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, model.Summary, model.Text);
 
-                    if (item != null)
+                    if (SaveChanges(ctx) != 0)
                     {
-                        item.CellID = RouteData.Values["cell"].GetCellID();
-                        item.UserID = Authentication.GetLoggedUser().UserID;
-                        item.RequestDate = DateTime.Now;
-                        item.Summary = model.Summary;
-                        item.Text = model.Text;
-
-                        if (SaveChanges(ctx) != 0)
-                        {
-                            Success("História alterada com sucesso!");
-                            return RedirectToAction("Index");
-                        }
-                        else
-                        {
-                            Error("Erro ao tentar alterar a história!");
-                        }
+                        Success("História alterada com sucesso!");
+                        return RedirectToAction("Index");
                     }
                     else
                     {
-                        Error("História inválida!");
+                        Error("Erro ao tentar alterar a história!");
                     }
                 }
             }

@@ -31,8 +31,8 @@ namespace Tigra.Models
             this.Description = item.Description;
             this.Lists = new HomeListModel[]
             {
-                new HomeListModel("Histórias", "Story"),
-                new HomeListModel("Documentação", "Documentation"),
+                new HomeListModel("Histórias", "Stories"),
+                new HomeListModel("Requisitos", "Requirements"),
                 new HomeListModel("Revisão", "Revision"),
             };
 
@@ -41,8 +41,8 @@ namespace Tigra.Models
                 List<HomeListItemModel> items = null;
 
                 items = new List<HomeListItemModel>();
-                var list = (from i in ctx.Stories where i.CellID == item.CellID orderby i.RequestDate descending select i).Take(HomeModel.LIST_ITEMS_QUANTITY).ToList();
-                list.ForEach(i => items.Add(new HomeListItemModel(i.StoryID, i.Summary, i.Text)));
+                var list = ctx.GetLatestRequirements(item.CellID, null, 1).ToList();
+                list.ForEach(i => items.Add(new HomeListItemModel(i.RequirementID, i.Title, i.Text)));
                 this.Lists[0].Items = items.ToArray();
             }
         }

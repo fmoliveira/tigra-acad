@@ -15,21 +15,21 @@ namespace Tigra.Models
         [Required]
         public int Id { get; set; }
 
-        [DisplayName("Solicitante")]
-        public string UserName { get; set; }
+        [DisplayName("Autor")]
+        public UserNameModel UserName { get; set; }
 
-        [DisplayName("Data da solicitação")]
-        public DateTime RequestDate { get; set; }
+        [DisplayName("Data")]
+        public DateTime Modified { get; set; }
 
         [DisplayName("Título")]
         public string Summary { get; set; }
 
-        public StoriesIndexModel(Story item)
+        public StoriesIndexModel(GetRequirementsIndex_Result item)
         {
-            this.Id = item.StoryID;
-            this.UserName = item.UserAccount.GetDisplayName();
-            this.RequestDate = item.RequestDate;
-            this.Summary = item.Summary;
+            this.Id = item.RequirementID;
+            this.UserName = new UserNameModel(item.UserID);
+            this.Modified = item.RevisionDate;
+            this.Summary = item.Title;
         }
 
         public static List<StoriesIndexModel> GetModels(object cell)
@@ -38,8 +38,8 @@ namespace Tigra.Models
 
             using (var ctx = new Entities())
             {
-                int id = ctx.GetCellID(cell);
-                var list = (from i in ctx.Stories where i.CellID == id select i).ToList();
+                int parent = ctx.GetCellID(cell);
+                var list = ctx.GetRequirementsIndex(parent, null).ToList();
                 list.ForEach(i => ret.Add(new StoriesIndexModel(i)));
             }
 

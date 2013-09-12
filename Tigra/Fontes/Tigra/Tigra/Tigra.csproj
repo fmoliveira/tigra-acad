@@ -133,6 +133,7 @@
     <Compile Include="BootstrapSupport\HtmlHelpers\Paging.cs" />
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
     <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\RequirementTypes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CellsController.cs" />
@@ -149,6 +150,15 @@
     <Compile Include="Database\Cell.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\GetLatestRequirements_Result.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GetRequirementDetails_Result.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GetRequirementsIndex_Result.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Requirement.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
@@ -159,9 +169,6 @@
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Role.cs">
-      <DependentUpon>TigraDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Story.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Team.cs">
@@ -203,6 +210,7 @@
     <Compile Include="Areas\Admin\Models\TeamsModel.cs" />
     <Compile Include="Models\MyProfileModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleModel.cs" />
+    <Compile Include="Models\UserNameModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -389,6 +397,7 @@
       <DependentUpon>TigraDatabase.edmx</DependentUpon>
       <LastGenOutput>TigraDatabase.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\Cloud.pubxml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
@@ -435,6 +444,8 @@
     <Content Include="Views\shared\EditorTemplates\Text.cshtml" />
     <Content Include="Views\shared\EditorTemplates\Html.cshtml" />
     <Content Include="Views\Stories\View.cshtml" />
+    <Content Include="Views\shared\DisplayTemplates\UserNameModel.cshtml" />
+    <Content Include="Views\shared\DisplayTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

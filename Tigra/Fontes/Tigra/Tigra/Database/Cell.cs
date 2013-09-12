@@ -16,18 +16,16 @@ namespace Tigra.Database
     {
         public Cell()
         {
-            this.Teams = new HashSet<Team>();
             this.Requirements = new HashSet<Requirement>();
-            this.Stories = new HashSet<Story>();
+            this.Teams = new HashSet<Team>();
         }
     
         public int CellID { get; set; }
         public string CellName { get; set; }
-        public string Description { get; set; }
         public string Tag { get; set; }
+        public string Description { get; set; }
     
-        public virtual ICollection<Team> Teams { get; set; }
         public virtual ICollection<Requirement> Requirements { get; set; }
-        public virtual ICollection<Story> Stories { get; set; }
+        public virtual ICollection<Team> Teams { get; set; }
     }
 }

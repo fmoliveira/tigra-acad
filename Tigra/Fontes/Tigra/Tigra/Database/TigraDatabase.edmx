@@ -12,7 +12,6 @@
           <EntitySet Name="Requirements" EntityType="TigraModel.Store.Requirements" store:Type="Tables" Schema="Tigra" />
           <EntitySet Name="RequirementTexts" EntityType="TigraModel.Store.RequirementTexts" store:Type="Tables" Schema="Tigra" />
           <EntitySet Name="Roles" EntityType="TigraModel.Store.Roles" store:Type="Tables" Schema="Tigra" />
-          <EntitySet Name="Stories" EntityType="TigraModel.Store.Stories" store:Type="Tables" Schema="Tigra" />
           <EntitySet Name="Teams" EntityType="TigraModel.Store.Teams" store:Type="Tables" Schema="Tigra" />
           <EntitySet Name="UserAccounts" EntityType="TigraModel.Store.UserAccounts" store:Type="Tables" Schema="Tigra" />
           <EntitySet Name="UserProfiles" EntityType="TigraModel.Store.UserProfiles" store:Type="Tables" Schema="Tigra" />
@@ -31,14 +30,6 @@
           <AssociationSet Name="fk_Tigra_RequirementTexts_Rev" Association="TigraModel.Store.fk_Tigra_RequirementTexts_Rev">
             <End Role="RequirementRevisions" EntitySet="RequirementRevisions" />
             <End Role="RequirementTexts" EntitySet="RequirementTexts" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Tigra_Stories_Cell" Association="TigraModel.Store.fk_Tigra_Stories_Cell">
-            <End Role="Cells" EntitySet="Cells" />
-            <End Role="Stories" EntitySet="Stories" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Tigra_Stories_User" Association="TigraModel.Store.fk_Tigra_Stories_User">
-            <End Role="UserAccounts" EntitySet="UserAccounts" />
-            <End Role="Stories" EntitySet="Stories" />
           </AssociationSet>
           <AssociationSet Name="fk_Tigra_Teams_Cell" Association="TigraModel.Store.fk_Tigra_Teams_Cell">
             <End Role="Cells" EntitySet="Cells" />
@@ -82,17 +73,18 @@
           </Key>
           <Property Name="RevisionID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RequirementID" Type="int" Nullable="false" />
+          <Property Name="RevisionNumber" Type="smallint" Nullable="false" />
+          <Property Name="RevisionDate" Type="datetime2" Nullable="false" Precision="0" />
           <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="Modified" Type="datetime2" Nullable="false" Precision="0" />
           <Property Name="Message" Type="varchar" Nullable="false" MaxLength="250" />
-          <Property Name="Status" Type="tinyint" Nullable="false" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <EntityType Name="Requirements">
           <Key>
             <PropertyRef Name="RequirementID" />
           </Key>
           <Property Name="RequirementID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ReqType" Type="tinyint" Nullable="false" />
+          <Property Name="ReqType" Type="smallint" Nullable="false" />
           <Property Name="CellID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="RequirementTexts">
@@ -100,7 +92,6 @@
             <PropertyRef Name="RevisionID" />
           </Key>
           <Property Name="RevisionID" Type="bigint" Nullable="false" />
-          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="Text" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
@@ -110,17 +101,6 @@
           <Property Name="RoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Authorisations" Type="varbinary" Nullable="false" MaxLength="4096" />
-        </EntityType>
-        <EntityType Name="Stories">
-          <Key>
-            <PropertyRef Name="StoryID" />
-          </Key>
-          <Property Name="StoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="CellID" Type="int" Nullable="false" />
-          <Property Name="UserID" Type="int" Nullable="false" />
-          <Property Name="RequestDate" Type="datetime2" Nullable="false" Precision="0" />
-          <Property Name="Summary" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="Text" Type="text" Nullable="false" />
         </EntityType>
         <EntityType Name="Teams">
           <Key>
@@ -199,30 +179,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Tigra_Stories_Cell">
-          <End Role="Cells" Type="TigraModel.Store.Cells" Multiplicity="1" />
-          <End Role="Stories" Type="TigraModel.Store.Stories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cells">
-              <PropertyRef Name="CellID" />
-            </Principal>
-            <Dependent Role="Stories">
-              <PropertyRef Name="CellID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Tigra_Stories_User">
-          <End Role="UserAccounts" Type="TigraModel.Store.UserAccounts" Multiplicity="1" />
-          <End Role="Stories" Type="TigraModel.Store.Stories" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccounts">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Stories">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Tigra_Teams_Cell">
           <End Role="Cells" Type="TigraModel.Store.Cells" Multiplicity="1" />
           <End Role="Teams" Type="TigraModel.Store.Teams" Multiplicity="*" />
@@ -271,23 +227,61 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetLatestRequirements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="CellID" Type="int" Mode="In" />
+          <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
+          <Parameter Name="Type" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="GetRequirementDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="RequirementID" Type="int" Mode="In" />
+          <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="GetRequirementsIndex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="CellID" Type="int" Mode="In" />
+          <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
+        </Function>
+        <Function Name="SaveRequirement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="ReqTypeID" Type="smallint" Mode="In" />
+          <Parameter Name="CellID" Type="int" Mode="In" />
+          <Parameter Name="RevisionID" Type="bigint" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Text" Type="text" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TigraModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="UserAccounts" EntityType="TigraModel.UserAccount" />
-          <EntitySet Name="UserProfiles" EntityType="TigraModel.UserProfile" />
-          <AssociationSet Name="fk_Tigra_UserProfiles_Usr" Association="TigraModel.fk_Tigra_UserProfiles_Usr">
-            <End Role="UserAccount" EntitySet="UserAccounts" />
-            <End Role="UserProfile" EntitySet="UserProfiles" />
-          </AssociationSet>
+          <EntitySet Name="Baselines" EntityType="TigraModel.Baseline" />
           <EntitySet Name="Cells" EntityType="TigraModel.Cell" />
+          <EntitySet Name="RequirementRevisions" EntityType="TigraModel.RequirementRevision" />
+          <EntitySet Name="Requirements" EntityType="TigraModel.Requirement" />
+          <EntitySet Name="RequirementTexts" EntityType="TigraModel.RequirementText" />
           <EntitySet Name="Roles" EntityType="TigraModel.Role" />
           <EntitySet Name="Teams" EntityType="TigraModel.Team" />
+          <EntitySet Name="UserAccounts" EntityType="TigraModel.UserAccount" />
+          <EntitySet Name="UserProfiles" EntityType="TigraModel.UserProfile" />
+          <AssociationSet Name="fk_Tigra_Requirements_Cell" Association="TigraModel.fk_Tigra_Requirements_Cell">
+            <End Role="Cell" EntitySet="Cells" />
+            <End Role="Requirement" EntitySet="Requirements" />
+          </AssociationSet>
           <AssociationSet Name="fk_Tigra_Teams_Cell" Association="TigraModel.fk_Tigra_Teams_Cell">
             <End Role="Cell" EntitySet="Cells" />
             <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tigra_RequirementRevisions_Req" Association="TigraModel.fk_Tigra_RequirementRevisions_Req">
+            <End Role="Requirement" EntitySet="Requirements" />
+            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tigra_RequirementRevisions_User" Association="TigraModel.fk_Tigra_RequirementRevisions_User">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tigra_RequirementTexts_Rev" Association="TigraModel.fk_Tigra_RequirementTexts_Rev">
+            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
+            <End Role="RequirementText" EntitySet="RequirementTexts" />
           </AssociationSet>
           <AssociationSet Name="fk_Tigra_Teams_Role" Association="TigraModel.fk_Tigra_Teams_Role">
             <End Role="Role" EntitySet="Roles" />
@@ -297,84 +291,86 @@
             <End Role="UserAccount" EntitySet="UserAccounts" />
             <End Role="Team" EntitySet="Teams" />
           </AssociationSet>
-          <EntitySet Name="Baselines" EntityType="TigraModel.Baseline" />
-          <EntitySet Name="RequirementRevisions" EntityType="TigraModel.RequirementRevision" />
-          <EntitySet Name="Requirements" EntityType="TigraModel.Requirement" />
-          <EntitySet Name="RequirementTexts" EntityType="TigraModel.RequirementText" />
-          <AssociationSet Name="fk_Tigra_Requirements_Cell" Association="TigraModel.fk_Tigra_Requirements_Cell">
-            <End Role="Cell" EntitySet="Cells" />
-            <End Role="Requirement" EntitySet="Requirements" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Tigra_RequirementRevisions_User" Association="TigraModel.fk_Tigra_RequirementRevisions_User">
+          <AssociationSet Name="fk_Tigra_UserProfiles_Usr" Association="TigraModel.fk_Tigra_UserProfiles_Usr">
             <End Role="UserAccount" EntitySet="UserAccounts" />
-            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
-          <AssociationSet Name="fk_Tigra_RequirementTexts_User" Association="TigraModel.fk_Tigra_RequirementTexts_User">
-            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
-            <End Role="RequirementText" EntitySet="RequirementTexts" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Tigra_RequirementRevisions_Req" Association="TigraModel.fk_Tigra_RequirementRevisions_Req">
-            <End Role="Requirement" EntitySet="Requirements" />
-            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
-          </AssociationSet>
-          <EntitySet Name="Stories" EntityType="TigraModel.Story" />
-          <AssociationSet Name="fk_Tigra_Stories_Cell" Association="TigraModel.fk_Tigra_Stories_Cell">
-            <End Role="Cell" EntitySet="Cells" />
-            <End Role="Story" EntitySet="Stories" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Tigra_Stories_User" Association="TigraModel.fk_Tigra_Stories_User">
-            <End Role="UserAccount" EntitySet="UserAccounts" />
-            <End Role="Story" EntitySet="Stories" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="UserAccount">
+          <FunctionImport Name="SaveRequirement">
+            <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
+            <Parameter Name="RevisionID" Mode="In" Type="Int64" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetRequirementDetails" ReturnType="Collection(TigraModel.GetRequirementDetails_Result)">
+            <Parameter Name="RequirementID" Mode="In" Type="Int32" />
+            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetRequirementsIndex" ReturnType="Collection(TigraModel.GetRequirementsIndex_Result)">
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
+            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetLatestRequirements" ReturnType="Collection(TigraModel.GetLatestRequirements_Result)">
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
+            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Type" Mode="In" Type="Byte" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Baseline">
           <Key>
-            <PropertyRef Name="UserID" />
+            <PropertyRef Name="BaselineID" />
           </Key>
-          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
-          <Property Type="Binary" Name="Password" MaxLength="32" FixedLength="true" />
-          <Property Type="DateTime" Name="RegisterDate" Nullable="false" Precision="0" />
-          <NavigationProperty Name="UserProfile" Relationship="TigraModel.fk_Tigra_UserProfiles_Usr" FromRole="UserAccount" ToRole="UserProfile" />
-          <NavigationProperty Name="Teams" Relationship="TigraModel.fk_Tigra_Teams_User" FromRole="UserAccount" ToRole="Team" />
-          <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.fk_Tigra_RequirementRevisions_User" FromRole="UserAccount" ToRole="RequirementRevision" />
-          <NavigationProperty Name="Stories" Relationship="TigraModel.fk_Tigra_Stories_User" FromRole="UserAccount" ToRole="Story" />
-        </EntityType>
-        <EntityType Name="UserProfile">
-          <Key>
-            <PropertyRef Name="UserID" />
-          </Key>
+          <Property Type="Int32" Name="BaselineID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CellID" Nullable="false" />
           <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Binary" Name="Picture" MaxLength="Max" FixedLength="false" />
-          <Property Type="String" Name="Location" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Biography" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_UserProfiles_Usr" FromRole="UserProfile" ToRole="UserAccount" />
-          <Property Type="DateTime" Name="BirthDate" Precision="0" />
+          <Property Type="DateTime" Name="SetDate" Nullable="false" Precision="0" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="fk_Tigra_UserProfiles_Usr">
-          <End Type="TigraModel.UserAccount" Role="UserAccount" Multiplicity="1" />
-          <End Type="TigraModel.UserProfile" Role="UserProfile" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccount">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="UserProfile">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Cell">
           <Key>
             <PropertyRef Name="CellID" />
           </Key>
           <Property Type="Int32" Name="CellID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="CellName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Description" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Tag" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Teams" Relationship="TigraModel.fk_Tigra_Teams_Cell" FromRole="Cell" ToRole="Team" />
+          <Property Type="String" Name="Description" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Requirements" Relationship="TigraModel.fk_Tigra_Requirements_Cell" FromRole="Cell" ToRole="Requirement" />
-          <NavigationProperty Name="Stories" Relationship="TigraModel.fk_Tigra_Stories_Cell" FromRole="Cell" ToRole="Story" />
+          <NavigationProperty Name="Teams" Relationship="TigraModel.fk_Tigra_Teams_Cell" FromRole="Cell" ToRole="Team" />
+        </EntityType>
+        <EntityType Name="RequirementRevision">
+          <Key>
+            <PropertyRef Name="RevisionID" />
+          </Key>
+          <Property Type="Int64" Name="RevisionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="false" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Requirement" Relationship="TigraModel.fk_Tigra_RequirementRevisions_Req" FromRole="RequirementRevision" ToRole="Requirement" />
+          <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_RequirementRevisions_User" FromRole="RequirementRevision" ToRole="UserAccount" />
+          <NavigationProperty Name="RequirementText" Relationship="TigraModel.fk_Tigra_RequirementTexts_Rev" FromRole="RequirementRevision" ToRole="RequirementText" />
+        </EntityType>
+        <EntityType Name="Requirement">
+          <Key>
+            <PropertyRef Name="RequirementID" />
+          </Key>
+          <Property Type="Int32" Name="RequirementID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="ReqType" Nullable="false" />
+          <Property Type="Int32" Name="CellID" Nullable="false" />
+          <NavigationProperty Name="Cell" Relationship="TigraModel.fk_Tigra_Requirements_Cell" FromRole="Requirement" ToRole="Cell" />
+          <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.fk_Tigra_RequirementRevisions_Req" FromRole="Requirement" ToRole="RequirementRevision" />
+        </EntityType>
+        <EntityType Name="RequirementText">
+          <Key>
+            <PropertyRef Name="RevisionID" />
+          </Key>
+          <Property Type="Int64" Name="RevisionID" Nullable="false" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RequirementRevision" Relationship="TigraModel.fk_Tigra_RequirementTexts_Rev" FromRole="RequirementText" ToRole="RequirementRevision" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -397,6 +393,42 @@
           <NavigationProperty Name="Role" Relationship="TigraModel.fk_Tigra_Teams_Role" FromRole="Team" ToRole="Role" />
           <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_Teams_User" FromRole="Team" ToRole="UserAccount" />
         </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="Password" MaxLength="32" FixedLength="true" />
+          <Property Type="DateTime" Name="RegisterDate" Nullable="false" Precision="0" />
+          <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.fk_Tigra_RequirementRevisions_User" FromRole="UserAccount" ToRole="RequirementRevision" />
+          <NavigationProperty Name="Teams" Relationship="TigraModel.fk_Tigra_Teams_User" FromRole="UserAccount" ToRole="Team" />
+          <NavigationProperty Name="UserProfile" Relationship="TigraModel.fk_Tigra_UserProfiles_Usr" FromRole="UserAccount" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="FullName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="BirthDate" Precision="0" />
+          <Property Type="Binary" Name="Picture" MaxLength="Max" FixedLength="false" />
+          <Property Type="String" Name="Location" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Biography" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_UserProfiles_Usr" FromRole="UserProfile" ToRole="UserAccount" />
+        </EntityType>
+        <Association Name="fk_Tigra_Requirements_Cell">
+          <End Type="TigraModel.Cell" Role="Cell" Multiplicity="1" />
+          <End Type="TigraModel.Requirement" Role="Requirement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cell">
+              <PropertyRef Name="CellID" />
+            </Principal>
+            <Dependent Role="Requirement">
+              <PropertyRef Name="CellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Tigra_Teams_Cell">
           <End Type="TigraModel.Cell" Role="Cell" Multiplicity="1" />
           <End Type="TigraModel.Team" Role="Team" Multiplicity="*" />
@@ -406,6 +438,42 @@
             </Principal>
             <Dependent Role="Team">
               <PropertyRef Name="CellID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tigra_RequirementRevisions_Req">
+          <End Type="TigraModel.Requirement" Role="Requirement" Multiplicity="1" />
+          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Requirement">
+              <PropertyRef Name="RequirementID" />
+            </Principal>
+            <Dependent Role="RequirementRevision">
+              <PropertyRef Name="RequirementID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tigra_RequirementRevisions_User">
+          <End Type="TigraModel.UserAccount" Role="UserAccount" Multiplicity="1" />
+          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RequirementRevision">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tigra_RequirementTexts_Rev">
+          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="1" />
+          <End Type="TigraModel.RequirementText" Role="RequirementText" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RequirementRevision">
+              <PropertyRef Name="RevisionID" />
+            </Principal>
+            <Dependent Role="RequirementText">
+              <PropertyRef Name="RevisionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -433,169 +501,97 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Baseline">
-          <Key>
-            <PropertyRef Name="BaselineID" />
-          </Key>
-          <Property Type="Int32" Name="BaselineID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="CellID" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="DateTime" Name="SetDate" Nullable="false" Precision="0" />
-          <Property Type="String" Name="Message" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="RequirementRevision">
-          <Key>
-            <PropertyRef Name="RevisionID" />
-          </Key>
-          <Property Type="Int64" Name="RevisionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="DateTime" Name="Modified" Nullable="false" Precision="0" />
-          <Property Type="String" Name="Message" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Type="Byte" Name="Status" Nullable="false" />
-          <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_RequirementRevisions_User" FromRole="RequirementRevision" ToRole="UserAccount" />
-          <NavigationProperty Name="RequirementText" Relationship="TigraModel.fk_Tigra_RequirementTexts_User" FromRole="RequirementRevision" ToRole="RequirementText" />
-          <Property Type="Int32" Name="RequirementID" Nullable="false" />
-          <NavigationProperty Name="Requirement" Relationship="TigraModel.fk_Tigra_RequirementRevisions_Req" FromRole="RequirementRevision" ToRole="Requirement" />
-        </EntityType>
-        <EntityType Name="Requirement">
-          <Key>
-            <PropertyRef Name="RequirementID" />
-          </Key>
-          <Property Type="Int32" Name="RequirementID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Byte" Name="ReqType" Nullable="false" />
-          <Property Type="Int32" Name="CellID" Nullable="false" />
-          <NavigationProperty Name="Cell" Relationship="TigraModel.fk_Tigra_Requirements_Cell" FromRole="Requirement" ToRole="Cell" />
-          <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.fk_Tigra_RequirementRevisions_Req" FromRole="Requirement" ToRole="RequirementRevision" />
-        </EntityType>
-        <EntityType Name="RequirementText">
-          <Key>
-            <PropertyRef Name="RevisionID" />
-          </Key>
+        <Association Name="fk_Tigra_UserProfiles_Usr">
+          <End Type="TigraModel.UserAccount" Role="UserAccount" Multiplicity="1" />
+          <End Type="TigraModel.UserProfile" Role="UserProfile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetRequirementDetails_Result">
+          <Property Type="Int16" Name="ReqType" Nullable="false" />
           <Property Type="Int64" Name="RevisionID" Nullable="false" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RequirementRevision" Relationship="TigraModel.fk_Tigra_RequirementTexts_User" FromRole="RequirementText" ToRole="RequirementRevision" />
-        </EntityType>
-        <Association Name="fk_Tigra_Requirements_Cell">
-          <End Type="TigraModel.Cell" Role="Cell" Multiplicity="1" />
-          <End Type="TigraModel.Requirement" Role="Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cell">
-              <PropertyRef Name="CellID" />
-            </Principal>
-            <Dependent Role="Requirement">
-              <PropertyRef Name="CellID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Tigra_RequirementRevisions_User">
-          <End Type="TigraModel.UserAccount" Role="UserAccount" Multiplicity="1" />
-          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccount">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="RequirementRevision">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Tigra_RequirementTexts_User">
-          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="1" />
-          <End Type="TigraModel.RequirementText" Role="RequirementText" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="RequirementRevision">
-              <PropertyRef Name="RevisionID" />
-            </Principal>
-            <Dependent Role="RequirementText">
-              <PropertyRef Name="RevisionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Tigra_RequirementRevisions_Req">
-          <End Type="TigraModel.Requirement" Role="Requirement" Multiplicity="1" />
-          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Requirement">
-              <PropertyRef Name="RequirementID" />
-            </Principal>
-            <Dependent Role="RequirementRevision">
-              <PropertyRef Name="RequirementID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Story">
-          <Key>
-            <PropertyRef Name="StoryID" />
-          </Key>
-          <Property Type="Int32" Name="StoryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="CellID" Nullable="false" />
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="false" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
           <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="DateTime" Name="RequestDate" Nullable="false" Precision="0" />
-          <Property Type="String" Name="Summary" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cell" Relationship="TigraModel.fk_Tigra_Stories_Cell" FromRole="Story" ToRole="Cell" />
-          <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_Stories_User" FromRole="Story" ToRole="UserAccount" />
-        </EntityType>
-        <Association Name="fk_Tigra_Stories_Cell">
-          <End Type="TigraModel.Cell" Role="Cell" Multiplicity="1" />
-          <End Type="TigraModel.Story" Role="Story" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cell">
-              <PropertyRef Name="CellID" />
-            </Principal>
-            <Dependent Role="Story">
-              <PropertyRef Name="CellID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Tigra_Stories_User">
-          <End Type="TigraModel.UserAccount" Role="UserAccount" Multiplicity="1" />
-          <End Type="TigraModel.Story" Role="Story" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserAccount">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Story">
-              <PropertyRef Name="UserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
+        </ComplexType>
+        <ComplexType Name="GetRequirementsIndex_Result">
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetLatestRequirements_Result">
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="TigraModelStoreContainer" CdmEntityContainer="Entities">
-          <EntitySetMapping Name="UserAccounts">
-            <EntityTypeMapping TypeName="TigraModel.UserAccount">
-              <MappingFragment StoreEntitySet="UserAccounts">
-                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+          <EntitySetMapping Name="Baselines">
+            <EntityTypeMapping TypeName="TigraModel.Baseline">
+              <MappingFragment StoreEntitySet="Baseline">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="SetDate" ColumnName="SetDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserProfiles">
-            <EntityTypeMapping TypeName="TigraModel.UserProfile">
-              <MappingFragment StoreEntitySet="UserProfiles">
-                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
-                <ScalarProperty Name="Biography" ColumnName="Biography" />
-                <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="Picture" ColumnName="Picture" />
-                <ScalarProperty Name="FullName" ColumnName="FullName" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CellID" ColumnName="CellID" />
+                <ScalarProperty Name="BaselineID" ColumnName="BaselineID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cells">
             <EntityTypeMapping TypeName="TigraModel.Cell">
               <MappingFragment StoreEntitySet="Cells">
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="CellName" ColumnName="CellName" />
                 <ScalarProperty Name="CellID" ColumnName="CellID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequirementRevisions">
+            <EntityTypeMapping TypeName="TigraModel.RequirementRevision">
+              <MappingFragment StoreEntitySet="RequirementRevisions">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requirements">
+            <EntityTypeMapping TypeName="TigraModel.Requirement">
+              <MappingFragment StoreEntitySet="Requirements">
+                <ScalarProperty Name="CellID" ColumnName="CellID" />
+                <ScalarProperty Name="ReqType" ColumnName="ReqType" />
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequirementTexts">
+            <EntityTypeMapping TypeName="TigraModel.RequirementText">
+              <MappingFragment StoreEntitySet="RequirementTexts">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -617,59 +613,66 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Baselines">
-            <EntityTypeMapping TypeName="TigraModel.Baseline">
-              <MappingFragment StoreEntitySet="Baseline">
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="SetDate" ColumnName="SetDate" />
+          <EntitySetMapping Name="UserAccounts">
+            <EntityTypeMapping TypeName="TigraModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccounts">
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CellID" ColumnName="CellID" />
-                <ScalarProperty Name="BaselineID" ColumnName="BaselineID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RequirementRevisions">
-            <EntityTypeMapping TypeName="TigraModel.RequirementRevision">
-              <MappingFragment StoreEntitySet="RequirementRevisions">
-                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="Modified" ColumnName="Modified" />
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="TigraModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfiles">
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Requirements">
-            <EntityTypeMapping TypeName="TigraModel.Requirement">
-              <MappingFragment StoreEntitySet="Requirements">
-                <ScalarProperty Name="CellID" ColumnName="CellID" />
+          <FunctionImportMapping FunctionImportName="SaveRequirement" FunctionName="TigraModel.Store.SaveRequirement" />
+          <FunctionImportMapping FunctionImportName="GetRequirementDetails" FunctionName="TigraModel.Store.GetRequirementDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetRequirementDetails_Result">
                 <ScalarProperty Name="ReqType" ColumnName="ReqType" />
-                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RequirementTexts">
-            <EntityTypeMapping TypeName="TigraModel.RequirementText">
-              <MappingFragment StoreEntitySet="RequirementTexts">
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Stories">
-            <EntityTypeMapping TypeName="TigraModel.Story">
-              <MappingFragment StoreEntitySet="Stories">
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Summary" ColumnName="Summary" />
-                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="CellID" ColumnName="CellID" />
-                <ScalarProperty Name="StoryID" ColumnName="StoryID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRequirementsIndex" FunctionName="TigraModel.Store.GetRequirementsIndex">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetRequirementsIndex_Result">
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetLatestRequirements" FunctionName="TigraModel.Store.GetLatestRequirements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetLatestRequirements_Result">
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

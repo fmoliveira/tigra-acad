@@ -5,27 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a7a8642c70ea4344a0e50b7a40a2cdf9" Name="Diagram1">
-        <EntityTypeShape EntityType="TigraModel.UserAccount" Width="1.5" PointX="11.533351426726835" PointY="27.490685222433267" />
-        <EntityTypeShape EntityType="TigraModel.UserProfile" Width="1.5" PointX="2.2132668691749062" PointY="0.407354459356216" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_UserProfiles_Usr" />
-        <EntityTypeShape EntityType="TigraModel.Cell" Width="1.5" PointX="0.98810137668070452" PointY="17.876275160292291" />
-        <EntityTypeShape EntityType="TigraModel.Role" Width="1.5" PointX="3.9902615118726441" PointY="19.160732576232746" />
-        <EntityTypeShape EntityType="TigraModel.Team" Width="1.5" PointX="7.8540353774344709" PointY="5.9199077067523769" />
+        <EntityTypeShape EntityType="TigraModel.Baseline" Width="1.5" PointX="9.7572262500213576" PointY="29.24670614173948" />
+        <EntityTypeShape EntityType="TigraModel.Cell" Width="1.5" PointX="1.2882378777899954" PointY="30.431881233319586" />
+        <EntityTypeShape EntityType="TigraModel.RequirementRevision" Width="1.5" PointX="7.5713229587168076" PointY="5.6654204007542788" />
+        <EntityTypeShape EntityType="TigraModel.Requirement" Width="1.5" PointX="0.10637541492766488" PointY="25.258625012477218" />
+        <EntityTypeShape EntityType="TigraModel.RequirementText" Width="1.5" PointX="11.149821571609854" PointY="3.5966601984559841" />
+        <EntityTypeShape EntityType="TigraModel.Role" Width="1.5" PointX="0.39831641521226446" PointY="7.1095556649889593" />
+        <EntityTypeShape EntityType="TigraModel.Team" Width="1.5" PointX="6.1452670349484624" PointY="26.10540900849989" />
+        <EntityTypeShape EntityType="TigraModel.UserAccount" Width="1.5" PointX="0.5394125397034979" PointY="19.815131867218359" />
+        <EntityTypeShape EntityType="TigraModel.UserProfile" Width="1.5" PointX="3.6654250173202834" PointY="2.4567320954318772" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_Requirements_Cell" />
         <AssociationConnector Association="TigraModel.fk_Tigra_Teams_Cell" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRevisions_Req" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRevisions_User" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementTexts_Rev" />
         <AssociationConnector Association="TigraModel.fk_Tigra_Teams_Role" />
         <AssociationConnector Association="TigraModel.fk_Tigra_Teams_User" />
-        <EntityTypeShape EntityType="TigraModel.Baseline" Width="1.5" PointX="5.7689825807553632" PointY="1.5684308118971209" />
-        <EntityTypeShape EntityType="TigraModel.RequirementRevision" Width="1.5" PointX="3.1591650113273246" PointY="4.7100016049621631" />
-        <EntityTypeShape EntityType="TigraModel.Requirement" Width="1.5" PointX="8.2372030337514364" PointY="12.088117038872147" />
-        <EntityTypeShape EntityType="TigraModel.RequirementText" Width="1.5" PointX="0.20254521453871635" PointY="28.536895303305656" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_Requirements_Cell" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRevisions_User" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementTexts_User" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRevisions_Req" />
-        <EntityTypeShape EntityType="TigraModel.Story" Width="1.5" PointX="9.3248597333789149" PointY="24.368813898586115" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_Stories_Cell" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_Stories_User" />
-        </Diagram>
+        <AssociationConnector Association="TigraModel.fk_Tigra_UserProfiles_Usr" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

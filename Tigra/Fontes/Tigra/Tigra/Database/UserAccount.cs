@@ -16,9 +16,8 @@ namespace Tigra.Database
     {
         public UserAccount()
         {
-            this.Teams = new HashSet<Team>();
             this.RequirementRevisions = new HashSet<RequirementRevision>();
-            this.Stories = new HashSet<Story>();
+            this.Teams = new HashSet<Team>();
         }
     
         public int UserID { get; set; }
@@ -26,9 +25,8 @@ namespace Tigra.Database
         public byte[] Password { get; set; }
         public System.DateTime RegisterDate { get; set; }
     
-        public virtual UserProfile UserProfile { get; set; }
-        public virtual ICollection<Team> Teams { get; set; }
         public virtual ICollection<RequirementRevision> RequirementRevisions { get; set; }
-        public virtual ICollection<Story> Stories { get; set; }
+        public virtual ICollection<Team> Teams { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

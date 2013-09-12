@@ -4,7 +4,7 @@ BEGIN
 	CREATE TABLE [Tigra].[Requirements]
 	(
 		[RequirementID] INT IDENTITY(1,1) NOT NULL,
-		[ReqType] TINYINT NOT NULL,
+		[ReqType] SMALLINT NOT NULL,
 		[CellID] INT NOT NULL,
 		CONSTRAINT [pk_Tigra_Requirements_Key] PRIMARY KEY ([RequirementID]),
 		CONSTRAINT [fk_Tigra_Requirements_Cell] FOREIGN KEY ([CellID]) REFERENCES [Tigra].[Cells] ([CellID])

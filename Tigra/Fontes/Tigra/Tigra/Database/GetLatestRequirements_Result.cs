@@ -10,13 +10,14 @@
 namespace Tigra.Database
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class RequirementText
+    public partial class GetLatestRequirements_Result
     {
-        public long RevisionID { get; set; }
+        public int RequirementID { get; set; }
+        public Nullable<short> RevisionNumber { get; set; }
+        public System.DateTime RevisionDate { get; set; }
+        public int UserID { get; set; }
+        public string Title { get; set; }
         public string Text { get; set; }
-    
-        public virtual RequirementRevision RequirementRevision { get; set; }
     }
 }

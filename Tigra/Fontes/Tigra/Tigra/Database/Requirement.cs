@@ -20,7 +20,7 @@ namespace Tigra.Database
         }
     
         public int RequirementID { get; set; }
-        public byte ReqType { get; set; }
+        public short ReqType { get; set; }
         public int CellID { get; set; }
     
         public virtual Cell Cell { get; set; }

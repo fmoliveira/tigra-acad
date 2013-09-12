@@ -10,18 +10,16 @@
 namespace Tigra.Database
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Story
+    public partial class GetRequirementDetails_Result
     {
-        public int StoryID { get; set; }
-        public int CellID { get; set; }
+        public short ReqType { get; set; }
+        public long RevisionID { get; set; }
+        public int RequirementID { get; set; }
+        public short RevisionNumber { get; set; }
+        public System.DateTime RevisionDate { get; set; }
         public int UserID { get; set; }
-        public System.DateTime RequestDate { get; set; }
-        public string Summary { get; set; }
+        public string Title { get; set; }
         public string Text { get; set; }
-    
-        public virtual Cell Cell { get; set; }
-        public virtual UserAccount UserAccount { get; set; }
     }
 }

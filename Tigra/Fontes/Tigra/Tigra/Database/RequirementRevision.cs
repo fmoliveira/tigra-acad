@@ -15,14 +15,15 @@ namespace Tigra.Database
     public partial class RequirementRevision
     {
         public long RevisionID { get; set; }
-        public int UserID { get; set; }
-        public System.DateTime Modified { get; set; }
-        public string Message { get; set; }
-        public byte Status { get; set; }
         public int RequirementID { get; set; }
+        public short RevisionNumber { get; set; }
+        public System.DateTime RevisionDate { get; set; }
+        public int UserID { get; set; }
+        public string Message { get; set; }
+        public string Title { get; set; }
     
+        public virtual Requirement Requirement { get; set; }
         public virtual UserAccount UserAccount { get; set; }
         public virtual RequirementText RequirementText { get; set; }
-        public virtual Requirement Requirement { get; set; }
     }
 }

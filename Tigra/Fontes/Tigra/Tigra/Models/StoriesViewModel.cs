@@ -14,13 +14,16 @@ namespace Tigra.Models
     {
         
         [Required]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
-        [DisplayName("Solicitante")]
-        public string UserName { get; set; }
+        [DisplayName("Autor")]
+        public UserNameModel UserName { get; set; }
 
-        [DisplayName("Data da solicitação")]
-        public DateTime RequestDate { get; set; }
+        [DisplayName("Número da revisão")]
+        public int RevisionNumber { get; set; }
+
+        [DisplayName("Data da revisão")]
+        public DateTime RevisionDate { get; set; }
 
         [DisplayName("Título")]
         [DataType(DataType.Text)]
@@ -38,12 +41,13 @@ namespace Tigra.Models
             //
         }
 
-        public StoriesViewModel(Story item)
+        public StoriesViewModel(GetRequirementDetails_Result item)
         {
-            this.Id = item.StoryID;
-            this.UserName = item.UserAccount.GetDisplayName();
-            this.RequestDate = item.RequestDate;
-            this.Summary = item.Summary;
+            this.Id = item.RevisionID;
+            this.UserName = new UserNameModel(item.UserID);
+            this.RevisionNumber = item.RevisionNumber;
+            this.RevisionDate = item.RevisionDate;
+            this.Summary = item.Title;
             this.Text = item.Text;
         }
 

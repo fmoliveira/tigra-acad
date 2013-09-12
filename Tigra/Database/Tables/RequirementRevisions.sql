@@ -5,10 +5,11 @@ BEGIN
 	(
 		[RevisionID] BIGINT IDENTITY(1,1) NOT NULL,
 		[RequirementID] INT NOT NULL,
+		[RevisionNumber] SMALLINT NOT NULL,
+		[RevisionDate] DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME(),
 		[UserID] INT NOT NULL,
-		[Modified] DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME(),
 		[Message] VARCHAR(250) NOT NULL CHECK(LEN([Message]) >= 10),
-		[Status] TINYINT NOT NULL,
+		[Title] VARCHAR(100) NOT NULL CHECK(LEN([Title]) >= 10),
 		CONSTRAINT [pk_Tigra_RequirementRevisions_Key] PRIMARY KEY ([RevisionID]),
 		CONSTRAINT [fk_Tigra_RequirementRevisions_Req] FOREIGN KEY ([RequirementID]) REFERENCES [Tigra].[Requirements] ([RequirementID]),
 		CONSTRAINT [fk_Tigra_RequirementRevisions_User] FOREIGN KEY ([UserID]) REFERENCES [Tigra].[UserAccounts] ([UserID])
