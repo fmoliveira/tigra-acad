@@ -127,6 +127,7 @@
     <Compile Include="Api\RegisterController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="BootstrapSupport\AutoFocusAttribute.cs" />
+    <Compile Include="BootstrapSupport\Breadcrumb.cs" />
     <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
     <Compile Include="BootstrapSupport\Utils.cs" />
     <Compile Include="BootstrapSupport\HtmlHelpers\GlyphIcons.cs" />

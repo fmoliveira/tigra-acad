@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Tigra.Database;
 using Tigra;
+using Tigra.BootstrapSupport;
 
 namespace BootstrapSupport
 {
@@ -196,174 +197,11 @@ namespace BootstrapSupport
             return MvcHtmlString.Create(li.ToString());
         }
 
-        private static string GetAreaDescription(string areaName)
+        public static MvcHtmlString MakeBreadcrumb(this HtmlHelper helper)
         {
-            switch (areaName)
-            {
-                case "Admin":
-                    return "Administração";
-
-                default:
-                    return areaName;
-            }
-        }
-
-        private static string GetControllerDescription(string controllerName)
-        {
-            switch (controllerName)
-            {
-                case "Home":
-                    return "Início";
-
-                case "Stories":
-                    return "Histórias";
-
-                case "Documentation":
-                    return "Documentação";
-
-                case "Revision":
-                    return "Revisão";
-
-                case "Cells":
-                    return "Células";
-
-                case "Teams":
-                    return "Equipes";
-
-                case "Roles":
-                    return "Permissões";
-
-                default:
-                    return controllerName;
-            }
-        }
-
-        private static string GetActionDescription(string actionName)
-        {
-            switch (actionName)
-            {
-                case "Index":
-                    return "Índice";
-
-                case "Create":
-                    return "Criar novo";
-
-                case "Edit":
-                    return "Editar";
-
-                case "Details":
-                    return "Visualizar";
-
-                default:
-                    return actionName;
-            }
-        }
-
-        public static MvcHtmlString Breadcrumb(this HtmlHelper helper)
-        {
-            TagBuilder ol, li, a;
-            StringBuilder contents = new StringBuilder();
             UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
-            string cell = null, controller = null, action = null, id = null, cur = null;
-
-            /* Instantiate bradcrumb. */
-            ol = new TagBuilder("ol");
-            ol.AddCssClass("breadcrumb");
-
-            /* Top level. */
-            a = new TagBuilder("a");
-            li = new TagBuilder("li");
-            a.MergeAttribute("href", url.Content("~/"));
-            a.SetInnerText("Tigra");
-            cur = a.InnerHtml;
-            li.InnerHtml = a.ToString();
-
-            /* Area level. */
-            if (helper.ViewContext.RouteData.DataTokens["area"] != null && helper.ViewContext.RouteData.DataTokens["area"].ToString().Length != 0)
-            {
-                contents.Append(li.ToString());
-                cell = helper.ViewContext.RouteData.DataTokens["area"].ToString();
-
-                a = new TagBuilder("a");
-                li = new TagBuilder("li");
-                a.MergeAttribute("href", url.Content(String.Format("~/")));
-                a.SetInnerText(GetAreaDescription(cell));
-                cur = a.InnerHtml;
-                li.InnerHtml = a.ToString();
-            }
-            /* Cell level. */
-            else if (helper.ViewContext.RouteData.Values["cell"] != null && helper.ViewContext.RouteData.Values["cell"].ToString().Length != 0)
-            {
-                contents.Append(li.ToString());
-                cell = helper.ViewContext.RouteData.Values["cell"].ToString();
-
-                a = new TagBuilder("a");
-                li = new TagBuilder("li");
-                a.MergeAttribute("href", url.Content(String.Format("~/{0}", cell)));
-                a.SetInnerText(helper.CurrentCell());
-                cur = a.InnerHtml;
-                li.InnerHtml = a.ToString();
-            }
-
-            /* Controller level. */
-            if (helper.ViewContext.RouteData.Values["controller"] != null && helper.ViewContext.RouteData.Values["controller"].ToString().Length != 0)
-            {
-                contents.Append(li.ToString());
-                controller = helper.ViewContext.RouteData.Values["controller"].ToString();
-
-                a = new TagBuilder("a");
-                li = new TagBuilder("li");
-                a.MergeAttribute("href", url.Content(String.Format("~/{0}/{1}", cell, controller)));
-                a.SetInnerText(GetControllerDescription(controller));
-                cur = a.InnerHtml;
-                li.InnerHtml = a.ToString();
-            }
-
-            /* Action level. */
-            if (helper.ViewContext.RouteData.Values["action"] != null && helper.ViewContext.RouteData.Values["action"].ToString().Length != 0)
-            {
-                if (helper.ViewContext.RouteData.Values["action"].ToString().ToUpper() != "INDEX")
-                {
-                    contents.Append(li.ToString());
-                    action = helper.ViewContext.RouteData.Values["action"].ToString();
-
-                    a = new TagBuilder("a");
-                    li = new TagBuilder("li");
-                    a.MergeAttribute("href", url.Content(String.Format("~/{0}/{1}", cell, controller)));
-                    a.SetInnerText(GetActionDescription(action));
-                    cur = a.InnerHtml;
-                    li.InnerHtml = a.ToString();
-                }
-            }
-
-            /* Sets current level. */
-            li = new TagBuilder("li");
-            li.InnerHtml = cur;
-            li.AddCssClass("active");
-            contents.Append(li.ToString());
-
-            /* Id level. */
-            if (helper.ViewContext.RouteData.Values["id"] != null && helper.ViewContext.RouteData.Values["id"].ToString().Length != 0)
-            {
-                id = helper.ViewContext.RouteData.Values["id"].ToString();
-                li = new TagBuilder("li");
-
-                if (helper.ViewContext.RouteData.Values["title"] != null && helper.ViewContext.RouteData.Values["title"].ToString().Length != 0)
-                {
-                    li.SetInnerText(helper.ViewContext.RouteData.Values["title"].ToString());
-                }
-                else
-                {
-                    li.SetInnerText(id);
-                }
-
-                li.AddCssClass("active");
-                contents.Append(li.ToString());
-            }
-
-            /* Returns breadcrumb. */
-            ol.InnerHtml = contents.ToString();
-            return MvcHtmlString.Create(ol.ToString());
+            Breadcrumb bc = new Breadcrumb(url, helper.ViewContext.RouteData.DataTokens, helper.ViewContext.RouteData.Values);
+            return MvcHtmlString.Create(bc.HtmlCode.ToString());
         }
         
         /// <summary>
