@@ -16,6 +16,8 @@ namespace Tigra.Models
         [Required]
         public long Id { get; set; }
 
+        public string Tag = null;
+
         [DisplayName("Título"), DataType(DataType.Text), StringLength(100)]
         [Required]
         public string Summary { get; set; }
@@ -36,6 +38,7 @@ namespace Tigra.Models
         public StoriesCreateModel(GetRequirementDetails_Result item)
         {
             this.Id = item.RevisionID;
+            this.Tag = item.Tag;
             this.Summary = item.Title;
             this.Text = item.Text;
         }

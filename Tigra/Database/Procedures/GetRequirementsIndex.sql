@@ -35,7 +35,7 @@ BEGIN
 		WHERE r.[CellID] = @CellID AND v.[RevisionDate] <= @BaselineDate
 		GROUP BY r.RequirementID
 	)
-	SELECT r.[RequirementID], r.[RevisionNumber], v.[RevisionDate], v.[UserID], v.[Title]
+	SELECT r.[RequirementID], r.[RevisionNumber], v.[RevisionDate], v.[UserID], v.[Tag], v.[Title]
 	FROM LatestReqs AS r
 		INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = r.[RequirementID] AND v.[RevisionNumber] = r.[RevisionNumber]
 	ORDER BY [Title] ASC;

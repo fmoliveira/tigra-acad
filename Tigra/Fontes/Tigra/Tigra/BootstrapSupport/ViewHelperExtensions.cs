@@ -43,7 +43,7 @@ namespace BootstrapSupport
 
         public static RouteValueDictionary GetIdValue(this object model)
         {
-            RouteValueDictionary v = new RouteValueDictionary();
+            var v = new RouteValueDictionary();
             v.Add(model.IdentifierPropertyName(), model.GetId());
             return v;
         }

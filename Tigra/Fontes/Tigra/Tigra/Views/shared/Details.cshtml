@@ -14,5 +14,5 @@
 </dl>
 <p>
     @Html.ActionLink("Retornar à listagem", "Index", null, new { @class = "btn btn-lg btn-primary" })
-    @Html.ActionLink("Editar", "Edit", Model.GetIdValue(), new { @class = "btn btn-lg btn-default" })
+    @Html.ActionLink("Editar", "Edit", new { @id = Model.GetId() }, new { @class = "btn btn-lg btn-default" })
 </p>

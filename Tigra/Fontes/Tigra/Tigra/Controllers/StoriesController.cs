@@ -18,7 +18,7 @@ namespace Tigra.Controllers
             return View(model);
         }
 
-        public ActionResult View(int id)
+        public ActionResult Details(string id)
         {
             using (var ctx = new Entities())
             {
@@ -64,7 +64,7 @@ namespace Tigra.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string id)
         {
             using (var ctx = new Entities())
             {

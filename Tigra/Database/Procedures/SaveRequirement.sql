@@ -11,11 +11,15 @@ CREATE PROCEDURE [Tigra].[SaveRequirement]
 	@RevisionID BIGINT,
 	@UserID INT,
 	@Message VARCHAR(250),
+	@Tag VARCHAR(100),
 	@Title VARCHAR(100),
 	@Text TEXT
 )
 AS
 BEGIN
+
+	/* Checks whether this tag isn't being used for another requirement. */
+	--
 
 	BEGIN TRANSACTION;
 

@@ -13,7 +13,7 @@ namespace Tigra.Models
     {
 
         [Required]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [DisplayName("Autor")]
         public UserNameModel UserName { get; set; }
@@ -26,7 +26,7 @@ namespace Tigra.Models
 
         public StoriesIndexModel(GetRequirementsIndex_Result item)
         {
-            this.Id = item.RequirementID;
+            this.Id = item.Tag;
             this.UserName = new UserNameModel(item.UserID);
             this.Modified = item.RevisionDate;
             this.Summary = item.Title;

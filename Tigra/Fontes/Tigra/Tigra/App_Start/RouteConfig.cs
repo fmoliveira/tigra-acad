@@ -15,13 +15,13 @@ namespace Tigra
 
             /* View routing. */
             routes.MapRoute(
-                name: "View",
-                url: "{cell}/{controller}/{id}",
-                defaults: new { action = "View"},
+                name: "Details",
+                url: "{cell}/{controller}/{id}/{action}",
+                defaults: new { controller = "Home", action = "Details" },
                 constraints: new
                 {
                     cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$",
-                    id = "^(?!.*(?i:Index|View|Edit|Delete)).*$"
+                    id = "^(?!.*(?i:Index|Details|Edit|Delete)).*$"
                 }
             );
 

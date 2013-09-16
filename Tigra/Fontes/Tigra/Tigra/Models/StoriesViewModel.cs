@@ -14,7 +14,9 @@ namespace Tigra.Models
     {
         
         [Required]
-        public long Id { get; set; }
+        public string Id { get; set; }
+
+        public long RevisionId = 0;
 
         [DisplayName("Autor")]
         public UserNameModel UserName { get; set; }
@@ -43,7 +45,8 @@ namespace Tigra.Models
 
         public StoriesViewModel(GetRequirementDetails_Result item)
         {
-            this.Id = item.RevisionID;
+            this.Id = item.Tag;
+            this.RevisionId = item.RevisionID;
             this.UserName = new UserNameModel(item.UserID);
             this.RevisionNumber = item.RevisionNumber;
             this.RevisionDate = item.RevisionDate;

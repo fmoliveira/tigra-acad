@@ -252,9 +252,6 @@ namespace BootstrapSupport
                     return "Editar";
 
                 case "Details":
-                    return "Detalhes";
-
-                case "View":
                     return "Visualizar";
 
                 default:
@@ -370,11 +367,11 @@ namespace BootstrapSupport
         }
         
         /// <summary>
-        /// Format a tag to be used in links.
+        /// Format a tag to be used in canonical links.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string FormatLinkTag(string value)
+        public static string Tagify(string value)
         {
             value = value.Replace(" ", "_");
 

@@ -67,7 +67,7 @@ namespace Tigra.Areas.Admin.Controllers
                 }
 
                 item.CellName = model.CellName;
-                item.Tag = Utils.FormatLinkTag(model.CellName);
+                item.Tag = Utils.Tagify(model.CellName);
                 item.Description = model.Description;
 
                 if (model.Id == 0)
