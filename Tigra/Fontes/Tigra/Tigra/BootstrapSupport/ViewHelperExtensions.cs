@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -40,12 +41,12 @@ namespace BootstrapSupport
 			return model.GetType().GetProperties().Where(info => info.Name != model.IdentifierPropertyName()).ToArray();
 		}
 
-		public static RouteValueDictionary GetIdValue(this object model)
-		{
-			var v = new RouteValueDictionary();
-			v.Add(model.IdentifierPropertyName(), model.GetId());
-			return v;
-		}
+        public static RouteValueDictionary GetIdValue(this object model)
+        {
+            RouteValueDictionary v = new RouteValueDictionary();
+            v.Add(model.IdentifierPropertyName(), model.GetId());
+            return v;
+        }
 
 		public static object GetId(this object model)
 		{

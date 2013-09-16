@@ -13,11 +13,23 @@ namespace Tigra
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            /* View routing. */
+            routes.MapRoute(
+                name: "View",
+                url: "{cell}/{controller}/{id}",
+                defaults: new { action = "View"},
+                constraints: new
+                {
+                    cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$",
+                    id = "^(?!.*(?i:Index|View|Edit|Delete)).*$"
+                }
+            );
+
             /* Cells routing. */
             routes.MapRoute(
                 name: "Cells",
                 url: "{cell}/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", cell = "", action = "Index", id = UrlParameter.Optional },
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 constraints: new { cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$" }
             );
 

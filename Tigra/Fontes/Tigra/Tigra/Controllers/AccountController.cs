@@ -33,6 +33,11 @@ namespace Tigra.Controllers
             return Redirect(Request.UrlReferrer.AbsoluteUri);
         }
 
+        public ActionResult Profile(int id)
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult MyProfile()
         {
             using (var ctx = new Entities())
