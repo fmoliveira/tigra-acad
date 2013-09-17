@@ -100,6 +100,32 @@ namespace BootstrapSupport
 			return (attrib != null) ? "autofocus" : null;
 		}
 
+        public static string GetControllerDisplayName(this HtmlHelper helper)
+        {
+            DisplayNameAttribute atb = (DisplayNameAttribute)helper.ViewContext.Controller.GetType().GetCustomAttribute(typeof(DisplayNameAttribute));
+            if (atb != null)
+            {
+                return atb.DisplayName;
+            }
+            else
+            {
+                return helper.ViewContext.Controller.ToString();
+            }
+        }
+
+        public static string GetControllerDescription(this HtmlHelper helper)
+        {
+            DescriptionAttribute atb = (DescriptionAttribute)helper.ViewContext.Controller.GetType().GetCustomAttribute(typeof(DescriptionAttribute));
+            if (atb != null)
+            {
+                return atb.Description;
+            }
+            else
+            {
+                return helper.ViewContext.Controller.ToString();
+            }
+        }
+
 	}
 
 	public static class PropertyInfoExtensions

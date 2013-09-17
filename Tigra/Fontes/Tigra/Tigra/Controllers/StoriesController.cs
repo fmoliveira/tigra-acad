@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -8,6 +9,7 @@ using Tigra.Models;
 
 namespace Tigra.Controllers
 {
+    [DisplayName("Histórias"), Description("As histórias descrevem a necessidade do cliente. A partir da história, serão definidos os requisitos que nós implementaremos para atender a necessidade descrita na história. Cada detalhe informado pelo cliente é relevante nestes tópicos.")]
     public class StoriesController : BootstrapBaseController
     {
 

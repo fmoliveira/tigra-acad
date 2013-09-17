@@ -98,10 +98,12 @@
 				@if (ViewContext.RouteData.Values["title"] != null && ViewContext.RouteData.Values["title"].ToString().Length != 0)
 				{
 					<h1>@ViewContext.RouteData.Values["title"].ToString()</h1>
+                    <p>@Html.GetControllerDescription()</p>
 				}
 				else
 				{
-					<h1>@ViewBag.Title</h1>
+                    <h1>@Html.GetControllerDisplayName()</h1>
+                    <p>@Html.GetControllerDescription()</p>
 				}
 			</div>
 	  

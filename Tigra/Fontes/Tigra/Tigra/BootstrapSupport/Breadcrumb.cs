@@ -38,6 +38,21 @@ namespace Tigra.BootstrapSupport
             }
         }
 
+        private string Route(UrlHelper url, RouteValueDictionary routevalues)
+        {
+            string href = string.Empty;
+
+            foreach (KeyValuePair<string, object> item in routevalues)
+            {
+                if (item.Value != null && item.Value.ToString().Length != 0)
+                {
+                    href += (href.Length == 0 ? "~/" : "/") + item.Value;
+                }
+            }
+
+            return url.Content(href);
+        }
+
         public Breadcrumb(UrlHelper url, params RouteValueDictionary[] routevalues)
         {
             /* Merge all route values into one list. */
@@ -59,7 +74,7 @@ namespace Tigra.BootstrapSupport
 
             /* Add all empty values to the route dictionary. */
             var atb = new RouteValueDictionary();
-            levels.ToList().ForEach(i => atb.Add(i, ""));
+            levels.ToList().ForEach(i => atb.Add(i, null));
 
             /* Reset item tags to properly handle current active level. */
             TagBuilder oli, oa;
@@ -77,7 +92,7 @@ namespace Tigra.BootstrapSupport
                 {
                     a = new TagBuilder("a");
                     atb[k] = v.ToString();
-                    a.MergeAttribute("href", url.RouteUrl(atb));
+                    a.MergeAttribute("href", this.Route(url, atb));
 
                     string title = v.ToString();
 

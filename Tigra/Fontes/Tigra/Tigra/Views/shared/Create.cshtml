@@ -1,10 +1,6 @@
 @using BootstrapSupport
 @model Object
 
-@{
-	ViewBag.Title = @Model.GetLabel();
-}
-
 @using (Html.BeginForm())
 {
 	@Html.ValidationSummary(true)
@@ -19,9 +15,6 @@
 	}
 	<p>
 		@Html.SubmitButton()
-		@Html.CancelButton()
+		@Html.CancelButton(Model)
 	</p>
 }
-<div>
-	@Html.ActionLink("Retornar à listagem", "Index")
-</div>

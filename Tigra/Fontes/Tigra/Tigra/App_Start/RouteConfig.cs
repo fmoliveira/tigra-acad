@@ -13,7 +13,7 @@ namespace Tigra
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            /* View routing. */
+            /* Details routing. */
             routes.MapRoute(
                 name: "Details",
                 url: "{cell}/{controller}/{id}/{action}",
@@ -21,23 +21,30 @@ namespace Tigra
                 constraints: new
                 {
                     cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$",
-                    id = "^(?!.*(?i:Index|Details|Edit|Delete)).*$"
+                    id = "^(?!.*(?i:Index|Details|Create|Edit|Delete)).*$"
                 }
             );
 
-            /* Cells routing. */
-            routes.MapRoute(
-                name: "Cells",
-                url: "{cell}/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
-                constraints: new { cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$" }
-            );
-
-            /* Default page routing. */
+            /* Default routing. */
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", cell = "", action = "Index", id = UrlParameter.Optional }
+                url: "{cell}/{controller}/{action}",
+                defaults: new { cell = UrlParameter.Optional, controller = "Home", action = "Index" },
+                constraints: new
+                {
+                    cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$"
+                }
+            );
+
+            /* Menu routing. */
+            routes.MapRoute(
+                name: "Menu",
+                url: "{cell}/{controller}",
+                defaults: new { controller = "Home", action = "Index" },
+                constraints: new
+                {
+                    cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$"
+                }
             );
         }
     }

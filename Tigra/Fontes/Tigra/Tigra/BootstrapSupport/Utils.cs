@@ -38,16 +38,11 @@ namespace BootstrapSupport
         /// <param name="helper"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static MvcHtmlString ActionButton(this HtmlHelper helper, string text, string context, string action, string controller = null)
+        public static MvcHtmlString ActionButton(this HtmlHelper helper, string text, string context, string action, RouteValueDictionary routevalues = null)
         {
-            if (controller == null)
-            {
-                controller = helper.ViewContext.RouteData.GetRequiredString("controller");
-            }
-
             UrlHelper h = new UrlHelper(helper.ViewContext.RequestContext);
             var btn = new TagBuilder("a");
-            btn.MergeAttribute("href", h.Action(action, controller));
+            btn.MergeAttribute("href", h.Action(action, routevalues));
             btn.AddCssClass("btn");
             btn.AddCssClass("btn-lg");
             btn.AddCssClass("btn-" + context);
@@ -62,14 +57,27 @@ namespace BootstrapSupport
         /// <param name="helper"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static MvcHtmlString CancelButton(this HtmlHelper helper, string text = "Cancelar", string action = null)
+        public static MvcHtmlString CancelButton(this HtmlHelper helper, object model)
         {
-            if (action == null)
+            string action = "Index";
+
+            if (model != null)
             {
-                action = "Index";
+                object v = model.GetId();
+                if (v != null)
+                {
+                    int w;
+                    if (int.TryParse(v.ToString(), out w))
+                    {
+                        if (w != 0)
+                        {
+                            action = "Details";
+                        }
+                    }
+                }
             }
 
-            return ActionButton(helper, text, "default", action);
+            return ActionButton(helper, "Cancelar", "default", action);
         }
 
         private static MenuArea _menuArea = null;
@@ -108,22 +116,7 @@ namespace BootstrapSupport
                 a.InnerHtml = linkText;
             }
 
-            object route = null;
-
-            if (_menuArea != null)
-            {
-                route = new { @area = _menuArea.AreaName };
-            }
-            else
-            {
-                if (helper.ViewContext.RouteData.Values.ContainsKey("cell"))
-                {
-                    route = new { @cell = helper.ViewContext.RouteData.Values["cell"].ToString() };
-                }
-            }
-
-            string href = url.Action(actionName, controllerName, route).Replace("//", "/");
-            a.MergeAttribute("href", href);
+            a.MergeAttribute("href", url.RouteUrl("Menu", new { @controller = controllerName }));
 
             li = new TagBuilder("li");
             li.InnerHtml = a.ToString();
@@ -173,25 +166,33 @@ namespace BootstrapSupport
         /// <returns></returns>
         public static MvcHtmlString ChangeCellLink(this HtmlHelper helper, string cellName, string description)
         {
-            var ctrl = helper.ViewContext.RouteData.GetRequiredString("controller");
-            var act = helper.ViewContext.RouteData.GetRequiredString("action");
-
-            TagBuilder a, li;
-            UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
-
-            a = new TagBuilder("a");
-            a.MergeAttribute("href", url.Action(act, ctrl, new { @cell = cellName }));
-            a.SetInnerText(description);
-
-            li = new TagBuilder("li");
-            li.InnerHtml = a.ToString();
+            bool active = false;
 
             if (helper.ViewContext.RouteData.Values["cell"] != null)
             {
                 if (helper.ViewContext.RouteData.Values["cell"].ToString() == cellName)
                 {
-                    li.AddCssClass("active");
+                    active = true;
                 }
+            }
+
+            var ctrl = helper.ViewContext.RouteData.GetRequiredString("controller");
+            var act = (helper.ViewContext.RouteData.Values.ContainsKey("id") && true == active ? "Details" : "Index");
+
+            TagBuilder a, li;
+            UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
+
+            a = new TagBuilder("a");
+            //a.MergeAttribute("href", url.Action("Index", new { @cell = cellName, @id = "" }));
+            a.MergeAttribute("href", url.RouteUrl(new { @controller = ctrl, @action = act, @cell = cellName }));
+            a.SetInnerText(description);
+
+            li = new TagBuilder("li");
+            li.InnerHtml = a.ToString();
+
+            if (true == active)
+            {
+                li.AddCssClass("active");
             }
 
             return MvcHtmlString.Create(li.ToString());

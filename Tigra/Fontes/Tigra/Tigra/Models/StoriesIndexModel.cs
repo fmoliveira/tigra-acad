@@ -8,7 +8,6 @@ using Tigra.Database;
 
 namespace Tigra.Models
 {
-    [DisplayName("Histórias")]
     public class StoriesIndexModel
     {
 
