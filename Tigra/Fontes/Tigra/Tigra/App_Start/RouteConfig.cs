@@ -25,15 +25,22 @@ namespace Tigra
                 }
             );
 
-            /* Default routing. */
+            /* Cells routing. */
             routes.MapRoute(
-                name: "Default",
+                name: "Cells",
                 url: "{cell}/{controller}/{action}",
-                defaults: new { cell = UrlParameter.Optional, controller = "Home", action = "Index" },
+                defaults: new { controller = "Home", action = "Index" },
                 constraints: new
                 {
                     cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$"
                 }
+            );
+
+            /* Default routing. */
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" }
             );
 
             /* Menu routing. */
@@ -45,6 +52,13 @@ namespace Tigra
                 {
                     cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$"
                 }
+            );
+
+            /* Admin routing. */
+            routes.MapRoute(
+                name: "Admin",
+                url: "Admin/{controller}/{action}",
+                defaults: new { action = "Index" }
             );
         }
     }

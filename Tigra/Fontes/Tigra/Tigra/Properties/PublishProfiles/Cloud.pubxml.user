@@ -9,16 +9,17 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword />
+    <_PublishTargetUrl>ftp://fmoliveira.com.br/fmoliveira.com.br/wwwroot/tigra</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Admin/Views/Shared/Index.cshtml">
-      <publishTime>09/05/2013 19:34:59</publishTime>
+      <publishTime>05/09/2013 19:34:59</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Web.config">
-      <publishTime>09/04/2013 13:42:20</publishTime>
+      <publishTime>04/09/2013 13:42:20</publishTime>
     </File>
     <File Include="Areas/Admin/Views/_ViewStart.cshtml">
-      <publishTime>09/05/2013 19:34:21</publishTime>
+      <publishTime>05/09/2013 19:34:21</publishTime>
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>08/26/2013 18:55:56</publishTime>
@@ -66,7 +67,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:53:33</publishTime>
     </File>
     <File Include="bin/Tigra.dll">
-      <publishTime>09/12/2013 18:28:05</publishTime>
+      <publishTime>09/18/2013 00:10:06</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>08/26/2013 18:55:56</publishTime>
@@ -105,7 +106,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:56:01</publishTime>
     </File>
     <File Include="Content/tigra.css">
-      <publishTime>09/05/2013 20:22:34</publishTime>
+      <publishTime>05/09/2013 20:22:34</publishTime>
     </File>
     <File Include="Database/TigraDatabase.Context.tt">
       <publishTime>09/11/2013 16:17:17</publishTime>
@@ -147,7 +148,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/config.js">
-      <publishTime>09/04/2013 17:07:29</publishTime>
+      <publishTime>04/09/2013 17:07:29</publishTime>
     </File>
     <File Include="scripts/ckeditor/contents.css">
       <publishTime>07/18/2013 17:42:06</publishTime>
@@ -606,31 +607,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 19:21:07</publishTime>
     </File>
     <File Include="scripts/tigra.clamp.js">
-      <publishTime>09/04/2013 23:32:42</publishTime>
+      <publishTime>04/09/2013 23:32:42</publishTime>
     </File>
     <File Include="scripts/tigra.login.js">
       <publishTime>08/29/2013 14:06:12</publishTime>
     </File>
     <File Include="scripts/tigra.modal.js">
-      <publishTime>09/03/2013 13:41:55</publishTime>
+      <publishTime>03/09/2013 13:41:55</publishTime>
     </File>
     <File Include="Views/Account/MyProfile.cshtml">
-      <publishTime>09/02/2013 19:23:01</publishTime>
+      <publishTime>02/09/2013 19:23:01</publishTime>
     </File>
     <File Include="Views/Error/Index.cshtml">
-      <publishTime>09/04/2013 15:58:11</publishTime>
+      <publishTime>04/09/2013 15:58:11</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>09/11/2013 16:26:56</publishTime>
+      <publishTime>09/16/2013 16:04:37</publishTime>
     </File>
     <File Include="Views/shared/Create.cshtml">
-      <publishTime>09/04/2013 19:40:06</publishTime>
+      <publishTime>09/17/2013 14:59:12</publishTime>
+    </File>
+    <File Include="Views/shared/Details.cshtml">
+      <publishTime>09/16/2013 12:52:13</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/DateTime.cshtml">
       <publishTime>09/12/2013 17:28:59</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/List_TeamMember.cshtml">
-      <publishTime>09/04/2013 14:19:08</publishTime>
+      <publishTime>04/09/2013 14:19:08</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/UserNameModel.cshtml">
       <publishTime>09/12/2013 16:25:04</publishTime>
@@ -639,7 +643,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/30/2013 00:03:55</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/Html.cshtml">
-      <publishTime>09/04/2013 16:54:08</publishTime>
+      <publishTime>04/09/2013 16:54:08</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/MultilineText.cshtml">
       <publishTime>08/29/2013 22:25:23</publishTime>
@@ -648,10 +652,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/30/2013 10:09:18</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/Text.cshtml">
-      <publishTime>09/04/2013 16:51:24</publishTime>
+      <publishTime>04/09/2013 16:51:24</publishTime>
     </File>
     <File Include="Views/shared/Index.cshtml">
-      <publishTime>09/05/2013 20:25:14</publishTime>
+      <publishTime>09/17/2013 14:59:19</publishTime>
     </File>
     <File Include="Views/shared/View.cshtml">
       <publishTime>09/11/2013 16:24:29</publishTime>
@@ -660,16 +664,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 20:04:33</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.basic.cshtml">
-      <publishTime>09/11/2013 15:42:14</publishTime>
+      <publishTime>09/17/2013 14:58:03</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.empty.cshtml">
       <publishTime>08/28/2013 18:20:47</publishTime>
     </File>
     <File Include="Views/shared/_login.cshtml">
-      <publishTime>09/04/2013 14:13:52</publishTime>
+      <publishTime>04/09/2013 14:13:52</publishTime>
     </File>
     <File Include="Views/shared/_validationSummary.cshtml">
       <publishTime>08/26/2013 23:44:22</publishTime>
+    </File>
+    <File Include="Views/Stories/Details.cshtml">
+      <publishTime>09/17/2013 14:36:07</publishTime>
     </File>
     <File Include="Views/Stories/View.cshtml">
       <publishTime>09/11/2013 17:13:19</publishTime>
@@ -681,7 +688,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:56:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/12/2013 18:28:13</publishTime>
+      <publishTime>09/18/2013 00:10:31</publishTime>
     </File>
   </ItemGroup>
 </Project>

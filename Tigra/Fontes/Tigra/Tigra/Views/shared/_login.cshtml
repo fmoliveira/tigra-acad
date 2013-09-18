@@ -7,14 +7,14 @@
 			<ul class="dropdown-menu">
 				@using(Html.MenuAreaFor("Admin"))
 				{
-					@Html.MenuLink("Cells", "Index", "Células")
-					@Html.MenuLink("Teams", "Index", "Equipes")
-					@Html.MenuLink("Roles", "Index", "Permissões")
-					@Html.MenuLink("Templates", "Index", "Templates")
+					@Html.AdminLink("Cells", "Index", "Células")
+					@Html.AdminLink("Teams", "Index", "Equipes")
+					@Html.AdminLink("Roles", "Index", "Permissões")
+					@Html.AdminLink("Templates", "Index", "Templates")
 					<li class="divider"></li>
-					@Html.MenuLink("Defaults", "Index", "Padrões")
-					@Html.MenuLink("Preferences", "Index", "Preferências")
-					@Html.MenuLink("Settings", "Index", "Configurações")
+					@Html.AdminLink("Defaults", "Index", "Padrões")
+					@Html.AdminLink("Preferences", "Index", "Preferências")
+					@Html.AdminLink("Settings", "Index", "Configurações")
 				}
 			</ul>
 		</li>
@@ -24,7 +24,7 @@
 				<li><a href="@Url.Content("~/Account/MyProfile")" data-tigra="modal">Meu Perfil</a></li>
 				<li><a href="#">Alterar Senha</a></li>
 				<li class="divider"></li>
-				@Html.MenuLink("Account", "Logout", "Sair")
+                <li><a href="@Url.Content("~/Account/Logout")">Sair</a></li>
 			</ul>
 		</li>
 	</ul>

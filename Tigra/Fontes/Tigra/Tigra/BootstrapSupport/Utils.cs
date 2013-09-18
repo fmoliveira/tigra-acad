@@ -88,6 +88,16 @@ namespace BootstrapSupport
             return _menuArea;
         }
 
+        public static MvcHtmlString MenuLink(this HtmlHelper helper, string controllerName, string actionName, string linkText, string glyphIcon = null)
+        {
+            return helper.CreateMenuLink("Menu", controllerName, actionName, linkText, glyphIcon);
+        }
+
+        public static MvcHtmlString AdminLink(this HtmlHelper helper, string controllerName, string actionName, string linkText, string glyphIcon = null)
+        {
+            return helper.CreateMenuLink("Admin", controllerName, actionName, linkText, glyphIcon);
+        }
+
         /// <summary>
         /// Creates a menu link and automatically make it active if it's the current page.
         /// </summary>
@@ -97,7 +107,7 @@ namespace BootstrapSupport
         /// <param name="linkText"></param>
         /// <param name="glyphIcon"></param>
         /// <returns></returns>
-        public static MvcHtmlString MenuLink(this HtmlHelper helper, string controllerName, string actionName, string linkText, string glyphIcon = null)
+        private static MvcHtmlString CreateMenuLink(this HtmlHelper helper, string routeName, string controllerName, string actionName, string linkText, string glyphIcon = null)
         {
             TagBuilder a, b, li;
             UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
@@ -116,7 +126,7 @@ namespace BootstrapSupport
                 a.InnerHtml = linkText;
             }
 
-            a.MergeAttribute("href", url.RouteUrl("Menu", new { @controller = controllerName }));
+            a.MergeAttribute("href", url.RouteUrl(routeName, new { @controller = controllerName }));
 
             li = new TagBuilder("li");
             li.InnerHtml = a.ToString();
@@ -183,8 +193,7 @@ namespace BootstrapSupport
             UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
 
             a = new TagBuilder("a");
-            //a.MergeAttribute("href", url.Action("Index", new { @cell = cellName, @id = "" }));
-            a.MergeAttribute("href", url.RouteUrl(new { @controller = ctrl, @action = act, @cell = cellName }));
+            a.MergeAttribute("href", url.Content(String.Format("~/{0}", cellName)));
             a.SetInnerText(description);
 
             li = new TagBuilder("li");
