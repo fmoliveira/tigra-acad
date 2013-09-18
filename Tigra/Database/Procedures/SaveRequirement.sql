@@ -59,8 +59,8 @@ BEGIN
 	/* Creates revision number if it doesn't exists yet. */
 	IF (@RevisionID IS NULL)
 	BEGIN
-		INSERT INTO [Tigra].[RequirementRevisions] ([RequirementID], [RevisionNumber], [RevisionDate], [UserID], [Message], [Title])
-		VALUES (@RequirementID, @RevisionNumber, SYSUTCDATETIME(), @UserID, @Message, @Title);
+		INSERT INTO [Tigra].[RequirementRevisions] ([RequirementID], [RevisionNumber], [RevisionDate], [UserID], [Message], [Tag], [Title])
+		VALUES (@RequirementID, @RevisionNumber, SYSUTCDATETIME(), @UserID, @Message, @Tag, @Title);
 
 		IF (@@ROWCOUNT = 1)
 		BEGIN
@@ -70,7 +70,7 @@ BEGIN
 	/* Or update current revision. */
 	ELSE
 	BEGIN
-		UPDATE [Tigra].[RequirementRevisions] SET [RevisionDate] = SYSUTCDATETIME(), [Message] = @Message, [Title] = @Title
+		UPDATE [Tigra].[RequirementRevisions] SET [RevisionDate] = SYSUTCDATETIME(), [Message] = @Message, [Tag] = @Tag, [Title] = @Title
 		WHERE [RevisionID] = @RevisionID;
 	END
 

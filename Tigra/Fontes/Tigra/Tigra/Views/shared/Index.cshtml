@@ -29,7 +29,7 @@
                 <div class="btn-group">
 
                     @{
-                        var routevalues = model.GetIdValue();
+                        var routevalues = new { @tag = model.GetId() };
                         <a class="btn btn-default" href="@Url.Action("Details", routevalues)">Visualizar</a>
                     }
 

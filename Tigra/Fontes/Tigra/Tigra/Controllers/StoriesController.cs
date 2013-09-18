@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BootstrapSupport;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -20,11 +21,11 @@ namespace Tigra.Controllers
             return View(model);
         }
 
-        public ActionResult Details(string id)
+        public ActionResult Details(string tag)
         {
             using (var ctx = new Entities())
             {
-                StoriesViewModel model = new StoriesViewModel(ctx.GetRequirementDetails(id, null).FirstOrDefault());
+                StoriesDetailsModel model = new StoriesDetailsModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
                 RouteData.Values["title"] = model.Summary;
                 return View(model);
             }
@@ -46,7 +47,7 @@ namespace Tigra.Controllers
                 {
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Summary, model.Text);
+                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
 
                     if (SaveChanges(ctx) != 0)
                     {
@@ -66,11 +67,11 @@ namespace Tigra.Controllers
             return View(model);
         }
 
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string tag)
         {
             using (var ctx = new Entities())
             {
-                StoriesCreateModel model = new StoriesCreateModel(ctx.GetRequirementDetails(id, null).FirstOrDefault());
+                StoriesCreateModel model = new StoriesCreateModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
                 RouteData.Values["title"] = model.Summary;
                 return View("Create", model);
             }
@@ -86,7 +87,7 @@ namespace Tigra.Controllers
                 {
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, model.Summary, model.Text);
+                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
 
                     if (SaveChanges(ctx) != 0)
                     {

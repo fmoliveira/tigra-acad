@@ -38,39 +38,6 @@ namespace Tigra.Database
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
     
-        public virtual int SaveRequirement(Nullable<short> reqTypeID, Nullable<int> cellID, Nullable<long> revisionID, Nullable<int> userID, string message, string title, string text)
-        {
-            var reqTypeIDParameter = reqTypeID.HasValue ?
-                new ObjectParameter("ReqTypeID", reqTypeID) :
-                new ObjectParameter("ReqTypeID", typeof(short));
-    
-            var cellIDParameter = cellID.HasValue ?
-                new ObjectParameter("CellID", cellID) :
-                new ObjectParameter("CellID", typeof(int));
-    
-            var revisionIDParameter = revisionID.HasValue ?
-                new ObjectParameter("RevisionID", revisionID) :
-                new ObjectParameter("RevisionID", typeof(long));
-    
-            var userIDParameter = userID.HasValue ?
-                new ObjectParameter("UserID", userID) :
-                new ObjectParameter("UserID", typeof(int));
-    
-            var messageParameter = message != null ?
-                new ObjectParameter("Message", message) :
-                new ObjectParameter("Message", typeof(string));
-    
-            var titleParameter = title != null ?
-                new ObjectParameter("Title", title) :
-                new ObjectParameter("Title", typeof(string));
-    
-            var textParameter = text != null ?
-                new ObjectParameter("Text", text) :
-                new ObjectParameter("Text", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveRequirement", reqTypeIDParameter, cellIDParameter, revisionIDParameter, userIDParameter, messageParameter, titleParameter, textParameter);
-        }
-    
         public virtual ObjectResult<GetRequirementsIndex_Result> GetRequirementsIndex(Nullable<int> cellID, Nullable<System.DateTime> baselineDate)
         {
             var cellIDParameter = cellID.HasValue ?
@@ -112,6 +79,43 @@ namespace Tigra.Database
                 new ObjectParameter("Type", typeof(byte));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLatestRequirements_Result>("GetLatestRequirements", cellIDParameter, baselineDateParameter, typeParameter);
+        }
+    
+        public virtual int SaveRequirement(Nullable<short> reqTypeID, Nullable<int> cellID, Nullable<long> revisionID, Nullable<int> userID, string message, string tag, string title, string text)
+        {
+            var reqTypeIDParameter = reqTypeID.HasValue ?
+                new ObjectParameter("ReqTypeID", reqTypeID) :
+                new ObjectParameter("ReqTypeID", typeof(short));
+    
+            var cellIDParameter = cellID.HasValue ?
+                new ObjectParameter("CellID", cellID) :
+                new ObjectParameter("CellID", typeof(int));
+    
+            var revisionIDParameter = revisionID.HasValue ?
+                new ObjectParameter("RevisionID", revisionID) :
+                new ObjectParameter("RevisionID", typeof(long));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            var tagParameter = tag != null ?
+                new ObjectParameter("Tag", tag) :
+                new ObjectParameter("Tag", typeof(string));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var textParameter = text != null ?
+                new ObjectParameter("Text", text) :
+                new ObjectParameter("Text", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveRequirement", reqTypeIDParameter, cellIDParameter, revisionIDParameter, userIDParameter, messageParameter, tagParameter, titleParameter, textParameter);
         }
     }
 }

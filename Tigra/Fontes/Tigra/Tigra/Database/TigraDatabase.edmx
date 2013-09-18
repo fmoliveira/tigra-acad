@@ -204,6 +204,7 @@
           <Parameter Name="RevisionID" Type="bigint" Mode="In" />
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="Message" Type="varchar" Mode="In" />
+          <Parameter Name="Tag" Type="varchar" Mode="In" />
           <Parameter Name="Title" Type="varchar" Mode="In" />
           <Parameter Name="Text" Type="text" Mode="In" />
         </Function>
@@ -296,15 +297,6 @@
             <End Role="UserAccount" EntitySet="UserAccounts" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
-          <FunctionImport Name="SaveRequirement">
-            <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
-            <Parameter Name="CellID" Mode="In" Type="Int32" />
-            <Parameter Name="RevisionID" Mode="In" Type="Int64" />
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
-            <Parameter Name="Message" Mode="In" Type="String" />
-            <Parameter Name="Title" Mode="In" Type="String" />
-            <Parameter Name="Text" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="GetRequirementsIndex" ReturnType="Collection(TigraModel.GetRequirementsIndex_Result)">
             <Parameter Name="CellID" Mode="In" Type="Int32" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
@@ -317,6 +309,16 @@
             <Parameter Name="CellID" Mode="In" Type="Int32" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
             <Parameter Name="Type" Mode="In" Type="Byte" />
+          </FunctionImport>
+          <FunctionImport Name="SaveRequirement">
+            <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
+            <Parameter Name="RevisionID" Mode="In" Type="Int64" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="Tag" Mode="In" Type="String" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Text" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Baseline">
@@ -641,7 +643,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SaveRequirement" FunctionName="TigraModel.Store.SaveRequirement" />
           <FunctionImportMapping FunctionImportName="GetRequirementsIndex" FunctionName="TigraModel.Store.GetRequirementsIndex">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TigraModel.GetRequirementsIndex_Result">
@@ -682,6 +683,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SaveRequirement" FunctionName="TigraModel.Store.SaveRequirement" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

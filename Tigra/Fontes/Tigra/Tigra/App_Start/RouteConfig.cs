@@ -16,12 +16,12 @@ namespace Tigra
             /* Details routing. */
             routes.MapRoute(
                 name: "Details",
-                url: "{cell}/{controller}/{id}/{action}",
+                url: "{cell}/{controller}/{tag}/{action}",
                 defaults: new { controller = "Home", action = "Details" },
                 constraints: new
                 {
                     cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$",
-                    id = "^(?!.*(?i:Index|Details|Create|Edit|Delete)).*$"
+                    tag = "^(?!.*(?i:Index|Details|Create|Edit|Delete)).*$"
                 }
             );
 

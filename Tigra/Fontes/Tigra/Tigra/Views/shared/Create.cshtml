@@ -3,6 +3,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.Hidden("Id", Model.GetId())
 	@Html.ValidationSummary(true)
 	foreach (var property in Model.VisibleProperties())
 	{

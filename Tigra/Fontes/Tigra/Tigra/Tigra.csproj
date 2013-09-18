@@ -202,7 +202,7 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
-    <Compile Include="Models\StoriesViewModel.cs" />
+    <Compile Include="Models\StoriesDetailsModel.cs" />
     <Compile Include="Models\StoriesCreateModel.cs" />
     <Compile Include="Models\StoriesIndexModel.cs" />
     <Compile Include="Models\HomeModel.cs" />
