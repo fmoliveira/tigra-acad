@@ -12,9 +12,26 @@
         </dd>
     }
 </dl>
-<p>
+<div>
     @Html.RouteLink("Retornar à listagem", "Menu", null, new { @class = "btn btn-lg btn-default" })
-    @Html.ActionLink("Editar", "Edit", new { @id = Model.GetId() }, new { @class = "btn btn-lg btn-default" })
-    @Html.ActionLink("Documentar", "Document", new { @id = Model.GetId() }, new { @class = "btn btn-lg btn-primary" })
-    @Html.ActionLink("Excluir", "Delete", new { @id = Model.GetId() }, new { @class = "btn btn-lg btn-danger" })
-</p>
+    <div class="btn-group">
+        @Html.ActionLink("Editar", "Edit", new { @id = Model.GetId() }, new { @class = "btn btn-lg btn-default" })
+        <a class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Editar", "Edit", new { @id = Model.GetId() })</li>
+            <li>@Html.ActionLink("Excluir", "Delete", new { @id = Model.GetId() })</li>
+        </ul>
+    </div>
+    <div class="btn-group">
+        @Html.ActionLink("Documentar", "Document", new { @id = Model.GetId() }, new { @class = "btn btn-lg btn-primary" })
+        <a class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
+            <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Utilizar requisito existente", "Document", new { @id = Model.GetId() })</li>
+            <li>@Html.ActionLink("Criar novo requisito", "Document", new { @id = Model.GetId() })</li>
+        </ul>
+    </div>
+</div>
