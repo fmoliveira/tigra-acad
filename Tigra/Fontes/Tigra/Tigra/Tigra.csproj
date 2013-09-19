@@ -135,6 +135,7 @@
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
     <Compile Include="Common\Choice.cs" />
     <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\HtmlDiff.cs" />
     <Compile Include="Common\RequirementTypes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
@@ -156,6 +157,9 @@
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\GetRequirementDetails_Result.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GetRequirementHistory_Result.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\GetRequirementsIndex_Result.cs">
@@ -203,6 +207,7 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
+    <Compile Include="Models\StoriesHistoryModel.cs" />
     <Compile Include="Models\StoriesDetailsModel.cs" />
     <Compile Include="Models\StoriesCreateModel.cs" />
     <Compile Include="Models\StoriesIndexModel.cs" />
@@ -460,6 +465,7 @@
     <Content Include="Views\shared\DisplayTemplates\UserNameModel.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\shared\EditorTemplates\Choice_UserThemes.cshtml" />
+    <Content Include="Views\Stories\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

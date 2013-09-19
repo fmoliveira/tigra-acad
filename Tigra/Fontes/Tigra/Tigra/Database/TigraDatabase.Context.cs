@@ -117,5 +117,18 @@ namespace Tigra.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveRequirement", reqTypeIDParameter, cellIDParameter, revisionIDParameter, userIDParameter, messageParameter, tagParameter, titleParameter, textParameter);
         }
+    
+        public virtual ObjectResult<GetRequirementHistory_Result> GetRequirementHistory(string tag, Nullable<System.DateTime> baselineDate)
+        {
+            var tagParameter = tag != null ?
+                new ObjectParameter("Tag", tag) :
+                new ObjectParameter("Tag", typeof(string));
+    
+            var baselineDateParameter = baselineDate.HasValue ?
+                new ObjectParameter("BaselineDate", baselineDate) :
+                new ObjectParameter("BaselineDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementHistory_Result>("GetRequirementHistory", tagParameter, baselineDateParameter);
+        }
     }
 }

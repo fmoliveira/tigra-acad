@@ -107,5 +107,12 @@ namespace Tigra.Controllers
             return View("Create", model);
         }
 
+        public ActionResult History(string tag)
+        {
+            var model = StoriesHistoryModel.GetModels(tag);
+            RouteData.Values["title"] = model[0].Summary;
+            return View(model);
+        }
+
     }
 }

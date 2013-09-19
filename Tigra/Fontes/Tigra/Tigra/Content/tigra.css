@@ -17,3 +17,13 @@ div#loading {
 div.container > dl.dl-horizontal > dt {
 	margin-bottom: 10px;
 }
+
+ins {
+    background-color: #cfc;
+    text-decoration: none;
+}
+
+del {
+    color: #999;
+    background-color: #FEC8C8;
+}

@@ -1,0 +1,18 @@
+@using BootstrapSupport
+@model List<Tigra.Models.StoriesHistoryModel>
+
+@foreach (var rev in Model)
+{
+    <div class="panel @Html.Raw(rev.RevisionNumber == Model[0].RevisionNumber ? "panel-info" : "panel-default")">
+        <div class="panel-heading">
+            <span class="badge">@Html.Raw(rev.RevisionNumber)</span>
+            <strong>@Html.DisplayFor(m => rev.UserName):</strong>
+            @Html.Raw(rev.Message)
+            <span class="pull-right">@Html.Raw(rev.RevisionDate.ToString("dd/MM/yyyy HH:mm:ss"))</span>
+        </div>
+        <div class="panel-body">
+            <p><strong>@Html.Raw(rev.Summary)</strong></p>
+            @Html.Raw(rev.Text)
+        </div>
+    </div>
+}
