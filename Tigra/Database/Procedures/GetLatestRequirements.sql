@@ -38,13 +38,13 @@ BEGIN
 				(@Type = 1 AND r.[ReqType] = -1)
 			)
 		GROUP BY r.RequirementID
-		ORDER BY MAX(v.[RevisionDate])
+		ORDER BY MAX(v.[RevisionDate]) DESC
 	)
 	SELECT r.[RequirementID], r.[RevisionNumber], v.[RevisionDate], v.[UserID], v.[Tag], v.[Title], SUBSTRING(t.[Text], 0, 200) AS [Text]
 	FROM LatestReqs AS r
 		INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = r.[RequirementID] AND v.[RevisionNumber] = r.[RevisionNumber]
 		INNER JOIN [Tigra].[RequirementTexts] AS t ON t.[RevisionID] = v.[RevisionID]
-	ORDER BY [Title] ASC;
+	ORDER BY [RevisionDate] DESC;
 
 END
 GO

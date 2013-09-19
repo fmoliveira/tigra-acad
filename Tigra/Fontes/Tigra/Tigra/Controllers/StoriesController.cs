@@ -47,9 +47,9 @@ namespace Tigra.Controllers
                 {
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
 
-                    if (SaveChanges(ctx) != 0)
+                    if (ret != 0)
                     {
                         Success("História inserida com sucesso!");
                         return RedirectToAction("Index");
@@ -87,9 +87,9 @@ namespace Tigra.Controllers
                 {
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
 
-                    if (SaveChanges(ctx) != 0)
+                    if (ret != 0)
                     {
                         Success("História alterada com sucesso!");
                         return RedirectToAction("Index");

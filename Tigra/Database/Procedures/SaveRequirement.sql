@@ -47,7 +47,7 @@ BEGIN
 
 	/* Determines whether revision number should be incremented. */
 	IF (COALESCE(@RevisionNumber, 0) < 1)
-		OR (DATEDIFF(MINUTE, @RevisionDate, SYSUTCDATETIME()) > 10)
+		OR (DATEDIFF(MINUTE, @RevisionDate, SYSUTCDATETIME()) > 60)
 		OR (@RevisionUserID <> @UserID)
 	BEGIN
 		SELECT @RevisionID = NULL, @RevisionNumber = (COALESCE(@RevisionNumber, 0) + 1);

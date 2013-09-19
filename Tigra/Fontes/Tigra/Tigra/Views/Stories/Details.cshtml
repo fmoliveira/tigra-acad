@@ -14,26 +14,29 @@
 </dl>
 <div>
     @Html.RouteLink("Retornar à listagem", "Menu", null, new { @class = "btn btn-lg btn-default" })
+    @{
+        var routevalues = new { @tag = Model.GetId() };
+    }
     <div class="btn-group">
-        @Html.ActionLink("Editar", "Edit", new { @tag = Model.GetId() }, new { @class = "btn btn-lg btn-default" })
+        @Html.ActionLink("Editar", "Edit", routevalues, new { @class = "btn btn-lg btn-default" })
         <a class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li>@Html.ActionLink("Editar", "Edit", new { @tag = Model.GetId() })</li>
-            <li>@Html.ActionLink("Histórico", "History", new { @tag = Model.GetId() })</li>
+            <li>@Html.ActionLink("Editar", "Edit", routevalues)</li>
+            <li>@Html.ActionLink("Histórico", "History", routevalues)</li>
             <li class="divider"></li>
-            <li>@Html.ActionLink("Excluir", "Delete", new { @tag = Model.GetId() })</li>
+            <li>@Html.ActionLink("Excluir", "Delete", routevalues)</li>
         </ul>
     </div>
     <div class="btn-group">
-        @Html.ActionLink("Documentar", "Document", new { @tag = Model.GetId() }, new { @class = "btn btn-lg btn-primary" })
+        @Html.ActionLink("Documentar", "Document", routevalues, new { @class = "btn btn-lg btn-primary" })
         <a class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
             <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
-            <li>@Html.ActionLink("Criar novo requisito", "Document", new { @tag = Model.GetId() })</li>
-            <li>@Html.ActionLink("Utilizar requisito existente", "Document", new { @tag = Model.GetId() })</li>
+            <li>@Html.ActionLink("Criar novo requisito", "NewRequirement", routevalues)</li>
+            <li>@Html.ActionLink("Utilizar requisito existente", "ExistingRequirement", routevalues)</li>
         </ul>
     </div>
 </div>
