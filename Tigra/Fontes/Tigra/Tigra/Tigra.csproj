@@ -459,7 +459,7 @@
     <Content Include="Views\Stories\Details.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\UserNameModel.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\DateTime.cshtml" />
-    <Content Include="Views\shared\EditorTemplates\List.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\Choice_UserThemes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

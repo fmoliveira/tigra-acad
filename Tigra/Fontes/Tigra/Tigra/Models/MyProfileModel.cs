@@ -32,7 +32,8 @@ namespace Tigra.Models
 
         [DisplayName("Tema")]
         [Description("Deixe o Tigra com a sua cara!")]
-        public List<SelectListItem> UserTheme { get; set; }
+        [DataType("Choice_UserThemes")]
+        public string UserTheme { get; set; }
 
         [DisplayName("Auto biografia")]
         [Description("Escreva um pouco sobre você...")]
@@ -50,7 +51,7 @@ namespace Tigra.Models
             this.FullName = up.FullName;
             this.BirthDate = up.BirthDate;
             this.Location = up.Location;
-            this.UserTheme = new Choice(Utils.GetThemes(), up.UserTheme).DropDownList;
+            this.UserTheme = up.UserTheme;
             this.Biography = up.Biography;
         }
     }

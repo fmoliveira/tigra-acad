@@ -1,0 +1,2 @@
+﻿@model string
+@Html.DropDownListFor(model => model, (SelectList)ViewBag.UserThemeList, new { @class = "form-control", @placeholder = ViewData["placeholder"], @autofocus = ViewData["autofocus"], @data_field = @ViewData.TemplateInfo.GetFullHtmlFieldName("") })

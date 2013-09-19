@@ -36,6 +36,7 @@ namespace Tigra.Api
                     /* Set user profile info. */
                     profile.FullName = value.FullName;
                     profile.BirthDate = value.BirthDate;
+                    profile.UserTheme = value.UserTheme;
                     profile.Location = value.Location;
                     profile.Biography = value.Biography;
 

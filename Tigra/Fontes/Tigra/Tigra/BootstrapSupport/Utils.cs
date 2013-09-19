@@ -250,8 +250,6 @@ namespace BootstrapSupport
         public static List<string> GetThemes()
         {
             List<string> ret = new List<string>();
-            ret.Add("(Padrão)");
-
             string[] list = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/Content/themes/"), "*.css");
 
             if (list.Length != 0)

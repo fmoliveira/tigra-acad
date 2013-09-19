@@ -10,24 +10,26 @@ namespace Tigra.Common
 {
     public class Choice
     {
-        public List<string> Options { get; set; }
+        public Dictionary<string,string> Options { get; set; }
 
         public string Selected { get; set; }
 
-        public List<SelectListItem> DropDownList
+        public Choice(List<string> options, bool createDefault, string selected)
         {
-            get
+            this.Options= new Dictionary<string,string>();
+            
+            if(true == createDefault)
             {
-                List<SelectListItem> opts = new List<SelectListItem>();
-                this.Options.ForEach(i => opts.Add(new SelectListItem() { Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(i), Value = Utils.Tagify(i.ToLower()), Selected = (this.Selected != null && this.Selected.ToLower() == i.ToLower()) }));
-                return opts;
+                this.Options.Add("default", "(Padrão)");
             }
+
+            options.ForEach(i => this.Options.Add(i, CultureInfo.CurrentCulture.TextInfo.ToTitleCase(i)));
+            this.Selected = selected;
         }
 
-        public Choice(List<string> options, string selected)
+        public SelectList GetSelectList()
         {
-            this.Options = options;
-            this.Selected = selected;
+            return new SelectList(this.Options, "Key", "Value", this.Selected);
         }
     }
 }

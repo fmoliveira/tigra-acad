@@ -1,8 +1,10 @@
-﻿using System;
+﻿using BootstrapSupport;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Tigra.Common;
 using Tigra.Database;
 using Tigra.Models;
 
@@ -51,6 +53,7 @@ namespace Tigra.Controllers
                 }
 
                 var profile = new MyProfileModel(up);
+                ViewBag.UserThemeList = new Choice(Utils.GetThemes(), true, up.UserTheme).GetSelectList();
                 return View(profile);
             }
         }
