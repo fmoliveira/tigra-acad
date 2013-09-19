@@ -55,6 +55,7 @@
 			var $data = JSON.stringify({
 				"FullName": $('input[data-field="FullName"]').val(),
 				"BirthDate": $birthdate,
+				"UserTheme": $('select[data-field=UserTheme]').val(),
 				"Location": $('input[data-field="Location"]').val(),
 				"Biography": $('textarea[data-field="Biography"]').val()
 			});
@@ -73,6 +74,13 @@
 						case 200:
 							$('#LoggedUserName').html($('input[data-field="FullName"]').val());
 							$('button[data-dismiss="modal"]').click();
+
+							var $oldtheme = $('select[data-field=UserTheme] > option[selected=selected]');
+							var $newtheme = $('select[data-field=UserTheme]').val() ;
+							if ($oldtheme.length != 1 || ($oldtheme.length == 1 && $oldtheme.attr('value') != $newtheme)) {
+							    locatio.reload();
+							}
+
 							break;
 
 						case 500:
