@@ -1,9 +1,13 @@
-﻿using System;
+﻿using BootstrapSupport;
+using Microsoft.Web.Mvc.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using Tigra.Common;
 using Tigra.Database;
 
 namespace Tigra.Models
@@ -26,6 +30,10 @@ namespace Tigra.Models
         [StringLength(50)]
         public string Location { get; set; }
 
+        [DisplayName("Tema")]
+        [Description("Deixe o Tigra com a sua cara!")]
+        public List<SelectListItem> UserTheme { get; set; }
+
         [DisplayName("Auto biografia")]
         [Description("Escreva um pouco sobre você...")]
         [DataType(DataType.MultilineText)]
@@ -42,6 +50,7 @@ namespace Tigra.Models
             this.FullName = up.FullName;
             this.BirthDate = up.BirthDate;
             this.Location = up.Location;
+            this.UserTheme = new Choice(Utils.GetThemes(), up.UserTheme).DropDownList;
             this.Biography = up.Biography;
         }
     }

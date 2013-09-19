@@ -14,6 +14,8 @@ namespace Tigra.Models
 
         public string FullName { get; set; }
 
+        public string UserTheme { get; set; }
+
         public bool RememberMe { get; set; }
 
     }

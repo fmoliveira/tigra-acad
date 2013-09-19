@@ -133,6 +133,7 @@
     <Compile Include="BootstrapSupport\HtmlHelpers\GlyphIcons.cs" />
     <Compile Include="BootstrapSupport\HtmlHelpers\Paging.cs" />
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
+    <Compile Include="Common\Choice.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\RequirementTypes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -225,6 +226,17 @@
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\datepicker.css" />
     <Content Include="Content\bootstrap\jumbotron.css" />
+    <Content Include="Content\themes\amelia.css" />
+    <Content Include="Content\themes\cerulean.css" />
+    <Content Include="Content\themes\cosmo.css" />
+    <Content Include="Content\themes\cyborg.css" />
+    <Content Include="Content\themes\flatly.css" />
+    <Content Include="Content\themes\journal.css" />
+    <Content Include="Content\themes\readable.css" />
+    <Content Include="Content\themes\simplex.css" />
+    <Content Include="Content\themes\slate.css" />
+    <Content Include="Content\themes\spacelab.css" />
+    <Content Include="Content\themes\united.css" />
     <Content Include="Content\tigra.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -447,6 +459,7 @@
     <Content Include="Views\Stories\Details.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\UserNameModel.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

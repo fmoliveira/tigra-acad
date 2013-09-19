@@ -6,6 +6,11 @@ using System.Web.Routing;
 using Tigra.Database;
 using Tigra;
 using Tigra.BootstrapSupport;
+using Tigra.Models;
+using System.IO;
+using System.Web;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace BootstrapSupport
 {
@@ -212,6 +217,55 @@ namespace BootstrapSupport
             UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
             Breadcrumb bc = new Breadcrumb(url, helper.ViewContext.RouteData.DataTokens, helper.ViewContext.RouteData.Values);
             return MvcHtmlString.Create(bc.HtmlCode.ToString());
+        }
+
+        public static MvcHtmlString ApplyUserTheme(this HtmlHelper helper)
+        {
+            UrlHelper url = new UrlHelper(helper.ViewContext.RequestContext);
+            AuthCookieModel user = Authentication.GetLoggedUser();
+            string fn = null;
+
+            if (user != null && user.UserTheme != null)
+            {
+                fn = String.Format("~/Content/themes/{0}.css", user.UserTheme.ToLower());
+
+                if (false == File.Exists(HttpContext.Current.Server.MapPath(fn)))
+                {
+                    fn = null;
+                }
+            }
+
+            if (fn == null)
+            {
+                fn = "~/Content/bootstrap/bootstrap-theme.min.css";
+            }
+
+            var css = new TagBuilder("link");
+            css.MergeAttribute("href", url.Content(fn));
+            css.MergeAttribute("rel", "stylesheet");
+
+            return MvcHtmlString.Create(css.ToString(TagRenderMode.SelfClosing));
+        }
+
+        public static List<string> GetThemes()
+        {
+            List<string> ret = new List<string>();
+            ret.Add("(Padrão)");
+
+            string[] list = Directory.GetFiles(HttpContext.Current.Server.MapPath("~/Content/themes/"), "*.css");
+
+            if (list.Length != 0)
+            {
+                Regex r = new Regex("^.*\\\\(?<theme>[a-zA-Z0-9]+)\\.css$");
+
+                foreach (string fn in list)
+                {
+                    Match m = r.Match(fn);
+                    ret.Add(m.Groups["theme"].Value);
+                }
+            }
+
+            return ret;
         }
         
         /// <summary>

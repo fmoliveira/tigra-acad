@@ -88,6 +88,7 @@
           <Property Name="Picture" Type="varbinary(max)" />
           <Property Name="Location" Type="varchar" MaxLength="50" />
           <Property Name="Biography" Type="varchar" MaxLength="500" />
+          <Property Name="UserTheme" Type="varchar" MaxLength="20" />
         </EntityType>
         <Association Name="fk_Tigra_RequirementRevisions_Req">
           <End Role="Requirements" Type="Self.Requirements" Multiplicity="1" />
@@ -420,6 +421,7 @@
           <Property Type="String" Name="Location" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Biography" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_UserProfiles_Usr" FromRole="UserProfile" ToRole="UserAccount" />
+          <Property Type="String" Name="UserTheme" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_Tigra_Requirements_Cell">
           <End Type="TigraModel.Cell" Role="Cell" Multiplicity="1" />
@@ -634,6 +636,7 @@
           <EntitySetMapping Name="UserProfiles">
             <EntityTypeMapping TypeName="TigraModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfiles">
+                <ScalarProperty Name="UserTheme" ColumnName="UserTheme" />
                 <ScalarProperty Name="Biography" ColumnName="Biography" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="Picture" ColumnName="Picture" />

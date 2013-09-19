@@ -1,0 +1,2 @@
+﻿@model List<SelectListItem>
+@Html.TextBoxFor(model => model, new { @class = "form-control", @placeholder = ViewData["placeholder"], @autofocus = ViewData["autofocus"], @data_field = @ViewData.TemplateInfo.GetFullHtmlFieldName("") })

@@ -7,6 +7,7 @@ BEGIN
 		[FullName] VARCHAR(50) NULL,
 		[BirthDate] DATE NULL,
 		[Picture] VARBINARY(MAX) NULL,
+		[UserTheme] VARCHAR(20) NULL,
 		[Location] VARCHAR(50) NULL,
 		[Biography] VARCHAR(500) NULL
 		CONSTRAINT [pk_Tigra_UserProfiles_Key] PRIMARY KEY ([UserID]),
