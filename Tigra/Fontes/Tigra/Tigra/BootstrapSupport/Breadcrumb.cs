@@ -31,6 +31,7 @@ namespace Tigra.BootstrapSupport
                     this.mLevelsDicionary.Add("Roles", "Permissões");
                     this.mLevelsDicionary.Add("Create", "Criar novo");
                     this.mLevelsDicionary.Add("Edit", "Editar");
+                    this.mLevelsDicionary.Add("History", "Histórico");
                     this.mLevelsDicionary.Add("Delete", "Excluir");
                 }
 
@@ -60,7 +61,7 @@ namespace Tigra.BootstrapSupport
             routevalues.ToList().ForEach(i => i.ToList().ForEach(j => list.Add(j.Key, j.Value)));
 
             /* Those are the levels in the desired order of display. */
-            var levels = new string[] { "area", "cell", "controller", "id", "action" };
+            var levels = new string[] { "area", "cell", "controller", "tag", "action" };
 
             /* Creates breadcrumb. */
             StringBuilder sb = new StringBuilder();
@@ -102,7 +103,7 @@ namespace Tigra.BootstrapSupport
                         title = v.GetCell().CellName;
                     }
                     /* Get topic title. */
-                    else if (k == "id")
+                    else if (k == "tag")
                     {
                         if (list.TryGetValue("title", out v))
                         {
