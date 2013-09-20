@@ -78,7 +78,7 @@
 							var $oldtheme = $('select[data-field=UserTheme] > option[selected=selected]');
 							var $newtheme = $('select[data-field=UserTheme]').val() ;
 							if ($oldtheme.length != 1 || ($oldtheme.length == 1 && $oldtheme.attr('value') != $newtheme)) {
-							    locatio.reload();
+							    location.reload();
 							}
 
 							break;
