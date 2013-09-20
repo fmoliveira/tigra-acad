@@ -5,13 +5,12 @@
 {
     <div class="panel @Html.Raw(rev.RevisionNumber == Model[0].RevisionNumber ? "panel-info" : "panel-default")">
         <div class="panel-heading">
-            <span class="badge">@Html.Raw(rev.RevisionNumber)</span>
+            <span class="badge">Rev. @Html.Raw(rev.RevisionNumber)</span>
             <strong>@Html.DisplayFor(m => rev.UserName):</strong>
             @Html.Raw(rev.Message)
             <span class="pull-right">@Html.DisplayFor(m => rev.Modified)</span>
         </div>
         <div class="panel-body">
-            <p><strong>@Html.Raw(rev.Summary)</strong></p>
             @Html.Raw(rev.Text)
         </div>
     </div>

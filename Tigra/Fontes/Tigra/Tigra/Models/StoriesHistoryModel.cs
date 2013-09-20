@@ -55,12 +55,13 @@ namespace Tigra.Models
             using (var ctx = new Entities())
             {
                 var list = ctx.GetRequirementHistory(tag, null).ToList();
-                string previous = string.Empty;
+                string previous = string.Empty, text;
 
                 foreach (var i in list)
                 {
-                    ret.Add(new StoriesHistoryModel(i, HtmlDiff.Execute(previous, i.Text)));
-                    previous = i.Text;
+                    text = String.Format("<p><strong>{0}</strong></p>{1}", i.Title, i.Text);
+                    ret.Add(new StoriesHistoryModel(i, HtmlDiff.Execute(previous, text)));
+                    previous = text;
                 }
             }
 
