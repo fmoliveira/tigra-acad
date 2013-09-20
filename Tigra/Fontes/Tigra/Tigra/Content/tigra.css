@@ -19,11 +19,17 @@ div.container > dl.dl-horizontal > dt {
 }
 
 ins {
-    background-color: #cfc;
+    color: #0b6000;
+    background-color: #bfb;
     text-decoration: none;
 }
 
+ins:before {
+    content: ' ';
+    background: #fff;
+}
+
 del {
-    color: #999;
-    background-color: #FEC8C8;
+    color: #ab6f6f;
+    background-color: #ffb8b8;
 }
