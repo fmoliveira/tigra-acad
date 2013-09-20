@@ -5,11 +5,8 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 -->
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
-    <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword />
-    <_PublishTargetUrl>ftp://fmoliveira.com.br/fmoliveira.com.br/wwwroot/tigra</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\Temporário\Export\Tigra</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Admin/Views/Shared/Index.cshtml">
@@ -23,6 +20,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>08/26/2013 18:55:56</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>09/19/2013 21:11:06</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>09/19/2013 21:11:06</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/27/2013 00:17:21</publishTime>
@@ -67,7 +70,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:53:33</publishTime>
     </File>
     <File Include="bin/Tigra.dll">
-      <publishTime>09/19/2013 20:57:53</publishTime>
+      <publishTime>09/19/2013 21:10:52</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>08/26/2013 18:55:56</publishTime>
@@ -130,7 +133,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/18/2013 21:46:16</publishTime>
     </File>
     <File Include="Content/themes/slate.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/18/2013 21:46:21</publishTime>
     </File>
     <File Include="Content/themes/spacelab.css">
       <publishTime>09/18/2013 21:46:27</publishTime>
@@ -141,20 +144,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/tigra.css">
       <publishTime>09/19/2013 20:28:56</publishTime>
     </File>
-    <File Include="Database/TigraDatabase.Context.tt">
-      <publishTime>11/09/2013 16:17:17</publishTime>
-    </File>
     <File Include="Database/TigraDatabase.edmx.diagram">
       <publishTime>09/12/2013 15:28:16</publishTime>
     </File>
-    <File Include="Database/TigraDatabase.tt">
-      <publishTime>11/09/2013 16:17:17</publishTime>
-    </File>
-    <File Include="Global.asax">
-      <publishTime>08/26/2013 18:53:31</publishTime>
-    </File>
     <File Include="packages.config">
       <publishTime>08/27/2013 00:17:23</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>09/19/2013 21:11:01</publishTime>
     </File>
     <File Include="scripts/bootstrap-datepicker.js">
       <publishTime>08/29/2013 22:16:21</publishTime>
@@ -220,7 +217,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/en-au.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/en-ca.js">
       <publishTime>07/18/2013 17:42:06</publishTime>
@@ -232,361 +229,361 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/eo.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/es.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/et.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/eu.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/fa.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/fi.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/fo.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/fr-ca.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/fr.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/gl.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/gu.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/he.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/hi.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/hr.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/hu.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/id.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/is.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/it.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ja.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ka.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/km.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ko.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ku.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/lt.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/lv.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/mk.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/mn.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ms.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/nb.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/nl.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/no.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/pl.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/pt-br.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/pt.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ro.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ru.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/si.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/sk.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/sl.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/sq.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/sr-latn.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/sr.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/sv.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/th.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/tr.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/ug.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/uk.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/vi.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/zh-cn.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/lang/zh.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/LICENSE.md">
       <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/about/dialogs/about.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/about/dialogs/hidpi/logo_ckeditor.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/about/dialogs/logo_ckeditor.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/clipboard/dialogs/paste.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/dialog/dialogDefinition.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/fakeobjects/images/spacer.gif">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/icons.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/icons_hidpi.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/link/dialogs/anchor.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/link/dialogs/link.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/link/images/anchor.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/plugins/link/images/hidpi/anchor.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/README.md">
       <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/ajax.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/api.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/appendto.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/assets/inlineall/logo.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/assets/outputxhtml/outputxhtml.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/assets/posteddata.php">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/assets/sample.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/assets/sample.jpg">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/assets/uilanguages/languages.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/datafiltering.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/divreplace.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/index.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/inlineall.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/inlinebycode.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/inlinetextarea.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/jquery.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/plugins/dialog/assets/my_dialog.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/plugins/dialog/dialog.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/plugins/enterkey/enterkey.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/plugins/toolbar/toolbar.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/plugins/wysiwygarea/fullpage.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/readonly.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/replacebyclass.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/replacebycode.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/sample.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/sample.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/sample_posteddata.php">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/tabindex.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/uicolor.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/uilanguages.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/samples/xhtmlstyle.html">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/dialog.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/dialog_ie.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/dialog_ie7.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/dialog_ie8.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/dialog_iequirks.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/dialog_opera.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/editor.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/editor_gecko.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/editor_ie.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/editor_ie7.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/editor_ie8.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/editor_iequirks.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/icons.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/icons_hidpi.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/arrow.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/close.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/hidpi/close.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/hidpi/lock-open.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/hidpi/lock.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/hidpi/refresh.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/lock-open.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/lock.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/images/refresh.png">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/skins/moono/readme.md">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>07/18/2013 17:42:06</publishTime>
     </File>
     <File Include="scripts/ckeditor/styles.js">
       <publishTime>07/18/2013 17:42:06</publishTime>
@@ -595,7 +592,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/17/2013 10:49:18</publishTime>
     </File>
     <File Include="scripts/html5shiv.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/26/2013 18:56:00</publishTime>
     </File>
     <File Include="scripts/jquery-1.9.1.js">
       <publishTime>08/26/2013 18:56:01</publishTime>
@@ -649,82 +646,79 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/03/2013 13:41:55</publishTime>
     </File>
     <File Include="Views/Account/MyProfile.cshtml">
-      <publishTime>09/02/2013 19:23:01</publishTime>
+      <publishTime>09/19/2013 18:47:44</publishTime>
     </File>
     <File Include="Views/Error/Index.cshtml">
       <publishTime>09/04/2013 15:58:11</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/19/2013 19:01:17</publishTime>
     </File>
     <File Include="Views/shared/Create.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/18/2013 19:54:26</publishTime>
     </File>
     <File Include="Views/shared/Details.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/16/2013 12:52:13</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/DateTime.cshtml">
-      <publishTime>12/09/2013 17:28:59</publishTime>
+      <publishTime>09/19/2013 21:10:16</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/List_TeamMember.cshtml">
       <publishTime>09/04/2013 14:19:08</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/UserNameModel.cshtml">
-      <publishTime>12/09/2013 16:25:04</publishTime>
+      <publishTime>09/12/2013 16:25:04</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/Choice_UserThemes.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/19/2013 18:35:39</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/Date.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/19/2013 07:21:24</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/Html.cshtml">
       <publishTime>09/04/2013 16:54:08</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/MultilineText.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/29/2013 22:25:23</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/string.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/30/2013 10:09:18</publishTime>
     </File>
     <File Include="Views/shared/EditorTemplates/Text.cshtml">
       <publishTime>09/04/2013 16:51:24</publishTime>
     </File>
     <File Include="Views/shared/Index.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
-    </File>
-    <File Include="Views/shared/View.cshtml">
-      <publishTime>11/09/2013 16:24:29</publishTime>
+      <publishTime>09/18/2013 20:01:35</publishTime>
     </File>
     <File Include="Views/shared/_alerts.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/26/2013 20:04:33</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.basic.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/19/2013 18:59:41</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.empty.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/28/2013 18:20:47</publishTime>
     </File>
     <File Include="Views/shared/_login.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/18/2013 18:27:32</publishTime>
     </File>
     <File Include="Views/shared/_validationSummary.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/26/2013 23:44:22</publishTime>
     </File>
     <File Include="Views/Stories/Details.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>09/18/2013 21:08:06</publishTime>
     </File>
-    <File Include="Views/Stories/View.cshtml">
-      <publishTime>11/09/2013 17:13:19</publishTime>
+    <File Include="Views/Stories/History.cshtml">
+      <publishTime>09/19/2013 21:10:30</publishTime>
     </File>
     <File Include="Views/Web.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/26/2013 18:53:31</publishTime>
     </File>
     <File Include="Views/_ViewStart.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>08/26/2013 18:56:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/19/2013 20:58:10</publishTime>
+      <publishTime>09/19/2013 21:10:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

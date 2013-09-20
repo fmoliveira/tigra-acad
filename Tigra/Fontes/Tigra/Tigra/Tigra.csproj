@@ -416,6 +416,7 @@
       <LastGenOutput>TigraDatabase.cs</LastGenOutput>
     </Content>
     <None Include="Properties\PublishProfiles\Cloud.pubxml" />
+    <None Include="Properties\PublishProfiles\File System.pubxml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />

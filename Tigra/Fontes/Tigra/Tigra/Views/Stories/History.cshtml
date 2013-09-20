@@ -8,7 +8,7 @@
             <span class="badge">@Html.Raw(rev.RevisionNumber)</span>
             <strong>@Html.DisplayFor(m => rev.UserName):</strong>
             @Html.Raw(rev.Message)
-            <span class="pull-right">@Html.Raw(rev.RevisionDate.ToString("dd/MM/yyyy HH:mm:ss"))</span>
+            <span class="pull-right">@Html.DisplayFor(m => rev.Modified)</span>
         </div>
         <div class="panel-body">
             <p><strong>@Html.Raw(rev.Summary)</strong></p>
