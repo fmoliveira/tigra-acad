@@ -11,6 +11,7 @@ using System.IO;
 using System.Web;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Web.Configuration;
 
 namespace BootstrapSupport
 {
@@ -264,6 +265,18 @@ namespace BootstrapSupport
             }
 
             return ret;
+        }
+
+        public static MvcHtmlString VersionNumber(this HtmlHelper helper)
+        {
+            string v = WebConfigurationManager.AppSettings["VersionNumber"].ToString();
+            return MvcHtmlString.Create(v);
+        }
+
+        public static MvcHtmlString BuildNumber(this HtmlHelper helper)
+        {
+            string v = WebConfigurationManager.AppSettings["BuildNumber"].ToString();
+            return MvcHtmlString.Create(v);
         }
         
         /// <summary>
