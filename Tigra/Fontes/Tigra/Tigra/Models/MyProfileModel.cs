@@ -23,6 +23,7 @@ namespace Tigra.Models
         [DisplayName("Data de nascimento")]
         [Description("Informe sua data de nascimento")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "yyyy-MM-dd")]
         public DateTime? BirthDate { get; set; }
 
         [DisplayName("Localização")]
