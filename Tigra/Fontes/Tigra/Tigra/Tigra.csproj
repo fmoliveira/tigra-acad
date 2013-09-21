@@ -231,6 +231,8 @@
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\datepicker.css" />
     <Content Include="Content\bootstrap\jumbotron.css" />
+    <Content Include="Content\carousel.css" />
+    <Content Include="Content\loading.gif" />
     <Content Include="Content\themes\amelia.css" />
     <Content Include="Content\themes\cerulean.css" />
     <Content Include="Content\themes\cosmo.css" />
@@ -467,6 +469,7 @@
     <Content Include="Views\shared\DisplayTemplates\DateTime.cshtml" />
     <Content Include="Views\shared\EditorTemplates\Choice_UserThemes.cshtml" />
     <Content Include="Views\Stories\History.cshtml" />
+    <Content Include="Views\Home\HomePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

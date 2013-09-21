@@ -13,29 +13,20 @@ namespace Tigra.Controllers
 
 		public ActionResult Index()
 		{
-			HomeModel model = null;
+            if (RouteData.Values.ContainsKey("cell"))
+            {
+                try
+                {
+                    HomeModel model = new HomeModel(RouteData.Values["cell"].GetCell());
+                    return View(model);
+                }
+                catch (NullReferenceException)
+                {
+                    // nothing to do, just skips to home page
+                }
+            }
 
-			try
-			{
-				model = new HomeModel(RouteData.Values["cell"].GetCell());
-			}
-			catch (NullReferenceException)
-			{
-				model = new HomeModel
-				(
-					new Cell()
-					{
-						CellID = 0,
-						CellName = "Teste",
-						Description = "Nenhuma célula selecionada."
-					}
-				);
-			}
-			catch (Exception)
-			{
-				return RedirectToAction("Index", "Error");
-			}
-			return View(model);
+            return View("HomePage");
 		}
 
 	}
