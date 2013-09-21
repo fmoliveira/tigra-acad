@@ -60,7 +60,7 @@ namespace Tigra
         /// <returns></returns>
         public static string GetDisplayName(this UserAccount user)
         {
-            if (user.UserProfile != null && user.UserProfile.FullName.Trim().Length != 0)
+            if (user.UserProfile != null && user.UserProfile.FullName != null && user.UserProfile.FullName.Trim().Length != 0)
             {
                 return user.UserProfile.FullName;
             }
