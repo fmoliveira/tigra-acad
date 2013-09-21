@@ -368,7 +368,7 @@ namespace Tigra.Common
 
             var matches = this.MatchingBlocks();
 
-            matches.Add(new Match(this.oldWords.Length, this.newWords.Length, 0));
+            matches.Add(new SequenceMatch(this.oldWords.Length, this.newWords.Length, 0));
 
             for (int i = 0; i < matches.Count; i++)
             {
@@ -428,15 +428,15 @@ namespace Tigra.Common
 
         }
 
-        private List<Match> MatchingBlocks()
+        private List<SequenceMatch> MatchingBlocks()
         {
-            List<Match> matchingBlocks = new List<Match>();
+            List<SequenceMatch> matchingBlocks = new List<SequenceMatch>();
             this.FindMatchingBlocks(0, this.oldWords.Length, 0, this.newWords.Length, matchingBlocks);
             return matchingBlocks;
         }
 
 
-        private void FindMatchingBlocks(int startInOld, int endInOld, int startInNew, int endInNew, List<Match> matchingBlocks)
+        private void FindMatchingBlocks(int startInOld, int endInOld, int startInNew, int endInNew, List<SequenceMatch> matchingBlocks)
         {
             var match = this.FindMatch(startInOld, endInOld, startInNew, endInNew);
 
@@ -458,7 +458,7 @@ namespace Tigra.Common
         }
 
 
-        private Match FindMatch(int startInOld, int endInOld, int startInNew, int endInNew)
+        private SequenceMatch FindMatch(int startInOld, int endInOld, int startInNew, int endInNew)
         {
             int bestMatchInOld = startInOld;
             int bestMatchInNew = startInNew;
@@ -510,7 +510,7 @@ namespace Tigra.Common
                 matchLengthAt = newMatchLengthAt;
             }
 
-            return bestMatchSize != 0 ? new Match(bestMatchInOld, bestMatchInNew, bestMatchSize) : null;
+            return bestMatchSize != 0 ? new SequenceMatch(bestMatchInOld, bestMatchInNew, bestMatchSize) : null;
         }
 
         private static string WrapText(string text, string tagName, string cssClass)
@@ -556,9 +556,9 @@ namespace Tigra.Common
 
     }
 
-    public class Match
+    public class SequenceMatch
     {
-        public Match(int startInOld, int startInNew, int size)
+        public SequenceMatch(int startInOld, int startInNew, int size)
         {
             this.StartInOld = startInOld;
             this.StartInNew = startInNew;

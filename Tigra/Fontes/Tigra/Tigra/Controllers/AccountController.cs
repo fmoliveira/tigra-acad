@@ -29,6 +29,20 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        public ActionResult Confirm(string token)
+        {
+            if (Mail.ValidateToken(token))
+            {
+                Success("Sua conta foi ativada com sucesso! Você já pode entrar!");
+            }
+            else
+            {
+                Error("Token inválido! Provavelmente o link foi corrompido ou o token foi expirado. Por favor solicite um novo.");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
         public ActionResult Logout()
         {
             Authentication.Logout();

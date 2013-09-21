@@ -118,12 +118,19 @@ namespace Tigra.Database
             }
         }
 
+        public enum AuthResponse
+        {
+            Ok,
+            InvalidCredentials,
+            AccountNotEnabled
+        }
+
         /// <summary>
         /// Validates user login.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static bool Login(AuthenticationModel model)
+        public static AuthResponse Login(AuthenticationModel model)
         {
             using (var ctx = new Entities())
             {
@@ -135,16 +142,23 @@ namespace Tigra.Database
                 {
                     if (ValidatePassword(user, model.Password))
                     {
-                        /* Sets authentication ticket. */
-                        var ticket = MakeAuthCookie(user, model.RememberMe);
-                        HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
-                        HttpContext.Current.Response.Cookies.Set(ck);
+                        if (true == user.Enabled)
+                        {
+                            /* Sets authentication ticket. */
+                            var ticket = MakeAuthCookie(user, model.RememberMe);
+                            HttpCookie ck = new HttpCookie(FormsAuthentication.FormsCookieName, ticket);
+                            HttpContext.Current.Response.Cookies.Set(ck);
 
-                        return true;
+                            return AuthResponse.Ok;
+                        }
+                        else
+                        {
+                            return AuthResponse.AccountNotEnabled;
+                        }
                     }
                 }
             }
-            return false;
+            return AuthResponse.InvalidCredentials;
         }
 
         /// <summary>

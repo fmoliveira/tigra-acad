@@ -77,6 +77,7 @@
           <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Password" Type="binary" MaxLength="32" />
           <Property Name="RegisterDate" Type="datetime2" Precision="0" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfiles">
           <Key>
@@ -417,6 +418,7 @@
           <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.fk_Tigra_RequirementRevisions_User" FromRole="UserAccount" ToRole="RequirementRevision" />
           <NavigationProperty Name="Teams" Relationship="TigraModel.fk_Tigra_Teams_User" FromRole="UserAccount" ToRole="Team" />
           <NavigationProperty Name="UserProfile" Relationship="TigraModel.fk_Tigra_UserProfiles_Usr" FromRole="UserAccount" ToRole="UserProfile" />
+          <Property Type="Boolean" Name="Enabled" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -643,6 +645,7 @@
           <EntitySetMapping Name="UserAccounts">
             <EntityTypeMapping TypeName="TigraModel.UserAccount">
               <MappingFragment StoreEntitySet="UserAccounts">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

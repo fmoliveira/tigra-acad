@@ -24,6 +24,7 @@ namespace Tigra.Database
         public string Email { get; set; }
         public byte[] Password { get; set; }
         public System.DateTime RegisterDate { get; set; }
+        public bool Enabled { get; set; }
     
         public virtual ICollection<RequirementRevision> RequirementRevisions { get; set; }
         public virtual ICollection<Team> Teams { get; set; }

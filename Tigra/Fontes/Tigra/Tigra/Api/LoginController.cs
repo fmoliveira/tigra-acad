@@ -21,13 +21,20 @@ namespace Tigra.Api
             try
             {
                 /* Test if credentials are accepted. */
-                if (Authentication.Login(value))
+                Authentication.AuthResponse resp =  Authentication.Login(value) ;
+                switch (resp)
                 {
-                    return new HttpResponseMessage(HttpStatusCode.Accepted);
-                }
-                else
-                {
-                    return new HttpResponseMessage(HttpStatusCode.Unauthorized);
+                    case Authentication.AuthResponse.Ok:
+                        return new HttpResponseMessage(HttpStatusCode.Accepted);
+
+                    case Authentication.AuthResponse.AccountNotEnabled:
+                        return new HttpResponseMessage(HttpStatusCode.NotModified);
+
+                    case Authentication.AuthResponse.InvalidCredentials:
+                        return new HttpResponseMessage(HttpStatusCode.Unauthorized);
+
+                    default:
+                        return new HttpResponseMessage(HttpStatusCode.BadRequest);
                 }
             }
             catch

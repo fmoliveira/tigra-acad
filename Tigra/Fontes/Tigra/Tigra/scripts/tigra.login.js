@@ -62,6 +62,49 @@ function Info(msg, elem) {
 	Alert('info', msg, elem);
 }
 
+function NewRegisterToken() {
+    console.log("new register token")
+    /* Make post URI and get login data. */
+    var $uri = $('body').data('api') + 'NewRegisterToken';
+    console.log($uri);
+    var $data = JSON.stringify({ "Email": $('#email').val() });
+    console.log($data);
+
+    /* Post login data. */
+    $.ajax({
+        url: $uri,
+        type: 'POST',
+        dataType: 'json',
+        data: $data,
+        contentType: 'application/json; charset=utf-8',
+        complete: function (x, y, z) {
+            console.log("código " + x.status);
+            switch (x.status) {
+                case 202:
+                    Success('Enviamos um novo código de ativação!<br/>Por favor verifique seu email.');
+                    break;
+
+                case 304:
+                    Warning('A sua conta já está ativada!<br/>Você já pode entrar.');
+                    break;
+
+                case 404:
+                    Error('Endereço de email inválido.');
+                    break;
+
+                case 500:
+                    Error('Erro no servidor!');
+                    break;
+
+                default:
+                    Error('Erro inesperado (código ' + x.status + ')!');
+                    break;
+            }
+        }
+    });
+    console.log("finalizou");
+}
+
 /* Handles login form button clicks. */
 $('#login-menu button').click(function () {
 	var $action = $(this).data('action');
@@ -99,12 +142,16 @@ $('#login-menu button').click(function () {
 				switch (x.status)
 				{
 					case 201:
-						Success('Registro efetuado com sucesso!<br/>Você já pode entrar.');
+						Success('Registro efetuado com sucesso!<br/>Por favor verifique seu email.');
 						break;
 
 					case 202:
 						location.reload();
 						break;
+
+				    case 304:
+				        Warning('A sua conta não está ativada!<br/>Por favor verifique seu email.<br/><a href="./" class="alert-link" onclick="NewRegisterToken(); return false;">O email não chegou?</a>')
+				        break;
 
 					case 401:
 						Error('Acesso negado!<br/><a href="#" class="alert-link" data-action="LostPassword">Você esqueceu sua senha?</a>');

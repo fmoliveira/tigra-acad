@@ -15,7 +15,7 @@
     <AssemblyName>Tigra</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -122,6 +122,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\NewRegisterTokenController.cs" />
     <Compile Include="Api\LoginController.cs" />
     <Compile Include="Api\SaveProfileController.cs" />
     <Compile Include="Api\RegisterController.cs" />
@@ -134,8 +135,10 @@
     <Compile Include="BootstrapSupport\HtmlHelpers\Paging.cs" />
     <Compile Include="BootstrapSupport\ViewHelperExtensions.cs" />
     <Compile Include="Common\Choice.cs" />
+    <Compile Include="Common\Crypt.cs" />
     <Compile Include="Common\Extensions.cs" />
     <Compile Include="Common\HtmlDiff.cs" />
+    <Compile Include="Common\Mail.cs" />
     <Compile Include="Common\RequirementTypes.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
@@ -207,6 +210,7 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
+    <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\StoriesHistoryModel.cs" />
     <Compile Include="Models\StoriesDetailsModel.cs" />
     <Compile Include="Models\StoriesCreateModel.cs" />
@@ -233,6 +237,7 @@
     <Content Include="Content\bootstrap\jumbotron.css" />
     <Content Include="Content\carousel.css" />
     <Content Include="Content\loading.gif" />
+    <Content Include="Content\logo_email.png" />
     <Content Include="Content\themes\amelia.css" />
     <Content Include="Content\themes\cerulean.css" />
     <Content Include="Content\themes\cosmo.css" />
@@ -437,6 +442,7 @@
     <Content Include="scripts\tigra.clamp.js" />
     <Content Include="scripts\tigra.login.js" />
     <Content Include="scripts\tigra.modal.js" />
+    <Content Include="Templates\pt-BR\Mail.ConfirmAccountCreation.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -494,11 +500,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12224</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:18823/</IISUrl>
+          <IISUrl>http://localhost/Tigra</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

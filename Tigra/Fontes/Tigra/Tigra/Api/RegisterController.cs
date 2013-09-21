@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Tigra.Common;
 using Tigra.Database;
 using Tigra.Models;
 
@@ -35,6 +36,7 @@ namespace Tigra.Api
                         /* Save changes. */
                         if (ctx.SaveChanges() != 0)
                         {
+                            Mail.SendRegisterTokenMail(ua);
                             return new HttpResponseMessage(HttpStatusCode.Created);
                         }
                         else
