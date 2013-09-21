@@ -63,12 +63,9 @@ function Info(msg, elem) {
 }
 
 function NewRegisterToken() {
-    console.log("new register token")
     /* Make post URI and get login data. */
     var $uri = $('body').data('api') + 'NewRegisterToken';
-    console.log($uri);
     var $data = JSON.stringify({ "Email": $('#email').val() });
-    console.log($data);
 
     /* Post login data. */
     $.ajax({
@@ -78,7 +75,6 @@ function NewRegisterToken() {
         data: $data,
         contentType: 'application/json; charset=utf-8',
         complete: function (x, y, z) {
-            console.log("código " + x.status);
             switch (x.status) {
                 case 202:
                     Success('Enviamos um novo código de ativação!<br/>Por favor verifique seu email.');
@@ -102,7 +98,6 @@ function NewRegisterToken() {
             }
         }
     });
-    console.log("finalizou");
 }
 
 /* Handles login form button clicks. */

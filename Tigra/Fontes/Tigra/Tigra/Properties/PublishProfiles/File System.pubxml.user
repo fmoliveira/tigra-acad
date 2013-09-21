@@ -22,10 +22,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:55:56</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/20/2013 02:26:46</publishTime>
+      <publishTime>09/21/2013 16:19:40</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/20/2013 02:26:46</publishTime>
+      <publishTime>09/21/2013 16:19:40</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/27/2013 00:17:21</publishTime>
@@ -70,7 +70,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:53:33</publishTime>
     </File>
     <File Include="bin/Tigra.dll">
-      <publishTime>09/20/2013 02:26:23</publishTime>
+      <publishTime>09/21/2013 16:19:23</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>08/26/2013 18:55:56</publishTime>
@@ -96,6 +96,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/bootstrap/jumbotron.css">
       <publishTime>08/26/2013 19:17:57</publishTime>
     </File>
+    <File Include="Content/carousel.css">
+      <publishTime>09/21/2013 11:51:30</publishTime>
+    </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.eot">
       <publishTime>08/26/2013 18:56:01</publishTime>
     </File>
@@ -107,6 +110,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/fonts/glyphicons-halflings-regular.woff">
       <publishTime>08/26/2013 18:56:01</publishTime>
+    </File>
+    <File Include="Content/loading.gif">
+      <publishTime>09/03/2013 13:46:34</publishTime>
+    </File>
+    <File Include="Content/logo_email.png">
+      <publishTime>09/21/2013 12:12:02</publishTime>
     </File>
     <File Include="Content/themes/amelia.css">
       <publishTime>09/20/2013 01:28:37</publishTime>
@@ -151,7 +160,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2013 00:17:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/20/2013 02:26:39</publishTime>
+      <publishTime>09/21/2013 16:19:35</publishTime>
     </File>
     <File Include="scripts/bootstrap-datepicker.js">
       <publishTime>08/29/2013 22:16:21</publishTime>
@@ -640,16 +649,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/04/2013 23:32:42</publishTime>
     </File>
     <File Include="scripts/tigra.login.js">
-      <publishTime>08/29/2013 14:06:12</publishTime>
+      <publishTime>09/21/2013 15:58:54</publishTime>
     </File>
     <File Include="scripts/tigra.modal.js">
       <publishTime>09/03/2013 13:41:55</publishTime>
+    </File>
+    <File Include="Templates/pt-BR/Mail.ConfirmAccountCreation.html">
+      <publishTime>09/21/2013 12:26:00</publishTime>
     </File>
     <File Include="Views/Account/MyProfile.cshtml">
       <publishTime>09/20/2013 01:22:03</publishTime>
     </File>
     <File Include="Views/Error/Index.cshtml">
       <publishTime>09/04/2013 15:58:11</publishTime>
+    </File>
+    <File Include="Views/Home/HomePage.cshtml">
+      <publishTime>09/21/2013 11:55:51</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>09/19/2013 19:01:17</publishTime>
@@ -694,13 +709,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 20:04:33</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.basic.cshtml">
-      <publishTime>09/20/2013 02:23:46</publishTime>
+      <publishTime>09/21/2013 11:56:45</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.empty.cshtml">
       <publishTime>08/28/2013 18:20:47</publishTime>
     </File>
     <File Include="Views/shared/_login.cshtml">
-      <publishTime>09/18/2013 18:27:32</publishTime>
+      <publishTime>09/21/2013 16:17:33</publishTime>
     </File>
     <File Include="Views/shared/_validationSummary.cshtml">
       <publishTime>08/26/2013 23:44:22</publishTime>
@@ -718,7 +733,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:56:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/20/2013 02:26:33</publishTime>
+      <publishTime>09/21/2013 16:19:33</publishTime>
     </File>
   </ItemGroup>
 </Project>
