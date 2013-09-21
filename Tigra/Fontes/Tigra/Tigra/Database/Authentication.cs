@@ -61,7 +61,7 @@ namespace Tigra.Database
             {
                 UserID = user.UserID,
                 Email = user.Email,
-                UserTheme = user.UserProfile.UserTheme,
+                UserTheme = (user.UserProfile != null ? user.UserProfile.UserTheme : null),
                 RememberMe = remember
             };
 
