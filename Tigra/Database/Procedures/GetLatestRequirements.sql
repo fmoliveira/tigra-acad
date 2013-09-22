@@ -35,7 +35,8 @@ BEGIN
 			INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.RequirementID = r.RequirementID
 		WHERE r.[CellID] = @CellID AND v.[RevisionDate] <= @BaselineDate AND
 			(
-				(@Type = 1 AND r.[ReqType] = -1)
+				(@Type = 1 AND r.[ReqType] = -1) OR
+				(@Type = 2 AND r.[ReqType] = -2)
 			)
 		GROUP BY r.RequirementID
 		ORDER BY MAX(v.[RevisionDate]) DESC
