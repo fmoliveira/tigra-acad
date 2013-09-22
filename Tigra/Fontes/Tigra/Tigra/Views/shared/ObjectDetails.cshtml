@@ -1,0 +1,21 @@
+@using BootstrapSupport
+@model Object
+
+@{
+    if (ViewBag.VerticalDisplay == null || false == ViewBag.VerticalDisplay)
+    {
+        ViewBag.DlClass = "dl-horizontal";
+    }
+}
+
+<dl class="@ViewBag.DlClass">
+    @foreach(var property in Model.VisibleProperties())
+    {
+        <dt>
+            @(property.GetLabel() + ":")
+        </dt>
+        <dd>
+            @Html.Display(property.Name)                
+        </dd>
+    }
+</dl>

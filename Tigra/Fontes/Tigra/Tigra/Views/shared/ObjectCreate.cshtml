@@ -1,0 +1,17 @@
+@using BootstrapSupport
+@model Object
+
+@using (Html.BeginForm())
+{
+    @Html.Hidden("Id", Model.GetId())
+	@Html.ValidationSummary(true)
+	foreach (var property in Model.VisibleProperties())
+	{
+		using(Html.ControlGroupFor(property.Name))
+		{
+			@Html.Label(property.GetLabel() + ":", new { @class = "control-label" })
+			@Html.Editor(property.Name, new { @placeholder = property.GetDescription(), @autofocus = property.GetAutoFocus() })
+			@Html.ValidationMessage(property.Name, null, new { @class = "help-inline" })
+		}
+	}
+}

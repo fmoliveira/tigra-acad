@@ -1,17 +1,7 @@
 @using BootstrapSupport
 @model Object
 
-<dl class="dl-horizontal">
-    @foreach(var property in Model.VisibleProperties())
-    {
-        <dt>
-            @(property.GetLabel() + ":")
-        </dt>
-        <dd>
-            @Html.Display(property.Name)                
-        </dd>
-    }
-</dl>
+@Html.Partial("ObjectDetails", Model)
 <p>
     @Html.ActionLink("Retornar à listagem", "Index", null, new { @class = "btn btn-lg btn-primary" })
     @Html.ActionLink("Editar", "Edit", new { @id = Model.GetId() }, new { @class = "btn btn-lg btn-default" })

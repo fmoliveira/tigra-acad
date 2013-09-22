@@ -31,6 +31,16 @@ namespace Tigra.Controllers
             }
         }
 
+        public ActionResult NewRequirement(string tag)
+        {
+            using (var ctx = new Entities())
+            {
+                NewRequirementModel model = new NewRequirementModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
+                RouteData.Values["title"] = model.Story.Summary;
+                return View(model);
+            }
+        }
+
         public ActionResult Create()
         {
             var model = new StoriesCreateModel();

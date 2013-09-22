@@ -1,0 +1,21 @@
+@using BootstrapSupport
+@model Tigra.Models.NewRequirementModel
+
+@{
+    ViewBag.VerticalDisplay = true;
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <h2>História atual</h2>
+        @Html.Partial("ObjectDetails", Model.Story)
+    </div>
+    <div class="col-md-7">
+        <h2>Novo requisito</h2>
+        @Html.Partial("ObjectCreate", Model.Requirement)
+        <p>
+            @Html.SubmitButton()
+            @Html.CancelButton()
+        </p>
+    </div>
+</div>
