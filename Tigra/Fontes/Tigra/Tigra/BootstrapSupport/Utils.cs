@@ -268,7 +268,7 @@ namespace BootstrapSupport
         /// <returns></returns>
         public static string Tagify(string value)
         {
-            value = value.Replace(" ", "_");
+            value = value.Replace(" ", "-");
 
             var normalizedString = value.Normalize(NormalizationForm.FormD);
             var stringBuilder = new StringBuilder();
