@@ -20,9 +20,8 @@
         </ul>
     </div>
     <div class="btn-group">
-        @Html.ActionLink("Documentar", "Document", routevalues, new { @class = "btn btn-lg btn-primary" })
         <a class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
-            <span class="caret"></span>
+            Documentar <span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
             <li>@Html.ActionLink("Criar novo requisito", "NewRequirement", routevalues)</li>
