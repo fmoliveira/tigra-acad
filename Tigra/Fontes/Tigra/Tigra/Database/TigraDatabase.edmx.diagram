@@ -22,6 +22,7 @@
         <AssociationConnector Association="TigraModel.fk_Tigra_Teams_Role" />
         <AssociationConnector Association="TigraModel.fk_Tigra_Teams_User" />
         <AssociationConnector Association="TigraModel.fk_Tigra_UserProfiles_Usr" />
+        <AssociationConnector Association="TigraModel.RequirementRelations" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

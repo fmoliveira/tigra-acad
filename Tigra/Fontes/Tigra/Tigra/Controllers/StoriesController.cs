@@ -41,6 +41,36 @@ namespace Tigra.Controllers
             }
         }
 
+        [HttpPost]
+        public ActionResult NewRequirement(RequirementCreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var ctx = new Entities())
+                {
+                    model.Tag = Utils.Tagify(model.Summary);
+                    int cellID = RouteData.Values["cell"].GetCellID();
+                    int userID = Authentication.GetLoggedUser().UserID;
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, model.StoryId);
+
+                    if (ret != 0)
+                    {
+                        Success("Requisito inserido com sucesso!");
+                        return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                    }
+                    else
+                    {
+                        Error("Erro ao tentar inserir o novo requisito!");
+                    }
+                }
+            }
+            else
+            {
+                Warning("Preencha o formulário corretamente!");
+            }
+            return View(model);
+        }
+
         public ActionResult Create()
         {
             var model = new StoriesCreateModel();
@@ -58,7 +88,7 @@ namespace Tigra.Controllers
                     model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text);
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, null);
 
                     if (ret != 0)
                     {
@@ -99,7 +129,7 @@ namespace Tigra.Controllers
                     model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, model.Tag, model.Summary, model.Text);
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, model.Tag, model.Summary, model.Text, null);
 
                     if (ret != 0)
                     {

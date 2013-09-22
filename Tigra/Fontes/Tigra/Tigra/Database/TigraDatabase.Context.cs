@@ -81,7 +81,20 @@ namespace Tigra.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLatestRequirements_Result>("GetLatestRequirements", cellIDParameter, baselineDateParameter, typeParameter);
         }
     
-        public virtual int SaveRequirement(Nullable<short> reqTypeID, Nullable<int> cellID, Nullable<long> revisionID, Nullable<int> userID, string message, string tag, string title, string text)
+        public virtual ObjectResult<GetRequirementHistory_Result> GetRequirementHistory(string tag, Nullable<System.DateTime> baselineDate)
+        {
+            var tagParameter = tag != null ?
+                new ObjectParameter("Tag", tag) :
+                new ObjectParameter("Tag", typeof(string));
+    
+            var baselineDateParameter = baselineDate.HasValue ?
+                new ObjectParameter("BaselineDate", baselineDate) :
+                new ObjectParameter("BaselineDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementHistory_Result>("GetRequirementHistory", tagParameter, baselineDateParameter);
+        }
+    
+        public virtual int SaveRequirement(Nullable<short> reqTypeID, Nullable<int> cellID, Nullable<long> revisionID, Nullable<int> userID, string message, string tag, string title, string text, Nullable<long> storyID)
         {
             var reqTypeIDParameter = reqTypeID.HasValue ?
                 new ObjectParameter("ReqTypeID", reqTypeID) :
@@ -115,20 +128,11 @@ namespace Tigra.Database
                 new ObjectParameter("Text", text) :
                 new ObjectParameter("Text", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveRequirement", reqTypeIDParameter, cellIDParameter, revisionIDParameter, userIDParameter, messageParameter, tagParameter, titleParameter, textParameter);
-        }
+            var storyIDParameter = storyID.HasValue ?
+                new ObjectParameter("StoryID", storyID) :
+                new ObjectParameter("StoryID", typeof(long));
     
-        public virtual ObjectResult<GetRequirementHistory_Result> GetRequirementHistory(string tag, Nullable<System.DateTime> baselineDate)
-        {
-            var tagParameter = tag != null ?
-                new ObjectParameter("Tag", tag) :
-                new ObjectParameter("Tag", typeof(string));
-    
-            var baselineDateParameter = baselineDate.HasValue ?
-                new ObjectParameter("BaselineDate", baselineDate) :
-                new ObjectParameter("BaselineDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementHistory_Result>("GetRequirementHistory", tagParameter, baselineDateParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveRequirement", reqTypeIDParameter, cellIDParameter, revisionIDParameter, userIDParameter, messageParameter, tagParameter, titleParameter, textParameter, storyIDParameter);
         }
     }
 }

@@ -13,7 +13,8 @@ CREATE PROCEDURE [Tigra].[SaveRequirement]
 	@Message VARCHAR(250),
 	@Tag VARCHAR(100),
 	@Title VARCHAR(100),
-	@Text TEXT
+	@Text TEXT,
+	@StoryID BIGINT = NULL
 )
 AS
 BEGIN
@@ -83,6 +84,15 @@ BEGIN
 	ELSE
 	BEGIN
 		UPDATE [Tigra].[RequirementTexts] SET [Text] = @Text WHERE [RevisionID] = @RevisionID;
+	END
+
+	/* Register relations. */
+	IF (@StoryID IS NOT NULL)
+	BEGIN
+		IF NOT EXISTS (SELECT 1 FROM [Tigra].[RequirementRelations] WHERE [LeftRevisionID] = @StoryID AND [RightRevisionID] = @RevisionID)
+		BEGIN
+			INSERT INTO [Tigra].[RequirementRelations] ([LeftRevisionID], [RightRevisionID]) VALUES (@StoryID, @RevisionID);
+		END
 	END
 
 	/* Commits transaction. */

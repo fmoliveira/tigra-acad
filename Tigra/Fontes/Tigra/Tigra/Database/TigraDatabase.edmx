@@ -24,6 +24,14 @@
           <Property Name="Tag" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="RequirementRelations">
+          <Key>
+            <PropertyRef Name="LeftRevisionID" />
+            <PropertyRef Name="RightRevisionID" />
+          </Key>
+          <Property Name="LeftRevisionID" Type="bigint" Nullable="false" />
+          <Property Name="RightRevisionID" Type="bigint" Nullable="false" />
+        </EntityType>
         <EntityType Name="RequirementRevisions">
           <Key>
             <PropertyRef Name="RevisionID" />
@@ -91,6 +99,30 @@
           <Property Name="Biography" Type="varchar" MaxLength="500" />
           <Property Name="UserTheme" Type="varchar" MaxLength="20" />
         </EntityType>
+        <Association Name="fk_Tigra_RequirementRelations_Left">
+          <End Role="RequirementRevisions" Type="Self.RequirementRevisions" Multiplicity="1" />
+          <End Role="RequirementRelations" Type="Self.RequirementRelations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequirementRevisions">
+              <PropertyRef Name="RevisionID" />
+            </Principal>
+            <Dependent Role="RequirementRelations">
+              <PropertyRef Name="LeftRevisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tigra_RequirementRelations_Right">
+          <End Role="RequirementRevisions" Type="Self.RequirementRevisions" Multiplicity="1" />
+          <End Role="RequirementRelations" Type="Self.RequirementRelations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequirementRevisions">
+              <PropertyRef Name="RevisionID" />
+            </Principal>
+            <Dependent Role="RequirementRelations">
+              <PropertyRef Name="RightRevisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Tigra_RequirementRevisions_Req">
           <End Role="Requirements" Type="Self.Requirements" Multiplicity="1" />
           <End Role="RequirementRevisions" Type="Self.RequirementRevisions" Multiplicity="*" />
@@ -213,10 +245,12 @@
           <Parameter Name="Tag" Type="varchar" Mode="In" />
           <Parameter Name="Title" Type="varchar" Mode="In" />
           <Parameter Name="Text" Type="text" Mode="In" />
+          <Parameter Name="StoryID" Type="bigint" Mode="In" />
         </Function>
         <EntityContainer Name="TigraModelStoreContainer">
           <EntitySet Name="Baseline" EntityType="Self.Baseline" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="Cells" EntityType="Self.Cells" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="RequirementRelations" EntityType="Self.RequirementRelations" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="RequirementRevisions" EntityType="Self.RequirementRevisions" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="Requirements" EntityType="Self.Requirements" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="RequirementTexts" EntityType="Self.RequirementTexts" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
@@ -224,6 +258,14 @@
           <EntitySet Name="Teams" EntityType="Self.Teams" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="UserAccounts" EntityType="Self.UserAccounts" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="UserProfiles" EntityType="Self.UserProfiles" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="fk_Tigra_RequirementRelations_Left" Association="Self.fk_Tigra_RequirementRelations_Left">
+            <End Role="RequirementRevisions" EntitySet="RequirementRevisions" />
+            <End Role="RequirementRelations" EntitySet="RequirementRelations" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tigra_RequirementRelations_Right" Association="Self.fk_Tigra_RequirementRelations_Right">
+            <End Role="RequirementRevisions" EntitySet="RequirementRevisions" />
+            <End Role="RequirementRelations" EntitySet="RequirementRelations" />
+          </AssociationSet>
           <AssociationSet Name="fk_Tigra_RequirementRevisions_Req" Association="Self.fk_Tigra_RequirementRevisions_Req">
             <End Role="Requirements" EntitySet="Requirements" />
             <End Role="RequirementRevisions" EntitySet="RequirementRevisions" />
@@ -316,6 +358,14 @@
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
             <Parameter Name="Type" Mode="In" Type="Byte" />
           </FunctionImport>
+          <FunctionImport Name="GetRequirementHistory" ReturnType="Collection(TigraModel.GetRequirementHistory_Result)">
+            <Parameter Name="Tag" Mode="In" Type="String" />
+            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <AssociationSet Name="RequirementRelations" Association="TigraModel.RequirementRelations">
+            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
+            <End Role="RequirementRevision1" EntitySet="RequirementRevisions" />
+          </AssociationSet>
           <FunctionImport Name="SaveRequirement">
             <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
             <Parameter Name="CellID" Mode="In" Type="Int32" />
@@ -325,10 +375,7 @@
             <Parameter Name="Tag" Mode="In" Type="String" />
             <Parameter Name="Title" Mode="In" Type="String" />
             <Parameter Name="Text" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="GetRequirementHistory" ReturnType="Collection(TigraModel.GetRequirementHistory_Result)">
-            <Parameter Name="Tag" Mode="In" Type="String" />
-            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
+            <Parameter Name="StoryID" Mode="In" Type="Int64" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Baseline">
@@ -367,6 +414,8 @@
           <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_RequirementRevisions_User" FromRole="RequirementRevision" ToRole="UserAccount" />
           <NavigationProperty Name="RequirementText" Relationship="TigraModel.fk_Tigra_RequirementTexts_Rev" FromRole="RequirementRevision" ToRole="RequirementText" />
           <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RequirementRevisions1" Relationship="TigraModel.RequirementRelations" FromRole="RequirementRevision" ToRole="RequirementRevision1" />
+          <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.RequirementRelations" FromRole="RequirementRevision1" ToRole="RequirementRevision" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -566,6 +615,10 @@
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
         </ComplexType>
+        <Association Name="RequirementRelations">
+          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="*" />
+          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision1" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -706,7 +759,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SaveRequirement" FunctionName="TigraModel.Store.SaveRequirement" />
           <FunctionImportMapping FunctionImportName="GetRequirementHistory" FunctionName="TigraModel.Store.GetRequirementHistory">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TigraModel.GetRequirementHistory_Result">
@@ -720,6 +772,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <AssociationSetMapping Name="RequirementRelations" TypeName="TigraModel.RequirementRelations" StoreEntitySet="RequirementRelations">
+            <EndProperty Name="RequirementRevision1">
+              <ScalarProperty Name="RevisionID" ColumnName="RightRevisionID" />
+            </EndProperty>
+            <EndProperty Name="RequirementRevision">
+              <ScalarProperty Name="RevisionID" ColumnName="LeftRevisionID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="SaveRequirement" FunctionName="TigraModel.Store.SaveRequirement" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

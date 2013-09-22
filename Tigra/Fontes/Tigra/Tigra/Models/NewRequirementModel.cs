@@ -15,7 +15,7 @@ namespace Tigra.Models
         public NewRequirementModel(GetRequirementDetails_Result item)
         {
             this.Story = new StoriesDetailsModel(item);
-            this.Requirement = new RequirementCreateModel();
+            this.Requirement = new RequirementCreateModel(item.RevisionID);
         }
     }
 }

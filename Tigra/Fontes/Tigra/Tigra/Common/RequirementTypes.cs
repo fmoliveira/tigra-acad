@@ -8,5 +8,7 @@ namespace Tigra
     public class RequirementTypes
     {
         public const short Story = -1;
+
+        public const short Requirement = -1;
     }
 }

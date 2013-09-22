@@ -14,6 +14,12 @@ namespace Tigra.Database
     
     public partial class RequirementRevision
     {
+        public RequirementRevision()
+        {
+            this.RequirementRevisions1 = new HashSet<RequirementRevision>();
+            this.RequirementRevisions = new HashSet<RequirementRevision>();
+        }
+    
         public long RevisionID { get; set; }
         public int RequirementID { get; set; }
         public short RevisionNumber { get; set; }
@@ -26,5 +32,7 @@ namespace Tigra.Database
         public virtual Requirement Requirement { get; set; }
         public virtual UserAccount UserAccount { get; set; }
         public virtual RequirementText RequirementText { get; set; }
+        public virtual ICollection<RequirementRevision> RequirementRevisions1 { get; set; }
+        public virtual ICollection<RequirementRevision> RequirementRevisions { get; set; }
     }
 }
