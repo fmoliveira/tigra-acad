@@ -14,4 +14,8 @@
 			@Html.ValidationMessage(property.Name, null, new { @class = "help-inline" })
 		}
 	}
+    <p>
+        @Html.SubmitButton()
+        @Html.CancelButton()
+    </p>
 }
