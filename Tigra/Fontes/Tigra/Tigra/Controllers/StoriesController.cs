@@ -55,14 +55,15 @@ namespace Tigra.Controllers
             {
                 using (var ctx = new Entities())
                 {
+                    model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text);
 
                     if (ret != 0)
                     {
                         Success("História inserida com sucesso!");
-                        return RedirectToAction("Index");
+                        return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
                     }
                     else
                     {
@@ -95,14 +96,15 @@ namespace Tigra.Controllers
             {
                 using (var ctx = new Entities())
                 {
+                    model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, Utils.Tagify(model.Summary), model.Summary, model.Text);
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, model.Tag, model.Summary, model.Text);
 
                     if (ret != 0)
                     {
                         Success("História alterada com sucesso!");
-                        return RedirectToAction("Index");
+                        return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
                     }
                     else
                     {
