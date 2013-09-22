@@ -36,9 +36,14 @@ namespace BootstrapSupport
 			return elementType.GetProperties().Where(info => info.Name != elementType.IdentifierPropertyName()).ToArray();
 		}
 
+        public static PropertyInfo[] HiddenProperties(this Object model)
+        {
+            return model.GetType().GetProperties().Where(info => info.Name != model.IdentifierPropertyName() && null != info.GetCustomAttribute(typeof(HiddenInputAttribute))).ToArray();
+        }
+
 		public static PropertyInfo[] VisibleProperties(this Object model)
 		{
-			return model.GetType().GetProperties().Where(info => info.Name != model.IdentifierPropertyName()).ToArray();
+            return model.GetType().GetProperties().Where(info => info.Name != model.IdentifierPropertyName() && null == info.GetCustomAttribute(typeof(HiddenInputAttribute))).ToArray();
 		}
 
         public static RouteValueDictionary GetIdValue(this object model)

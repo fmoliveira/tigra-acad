@@ -4,6 +4,10 @@
 @using (Html.BeginForm())
 {
     @Html.Hidden("Id", Model.GetId())
+    foreach (var property in Model.HiddenProperties())
+    {
+        @Html.Hidden(property.Name)
+    }
 	@Html.ValidationSummary(true)
 	foreach (var property in Model.VisibleProperties())
 	{

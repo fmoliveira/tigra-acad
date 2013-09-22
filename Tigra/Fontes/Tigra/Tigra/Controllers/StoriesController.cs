@@ -42,6 +42,7 @@ namespace Tigra.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult NewRequirement(RequirementCreateModel model)
         {
             if (ModelState.IsValid)
@@ -51,7 +52,7 @@ namespace Tigra.Controllers
                     model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
                     int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, model.StoryId);
+                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Requirement, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, model.StoryId);
 
                     if (ret != 0)
                     {

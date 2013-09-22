@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Tigra.Models
 {
@@ -13,7 +14,8 @@ namespace Tigra.Models
         [Required]
         public long Id { get; set; }
 
-        public long StoryId = 0;
+        [HiddenInput]
+        public long StoryId { get; set; }
 
         public string Tag = null;
 
@@ -28,6 +30,11 @@ namespace Tigra.Models
         [DisplayName("Motivo da edição"), DataType(DataType.Text), StringLength(250)]
         [Required]
         public string Message { get; set; }
+
+        public RequirementCreateModel()
+        {
+            //
+        }
 
         public RequirementCreateModel(long storyId)
         {
