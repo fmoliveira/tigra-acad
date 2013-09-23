@@ -66,7 +66,7 @@ namespace Tigra.Database
             };
 
             data.FullName =
-                (user.UserProfile != null && user.UserProfile.FullName.Trim().Length != 0)
+                (user.UserProfile != null && user.UserProfile.FullName != null && user.UserProfile.FullName.Trim().Length != 0)
                 ? user.UserProfile.FullName
                 : user.Email.Substring(0, user.Email.IndexOf('@'));
 
