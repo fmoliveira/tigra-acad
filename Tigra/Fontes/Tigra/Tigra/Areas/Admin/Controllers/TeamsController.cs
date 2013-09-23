@@ -20,5 +20,14 @@ namespace Tigra.Areas.Admin.Controllers
             return View(model);
         }
 
+        public ActionResult Edit(int id)
+        {
+            using(var ctx= new Entities())
+            {
+                var model = new TeamsModel(id);
+                return View(model);
+            }
+        }
+
     }
 }

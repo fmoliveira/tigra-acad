@@ -10,7 +10,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="Areas/Admin/Views/Shared/Index.cshtml">
-      <publishTime>09/05/2013 19:34:59</publishTime>
+      <publishTime>09/22/2013 22:43:01</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Teams/Edit.cshtml">
+      <publishTime>09/22/2013 23:49:12</publishTime>
+    </File>
+    <File Include="Areas/Admin/Views/Teams/Index.cshtml">
+      <publishTime>09/22/2013 22:58:53</publishTime>
     </File>
     <File Include="Areas/Admin/Views/Web.config">
       <publishTime>09/04/2013 13:42:20</publishTime>
@@ -22,10 +28,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:55:56</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>09/22/2013 10:15:14</publishTime>
+      <publishTime>09/22/2013 23:50:12</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>09/22/2013 10:15:14</publishTime>
+      <publishTime>09/22/2013 23:50:12</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/27/2013 00:17:21</publishTime>
@@ -70,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:53:33</publishTime>
     </File>
     <File Include="bin/Tigra.dll">
-      <publishTime>09/22/2013 10:15:03</publishTime>
+      <publishTime>09/22/2013 23:50:01</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>08/26/2013 18:55:56</publishTime>
@@ -154,13 +160,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2013 00:44:50</publishTime>
     </File>
     <File Include="Database/TigraDatabase.edmx.diagram">
-      <publishTime>09/12/2013 15:28:16</publishTime>
+      <publishTime>09/22/2013 10:49:09</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>08/27/2013 00:17:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>09/22/2013 10:15:08</publishTime>
+      <publishTime>09/22/2013 23:50:08</publishTime>
     </File>
     <File Include="scripts/bootstrap-datepicker.js">
       <publishTime>08/29/2013 22:16:21</publishTime>
@@ -658,10 +664,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/21/2013 12:26:00</publishTime>
     </File>
     <File Include="Views/Account/MyProfile.cshtml">
-      <publishTime>09/20/2013 01:22:03</publishTime>
+      <publishTime>09/22/2013 23:29:12</publishTime>
     </File>
     <File Include="Views/Error/Index.cshtml">
       <publishTime>09/04/2013 15:58:11</publishTime>
+    </File>
+    <File Include="Views/Error/Login.cshtml">
+      <publishTime>09/22/2013 21:49:59</publishTime>
     </File>
     <File Include="Views/Home/HomePage.cshtml">
       <publishTime>09/21/2013 23:55:12</publishTime>
@@ -679,7 +688,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/19/2013 21:10:16</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/List_TeamMember.cshtml">
-      <publishTime>09/04/2013 14:19:08</publishTime>
+      <publishTime>09/22/2013 22:46:44</publishTime>
     </File>
     <File Include="Views/shared/DisplayTemplates/UserNameModel.cshtml">
       <publishTime>09/12/2013 16:25:04</publishTime>
@@ -703,10 +712,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/04/2013 16:51:24</publishTime>
     </File>
     <File Include="Views/shared/Index.cshtml">
-      <publishTime>09/18/2013 20:01:35</publishTime>
+      <publishTime>09/22/2013 23:15:49</publishTime>
     </File>
     <File Include="Views/shared/ObjectCreate.cshtml">
-      <publishTime>09/22/2013 09:48:31</publishTime>
+      <publishTime>09/22/2013 19:01:31</publishTime>
     </File>
     <File Include="Views/shared/ObjectDetails.cshtml">
       <publishTime>09/22/2013 00:56:57</publishTime>
@@ -715,25 +724,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 20:04:33</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.basic.cshtml">
-      <publishTime>09/21/2013 11:56:45</publishTime>
+      <publishTime>09/22/2013 23:16:29</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.empty.cshtml">
       <publishTime>08/28/2013 18:20:47</publishTime>
     </File>
     <File Include="Views/shared/_login.cshtml">
-      <publishTime>09/21/2013 16:17:33</publishTime>
+      <publishTime>09/22/2013 22:13:02</publishTime>
     </File>
     <File Include="Views/shared/_validationSummary.cshtml">
       <publishTime>08/26/2013 23:44:22</publishTime>
     </File>
     <File Include="Views/Stories/Details.cshtml">
-      <publishTime>09/22/2013 00:34:12</publishTime>
+      <publishTime>09/22/2013 10:21:34</publishTime>
     </File>
     <File Include="Views/Stories/History.cshtml">
       <publishTime>09/22/2013 00:51:44</publishTime>
     </File>
     <File Include="Views/Stories/NewRequirement.cshtml">
-      <publishTime>09/22/2013 09:48:21</publishTime>
+      <publishTime>09/22/2013 18:46:45</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>08/26/2013 18:53:31</publishTime>
@@ -742,7 +751,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:56:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/22/2013 10:15:06</publishTime>
+      <publishTime>09/22/2013 23:50:04</publishTime>
     </File>
   </ItemGroup>
 </Project>

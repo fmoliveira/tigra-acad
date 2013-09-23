@@ -98,7 +98,11 @@
 				@if (ViewContext.RouteData.Values["title"] != null && ViewContext.RouteData.Values["title"].ToString().Length != 0)
 				{
 					<h1>@ViewContext.RouteData.Values["title"].ToString()</h1>
-                    <p>@Html.GetControllerDescription()</p>
+                    
+                    if (@Html.GetControllerDescription() != null)
+                    {
+                        <p>@Html.GetControllerDescription()</p>
+                    }
 				}
 				else
 				{
@@ -113,7 +117,7 @@
                     
                     if (@Html.GetControllerDescription() != null)
                     {
-                        <h1>@Html.GetControllerDescription()</h1>
+                        <p>@Html.GetControllerDescription()</p>
                     }
 				}
 			</div>

@@ -1,0 +1,47 @@
+﻿@using BootstrapSupport
+@model Tigra.Areas.Admin.Models.TeamsModel
+
+@{
+	Layout = null;
+}
+
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h4 class="modal-title">Gerenciar Equipe</h4>
+</div>
+<div class="modal-body">
+    <p><strong>Célula:</strong> @Model.CellName</p>
+
+	<div class="row">
+        <div class="col-md-12">
+            <div class="list-group">
+                @foreach (var m in Model.Members)
+                {
+                    <a id="user_@m.Id" class="list-group-item" style="cursor:pointer">
+                        <p class="list-group-item-heading">
+                            <strong>@Html.Raw(m.DisplayName)</strong>
+                            <b class="pull-right caret"></b>
+                        </p>
+                        <p class="list-group-item-text">@Html.Raw(m.RoleName)</p>
+                    </a>
+                }
+                <a data-action="NewUser" class="list-group-item" style="cursor:pointer;text-align:center">
+                    <p>
+                        <b class="glyphicon glyphicon-plus"></b><br />
+                        Adicionar Membro
+                    </p>
+                </a>
+            </div>
+        </div>
+	</div>
+</div>
+<div class="modal-footer">
+	<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+	<button type="button" class="btn btn-primary" data-action="SaveTeam">Salvar</button>
+</div>
+
+<script type="text/javascript">
+    $('a[data-action="NewUser"]').click(function () {
+        //
+    });
+</script>

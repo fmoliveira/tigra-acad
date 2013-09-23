@@ -424,6 +424,8 @@
       <DependentUpon>TigraDatabase.edmx</DependentUpon>
       <LastGenOutput>TigraDatabase.cs</LastGenOutput>
     </Content>
+    <Content Include="Areas\Admin\Views\Teams\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Teams\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\Cloud.pubxml" />
     <None Include="Properties\PublishProfiles\File System.pubxml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />

@@ -4,7 +4,7 @@
 } else {
     <div class="list-group">
     @foreach (var m in Model) {
-        <a href="#" class="list-group-item">
+        <a class="list-group-item">
             <p class="list-group-item-heading"><strong>@Html.Raw(m.DisplayName)</strong></p>
             <p class="list-group-item-text">@Html.Raw(m.RoleName)</p>
         </a>

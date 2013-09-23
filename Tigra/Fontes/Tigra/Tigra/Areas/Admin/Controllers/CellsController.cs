@@ -14,18 +14,21 @@ namespace Tigra.Areas.Admin.Controllers
     public class CellsController : BootstrapBaseController
     {
 
+        [Authorize]
         public ActionResult Index()
         {
             var model = CellModel.GetCells();
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             var model = new CellModel();
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             using (var ctx = new Entities())
@@ -84,6 +87,7 @@ namespace Tigra.Areas.Admin.Controllers
             return false;
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(CellModel model)
         {
@@ -107,6 +111,7 @@ namespace Tigra.Areas.Admin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(CellModel model)
         {

@@ -30,22 +30,7 @@
                 </td>                    
             }
             <td>
-                <div class="btn-group">
-                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="./">
-                        Ação
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        @{
-                            var routevalues = model.GetIdValue();  
-                            <li>@Html.ActionLink("Editar", "Edit", routevalues)</li>
-                            <li>@Html.ActionLink("Detalhes", "Details", routevalues)</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Excluir", "Delete", routevalues)</li>
-                        }
-                    </ul>
-                </div>
-
+                @Html.ActionLink("Gerenciar", "Edit", new { @id = model.GetId() }, new { @class = "btn btn-default", @data_tigra = "modal" })
             </td>
         </tr>
             index++;

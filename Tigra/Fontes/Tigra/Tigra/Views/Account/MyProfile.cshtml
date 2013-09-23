@@ -13,7 +13,7 @@
 	<p>Preencha o seu perfil para que seus colegas saibam um pouco mais sobre você!</p>
 
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-md-4">
 			<p>
 				<label class="control-label">Foto de perfil:</label>
 				<img src="@Url.Content("~/Scripts/holder.js/160x200")" class="img-thumbnail" alt="Foto de perfil.">
@@ -21,7 +21,7 @@
 			<button class="btn btn-primary btn-block" style="width:160px" type="button" data-action="UploadPicture">Alterar</button>
 			<button class="btn btn-danger btn-block" style="width:160px" type="button" data-action="RemovePicture">Remover</button>
 		</div>
-		<div class="col-sm-8">
+		<div class="col-md-8">
 			@foreach (var property in Model.VisibleProperties())
 			{
 				using(Html.ControlGroupFor(property.Name))

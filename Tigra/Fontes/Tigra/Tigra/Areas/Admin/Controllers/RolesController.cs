@@ -14,18 +14,21 @@ namespace Tigra.Areas.Admin.Controllers
     public class RolesController : BootstrapBaseController
     {
 
+        [Authorize]
         public ActionResult Index()
         {
             var model = RoleModel.GetRoles();
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             var model = new RoleModel();
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Edit(int id)
         {
             using (var ctx = new Entities())
@@ -83,6 +86,7 @@ namespace Tigra.Areas.Admin.Controllers
             return false;
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Create(RoleModel model)
         {
@@ -106,6 +110,7 @@ namespace Tigra.Areas.Admin.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Edit(RoleModel model)
         {

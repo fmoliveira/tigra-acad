@@ -30,6 +30,17 @@ namespace Tigra.Areas.Admin.Models
             //
         }
 
+        public TeamsModel(int cellId)
+        {
+            using (var ctx = new Entities())
+            {
+                var item = ctx.Cells.FirstOrDefault(i => i.CellID == cellId);
+                this.Id = item.CellID;
+                this.CellName = item.CellName;
+                this.Members = TeamMember.GetTeamMembers(item.CellID);
+            }
+        }
+
         public TeamsModel(Cell item)
         {
             this.Id = item.CellID;
