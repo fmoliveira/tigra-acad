@@ -13,20 +13,28 @@ namespace Tigra.Controllers
     public class AccountController : BootstrapBaseController
     {
 
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Login()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToRoute("Default", new { @controller = "Home", @action = "Index" });
+            }
+            else
+            {
+                return RedirectToRoute("Error", new { @action = "Login" });
+            }
         }
 
         public ActionResult Register()
         {
-            AuthenticationModel model = new AuthenticationModel();
-            return View(model);
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToRoute("Default", new { @controller = "Home", @action = "Index" });
+            }
+            else
+            {
+                return RedirectToRoute("Error", new { @action = "Register" });
+            }
         }
 
         public ActionResult Confirm(string token)
@@ -46,14 +54,16 @@ namespace Tigra.Controllers
         public ActionResult Logout()
         {
             Authentication.Logout();
-            return Redirect(Request.UrlReferrer.AbsoluteUri);
+            return Redirect("~/");
         }
 
+        [Authorize]
         public ActionResult Profile(int id)
         {
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize]
         public ActionResult MyProfile()
         {
             using (var ctx = new Entities())

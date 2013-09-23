@@ -481,6 +481,7 @@
     <Content Include="Views\Stories\NewRequirement.cshtml" />
     <Content Include="Views\shared\ObjectDetails.cshtml" />
     <Content Include="Views\shared\ObjectCreate.cshtml" />
+    <Content Include="Views\Error\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

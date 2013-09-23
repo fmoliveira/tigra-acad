@@ -113,7 +113,7 @@ namespace BootstrapSupport
             }
             else
             {
-                return helper.ViewContext.Controller.ToString();
+                return null;
             }
         }
 
@@ -126,7 +126,7 @@ namespace BootstrapSupport
             }
             else
             {
-                return helper.ViewContext.Controller.ToString();
+                return null;
             }
         }
 

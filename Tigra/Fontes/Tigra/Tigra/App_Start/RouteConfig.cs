@@ -20,7 +20,7 @@ namespace Tigra
                 defaults: new { controller = "Home", action = "Details" },
                 constraints: new
                 {
-                    cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$",
+                    cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account|Error)).*$",
                     tag = "^(?!.*(?i:Index|Details|Create|Edit|Delete)).*$"
                 }
             );
@@ -32,7 +32,7 @@ namespace Tigra
                 defaults: new { controller = "Home", action = "Index" },
                 constraints: new
                 {
-                    cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account)).*$"
+                    cell = "^(?!.*(?i:Stories|Requirements|Revision|Baseline|Account|Error)).*$"
                 }
             );
 
@@ -59,6 +59,13 @@ namespace Tigra
                 name: "Admin",
                 url: "Admin/{controller}/{action}",
                 defaults: new { action = "Index" }
+            );
+
+            /* Error routing. */
+            routes.MapRoute(
+                name: "Error",
+                url: "Error/{action}",
+                defaults: new { controller = "Error" }
             );
         }
     }

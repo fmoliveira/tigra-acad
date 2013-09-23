@@ -14,5 +14,29 @@ namespace Tigra.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("~/");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Register()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Redirect("~/");
+            }
+            else
+            {
+                return View("Login");
+            }
+        }
+
     }
 }

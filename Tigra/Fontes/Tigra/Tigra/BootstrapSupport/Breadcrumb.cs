@@ -34,6 +34,7 @@ namespace Tigra.BootstrapSupport
                     this.mLevelsDicionary.Add("Edit", "Editar");
                     this.mLevelsDicionary.Add("History", "Histórico");
                     this.mLevelsDicionary.Add("Delete", "Excluir");
+                    this.mLevelsDicionary.Add("Error", "Erro");
                 }
 
                 return this.mLevelsDicionary;

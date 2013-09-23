@@ -102,8 +102,19 @@
 				}
 				else
 				{
-                    <h1>@Html.GetControllerDisplayName()</h1>
-                    <p>@Html.GetControllerDescription()</p>
+                    if (@Html.GetControllerDisplayName()!=null)
+                    {
+                        <h1>@Html.GetControllerDisplayName()</h1>
+                    }
+                    else
+                    {
+                        <h1>@ViewBag.Title</h1>
+                    }
+                    
+                    if (@Html.GetControllerDescription() != null)
+                    {
+                        <h1>@Html.GetControllerDescription()</h1>
+                    }
 				}
 			</div>
 	  

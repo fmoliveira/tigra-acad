@@ -14,6 +14,7 @@ namespace Tigra.Controllers
     public class StoriesController : BootstrapBaseController
     {
 
+        [Authorize]
         public ActionResult Index()
         {
             var cell = RouteData.Values["cell"];
@@ -21,6 +22,7 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Details(string tag)
         {
             using (var ctx = new Entities())
@@ -31,6 +33,7 @@ namespace Tigra.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult NewRequirement(string tag)
         {
             using (var ctx = new Entities())
@@ -41,6 +44,7 @@ namespace Tigra.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult NewRequirement(RequirementCreateModel model)
@@ -72,12 +76,14 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             var model = new StoriesCreateModel();
             return View(model);
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create(StoriesCreateModel model)
@@ -109,6 +115,7 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
         public ActionResult Edit(string tag)
         {
             using (var ctx = new Entities())
@@ -119,6 +126,7 @@ namespace Tigra.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Edit(StoriesCreateModel model)
@@ -150,6 +158,7 @@ namespace Tigra.Controllers
             return View("Create", model);
         }
 
+        [Authorize]
         public ActionResult History(string tag)
         {
             var model = StoriesHistoryModel.GetModels(tag);
