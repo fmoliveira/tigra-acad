@@ -11,7 +11,7 @@ namespace SetBuildNumber
 {
     class Program
     {
-        private static int Count = 0;
+        private static int Count = 1;
 
         static void Main(string[] args)
         {
