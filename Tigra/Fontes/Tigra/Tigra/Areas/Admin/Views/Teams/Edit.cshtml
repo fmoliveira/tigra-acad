@@ -1,5 +1,5 @@
 ﻿@using BootstrapSupport
-@model Tigra.Areas.Admin.Models.TeamsModel
+@model Tigra.Areas.Admin.Models.TeamModel
 
 @{
 	Layout = null;
@@ -14,7 +14,7 @@
 
 	<div class="row">
         <div class="col-md-12">
-            <div class="list-group">
+            <div id="userlist" class="list-group">
                 @foreach (var m in Model.Members)
                 {
                     <a id="user_@m.Id" class="list-group-item" style="cursor:pointer">
@@ -25,6 +25,12 @@
                         <p class="list-group-item-text">@Html.Raw(m.RoleName)</p>
                     </a>
                 }
+                <a class="list-group-item" style="cursor:pointer;text-align:center">
+                    <span class="input-group">
+                        <b class="input-group-addon glyphicon glyphicon-user"></b>
+                        <input type="text" class="form-control" placeholder="Usuário" />
+                    </span>
+                </a>
                 <a data-action="NewUser" class="list-group-item" style="cursor:pointer;text-align:center">
                     <p>
                         <b class="glyphicon glyphicon-plus"></b><br />
@@ -41,7 +47,7 @@
 </div>
 
 <script type="text/javascript">
-    $('a[data-action="NewUser"]').click(function () {
+    $('div#userlist > a[data-action="NewUser"]').click(function () {
         //
     });
 </script>

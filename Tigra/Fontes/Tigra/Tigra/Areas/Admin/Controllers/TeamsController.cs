@@ -16,7 +16,7 @@ namespace Tigra.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var model = TeamsModel.GetTeams();
+            var model = TeamModel.GetTeams();
             return View(model);
         }
 
@@ -24,7 +24,7 @@ namespace Tigra.Areas.Admin.Controllers
         {
             using(var ctx= new Entities())
             {
-                var model = new TeamsModel(id);
+                var model = TeamModel.GetTeam(id);
                 return View(model);
             }
         }

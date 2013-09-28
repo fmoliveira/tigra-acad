@@ -127,6 +127,7 @@
     <Compile Include="Api\SaveProfileController.cs" />
     <Compile Include="Api\RegisterController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Models\TeamUser.cs" />
     <Compile Include="BootstrapSupport\AutoFocusAttribute.cs" />
     <Compile Include="BootstrapSupport\Breadcrumb.cs" />
     <Compile Include="BootstrapSupport\ControlGroupExtensions.cs" />
@@ -220,7 +221,7 @@
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Common\RevisionStatus.cs" />
     <Compile Include="Areas\Admin\Models\TeamMember.cs" />
-    <Compile Include="Areas\Admin\Models\TeamsModel.cs" />
+    <Compile Include="Areas\Admin\Models\TeamModel.cs" />
     <Compile Include="Models\MyProfileModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleModel.cs" />
     <Compile Include="Models\UserNameModel.cs" />
