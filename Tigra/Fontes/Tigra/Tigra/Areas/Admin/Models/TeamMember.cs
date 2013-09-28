@@ -13,12 +13,15 @@ namespace Tigra.Areas.Admin.Models
 
         public string DisplayName { get; set; }
 
+        public int RoleId { get; set; }
+
         public string RoleName { get; set; }
 
         public TeamMember(Team item)
         {
             this.Id = item.UserID;
             this.DisplayName = item.UserAccount.GetDisplayName();
+            this.RoleId = item.RoleID;
             this.RoleName = item.Role.RoleName;
         }
 

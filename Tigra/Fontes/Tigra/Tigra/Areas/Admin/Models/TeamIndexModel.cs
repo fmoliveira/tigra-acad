@@ -10,7 +10,7 @@ using Tigra.Database;
 namespace Tigra.Areas.Admin.Models
 {
     [DisplayName("Equipes")]
-    public class TeamModel
+    public class TeamIndexModel
     {
 
         [Required]
@@ -25,35 +25,25 @@ namespace Tigra.Areas.Admin.Models
         [UIHint("List_TeamMember")]
         public List<TeamMember> Members { get; set; }
 
-        public TeamModel()
+        public TeamIndexModel()
         {
             //
         }
 
-        public TeamModel(Cell item)
+        public TeamIndexModel(Cell item)
         {
             this.Id = item.CellID;
             this.CellName = item.CellName;
             this.Members = TeamMember.GetTeamMembers(item.CellID);
         }
 
-        public static TeamModel GetTeam(int cellId)
-        {
-            using (var ctx = new Entities())
-            {
-                var item = ctx.Cells.FirstOrDefault(i => i.CellID == cellId);
-                var model = new TeamModel(item);
-                return model;
-            }
-        }
-
-        public static List<TeamModel> GetTeams()
+        public static List<TeamIndexModel> GetTeams()
         {
             using (var ctx = new Entities())
             {
                 var list = (from i in ctx.Cells orderby i.CellName ascending select i).ToList();
-                var model = new List<TeamModel>();
-                list.ForEach(i => model.Add(new TeamModel(i)));
+                var model = new List<TeamIndexModel>();
+                list.ForEach(i => model.Add(new TeamIndexModel(i)));
                 return model;
             }
         }

@@ -1,0 +1,140 @@
+﻿@using BootstrapSupport
+@model Tigra.Areas.Admin.Models.TeamManageModel
+
+@{
+    ViewBag.Title = @Model.CellName;
+}
+
+
+<table class="table table-striped">
+    <caption></caption>
+    <thead>
+        <tr>
+            <th>Membro</th>
+            <th>Papel</th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var m in Model.Members)
+    {
+        <tr id="user_@m.Id">
+            <td data-field="name">@m.DisplayName</td>
+            <td data-field="role" data-curid="@m.RoleId"><span>@m.RoleName</span></td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="./">
+                        Ação
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        @{
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="./">Alterar papel</a>
+                                <ul class="dropdown-menu">
+                                    @foreach (var role in Model.Roles)
+                                    {
+                                        <li class="@(m.RoleId == role.Id ? "active" : null)">@Html.ActionLink(@role.RoleName, "ChangeRole", null, new { @data_roleid = @role.Id, @data_rolename = @role.RoleName })</li>
+                                    }
+                                </ul>
+                            </li>
+                            <li>@Html.ActionLink("Remover membro", "Delete")</li>
+                        }
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+<p>
+    @Html.SubmitButton()
+    @Html.CancelButton()
+</p>
+
+@section Scripts {
+<script type="text/javascript">
+    $().ready(function () {
+        $("tr[id^='user_'] .dropdown-menu a").click(function () {
+            $(this).dropdown('toggle');
+
+            var $tr = $(this);
+            while ($tr.get(0).tagName != 'TR') {
+                $tr = $tr.parent();
+            }
+
+            var re = new RegExp(".*\/Teams\/([a-zA-Z]+)\/*$");
+            var match = re.exec($(this).attr('href'));
+            
+            if (match != null) {
+                var action = match[1].toUpperCase();
+
+                switch (action) {
+                    case "CHANGEROLE":
+                        var $newid = $(this).data('roleid');
+                        var $newname = $(this).data('rolename');
+                        var $role = $tr.find('td[data-field=role]');
+                        var $curid = $role.data('curid');
+
+                        if ($newid != $curid) {
+                            var $curobj = $role.find('span');
+
+                            if ($curobj != null) {
+                                $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
+                                $role.find('ins').remove();
+                                $role.find('del').after('<ins>' + $newname + '</ins>');
+                            }
+                        }
+                        else {
+                            var $curobj = $role.find('del');
+
+                            if ($curobj != null) {
+                                $role.find('ins').remove();
+                                $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
+                            }
+                        }
+
+                        break;
+
+                    case "DELETE":
+                        var $name = $tr.find('td[data-field=name]');
+                        var $nmobj = $name.find('del');
+                        if ($nmobj.length == 0) {
+                            $name.html('<del>' + $name.html() + '</del>');
+                        }
+
+                        var $role = $tr.find('td[data-field=role]');
+
+                        var $curobj = $role.find('span');
+                        if ($curobj != null) {
+                            $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
+                        }
+
+                        $(this).attr('href', $(this).attr('href').replace('Delete', 'Restore'));
+                        $(this).html('Restaurar membro');
+                        break;
+
+                    case "RESTORE":
+                        var $name = $tr.find('td[data-field=name]');
+                        var $nmobj = $name.find('del');
+                        if ($nmobj.length != 0) {
+                            $name.html($nmobj.html());
+                        }
+
+                        var $role = $tr.find('td[data-field=role]');
+
+                        var $curobj = $role.find('del');
+                        if ($curobj != null) {
+                            $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
+                        }
+
+                        $(this).attr('href', $(this).attr('href').replace('Restore', 'Delete'));
+                        $(this).html('Remover membro');
+                        break;
+                }
+            }
+
+            return false;
+        });
+    });
+</script>
+}

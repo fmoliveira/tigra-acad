@@ -127,6 +127,7 @@
     <Compile Include="Api\SaveProfileController.cs" />
     <Compile Include="Api\RegisterController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Models\TeamManageModel.cs" />
     <Compile Include="Areas\Admin\Models\TeamUser.cs" />
     <Compile Include="BootstrapSupport\AutoFocusAttribute.cs" />
     <Compile Include="BootstrapSupport\Breadcrumb.cs" />
@@ -221,7 +222,7 @@
     <Compile Include="Models\HomeModel.cs" />
     <Compile Include="Common\RevisionStatus.cs" />
     <Compile Include="Areas\Admin\Models\TeamMember.cs" />
-    <Compile Include="Areas\Admin\Models\TeamModel.cs" />
+    <Compile Include="Areas\Admin\Models\TeamIndexModel.cs" />
     <Compile Include="Models\MyProfileModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleModel.cs" />
     <Compile Include="Models\UserNameModel.cs" />
@@ -426,7 +427,7 @@
       <LastGenOutput>TigraDatabase.cs</LastGenOutput>
     </Content>
     <Content Include="Areas\Admin\Views\Teams\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Teams\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Teams\Manage.cshtml" />
     <None Include="Properties\PublishProfiles\Cloud.pubxml" />
     <None Include="Properties\PublishProfiles\File System.pubxml" />
     <None Include="scripts\jquery-1.9.1.intellisense.js" />

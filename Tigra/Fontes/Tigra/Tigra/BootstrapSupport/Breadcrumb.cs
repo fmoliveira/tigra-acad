@@ -32,6 +32,7 @@ namespace Tigra.BootstrapSupport
                     this.mLevelsDicionary.Add("Create", "Criar novo");
                     this.mLevelsDicionary.Add("NewRequirement", "Criar novo requisito");
                     this.mLevelsDicionary.Add("Edit", "Editar");
+                    this.mLevelsDicionary.Add("Manage", "Gerenciar");
                     this.mLevelsDicionary.Add("History", "Histórico");
                     this.mLevelsDicionary.Add("Delete", "Excluir");
                     this.mLevelsDicionary.Add("Error", "Erro");

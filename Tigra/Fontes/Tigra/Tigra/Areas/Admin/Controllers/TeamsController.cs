@@ -16,15 +16,15 @@ namespace Tigra.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var model = TeamModel.GetTeams();
+            var model = TeamIndexModel.GetTeams();
             return View(model);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Manage(int id)
         {
             using(var ctx= new Entities())
             {
-                var model = TeamModel.GetTeam(id);
+                var model = TeamManageModel.GetTeam(id);
                 return View(model);
             }
         }
