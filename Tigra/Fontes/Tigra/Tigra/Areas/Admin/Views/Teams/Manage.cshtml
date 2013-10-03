@@ -44,11 +44,24 @@
             </td>
         </tr>
     }
+    <tr id="newuser" style="display:none">
+        <td data-field="name">
+            @Html.EditorFor(m => m.Members)
+        </td>
+        <td data-field="role">
+            @Html.EditorFor(m => m.Roles)
+        </td>
+        <td>
+            <button class="btn btn-primary" data-action="Add">Adicionar</button>
+            <button class="btn btn-default" data-action="Cancel">Cancelar</button>
+        </td>
+    </tr>
 
 </table>
-<p>
+<p id="footer-button-bar">
     @Html.SubmitButton()
     @Html.CancelButton()
+    <a href="./Add" data-action="AddTeamMember" class="btn btn-info btn-lg pull-right glyphicon glyphicon-plus"></a>
 </p>
 
 @section Scripts {
@@ -93,6 +106,9 @@
                             }
                         }
 
+                        $tr.find('ul.dropdown-menu li.active').removeClass('active');
+                        $(this).parent().addClass('active');
+
                         break;
 
                     case "DELETE":
@@ -134,6 +150,20 @@
             }
 
             return false;
+        });
+
+        $('a[data-action="AddTeamMember"]').click(function () {
+            $('tr#newuser').show();
+            $('p#footer-button-bar').hide();
+            return false;
+        });
+
+        $('tr#newuser button[data-action="Add"]').click(function () {
+        });
+
+        $('tr#newuser button[data-action="Cancel"]').click(function () {
+            $('tr#newuser').hide();
+            $('p#footer-button-bar').show();
         });
     });
 </script>
