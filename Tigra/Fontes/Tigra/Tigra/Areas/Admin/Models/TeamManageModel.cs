@@ -26,8 +26,15 @@ namespace Tigra.Areas.Admin.Models
         public List<TeamMember> Members { get; set; }
 
         [DisplayName("Papel")]
-        [UIHint("Choice_Roles")]
         public List<RoleModel> Roles { get; set; }
+
+        [DisplayName("Membro")]
+        [UIHint("Choice_Members")]
+        public string NewMember { get; set; }
+
+        [DisplayName("Papel")]
+        [UIHint("Choice_Roles")]
+        public string NewRole { get; set; }
 
         public TeamManageModel()
         {

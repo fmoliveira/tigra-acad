@@ -27,6 +27,12 @@ namespace Tigra.Common
             this.Selected = selected;
         }
 
+        public Choice(Dictionary<int, string> options)
+        {
+            this.Options = new Dictionary<string, string>();
+            options.ToList().ForEach(i => this.Options.Add(i.Key.ToString(), i.Value));
+        }
+
         public SelectList GetSelectList()
         {
             return new SelectList(this.Options, "Key", "Value", this.Selected);
