@@ -7,6 +7,7 @@ GO
 CREATE PROCEDURE [Tigra].[GetRequirementsIndex]
 (
 	@CellID INT,
+	@ReqTypeID SMALLINT,
 	@BaselineDate DATETIME2 = NULL
 )
 AS
@@ -32,7 +33,7 @@ BEGIN
 		SElECT r.[RequirementID], MAX(v.[RevisionNumber]) AS [RevisionNumber]
 		FROM [Tigra].[Requirements] AS r
 			INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.RequirementID = r.RequirementID
-		WHERE r.[CellID] = @CellID AND v.[RevisionDate] <= @BaselineDate
+		WHERE r.[CellID] = @CellID AND r.ReqType = @ReqTypeID AND v.[RevisionDate] <= @BaselineDate
 		GROUP BY r.RequirementID
 	)
 	SELECT r.[RequirementID], r.[RevisionNumber], v.[RevisionDate], v.[UserID], v.[Tag], v.[Title]

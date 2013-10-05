@@ -38,7 +38,7 @@ namespace Tigra.Models
             using (var ctx = new Entities())
             {
                 int parent = ctx.GetCellID(cell);
-                var list = ctx.GetRequirementsIndex(parent, null).ToList();
+                var list = ctx.GetRequirementsIndex(parent, RequirementTypes.Story, null).ToList();
                 list.ForEach(i => ret.Add(new StoriesIndexModel(i)));
             }
 

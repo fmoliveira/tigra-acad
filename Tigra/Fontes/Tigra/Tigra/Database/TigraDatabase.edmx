@@ -234,6 +234,7 @@
         </Function>
         <Function Name="GetRequirementsIndex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="CellID" Type="int" Mode="In" />
+          <Parameter Name="ReqTypeID" Type="smallint" Mode="In" />
           <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
         </Function>
         <Function Name="SaveRequirement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
@@ -345,10 +346,6 @@
             <End Role="UserAccount" EntitySet="UserAccounts" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
-          <FunctionImport Name="GetRequirementsIndex" ReturnType="Collection(TigraModel.GetRequirementsIndex_Result)">
-            <Parameter Name="CellID" Mode="In" Type="Int32" />
-            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="GetRequirementDetails" ReturnType="Collection(TigraModel.GetRequirementDetails_Result)">
             <Parameter Name="Tag" Mode="In" Type="String" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
@@ -376,6 +373,11 @@
             <Parameter Name="Title" Mode="In" Type="String" />
             <Parameter Name="Text" Mode="In" Type="String" />
             <Parameter Name="StoryID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="GetRequirementsIndex" ReturnType="Collection(TigraModel.GetRequirementsIndex_Result)">
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
+            <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Baseline">
@@ -578,14 +580,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetRequirementsIndex_Result">
-          <Property Type="Int32" Name="RequirementID" Nullable="false" />
-          <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
-          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="GetRequirementDetails_Result">
           <Property Type="Int16" Name="ReqType" Nullable="false" />
           <Property Type="Int64" Name="RevisionID" Nullable="false" />
@@ -619,6 +613,14 @@
           <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="*" />
           <End Type="TigraModel.RequirementRevision" Role="RequirementRevision1" Multiplicity="*" />
         </Association>
+        <ComplexType Name="GetRequirementsIndex_Result">
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -719,18 +721,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetRequirementsIndex" FunctionName="TigraModel.Store.GetRequirementsIndex">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TigraModel.GetRequirementsIndex_Result">
-                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
-                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetRequirementDetails" FunctionName="TigraModel.Store.GetRequirementDetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TigraModel.GetRequirementDetails_Result">
@@ -781,6 +771,18 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="SaveRequirement" FunctionName="TigraModel.Store.SaveRequirement" />
+          <FunctionImportMapping FunctionImportName="GetRequirementsIndex" FunctionName="TigraModel.Store.GetRequirementsIndex">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetRequirementsIndex_Result">
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

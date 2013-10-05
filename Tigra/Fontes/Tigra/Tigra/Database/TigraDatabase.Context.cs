@@ -38,19 +38,6 @@ namespace Tigra.Database
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
     
-        public virtual ObjectResult<GetRequirementsIndex_Result> GetRequirementsIndex(Nullable<int> cellID, Nullable<System.DateTime> baselineDate)
-        {
-            var cellIDParameter = cellID.HasValue ?
-                new ObjectParameter("CellID", cellID) :
-                new ObjectParameter("CellID", typeof(int));
-    
-            var baselineDateParameter = baselineDate.HasValue ?
-                new ObjectParameter("BaselineDate", baselineDate) :
-                new ObjectParameter("BaselineDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementsIndex_Result>("GetRequirementsIndex", cellIDParameter, baselineDateParameter);
-        }
-    
         public virtual ObjectResult<GetRequirementDetails_Result> GetRequirementDetails(string tag, Nullable<System.DateTime> baselineDate)
         {
             var tagParameter = tag != null ?
@@ -133,6 +120,23 @@ namespace Tigra.Database
                 new ObjectParameter("StoryID", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SaveRequirement", reqTypeIDParameter, cellIDParameter, revisionIDParameter, userIDParameter, messageParameter, tagParameter, titleParameter, textParameter, storyIDParameter);
+        }
+    
+        public virtual ObjectResult<GetRequirementsIndex_Result> GetRequirementsIndex(Nullable<int> cellID, Nullable<short> reqTypeID, Nullable<System.DateTime> baselineDate)
+        {
+            var cellIDParameter = cellID.HasValue ?
+                new ObjectParameter("CellID", cellID) :
+                new ObjectParameter("CellID", typeof(int));
+    
+            var reqTypeIDParameter = reqTypeID.HasValue ?
+                new ObjectParameter("ReqTypeID", reqTypeID) :
+                new ObjectParameter("ReqTypeID", typeof(short));
+    
+            var baselineDateParameter = baselineDate.HasValue ?
+                new ObjectParameter("BaselineDate", baselineDate) :
+                new ObjectParameter("BaselineDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementsIndex_Result>("GetRequirementsIndex", cellIDParameter, reqTypeIDParameter, baselineDateParameter);
         }
     }
 }
