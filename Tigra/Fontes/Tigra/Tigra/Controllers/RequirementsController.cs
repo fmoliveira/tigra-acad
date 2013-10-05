@@ -10,7 +10,7 @@ using Tigra.Models;
 
 namespace Tigra.Controllers
 {
-    [DisplayName("Requisitos"), Description("O documento de requisitos de software é a declaração oficial do que os desenvolvedores de sistema devem implementar. Deve incluir os requisitos de usuário de um sistema e uma especificação detalhada dos requisitos do sistema.")]
+    [DisplayName("Requisitos"), Description("O documento de requisitos de software é a declaração oficial do que os desenvolvedores de sistema devem implementar. Deve incluir os requisitos de usuário de um sistema e uma especificação detalhada dos requisitos do sistema. (Sommerville)")]
     public class RequirementsController : BootstrapBaseController
     {
 
