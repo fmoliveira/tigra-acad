@@ -6,7 +6,7 @@
 }
 
 
-<table class="table table-striped">
+<table id="TeamManage" class="table table-striped">
     <caption></caption>
     <thead>
         <tr>
@@ -19,7 +19,7 @@
     {
         <tr id="user_@m.Id">
             <td data-field="name">@m.DisplayName</td>
-            <td data-field="role" data-curid="@m.RoleId"><span>@m.RoleName</span></td>
+            <td data-field="role">@m.RoleName</td>
             <td>
                 <div class="btn-group">
                     <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="./">
@@ -59,9 +59,8 @@
 
 </table>
 <p id="footer-button-bar">
-    @Html.SubmitButton()
-    @Html.CancelButton()
-    <a href="./Add" data-action="AddTeamMember" class="btn btn-info btn-lg pull-right glyphicon glyphicon-plus"></a>
+    <a href="./Add" data-action="AddTeamMember" class="btn btn-primary btn-lg">Adicionar</a>
+    @Html.CancelButton("Voltar")
 </p>
 
 @section Scripts {
@@ -81,72 +80,72 @@
             if (match != null) {
                 var action = match[1].toUpperCase();
 
-                switch (action) {
-                    case "CHANGEROLE":
-                        var $newid = $(this).data('roleid');
-                        var $newname = $(this).data('rolename');
-                        var $role = $tr.find('td[data-field=role]');
-                        var $curid = $role.data('curid');
+                //switch (action) {
+                //    case "CHANGEROLE":
+                //        var $newid = $(this).data('roleid');
+                //        var $newname = $(this).data('rolename');
+                //        var $role = $tr.find('td[data-field=role]');
+                //        var $curid = $role.data('curid');
 
-                        if ($newid != $curid) {
-                            var $curobj = $role.find('span');
+                //        if ($newid != $curid) {
+                //            var $curobj = $role.find('span');
 
-                            if ($curobj != null) {
-                                $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
-                                $role.find('ins').remove();
-                                $role.find('del').after('<ins>' + $newname + '</ins>');
-                            }
-                        }
-                        else {
-                            var $curobj = $role.find('del');
+                //            if ($curobj != null) {
+                //                $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
+                //                $role.find('ins').remove();
+                //                $role.find('del').after('<ins>' + $newname + '</ins>');
+                //            }
+                //        }
+                //        else {
+                //            var $curobj = $role.find('del');
 
-                            if ($curobj != null) {
-                                $role.find('ins').remove();
-                                $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
-                            }
-                        }
+                //            if ($curobj != null) {
+                //                $role.find('ins').remove();
+                //                $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
+                //            }
+                //        }
 
-                        $tr.find('ul.dropdown-menu li.active').removeClass('active');
-                        $(this).parent().addClass('active');
+                //        $tr.find('ul.dropdown-menu li.active').removeClass('active');
+                //        $(this).parent().addClass('active');
 
-                        break;
+                //        break;
 
-                    case "DELETE":
-                        var $name = $tr.find('td[data-field=name]');
-                        var $nmobj = $name.find('del');
-                        if ($nmobj.length == 0) {
-                            $name.html('<del>' + $name.html() + '</del>');
-                        }
+                //    case "DELETE":
+                //        var $name = $tr.find('td[data-field=name]');
+                //        var $nmobj = $name.find('del');
+                //        if ($nmobj.length == 0) {
+                //            $name.html('<del>' + $name.html() + '</del>');
+                //        }
 
-                        var $role = $tr.find('td[data-field=role]');
+                //        var $role = $tr.find('td[data-field=role]');
 
-                        var $curobj = $role.find('span');
-                        if ($curobj != null) {
-                            $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
-                        }
+                //        var $curobj = $role.find('span');
+                //        if ($curobj != null) {
+                //            $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
+                //        }
 
-                        $(this).attr('href', $(this).attr('href').replace('Delete', 'Restore'));
-                        $(this).html('Restaurar membro');
-                        break;
+                //        $(this).attr('href', $(this).attr('href').replace('Delete', 'Restore'));
+                //        $(this).html('Restaurar membro');
+                //        break;
 
-                    case "RESTORE":
-                        var $name = $tr.find('td[data-field=name]');
-                        var $nmobj = $name.find('del');
-                        if ($nmobj.length != 0) {
-                            $name.html($nmobj.html());
-                        }
+                //    case "RESTORE":
+                //        var $name = $tr.find('td[data-field=name]');
+                //        var $nmobj = $name.find('del');
+                //        if ($nmobj.length != 0) {
+                //            $name.html($nmobj.html());
+                //        }
 
-                        var $role = $tr.find('td[data-field=role]');
+                //        var $role = $tr.find('td[data-field=role]');
 
-                        var $curobj = $role.find('del');
-                        if ($curobj != null) {
-                            $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
-                        }
+                //        var $curobj = $role.find('del');
+                //        if ($curobj != null) {
+                //            $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
+                //        }
 
-                        $(this).attr('href', $(this).attr('href').replace('Restore', 'Delete'));
-                        $(this).html('Remover membro');
-                        break;
-                }
+                //        $(this).attr('href', $(this).attr('href').replace('Restore', 'Delete'));
+                //        $(this).html('Remover membro');
+                //        break;
+                //}
             }
 
             return false;
@@ -159,6 +158,39 @@
         });
 
         $('tr#newuser button[data-action="Add"]').click(function () {
+            var $data = JSON.stringify({
+                "UserId": $('select#NewMember').val(),
+                "CellId": "@Model.Id",
+                "RoleId": $('select#NewRole').val()
+            });
+
+            $.ajax({
+                url: $('body').data('api') + 'TeamManage',
+                type: 'POST',
+                dataType: 'json',
+                data: $data,
+                contentType: 'application/json; charset=utf-8',
+                complete: function (x, y, z) {
+                    switch (x.status) {
+                        case 200:
+                            // swap role name
+                            $('tr#user_' + $('select#NewMember').val() + ' td[data-field="role"]').html($('select#NewRole option:selected').text());
+                            break;
+
+                        case 201:
+                            location.reload();
+                            break;
+
+                        case 500:
+                            alert('Erro no servidor!');
+                            break;
+
+                        default:
+                            alert('Erro inesperado (código ' + x.status + ')!');
+                            break;
+                    }
+                }
+            });
         });
 
         $('tr#newuser button[data-action="Cancel"]').click(function () {
