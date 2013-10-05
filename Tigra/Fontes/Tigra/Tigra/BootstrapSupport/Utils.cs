@@ -63,9 +63,9 @@ namespace BootstrapSupport
         /// <param name="helper"></param>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static MvcHtmlString CancelButton(this HtmlHelper helper, string label = "Cancelar")
+        public static MvcHtmlString CancelButton(this HtmlHelper helper, string label = "Cancelar", string action = "Details")
         {
-            return ActionButton(helper, label, "default", "Details");
+            return ActionButton(helper, label, "default", action);
         }
 
         private static MenuArea _menuArea = null;

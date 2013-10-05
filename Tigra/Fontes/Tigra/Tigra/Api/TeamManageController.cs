@@ -48,16 +48,36 @@ namespace Tigra.Api
                 }
                 else
                 {
-                    return new HttpResponseMessage(HttpStatusCode.Gone);
+                    return new HttpResponseMessage(HttpStatusCode.InternalServerError);
                 }
             }
-
-            return new HttpResponseMessage(HttpStatusCode.InternalServerError);
         }
 
         // DELETE api/teammanage/5
-        public void Delete(int id)
+        public HttpResponseMessage Delete(TeamMemberModel value)
         {
+            using (var ctx = new Entities())
+            {
+                Team t = ctx.Teams.FirstOrDefault(i => i.CellID == value.CellId && i.UserID == value.UserId);
+
+                if (t != null)
+                {
+                    ctx.Teams.Remove(t);
+
+                    if (ctx.SaveChanges() != 0)
+                    {
+                        return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                    else
+                    {
+                        return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+                    }
+                }
+                else
+                {
+                    return new HttpResponseMessage(HttpStatusCode.NotFound);
+                }
+            }
         }
     }
 }

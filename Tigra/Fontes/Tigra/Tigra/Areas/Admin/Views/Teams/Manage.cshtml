@@ -60,7 +60,7 @@
 </table>
 <p id="footer-button-bar">
     <a href="./Add" data-action="AddTeamMember" class="btn btn-primary btn-lg">Adicionar</a>
-    @Html.CancelButton("Voltar")
+    @Html.CancelButton("Voltar", "Index")
 </p>
 
 @section Scripts {
@@ -123,9 +123,34 @@
                         break;
 
                     case "DELETE":
-                        break;
+                        var $data = JSON.stringify({
+                            "UserId": $tr.data('userid'),
+                            "CellId": "@Model.Id",
+                            "RoleId": 0
+                        });
 
-                    case "RESTORE":
+                        $.ajax({
+                            url: $('body').data('api') + 'TeamManage',
+                            type: 'DELETE',
+                            dataType: 'json',
+                            data: $data,
+                            contentType: 'application/json; charset=utf-8',
+                            complete: function (x, y, z) {
+                                switch (x.status) {
+                                    case 200:
+                                        location.reload();
+                                        break;
+
+                                    case 500:
+                                        alert('Erro no servidor!');
+                                        break;
+
+                                    default:
+                                        alert('Erro inesperado (código ' + x.status + ')!');
+                                        break;
+                                }
+                            }
+                        });
                         break;
                 }
             }
