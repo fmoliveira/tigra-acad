@@ -214,6 +214,7 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
+    <Compile Include="Models\RequirementsDetailsModel.cs" />
     <Compile Include="Models\RequirementsIndexModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\NewRequirementModel.cs" />
@@ -492,6 +493,8 @@
     <Content Include="Views\Error\Login.cshtml" />
     <Content Include="Views\shared\EditorTemplates\Choice_Roles.cshtml" />
     <Content Include="Views\shared\EditorTemplates\Choice_Members.cshtml" />
+    <Content Include="Views\Requirements\Details.cshtml" />
+    <Content Include="Views\Requirements\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

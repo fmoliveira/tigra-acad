@@ -10,7 +10,7 @@ using Tigra.Models;
 
 namespace Tigra.Controllers
 {
-    [DisplayName("Histórias"), Description("As histórias descrevem a necessidade do cliente. A partir da história, serão definidos os requisitos que nós implementaremos para atender a necessidade descrita na história. Cada detalhe informado pelo cliente é relevante nestes tópicos.")]
+    [DisplayName("Histórias"), Description("As histórias descrevem a necessidade do cliente. A partir da história, serão definidos os requisitos que deverão ser implementados pelos desenvolvedores de sistema para satisfazer as necessidades declaradas na história. Cada detalhe informado pelo cliente é relevante nestes tópicos.")]
     public class StoriesController : BootstrapBaseController
     {
 

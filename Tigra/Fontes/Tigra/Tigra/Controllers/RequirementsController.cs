@@ -22,5 +22,16 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult Details(string tag)
+        {
+            using (var ctx = new Entities())
+            {
+                RequirementsDetailsModel model = new RequirementsDetailsModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
+                RouteData.Values["title"] = model.Summary;
+                return View(model);
+            }
+        }
+
     }
 }

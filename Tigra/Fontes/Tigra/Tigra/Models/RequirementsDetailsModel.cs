@@ -9,7 +9,7 @@ using Tigra.Database;
 
 namespace Tigra.Models
 {
-    public class StoriesDetailsModel
+    public class RequirementsDetailsModel
     {
         
         [Required]
@@ -37,12 +37,12 @@ namespace Tigra.Models
         [Required]
         public string Text { get; set; }
 
-        public StoriesDetailsModel()
+        public RequirementsDetailsModel()
         {
             //
         }
 
-        public StoriesDetailsModel(GetRequirementDetails_Result item)
+        public RequirementsDetailsModel(GetRequirementDetails_Result item)
         {
             this.Id = item.Tag;
             this.RevisionId = item.RevisionID;
@@ -53,7 +53,7 @@ namespace Tigra.Models
             this.Text = item.Text;
         }
 
-        public StoriesDetailsModel(RequirementCreateModel req)
+        public RequirementsDetailsModel(RequirementCreateModel req)
         {
             using (var ctx = new Entities())
             {

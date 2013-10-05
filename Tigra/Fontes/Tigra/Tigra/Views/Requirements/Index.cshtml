@@ -1,0 +1,49 @@
+@using BootstrapSupport
+@model System.Collections.IEnumerable
+
+<table class="table table-striped">
+    <caption></caption>
+    <thead>
+        <tr>
+            @foreach (var property in Model.VisibleProperties())
+            {
+                <th>
+                    @property.GetLabel()
+                </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    @{ int index = 0; }
+    @foreach (var model in Model)
+    {
+        ViewData[index.ToString()] = model;
+        <tr>
+            @foreach (var property in model.VisibleProperties())
+            {
+                <td>
+                    @Html.Display(index + "." + property.Name)
+                </td>                    
+            }
+            <td>
+                <div class="btn-group">
+
+                    @{
+                        var routevalues = new { @tag = model.GetId() };
+                        <a class="btn btn-default" href="@Url.Action("Details", routevalues)">Visualizar</a>
+                    }
+
+                    <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Histórico", "History", routevalues)</li>
+                    </ul>
+                </div>
+
+            </td>
+        </tr>
+            index++;
+    }
+
+</table>
