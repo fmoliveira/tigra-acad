@@ -146,6 +146,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CellsController.cs" />
+    <Compile Include="Controllers\RequirementsController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
+    <Compile Include="Models\RequirementsIndexModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
     <Compile Include="Models\NewRequirementModel.cs" />
     <Compile Include="Models\RequirementCreateModel.cs" />
