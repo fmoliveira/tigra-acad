@@ -17,7 +17,7 @@
     </thead>
     @foreach (var m in Model.Members)
     {
-        <tr id="user_@m.Id">
+        <tr id="user_@m.Id" data-userid="@m.Id">
             <td data-field="name">@m.DisplayName</td>
             <td data-field="role">@m.RoleName</td>
             <td>
@@ -33,7 +33,7 @@
                                 <ul class="dropdown-menu">
                                     @foreach (var role in Model.Roles)
                                     {
-                                        <li class="@(m.RoleId == role.Id ? "active" : null)">@Html.ActionLink(@role.RoleName, "ChangeRole", null, new { @data_roleid = @role.Id, @data_rolename = @role.RoleName })</li>
+                                        <li class="@(m.RoleId == role.Id ? "active" : null)" data-roleid="@role.Id">@Html.ActionLink(@role.RoleName, "ChangeRole", null, new { @data_roleid = @role.Id, @data_rolename = @role.RoleName })</li>
                                     }
                                 </ul>
                             </li>
@@ -65,6 +65,43 @@
 
 @section Scripts {
 <script type="text/javascript">
+    function SaveTeamMember(userId, roleId, roleName) {
+        var $data = JSON.stringify({
+            "UserId": userId,
+            "CellId": "@Model.Id",
+            "RoleId": roleId
+        });
+
+        $.ajax({
+            url: $('body').data('api') + 'TeamManage',
+            type: 'POST',
+            dataType: 'json',
+            data: $data,
+            contentType: 'application/json; charset=utf-8',
+            complete: function (x, y, z) {
+                switch (x.status) {
+                    case 200:
+                        $('tr#user_' + userId + ' td[data-field="role"]').html(roleName);
+                        $('tr#user_' + userId + ' ul.dropdown-menu li.active').removeClass('active');
+                        $('tr#user_' + userId + ' ul.dropdown-menu li[data-roleid="' + roleId + '"]').addClass('active');
+                        break;
+
+                    case 201:
+                        location.reload();
+                        break;
+
+                    case 500:
+                        alert('Erro no servidor!');
+                        break;
+
+                    default:
+                        alert('Erro inesperado (código ' + x.status + ')!');
+                        break;
+                }
+            }
+        });
+    }
+
     $().ready(function () {
         $("tr[id^='user_'] .dropdown-menu a").click(function () {
             $(this).dropdown('toggle');
@@ -80,72 +117,17 @@
             if (match != null) {
                 var action = match[1].toUpperCase();
 
-                //switch (action) {
-                //    case "CHANGEROLE":
-                //        var $newid = $(this).data('roleid');
-                //        var $newname = $(this).data('rolename');
-                //        var $role = $tr.find('td[data-field=role]');
-                //        var $curid = $role.data('curid');
+                switch (action) {
+                    case "CHANGEROLE":
+                        SaveTeamMember($tr.data('userid'), $(this).data('roleid'), $(this).data('rolename'));
+                        break;
 
-                //        if ($newid != $curid) {
-                //            var $curobj = $role.find('span');
+                    case "DELETE":
+                        break;
 
-                //            if ($curobj != null) {
-                //                $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
-                //                $role.find('ins').remove();
-                //                $role.find('del').after('<ins>' + $newname + '</ins>');
-                //            }
-                //        }
-                //        else {
-                //            var $curobj = $role.find('del');
-
-                //            if ($curobj != null) {
-                //                $role.find('ins').remove();
-                //                $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
-                //            }
-                //        }
-
-                //        $tr.find('ul.dropdown-menu li.active').removeClass('active');
-                //        $(this).parent().addClass('active');
-
-                //        break;
-
-                //    case "DELETE":
-                //        var $name = $tr.find('td[data-field=name]');
-                //        var $nmobj = $name.find('del');
-                //        if ($nmobj.length == 0) {
-                //            $name.html('<del>' + $name.html() + '</del>');
-                //        }
-
-                //        var $role = $tr.find('td[data-field=role]');
-
-                //        var $curobj = $role.find('span');
-                //        if ($curobj != null) {
-                //            $curobj.replaceWith('<del>' + $curobj.html() + '</del>');
-                //        }
-
-                //        $(this).attr('href', $(this).attr('href').replace('Delete', 'Restore'));
-                //        $(this).html('Restaurar membro');
-                //        break;
-
-                //    case "RESTORE":
-                //        var $name = $tr.find('td[data-field=name]');
-                //        var $nmobj = $name.find('del');
-                //        if ($nmobj.length != 0) {
-                //            $name.html($nmobj.html());
-                //        }
-
-                //        var $role = $tr.find('td[data-field=role]');
-
-                //        var $curobj = $role.find('del');
-                //        if ($curobj != null) {
-                //            $curobj.replaceWith('<span>' + $curobj.html() + '</span>');
-                //        }
-
-                //        $(this).attr('href', $(this).attr('href').replace('Restore', 'Delete'));
-                //        $(this).html('Remover membro');
-                //        break;
-                //}
+                    case "RESTORE":
+                        break;
+                }
             }
 
             return false;
@@ -158,39 +140,7 @@
         });
 
         $('tr#newuser button[data-action="Add"]').click(function () {
-            var $data = JSON.stringify({
-                "UserId": $('select#NewMember').val(),
-                "CellId": "@Model.Id",
-                "RoleId": $('select#NewRole').val()
-            });
-
-            $.ajax({
-                url: $('body').data('api') + 'TeamManage',
-                type: 'POST',
-                dataType: 'json',
-                data: $data,
-                contentType: 'application/json; charset=utf-8',
-                complete: function (x, y, z) {
-                    switch (x.status) {
-                        case 200:
-                            // swap role name
-                            $('tr#user_' + $('select#NewMember').val() + ' td[data-field="role"]').html($('select#NewRole option:selected').text());
-                            break;
-
-                        case 201:
-                            location.reload();
-                            break;
-
-                        case 500:
-                            alert('Erro no servidor!');
-                            break;
-
-                        default:
-                            alert('Erro inesperado (código ' + x.status + ')!');
-                            break;
-                    }
-                }
-            });
+            SaveTeamMember($('select#NewMember').val(), $('select#NewRole').val(), $('select#NewRole option:selected').text());
         });
 
         $('tr#newuser button[data-action="Cancel"]').click(function () {
