@@ -2,21 +2,25 @@
 
 @if (User.Identity.IsAuthenticated) {
 	<ul class="nav navbar-nav navbar-right">
-        @if(Tigra.Database.Authentication.GetLoggedUser().UserID == 1) {
-		<li class="dropdown">
-			<a href="./" class="dropdown-toggle" accesskey="A" data-toggle="dropdown"><b class="glyphicon glyphicon-wrench"></b> &nbsp; Administração <b class="caret"></b></a>
-			<ul class="dropdown-menu">
-				@using(Html.MenuAreaFor("Admin"))
-				{
-					@Html.AdminLink("Cells", "Index", "Células")
-					@Html.AdminLink("Teams", "Index", "Equipes")
-                    @Html.AdminLink("Forms", "Index", "Formulários")
-					@Html.AdminLink("Roles", "Index", "Papéis")
-					<li class="divider"></li>
-					@Html.AdminLink("Settings", "Index", "Configurações")
-				}
-			</ul>
-		</li>
+        @{
+            int userId = Tigra.Database.Authentication.GetLoggedUser().UserID;
+            if (userId == 1 || userId == 7)
+            {
+		    <li class="dropdown">
+			    <a href="./" class="dropdown-toggle" accesskey="A" data-toggle="dropdown"><b class="glyphicon glyphicon-wrench"></b> &nbsp; Administração <b class="caret"></b></a>
+			    <ul class="dropdown-menu">
+				    @using(Html.MenuAreaFor("Admin"))
+				    {
+					    @Html.AdminLink("Cells", "Index", "Células")
+					    @Html.AdminLink("Teams", "Index", "Equipes")
+                        @Html.AdminLink("Forms", "Index", "Formulários")
+					    @Html.AdminLink("Roles", "Index", "Papéis")
+					    <li class="divider"></li>
+					    @Html.AdminLink("Settings", "Index", "Configurações")
+				    }
+			    </ul>
+		    </li>
+            }
         }
 		<li class="dropdown">
 			<a href="./" class="dropdown-toggle" accesskey="P" data-toggle="dropdown"><b class="glyphicon glyphicon-user"></b> &nbsp; <span id="LoggedUserName">@User.Identity.Name</span> <b class="caret"></b></a>
