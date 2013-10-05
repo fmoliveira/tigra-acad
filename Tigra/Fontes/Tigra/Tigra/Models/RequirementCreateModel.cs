@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Tigra.Database;
 
 namespace Tigra.Models
 {
@@ -18,6 +19,7 @@ namespace Tigra.Models
         public long StoryId { get; set; }
 
         public string Tag = null;
+        private RequirementCreateModel item;
 
         [DisplayName("Título"), DataType(DataType.Text), StringLength(100)]
         [Required]
@@ -39,6 +41,17 @@ namespace Tigra.Models
         public RequirementCreateModel(long storyId)
         {
             this.StoryId = storyId;
+        }
+
+        public RequirementCreateModel(RequirementCreateModel item)
+        {
+            using(var ctx=new Entities())
+            {
+                this.StoryId = item.StoryId;
+                this.Summary = item.Summary;
+                this.Text = item.Text;
+                this.Message = item.Message;
+            }
         }
     }
 }

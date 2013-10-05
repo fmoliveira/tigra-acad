@@ -16,6 +16,7 @@ namespace Tigra.Models
         public string Id { get; set; }
 
         public long RevisionId = 0;
+        private RequirementCreateModel item;
 
         [DisplayName("Autor")]
         public UserNameModel UserName { get; set; }
@@ -51,6 +52,20 @@ namespace Tigra.Models
             this.RevisionDate = item.RevisionDate;
             this.Summary = item.Title;
             this.Text = item.Text;
+        }
+
+        public StoriesDetailsModel(RequirementCreateModel req)
+        {
+            using (var ctx = new Entities())
+            {
+                var item = ctx.RequirementRevisions.FirstOrDefault(i => i.RevisionID == req.StoryId);
+                this.RevisionId = item.RevisionID;
+                this.UserName = new UserNameModel(item.UserID);
+                this.RevisionNumber = item.RevisionNumber;
+                this.RevisionDate = item.RevisionDate;
+                this.Summary = item.Title;
+                this.Text = ctx.RequirementTexts.FirstOrDefault(i => i.RevisionID == req.StoryId).Text;
+            }
         }
 
     }

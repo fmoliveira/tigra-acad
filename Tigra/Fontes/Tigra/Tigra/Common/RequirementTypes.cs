@@ -9,6 +9,6 @@ namespace Tigra
     {
         public const short Story = -1;
 
-        public const short Requirement = -1;
+        public const short Requirement = -2;
     }
 }

@@ -127,5 +127,22 @@ namespace Tigra
                 return ctx.GetCellID(cell);
             }
         }
+
+        /// <summary>
+        /// Checks whether a tag exists.
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="type"></param>
+        /// <param name="cellId"></param>
+        /// <param name="revisionId"></param>
+        /// <param name="tag"></param>
+        /// <returns></returns>
+        public static bool TagExists(this Entities ctx, short type, int cellId, long? revisionId, string tag)
+        {
+            var req = ctx.RequirementRevisions.FirstOrDefault(i => i.RevisionID == revisionId);
+            int id = (req != null) ? req.RequirementID : 0;
+            var rvt = ctx.RequirementRevisions.FirstOrDefault(i => i.Requirement.ReqType == type && i.Requirement.CellID == cellId && i.RequirementID != id && i.Tag == tag);
+            return (rvt != null);
+        }
     }
 }

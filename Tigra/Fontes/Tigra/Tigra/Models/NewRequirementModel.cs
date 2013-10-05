@@ -22,5 +22,11 @@ namespace Tigra.Models
             this.Story = new StoriesDetailsModel(item);
             this.Requirement = new RequirementCreateModel(item.RevisionID);
         }
+
+        public NewRequirementModel(RequirementCreateModel item)
+        {
+            this.Story = new StoriesDetailsModel(item);
+            this.Requirement = new RequirementCreateModel(item);
+        }
     }
 }

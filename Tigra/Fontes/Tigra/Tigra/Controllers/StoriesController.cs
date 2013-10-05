@@ -55,17 +55,25 @@ namespace Tigra.Controllers
                 {
                     model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
-                    int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Requirement, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, model.StoryId);
 
-                    if (ret != 0)
+                    if (ctx.TagExists(RequirementTypes.Requirement, cellID, null, model.Tag))
                     {
-                        Success("Requisito inserido com sucesso!");
-                        return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                        Warning("Já existe um requisito com este nome!");
                     }
                     else
                     {
-                        Error("Erro ao tentar inserir o novo requisito!");
+                        int userID = Authentication.GetLoggedUser().UserID;
+                        int ret = ctx.SaveRequirement(RequirementTypes.Requirement, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, model.StoryId);
+
+                        if (ret != 0)
+                        {
+                            Success("Requisito inserido com sucesso!");
+                            return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                        }
+                        else
+                        {
+                            Error("Erro ao tentar inserir o novo requisito!");
+                        }
                     }
                 }
             }
@@ -73,7 +81,10 @@ namespace Tigra.Controllers
             {
                 Warning("Preencha o formulário corretamente!");
             }
-            return View(model);
+
+            NewRequirementModel edit = new NewRequirementModel(model);
+            RouteData.Values["title"] = edit.Story.Summary;
+            return View(edit);
         }
 
         [Authorize]
@@ -94,17 +105,25 @@ namespace Tigra.Controllers
                 {
                     model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
-                    int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, null);
 
-                    if (ret != 0)
+                    if (ctx.TagExists(RequirementTypes.Story, cellID, null, model.Tag))
                     {
-                        Success("História inserida com sucesso!");
-                        return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                        Warning("Já existe uma história com este nome!");
                     }
                     else
                     {
-                        Error("Erro ao tentar inserir a nova história!");
+                        int userID = Authentication.GetLoggedUser().UserID;
+                        int ret = ctx.SaveRequirement(RequirementTypes.Story, cellID, null, userID, model.Message, model.Tag, model.Summary, model.Text, null);
+
+                        if (ret != 0)
+                        {
+                            Success("História inserida com sucesso!");
+                            return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                        }
+                        else
+                        {
+                            Error("Erro ao tentar inserir a nova história!");
+                        }
                     }
                 }
             }
@@ -137,17 +156,25 @@ namespace Tigra.Controllers
                 {
                     model.Tag = Utils.Tagify(model.Summary);
                     int cellID = RouteData.Values["cell"].GetCellID();
-                    int userID = Authentication.GetLoggedUser().UserID;
-                    int ret = ctx.SaveRequirement(Tigra.RequirementTypes.Story, cellID, model.Id, userID, model.Message, model.Tag, model.Summary, model.Text, null);
 
-                    if (ret != 0)
+                    if (ctx.TagExists(RequirementTypes.Story, cellID, model.Id, model.Tag))
                     {
-                        Success("História alterada com sucesso!");
-                        return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                        Warning("Já existe outra história com este nome!");
                     }
                     else
                     {
-                        Error("Erro ao tentar alterar a história!");
+                        int userID = Authentication.GetLoggedUser().UserID;
+                        int ret = ctx.SaveRequirement(RequirementTypes.Story, cellID, model.Id, userID, model.Message, model.Tag, model.Summary, model.Text, null);
+
+                        if (ret != 0)
+                        {
+                            Success("História alterada com sucesso!");
+                            return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                        }
+                        else
+                        {
+                            Error("Erro ao tentar alterar a história!");
+                        }
                     }
                 }
             }
