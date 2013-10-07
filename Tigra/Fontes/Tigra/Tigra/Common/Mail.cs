@@ -99,8 +99,38 @@ namespace Tigra.Common
             Dictionary<string, string> values = new Dictionary<string, string>();
             values.Add("SetupLink", Mail.FullUrl("~/"));
             values.Add("LogoUrl", Mail.FullUrl("~/Content/logo_email.png"));
-            values.Add("ConfirmAccountCreationLink", String.Format("{0}{1}", Mail.FullUrl("~/Account/Confirm?token="), token));
+            values.Add("TokenLink", String.Format("{0}{1}", Mail.FullUrl("~/Account/Confirm?token="), token));
             Mail.SendMail(user.Email, "Mail.ConfirmAccountCreation", values);
+        }
+
+        private static string GetIPAddress()
+        {
+            HttpContext context = HttpContext.Current;
+            string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+            if (!string.IsNullOrEmpty(ipAddress))
+            {
+                string[] addresses = ipAddress.Split(',');
+                if (addresses.Length != 0)
+                {
+                    return addresses[0];
+                }
+            }
+
+            return context.Request.ServerVariables["REMOTE_ADDR"];
+        }
+
+        public static void SendNewPasswordTokenMail(UserAccount user)
+        {
+            string token = Mail.MakeToken(user, "CHGPASS", DateTime.Now.AddHours(1));
+            Dictionary<string, string> values = new Dictionary<string, string>();
+            values.Add("SetupLink", Mail.FullUrl("~/"));
+            values.Add("LogoUrl", Mail.FullUrl("~/Content/logo_email.png"));
+            values.Add("IP", GetIPAddress());
+            values.Add("Data", DateTime.UtcNow.ToString("dd/MM/yyyy"));
+            values.Add("Hora", DateTime.UtcNow.ToString("HH:mm:ss"));
+            values.Add("TokenLink", String.Format("{0}{1}", Mail.FullUrl("~/Account/LostPassword?token="), token));
+            Mail.SendMail(user.Email, "Mail.LostPassword", values);
         }
 
         public static bool SendMail(string recipient, string template, Dictionary<string, string> values)

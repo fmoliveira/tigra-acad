@@ -13,7 +13,7 @@ namespace Tigra.Api
     /// <summary>
     /// API class for user authentication.
     /// </summary>
-    public class NewRegisterTokenController : ApiController
+    public class NewPasswordTokenController : ApiController
     {
 
         // POST api/login
@@ -25,23 +25,16 @@ namespace Tigra.Api
                 {
                     UserAccount user = ctx.UserAccounts.FirstOrDefault(i => i.Email == value.Email);
 
-                    if (user != null)
+                    if (user != null && user.Enabled)
                     {
-                        if (false == user.Enabled)
+                        try
                         {
-                            try
-                            {
-                                Mail.SendRegisterTokenMail(user);
-                                return new HttpResponseMessage(HttpStatusCode.Accepted);
-                            }
-                            catch (Exception)
-                            {
-                                return new HttpResponseMessage(HttpStatusCode.RequestTimeout);
-                            }
+                            Mail.SendNewPasswordTokenMail(user);
+                            return new HttpResponseMessage(HttpStatusCode.Accepted);
                         }
-                        else
+                        catch (Exception)
                         {
-                            return new HttpResponseMessage(HttpStatusCode.NotModified);
+                            return new HttpResponseMessage(HttpStatusCode.RequestTimeout);
                         }
                     }
                     else

@@ -34,10 +34,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:55:56</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/05/2013 12:07:19</publishTime>
+      <publishTime>10/07/2013 20:25:39</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/05/2013 12:07:19</publishTime>
+      <publishTime>10/07/2013 20:25:39</publishTime>
     </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>08/27/2013 00:17:21</publishTime>
@@ -82,7 +82,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:53:33</publishTime>
     </File>
     <File Include="bin/Tigra.dll">
-      <publishTime>10/05/2013 12:06:23</publishTime>
+      <publishTime>10/07/2013 20:25:27</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>08/26/2013 18:55:56</publishTime>
@@ -172,7 +172,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/27/2013 00:17:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/05/2013 12:07:14</publishTime>
+      <publishTime>10/07/2013 20:25:35</publishTime>
     </File>
     <File Include="scripts/bootstrap-datepicker.js">
       <publishTime>08/29/2013 22:16:21</publishTime>
@@ -661,13 +661,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/04/2013 23:32:42</publishTime>
     </File>
     <File Include="scripts/tigra.login.js">
-      <publishTime>09/21/2013 16:36:55</publishTime>
+      <publishTime>10/07/2013 20:15:45</publishTime>
     </File>
     <File Include="scripts/tigra.modal.js">
       <publishTime>09/03/2013 13:41:55</publishTime>
     </File>
     <File Include="Templates/pt-BR/Mail.ConfirmAccountCreation.html">
-      <publishTime>09/21/2013 12:26:00</publishTime>
+      <publishTime>10/07/2013 19:59:31</publishTime>
+    </File>
+    <File Include="Templates/pt-BR/Mail.LostPassword.html">
+      <publishTime>10/07/2013 20:02:16</publishTime>
     </File>
     <File Include="Views/Account/MyProfile.cshtml">
       <publishTime>09/22/2013 23:29:12</publishTime>
@@ -683,6 +686,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>09/19/2013 19:01:17</publishTime>
+    </File>
+    <File Include="Views/Requirements/Details.cshtml">
+      <publishTime>10/05/2013 12:29:17</publishTime>
+    </File>
+    <File Include="Views/Requirements/Index.cshtml">
+      <publishTime>10/05/2013 13:14:16</publishTime>
     </File>
     <File Include="Views/shared/Create.cshtml">
       <publishTime>10/05/2013 10:14:20</publishTime>
@@ -736,7 +745,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 20:04:33</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.basic.cshtml">
-      <publishTime>09/22/2013 23:16:29</publishTime>
+      <publishTime>10/05/2013 12:24:00</publishTime>
     </File>
     <File Include="Views/shared/_BootstrapLayout.empty.cshtml">
       <publishTime>08/28/2013 18:20:47</publishTime>
@@ -763,7 +772,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/26/2013 18:56:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/05/2013 12:07:12</publishTime>
+      <publishTime>10/07/2013 20:25:34</publishTime>
     </File>
   </ItemGroup>
 </Project>

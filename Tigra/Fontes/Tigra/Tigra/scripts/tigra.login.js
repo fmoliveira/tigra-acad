@@ -88,6 +88,48 @@ function NewRegisterToken() {
                     Error('Endereço de email inválido.');
                     break;
 
+                case 408:
+                    Error('Envio do email falhou!');
+                    break;
+
+                case 500:
+                    Error('Erro no servidor!');
+                    break;
+
+                default:
+                    Error('Erro inesperado (código ' + x.status + ')!');
+                    break;
+            }
+        }
+    });
+}
+
+function NewPasswordToken() {
+    /* Make post URI and get login data. */
+    var $uri = $('body').data('api') + 'NewPasswordToken';
+    var $data = JSON.stringify({ "Email": $('#email').val() });
+
+    /* Post login data. */
+    $.ajax({
+        url: $uri,
+        type: 'POST',
+        dataType: 'json',
+        data: $data,
+        contentType: 'application/json; charset=utf-8',
+        complete: function (x, y, z) {
+            switch (x.status) {
+                case 202:
+                    Success('Por favor verifique seu email para redefinir sua senha.');
+                    break;
+
+                case 404:
+                    Error('Endereço de email inválido.');
+                    break;
+
+                case 408:
+                    Error('Envio do email falhou!');
+                    break;
+
                 case 500:
                     Error('Erro no servidor!');
                     break;
@@ -149,7 +191,7 @@ $('#login-menu button').click(function () {
 				        break;
 
 					case 401:
-						Error('Acesso negado!<br/><a href="#" class="alert-link" data-action="LostPassword">Você esqueceu sua senha?</a>');
+						Error('Acesso negado!<br/><a href="./" class="alert-link" onclick="NewPasswordToken(); return false;">Você esqueceu sua senha?</a>');
 						break;
 
 					case 409:
