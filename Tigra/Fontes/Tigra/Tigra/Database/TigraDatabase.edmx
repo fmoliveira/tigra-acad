@@ -44,6 +44,7 @@
           <Property Name="Message" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Tag" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Published" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Requirements">
           <Key>
@@ -346,10 +347,6 @@
             <End Role="UserAccount" EntitySet="UserAccounts" />
             <End Role="UserProfile" EntitySet="UserProfiles" />
           </AssociationSet>
-          <FunctionImport Name="GetRequirementDetails" ReturnType="Collection(TigraModel.GetRequirementDetails_Result)">
-            <Parameter Name="Tag" Mode="In" Type="String" />
-            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="GetLatestRequirements" ReturnType="Collection(TigraModel.GetLatestRequirements_Result)">
             <Parameter Name="CellID" Mode="In" Type="Int32" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
@@ -377,6 +374,10 @@
           <FunctionImport Name="GetRequirementsIndex" ReturnType="Collection(TigraModel.GetRequirementsIndex_Result)">
             <Parameter Name="CellID" Mode="In" Type="Int32" />
             <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetRequirementDetails" ReturnType="Collection(TigraModel.GetRequirementDetails_Result)">
+            <Parameter Name="Tag" Mode="In" Type="String" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
           </FunctionImport>
         </EntityContainer>
@@ -418,6 +419,7 @@
           <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RequirementRevisions1" Relationship="TigraModel.RequirementRelations" FromRole="RequirementRevision" ToRole="RequirementRevision1" />
           <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.RequirementRelations" FromRole="RequirementRevision1" ToRole="RequirementRevision" />
+          <Property Type="Boolean" Name="Published" Nullable="false" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -580,17 +582,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="GetRequirementDetails_Result">
-          <Property Type="Int16" Name="ReqType" Nullable="false" />
-          <Property Type="Int64" Name="RevisionID" Nullable="false" />
-          <Property Type="Int32" Name="RequirementID" Nullable="false" />
-          <Property Type="Int16" Name="RevisionNumber" Nullable="false" />
-          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
-        </ComplexType>
         <ComplexType Name="GetLatestRequirements_Result">
           <Property Type="Int32" Name="RequirementID" Nullable="false" />
           <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
@@ -620,6 +611,18 @@
           <Property Type="Int32" Name="UserID" Nullable="false" />
           <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetRequirementDetails_Result">
+          <Property Type="Int16" Name="ReqType" Nullable="false" />
+          <Property Type="Int64" Name="RevisionID" Nullable="false" />
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="false" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Boolean" Name="Published" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -651,6 +654,7 @@
           <EntitySetMapping Name="RequirementRevisions">
             <EntityTypeMapping TypeName="TigraModel.RequirementRevision">
               <MappingFragment StoreEntitySet="RequirementRevisions">
+                <ScalarProperty Name="Published" ColumnName="Published" />
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Message" ColumnName="Message" />
@@ -721,21 +725,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetRequirementDetails" FunctionName="TigraModel.Store.GetRequirementDetails">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TigraModel.GetRequirementDetails_Result">
-                <ScalarProperty Name="ReqType" ColumnName="ReqType" />
-                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
-                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
-                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetLatestRequirements" FunctionName="TigraModel.Store.GetLatestRequirements">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TigraModel.GetLatestRequirements_Result">
@@ -780,6 +769,22 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRequirementDetails" FunctionName="TigraModel.Store.GetRequirementDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetRequirementDetails_Result">
+                <ScalarProperty Name="ReqType" ColumnName="ReqType" />
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -19,7 +19,8 @@ BEGIN
 		SELECT @RevisionNumber = MAX([RevisionNumber]) FROM [Tigra].[RequirementRevisions] WHERE [Tag] = @Tag;
 	END
 
-	SELECT r.[ReqType], v.[RevisionID], r.[RequirementID], v.[RevisionNumber], v.[RevisionDate], v.[UserID], v.[Tag], v.[Title], t.[Text]
+	SELECT r.[ReqType], v.[RevisionID], r.[RequirementID], v.[RevisionNumber], v.[RevisionDate]
+		, v.[Published], v.[UserID], v.[Tag], v.[Title], t.[Text]
 	FROM [Tigra].[RequirementRevisions] AS v
 		INNER JOIN [Tigra].[Requirements] AS r ON r.[RequirementID] = v.[RequirementID]
 		INNER JOIN [Tigra].[RequirementTexts] AS t ON t.[RevisionID] = v.[RevisionID]

@@ -18,6 +18,7 @@ namespace Tigra.Database
         public int RequirementID { get; set; }
         public short RevisionNumber { get; set; }
         public System.DateTime RevisionDate { get; set; }
+        public bool Published { get; set; }
         public int UserID { get; set; }
         public string Tag { get; set; }
         public string Title { get; set; }

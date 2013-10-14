@@ -497,6 +497,7 @@
     <Content Include="Views\shared\EditorTemplates\Choice_Members.cshtml" />
     <Content Include="Views\Requirements\Details.cshtml" />
     <Content Include="Views\Requirements\Index.cshtml" />
+    <Content Include="Views\shared\DisplayTemplates\Boolean.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

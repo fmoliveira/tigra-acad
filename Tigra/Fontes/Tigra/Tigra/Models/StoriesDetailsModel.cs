@@ -26,6 +26,9 @@ namespace Tigra.Models
         [DisplayName("Data da revisão")]
         public DateTime RevisionDate { get; set; }
 
+        [DisplayName("Publicado")]
+        public bool Published { get; set; }
+
         [DisplayName("Título")]
         [DataType(DataType.Text)]
         [StringLength(100)]
@@ -51,6 +54,7 @@ namespace Tigra.Models
             this.RevisionDate = item.RevisionDate;
             this.Summary = item.Title;
             this.Text = item.Text;
+            this.Published = item.Published;
         }
 
         public StoriesDetailsModel(RequirementCreateModel req)

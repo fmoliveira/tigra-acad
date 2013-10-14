@@ -7,6 +7,7 @@ BEGIN
 		[RequirementID] INT NOT NULL,
 		[RevisionNumber] SMALLINT NOT NULL,
 		[RevisionDate] DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME(),
+		[Published] BIT NOT NULL DEFAULT 0,
 		[UserID] INT NOT NULL,
 		[Message] VARCHAR(250) NOT NULL CHECK(LEN([Message]) >= 10),
 		[Title] VARCHAR(100) NOT NULL CHECK(LEN([Title]) >= 10),

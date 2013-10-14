@@ -38,19 +38,6 @@ namespace Tigra.Database
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
     
-        public virtual ObjectResult<GetRequirementDetails_Result> GetRequirementDetails(string tag, Nullable<System.DateTime> baselineDate)
-        {
-            var tagParameter = tag != null ?
-                new ObjectParameter("Tag", tag) :
-                new ObjectParameter("Tag", typeof(string));
-    
-            var baselineDateParameter = baselineDate.HasValue ?
-                new ObjectParameter("BaselineDate", baselineDate) :
-                new ObjectParameter("BaselineDate", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementDetails_Result>("GetRequirementDetails", tagParameter, baselineDateParameter);
-        }
-    
         public virtual ObjectResult<GetLatestRequirements_Result> GetLatestRequirements(Nullable<int> cellID, Nullable<System.DateTime> baselineDate, Nullable<byte> type)
         {
             var cellIDParameter = cellID.HasValue ?
@@ -137,6 +124,19 @@ namespace Tigra.Database
                 new ObjectParameter("BaselineDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementsIndex_Result>("GetRequirementsIndex", cellIDParameter, reqTypeIDParameter, baselineDateParameter);
+        }
+    
+        public virtual ObjectResult<GetRequirementDetails_Result> GetRequirementDetails(string tag, Nullable<System.DateTime> baselineDate)
+        {
+            var tagParameter = tag != null ?
+                new ObjectParameter("Tag", tag) :
+                new ObjectParameter("Tag", typeof(string));
+    
+            var baselineDateParameter = baselineDate.HasValue ?
+                new ObjectParameter("BaselineDate", baselineDate) :
+                new ObjectParameter("BaselineDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementDetails_Result>("GetRequirementDetails", tagParameter, baselineDateParameter);
         }
     }
 }

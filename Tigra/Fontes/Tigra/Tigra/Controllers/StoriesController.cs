@@ -186,6 +186,35 @@ namespace Tigra.Controllers
         }
 
         [Authorize]
+        public ActionResult Publish(string tag)
+        {
+            using (var ctx = new Entities())
+            {
+                StoriesDetailsModel model = new StoriesDetailsModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
+                int cellID = RouteData.Values["cell"].GetCellID();
+
+                int userID = Authentication.GetLoggedUser().UserID;
+                int ret = ctx.SaveRequirement(RequirementTypes.Story, cellID, model.RevisionId, userID, "Publicação de história", tag, model.Summary, model.Text, null);
+
+                if (ret != 0)
+                {
+                    model = new StoriesDetailsModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
+                    RequirementRevision rev = ctx.RequirementRevisions.FirstOrDefault(i => i.RevisionID == model.RevisionId);
+                    rev.Published = true;
+
+                    if (ctx.SaveChanges() != 0)
+                    {
+                        Success("História publicada com sucesso!");
+                        return RedirectToAction("Details", new { @tag = tag });
+                    }
+                }
+
+                Error("Erro ao tentar publicar a história!");
+                return RedirectToAction("Details", new { @tag = tag });
+            }
+        }
+
+        [Authorize]
         public ActionResult History(string tag)
         {
             var model = StoriesHistoryModel.GetModels(tag);
