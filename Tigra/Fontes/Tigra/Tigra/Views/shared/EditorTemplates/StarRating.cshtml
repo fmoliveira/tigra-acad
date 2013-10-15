@@ -1,0 +1,8 @@
+﻿@model int
+<span data-role="star-rating">
+    <input type="hidden" name="@ViewData.TemplateInfo.GetFullHtmlFieldName("")" id="@ViewData.TemplateInfo.GetFullHtmlFieldName("")" value="0" />
+    @for (int i = 0; i < 5; i++)
+    {
+        <b data-star="@(i+1)" class="glyphicon glyphicon-star-empty"></b>
+    }
+</span>

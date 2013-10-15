@@ -1,0 +1,59 @@
+@using BootstrapSupport
+@model System.Collections.IEnumerable
+
+<table class="table table-striped">
+    <caption></caption>
+    <thead>
+        <tr>
+            @foreach (var property in Model.VisibleProperties())
+            {
+                <th>
+                    @property.GetLabel()
+                </th>
+            }
+            <th>Minha Avaliação</th>
+        </tr>
+    </thead>
+    @{ int index = 0; }
+    @foreach (var model in Model)
+    {
+        ViewData[index.ToString()] = model;
+        <tr>
+            @foreach (var property in model.VisibleProperties())
+            {
+                <td>
+                    @Html.Display(index + "." + property.Name)
+                </td>                    
+            }
+            <td>
+                <div class="btn-group">
+                    @{
+                        var routevalues = new { @tag = model.GetId() };
+                        var rating = (Tigra.Models.RatingsIndexModel)model;
+
+                        if (rating.UserFinalRating.HasValue)
+                        {
+                            int stars = (int)Math.Floor(rating.UserFinalRating.Value);
+                            for (int i=0; i < stars; i++)
+                            {
+                                <b class="glyphicon glyphicon-star"></b>
+                            }
+                            while (stars++ < 5)
+                            {
+                                <b class="glyphicon glyphicon-star-empty"></b>
+                            }
+                        }
+                        else
+                        {
+                            <a class="btn btn-default" href="@Url.Action("Details", routevalues)">Avaliar Tópico</a>
+                        }
+                    }
+                </div>
+
+            </td>
+        </tr>
+            index++;
+    }
+
+</table>
+

@@ -24,6 +24,17 @@
           <Property Name="Tag" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="RequirementRatings">
+          <Key>
+            <PropertyRef Name="RevisionID" />
+          </Key>
+          <Property Name="RevisionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RatingA" Type="tinyint" Nullable="false" />
+          <Property Name="RatingB" Type="tinyint" Nullable="false" />
+          <Property Name="RatingC" Type="tinyint" Nullable="false" />
+          <Property Name="FinalRating" Type="numeric" Precision="10" Scale="6" StoreGeneratedPattern="Computed" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="RequirementRelations">
           <Key>
             <PropertyRef Name="LeftRevisionID" />
@@ -100,6 +111,31 @@
           <Property Name="Biography" Type="varchar" MaxLength="500" />
           <Property Name="UserTheme" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="UserRatings">
+          <Key>
+            <PropertyRef Name="RevisionID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="RevisionID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RatingA" Type="tinyint" Nullable="false" />
+          <Property Name="RatingB" Type="tinyint" Nullable="false" />
+          <Property Name="RatingC" Type="tinyint" Nullable="false" />
+          <Property Name="FinalRating" Type="numeric" Precision="10" Scale="6" StoreGeneratedPattern="Computed" />
+          <Property Name="Comments" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_Tigra_RequirementRatings_Rev">
+          <End Role="RequirementRevisions" Type="Self.RequirementRevisions" Multiplicity="1" />
+          <End Role="RequirementRatings" Type="Self.RequirementRatings" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RequirementRevisions">
+              <PropertyRef Name="RevisionID" />
+            </Principal>
+            <Dependent Role="RequirementRatings">
+              <PropertyRef Name="RevisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Tigra_RequirementRelations_Left">
           <End Role="RequirementRevisions" Type="Self.RequirementRevisions" Multiplicity="1" />
           <End Role="RequirementRelations" Type="Self.RequirementRelations" Multiplicity="*" />
@@ -220,10 +256,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Tigra_UserRatings_Rev">
+          <End Role="RequirementRevisions" Type="Self.RequirementRevisions" Multiplicity="1" />
+          <End Role="UserRatings" Type="Self.UserRatings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequirementRevisions">
+              <PropertyRef Name="RevisionID" />
+            </Principal>
+            <Dependent Role="UserRatings">
+              <PropertyRef Name="RevisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tigra_UserRatings_Usr">
+          <End Role="UserAccounts" Type="Self.UserAccounts" Multiplicity="1" />
+          <End Role="UserRatings" Type="Self.UserRatings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccounts">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRatings">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="GetLatestRequirements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="CellID" Type="int" Mode="In" />
           <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
           <Parameter Name="Type" Type="tinyint" Mode="In" />
+        </Function>
+        <Function Name="GetRatingsIndex" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="CellID" Type="int" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetRequirementDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="Tag" Type="varchar" Mode="In" />
@@ -252,6 +316,7 @@
         <EntityContainer Name="TigraModelStoreContainer">
           <EntitySet Name="Baseline" EntityType="Self.Baseline" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="Cells" EntityType="Self.Cells" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="RequirementRatings" EntityType="Self.RequirementRatings" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="RequirementRelations" EntityType="Self.RequirementRelations" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="RequirementRevisions" EntityType="Self.RequirementRevisions" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="Requirements" EntityType="Self.Requirements" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
@@ -260,6 +325,11 @@
           <EntitySet Name="Teams" EntityType="Self.Teams" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="UserAccounts" EntityType="Self.UserAccounts" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <EntitySet Name="UserProfiles" EntityType="Self.UserProfiles" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="UserRatings" EntityType="Self.UserRatings" Schema="Tigra" p3:Type="Tables" xmlns:p3="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="fk_Tigra_RequirementRatings_Rev" Association="Self.fk_Tigra_RequirementRatings_Rev">
+            <End Role="RequirementRevisions" EntitySet="RequirementRevisions" />
+            <End Role="RequirementRatings" EntitySet="RequirementRatings" />
+          </AssociationSet>
           <AssociationSet Name="fk_Tigra_RequirementRelations_Left" Association="Self.fk_Tigra_RequirementRelations_Left">
             <End Role="RequirementRevisions" EntitySet="RequirementRevisions" />
             <End Role="RequirementRelations" EntitySet="RequirementRelations" />
@@ -299,6 +369,14 @@
           <AssociationSet Name="fk_Tigra_UserProfiles_Usr" Association="Self.fk_Tigra_UserProfiles_Usr">
             <End Role="UserAccounts" EntitySet="UserAccounts" />
             <End Role="UserProfiles" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tigra_UserRatings_Rev" Association="Self.fk_Tigra_UserRatings_Rev">
+            <End Role="RequirementRevisions" EntitySet="RequirementRevisions" />
+            <End Role="UserRatings" EntitySet="UserRatings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tigra_UserRatings_Usr" Association="Self.fk_Tigra_UserRatings_Usr">
+            <End Role="UserAccounts" EntitySet="UserAccounts" />
+            <End Role="UserRatings" EntitySet="UserRatings" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -380,6 +458,24 @@
             <Parameter Name="Tag" Mode="In" Type="String" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="RequirementRatings" EntityType="TigraModel.RequirementRating" />
+          <AssociationSet Name="fk_Tigra_RequirementRatings_Rev" Association="TigraModel.fk_Tigra_RequirementRatings_Rev">
+            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
+            <End Role="RequirementRating" EntitySet="RequirementRatings" />
+          </AssociationSet>
+          <FunctionImport Name="GetRatingsIndex" ReturnType="Collection(TigraModel.GetRatingsIndex_Result)">
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="UserRatings" EntityType="TigraModel.UserRating" />
+          <AssociationSet Name="fk_Tigra_UserRatings_Rev" Association="TigraModel.fk_Tigra_UserRatings_Rev">
+            <End Role="RequirementRevision" EntitySet="RequirementRevisions" />
+            <End Role="UserRating" EntitySet="UserRatings" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Tigra_UserRatings_Usr" Association="TigraModel.fk_Tigra_UserRatings_Usr">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="UserRating" EntitySet="UserRatings" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Baseline">
           <Key>
@@ -420,6 +516,8 @@
           <NavigationProperty Name="RequirementRevisions1" Relationship="TigraModel.RequirementRelations" FromRole="RequirementRevision" ToRole="RequirementRevision1" />
           <NavigationProperty Name="RequirementRevisions" Relationship="TigraModel.RequirementRelations" FromRole="RequirementRevision1" ToRole="RequirementRevision" />
           <Property Type="Boolean" Name="Published" Nullable="false" />
+          <NavigationProperty Name="RequirementRating" Relationship="TigraModel.fk_Tigra_RequirementRatings_Rev" FromRole="RequirementRevision" ToRole="RequirementRating" />
+          <NavigationProperty Name="UserRatings" Relationship="TigraModel.fk_Tigra_UserRatings_Rev" FromRole="RequirementRevision" ToRole="UserRating" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -472,6 +570,7 @@
           <NavigationProperty Name="Teams" Relationship="TigraModel.fk_Tigra_Teams_User" FromRole="UserAccount" ToRole="Team" />
           <NavigationProperty Name="UserProfile" Relationship="TigraModel.fk_Tigra_UserProfiles_Usr" FromRole="UserAccount" ToRole="UserProfile" />
           <Property Type="Boolean" Name="Enabled" Nullable="false" />
+          <NavigationProperty Name="UserRatings" Relationship="TigraModel.fk_Tigra_UserRatings_Usr" FromRole="UserAccount" ToRole="UserRating" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -624,6 +723,78 @@
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
         </ComplexType>
+        <EntityType Name="RequirementRating">
+          <Key>
+            <PropertyRef Name="RevisionID" />
+          </Key>
+          <Property Type="Int64" Name="RevisionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Byte" Name="RatingA" Nullable="false" />
+          <Property Type="Byte" Name="RatingB" Nullable="false" />
+          <Property Type="Byte" Name="RatingC" Nullable="false" />
+          <Property Type="Decimal" Name="FinalRating" Precision="10" Scale="6" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Boolean" Name="Approved" Nullable="false" />
+          <NavigationProperty Name="RequirementRevision" Relationship="TigraModel.fk_Tigra_RequirementRatings_Rev" FromRole="RequirementRating" ToRole="RequirementRevision" />
+        </EntityType>
+        <Association Name="fk_Tigra_RequirementRatings_Rev">
+          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="1" />
+          <End Type="TigraModel.RequirementRating" Role="RequirementRating" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RequirementRevision">
+              <PropertyRef Name="RevisionID" />
+            </Principal>
+            <Dependent Role="RequirementRating">
+              <PropertyRef Name="RevisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetRatingsIndex_Result">
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="Decimal" Name="UserFinalRating" Nullable="true" Precision="10" Scale="6" />
+        </ComplexType>
+        <EntityType Name="UserRating">
+          <Key>
+            <PropertyRef Name="RevisionID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Type="Int64" Name="RevisionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="Byte" Name="RatingA" Nullable="false" />
+          <Property Type="Byte" Name="RatingB" Nullable="false" />
+          <Property Type="Byte" Name="RatingC" Nullable="false" />
+          <Property Type="Decimal" Name="FinalRating" Precision="10" Scale="6" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="String" Name="Comments" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RequirementRevision" Relationship="TigraModel.fk_Tigra_UserRatings_Rev" FromRole="UserRating" ToRole="RequirementRevision" />
+          <NavigationProperty Name="UserAccount" Relationship="TigraModel.fk_Tigra_UserRatings_Usr" FromRole="UserRating" ToRole="UserAccount" />
+        </EntityType>
+        <Association Name="fk_Tigra_UserRatings_Rev">
+          <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="1" />
+          <End Type="TigraModel.UserRating" Role="UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequirementRevision">
+              <PropertyRef Name="RevisionID" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="RevisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Tigra_UserRatings_Usr">
+          <End Type="TigraModel.UserAccount" Role="UserAccount" Multiplicity="1" />
+          <End Type="TigraModel.UserRating" Role="UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -788,6 +959,44 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="RequirementRatings">
+            <EntityTypeMapping TypeName="TigraModel.RequirementRating">
+              <MappingFragment StoreEntitySet="RequirementRatings">
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="FinalRating" ColumnName="FinalRating" />
+                <ScalarProperty Name="RatingC" ColumnName="RatingC" />
+                <ScalarProperty Name="RatingB" ColumnName="RatingB" />
+                <ScalarProperty Name="RatingA" ColumnName="RatingA" />
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetRatingsIndex" FunctionName="TigraModel.Store.GetRatingsIndex">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetRatingsIndex_Result">
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UserFinalRating" ColumnName="UserFinalRating" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="UserRatings">
+            <EntityTypeMapping TypeName="TigraModel.UserRating">
+              <MappingFragment StoreEntitySet="UserRatings">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="FinalRating" ColumnName="FinalRating" />
+                <ScalarProperty Name="RatingC" ColumnName="RatingC" />
+                <ScalarProperty Name="RatingB" ColumnName="RatingB" />
+                <ScalarProperty Name="RatingA" ColumnName="RatingA" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

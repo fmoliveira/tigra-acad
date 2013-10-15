@@ -37,6 +37,8 @@ namespace Tigra.Database
         public DbSet<Team> Teams { get; set; }
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<RequirementRating> RequirementRatings { get; set; }
+        public DbSet<UserRating> UserRatings { get; set; }
     
         public virtual ObjectResult<GetLatestRequirements_Result> GetLatestRequirements(Nullable<int> cellID, Nullable<System.DateTime> baselineDate, Nullable<byte> type)
         {
@@ -137,6 +139,19 @@ namespace Tigra.Database
                 new ObjectParameter("BaselineDate", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementDetails_Result>("GetRequirementDetails", tagParameter, baselineDateParameter);
+        }
+    
+        public virtual ObjectResult<GetRatingsIndex_Result> GetRatingsIndex(Nullable<int> cellID, Nullable<int> userID)
+        {
+            var cellIDParameter = cellID.HasValue ?
+                new ObjectParameter("CellID", cellID) :
+                new ObjectParameter("CellID", typeof(int));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRatingsIndex_Result>("GetRatingsIndex", cellIDParameter, userIDParameter);
         }
     }
 }

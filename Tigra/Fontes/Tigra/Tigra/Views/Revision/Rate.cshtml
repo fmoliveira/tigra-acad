@@ -1,0 +1,17 @@
+@using BootstrapSupport
+@model Tigra.Models.RateTopicModel
+
+@{
+    ViewBag.VerticalDisplay = true;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Tópico Avaliado</h2>
+        @Html.Partial("ObjectDetails", Model.Topic)
+    </div>
+    <div class="col-md-6">
+        <h2>Avaliação</h2>
+        @Html.Partial("Create", Model.Rating)
+    </div>
+</div>

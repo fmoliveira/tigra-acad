@@ -148,6 +148,7 @@
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CellsController.cs" />
     <Compile Include="Controllers\RequirementsController.cs" />
+    <Compile Include="Controllers\RevisionController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\TeamsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
@@ -164,6 +165,9 @@
     <Compile Include="Database\GetLatestRequirements_Result.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\GetRatingsIndex_Result.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\GetRequirementDetails_Result.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
@@ -174,6 +178,9 @@
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Requirement.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\RequirementRating.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\RequirementRevision.cs">
@@ -209,12 +216,17 @@
     <Compile Include="Database\UserProfile.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\UserRating.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
+    <Compile Include="Models\RateTopicModel.cs" />
+    <Compile Include="Models\RatingsIndexModel.cs" />
     <Compile Include="Models\RequirementsDetailsModel.cs" />
     <Compile Include="Models\RequirementsIndexModel.cs" />
     <Compile Include="Models\EmailModel.cs" />
@@ -232,6 +244,7 @@
     <Compile Include="Areas\Admin\Models\RoleModel.cs" />
     <Compile Include="Models\TeamMemberModel.cs" />
     <Compile Include="Models\UserNameModel.cs" />
+    <Compile Include="Models\UserRatingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -455,6 +468,7 @@
     <Content Include="scripts\tigra.clamp.js" />
     <Content Include="scripts\tigra.login.js" />
     <Content Include="scripts\tigra.modal.js" />
+    <Content Include="scripts\tigra.star-rating.js" />
     <Content Include="Templates\pt-BR\Mail.LostPassword.html" />
     <Content Include="Templates\pt-BR\Mail.ConfirmAccountCreation.html" />
     <Content Include="Web.config" />
@@ -498,6 +512,9 @@
     <Content Include="Views\Requirements\Details.cshtml" />
     <Content Include="Views\Requirements\Index.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Revision\Index.cshtml" />
+    <Content Include="Views\Revision\Rate.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\StarRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

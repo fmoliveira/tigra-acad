@@ -18,6 +18,7 @@ namespace Tigra.Database
         {
             this.RequirementRevisions = new HashSet<RequirementRevision>();
             this.Teams = new HashSet<Team>();
+            this.UserRatings = new HashSet<UserRating>();
         }
     
         public int UserID { get; set; }
@@ -29,5 +30,6 @@ namespace Tigra.Database
         public virtual ICollection<RequirementRevision> RequirementRevisions { get; set; }
         public virtual ICollection<Team> Teams { get; set; }
         public virtual UserProfile UserProfile { get; set; }
+        public virtual ICollection<UserRating> UserRatings { get; set; }
     }
 }

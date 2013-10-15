@@ -33,7 +33,7 @@ namespace BootstrapSupport
 			{
 				elementType = Model.GetType().GetGenericArguments()[0];
 			}
-			return elementType.GetProperties().Where(info => info.Name != elementType.IdentifierPropertyName()).ToArray();
+            return elementType.GetProperties().Where(info => info.Name != elementType.IdentifierPropertyName() && null == info.GetCustomAttribute(typeof(HiddenInputAttribute))).ToArray();
 		}
 
         public static PropertyInfo[] HiddenProperties(this Object model)
