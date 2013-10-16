@@ -20,6 +20,6 @@
     }
     <p>
         @Html.SubmitButton()
-        @Html.CancelButton()
+        @(ViewBag.OverrideCancelButton == null ? Html.CancelButton() : Html.Raw(ViewBag.OverrideCancelButton))
     </p>
 }

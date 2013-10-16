@@ -10,7 +10,7 @@ using Tigra.Models;
 namespace Tigra.Controllers
 {
     [DisplayName("Revisão"), Description("Todas as histórias e requisitos devem ser revisadas e aprovadas por todos os membros de sua equipe. Esta página exibe os itens que estão aguardando avaliação da equipe.")]
-    public class RevisionController : Controller
+    public class RevisionController : BootstrapBaseController
     {
         [Authorize]
         public ActionResult Index()
@@ -27,8 +27,34 @@ namespace Tigra.Controllers
             {
                 RequirementsDetailsModel req = new RequirementsDetailsModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
                 RouteData.Values["title"] = req.Summary;
-                RateTopicModel model = new RateTopicModel(req);
-                return View("Rate", model);
+                return View("Rate", new RateTopicModel(req));
+            }
+        }
+
+        [Authorize, HttpPost]
+        public ActionResult Details(UserRatingModel model)
+        {
+            using (var ctx = new Entities())
+            {
+                UserRating rating = new UserRating();
+                rating.RevisionID = model.Id;
+                rating.UserID = Authentication.GetLoggedUser().UserID;
+                rating.RatingA = model.RatingA;
+                rating.RatingB = model.RatingB;
+                rating.RatingC = model.RatingC;
+                rating.Comments = model.Comments;
+                ctx.UserRatings.Add(rating);
+
+                if (ctx.SaveChanges() != 0)
+                {
+                    Success("Obrigado por avaliar este tópico!");
+                    return RedirectToRoute("Cells", new { @action = "Index" });
+                }
+                else
+                {
+                    Error("Erro ao enviar a sua avaliação!");
+                    return View("Rate", model);
+                }
             }
         }
 

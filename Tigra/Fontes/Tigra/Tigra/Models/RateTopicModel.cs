@@ -19,7 +19,7 @@ namespace Tigra.Models
         public RateTopicModel(RequirementsDetailsModel req)
         {
             this.Topic = req;
-            this.Rating = new UserRatingModel();
+            this.Rating = new UserRatingModel(req.RevisionId);
         }
     }
 }

@@ -3,10 +3,10 @@ BEGIN
 
 	CREATE TABLE [Tigra].[RequirementRatings]
 	(
-		[RevisionID] BIGINT IDENTITY(1,1) NOT NULL,
-		[RatingA] TINYINT NOT NULL CHECK([RatingA] BETWEEN 1 AND 5),
-		[RatingB] TINYINT NOT NULL CHECK([RatingB] BETWEEN 1 AND 5),
-		[RatingC] TINYINT NOT NULL CHECK([RatingC] BETWEEN 1 AND 5),
+		[RevisionID] BIGINT NOT NULL,
+		[RatingA] TINYINT NOT NULL CHECK([RatingA] BETWEEN 0 AND 5),
+		[RatingB] TINYINT NOT NULL CHECK([RatingB] BETWEEN 0 AND 5),
+		[RatingC] TINYINT NOT NULL CHECK([RatingC] BETWEEN 0 AND 5),
 		[FinalRating] AS (([RatingA] + [RatingB] + [RatingC]) / 3.0),
 		[Approved] BIT NOT NULL,
 		CONSTRAINT [pk_Tigra_RequirementRatings_Key] PRIMARY KEY ([RevisionID]),

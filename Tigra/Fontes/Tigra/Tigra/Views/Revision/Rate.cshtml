@@ -3,6 +3,11 @@
 
 @{
     ViewBag.VerticalDisplay = true;
+
+    string uri = Request.Url.AbsoluteUri;
+    int idx = uri.IndexOf("/Revision");
+    uri = uri.Substring(0, idx + "/Revision".Length);
+    ViewBag.OverrideCancelButton = String.Format("<a href=\"{0}\" class=\"btn btn-lg btn-default\">Cancelar</a>", uri);
 }
 
 <div class="row">
