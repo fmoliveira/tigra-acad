@@ -23,11 +23,11 @@
         <AssociationConnector Association="TigraModel.fk_Tigra_Teams_User" />
         <AssociationConnector Association="TigraModel.fk_Tigra_UserProfiles_Usr" />
         <AssociationConnector Association="TigraModel.RequirementRelations" />
-        <EntityTypeShape EntityType="TigraModel.RequirementRating" Width="1.5" PointX="0.20067365849421998" PointY="25.712975603394664" />
         <EntityTypeShape EntityType="TigraModel.UserRating" Width="1.5" PointX="2.0579012250797364" PointY="15.641258410942395" />
-        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRatings_Rev" />
         <AssociationConnector Association="TigraModel.fk_Tigra_UserRatings_Rev" />
         <AssociationConnector Association="TigraModel.fk_Tigra_UserRatings_Usr" />
+        <EntityTypeShape EntityType="TigraModel.RequirementRating" Width="1.5" PointX="3.4464840122715028" PointY="20.615258151951831" />
+        <AssociationConnector Association="TigraModel.fk_Tigra_RequirementRatings_Rev" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

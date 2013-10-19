@@ -26,8 +26,8 @@ namespace Tigra.Models
         [DisplayName("Data da revisão")]
         public DateTime RevisionDate { get; set; }
 
-        [DisplayName("Publicado")]
-        public bool Published { get; set; }
+        [DisplayName("Status")]
+        public string Status { get; set; }
 
         [DisplayName("Título")]
         [DataType(DataType.Text)]
@@ -39,6 +39,11 @@ namespace Tigra.Models
         [DataType(DataType.Html)]
         [Required]
         public string Text { get; set; }
+
+        public bool Published = false;
+        public bool MeRated = false;
+        public bool TeamRated = false;
+        public bool Approved = false;
 
         public StoriesDetailsModel()
         {
@@ -55,6 +60,36 @@ namespace Tigra.Models
             this.Summary = item.Title;
             this.Text = item.Text;
             this.Published = item.Published;
+
+            using (var ctx = new Entities())
+            {
+                int logged = Authentication.GetLoggedUser().UserID;
+                this.MeRated = (item.UserID == logged) || (ctx.UserRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.UserID == logged) != null);
+                this.TeamRated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
+                this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
+            }
+
+            if (this.Published == false)
+            {
+                this.Status = "Em edição";
+            }
+            else if (this.MeRated == false)
+            {
+                this.Status = "Publicado, aguardando sua avaliação";
+            }
+            else if (this.TeamRated == false)
+            {
+                this.Status = "Publicado, aguardando avaliação da equipe";
+            }
+            else if (this.Approved == false)
+            {
+                this.Status = "Reprovado, por favor melhorar a qualidade do texto";
+                this.Published = false;
+            }
+            else
+            {
+                this.Status = "Aprovado, aguardando documentação";
+            }
         }
 
         public StoriesDetailsModel(RequirementCreateModel req)

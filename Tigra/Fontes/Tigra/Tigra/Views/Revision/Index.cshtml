@@ -11,7 +11,7 @@
                     @property.GetLabel()
                 </th>
             }
-            <th>Minha Avaliação</th>
+            <th>Avaliação</th>
         </tr>
     </thead>
     @{ int index = 0; }
@@ -31,10 +31,10 @@
                         var routevalues = new { @tag = model.GetId() };
                         var rating = (Tigra.Models.RatingsIndexModel)model;
 
-                        if (rating.UserFinalRating.HasValue)
+                        if (rating.FinalRating.HasValue)
                         {
-                            int stars = (int)Math.Floor(rating.UserFinalRating.Value);
-                            for (int i=0; i < stars; i++)
+                            int stars = (int)Math.Floor(rating.FinalRating.Value);
+                            for (int i = 0; i < stars; i++)
                             {
                                 <b class="glyphicon glyphicon-star"></b>
                             }
@@ -43,9 +43,13 @@
                                 <b class="glyphicon glyphicon-star-empty"></b>
                             }
                         }
-                        else
+                        else if (rating.UserName.UserID != Tigra.Database.Authentication.GetLoggedUser().UserID)
                         {
                             <a class="btn btn-default" href="@Url.Action("Details", routevalues)">Avaliar Tópico</a>
+                        }
+                        else
+                        {
+                            @:Aguardando avaliação...
                         }
                     }
                 </div>

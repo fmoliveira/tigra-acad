@@ -36,7 +36,7 @@ namespace Tigra.Database
         public virtual RequirementText RequirementText { get; set; }
         public virtual ICollection<RequirementRevision> RequirementRevisions1 { get; set; }
         public virtual ICollection<RequirementRevision> RequirementRevisions { get; set; }
-        public virtual RequirementRating RequirementRating { get; set; }
         public virtual ICollection<UserRating> UserRatings { get; set; }
+        public virtual RequirementRating RequirementRating { get; set; }
     }
 }

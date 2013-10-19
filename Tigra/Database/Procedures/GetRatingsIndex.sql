@@ -6,8 +6,7 @@ GO
 
 CREATE PROCEDURE [Tigra].[GetRatingsIndex]
 (
-	@CellID INT,
-	@UserID INT
+	@CellID INT
 )
 AS
 BEGIN
@@ -22,11 +21,10 @@ BEGIN
 		GROUP BY r.RequirementID
 	)
 	SELECT r.[RequirementID], r.[RevisionNumber], v.[RevisionDate], v.[UserID], v.[Tag], v.[Title]
-		, u.[FinalRating] AS [UserFinalRating]
+		, t.[FinalRating] AS [FinalRating]
 	FROM LatestReqs AS r
 		INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = r.[RequirementID] AND v.[RevisionNumber] = r.[RevisionNumber]
 		LEFT JOIN [Tigra].[RequirementRatings] AS t ON t.[RevisionID] = v.[RevisionID]
-		LEFT JOIN [Tigra].[UserRatings] AS u ON u.[RevisionID] = v.[RevisionID]
 	WHERE v.[Published] = 1 AND t.[FinalRating] IS NULL
 	ORDER BY [Title] ASC;
 

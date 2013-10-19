@@ -25,7 +25,7 @@ namespace Tigra.Models
         public string Summary { get; set; }
 
         [HiddenInput]
-        public decimal? UserFinalRating { get; set; }
+        public decimal? FinalRating { get; set; }
 
         public RatingsIndexModel(GetRatingsIndex_Result item)
         {
@@ -33,7 +33,7 @@ namespace Tigra.Models
             this.UserName = new UserNameModel(item.UserID);
             this.Modified = item.RevisionDate;
             this.Summary = item.Title;
-            this.UserFinalRating = item.UserFinalRating;
+            this.FinalRating = item.FinalRating;
         }
 
         public static List<RatingsIndexModel> GetModels(object cell)
@@ -43,7 +43,7 @@ namespace Tigra.Models
             using (var ctx = new Entities())
             {
                 int parent = ctx.GetCellID(cell);
-                var list = ctx.GetRatingsIndex(parent, Authentication.GetLoggedUser().UserID).ToList();
+                var list = ctx.GetRatingsIndex(parent).ToList();
                 list.ForEach(i => ret.Add(new RatingsIndexModel(i)));
             }
 

@@ -19,6 +19,6 @@ namespace Tigra.Database
         public int UserID { get; set; }
         public string Tag { get; set; }
         public string Title { get; set; }
-        public Nullable<decimal> UserFinalRating { get; set; }
+        public Nullable<decimal> FinalRating { get; set; }
     }
 }

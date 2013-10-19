@@ -36,25 +36,9 @@ namespace Tigra.Controllers
         {
             using (var ctx = new Entities())
             {
-                UserRating rating = new UserRating();
-                rating.RevisionID = model.Id;
-                rating.UserID = Authentication.GetLoggedUser().UserID;
-                rating.RatingA = model.RatingA;
-                rating.RatingB = model.RatingB;
-                rating.RatingC = model.RatingC;
-                rating.Comments = model.Comments;
-                ctx.UserRatings.Add(rating);
-
-                if (ctx.SaveChanges() != 0)
-                {
-                    Success("Obrigado por avaliar este tópico!");
-                    return RedirectToRoute("Cells", new { @action = "Index" });
-                }
-                else
-                {
-                    Error("Erro ao enviar a sua avaliação!");
-                    return View("Rate", model);
-                }
+                ctx.SubmitRating(model.Id, Authentication.GetLoggedUser().UserID, model.RatingA, model.RatingB, model.RatingC, model.Comments);
+                Success("Obrigado por avaliar este tópico!");
+                return RedirectToRoute("Cells", new { @action = "Index" });
             }
         }
 
