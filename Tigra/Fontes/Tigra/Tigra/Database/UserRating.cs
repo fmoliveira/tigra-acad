@@ -16,11 +16,8 @@ namespace Tigra.Database
     {
         public long RevisionID { get; set; }
         public int UserID { get; set; }
-        public byte RatingA { get; set; }
-        public byte RatingB { get; set; }
-        public byte RatingC { get; set; }
-        public Nullable<decimal> FinalRating { get; set; }
         public string Comments { get; set; }
+        public bool Approved { get; set; }
     
         public virtual RequirementRevision RequirementRevision { get; set; }
         public virtual UserAccount UserAccount { get; set; }

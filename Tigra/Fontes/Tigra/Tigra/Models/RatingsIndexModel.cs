@@ -33,7 +33,7 @@ namespace Tigra.Models
             this.UserName = new UserNameModel(item.UserID);
             this.Modified = item.RevisionDate;
             this.Summary = item.Title;
-            this.FinalRating = item.FinalRating;
+            //this.FinalRating = item.FinalRating;
         }
 
         public static List<RatingsIndexModel> GetModels(object cell)

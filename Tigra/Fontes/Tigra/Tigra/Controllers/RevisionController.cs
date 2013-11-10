@@ -36,7 +36,7 @@ namespace Tigra.Controllers
         {
             using (var ctx = new Entities())
             {
-                ctx.SubmitRating(model.Id, Authentication.GetLoggedUser().UserID, model.RatingA, model.RatingB, model.RatingC, model.Comments);
+                ctx.SubmitRating(model.Id, Authentication.GetLoggedUser().UserID, false, model.Comments);
                 Success("Obrigado por avaliar este tópico!");
                 return RedirectToRoute("Cells", new { @action = "Index" });
             }

@@ -37,8 +37,8 @@ namespace Tigra.Database
         public DbSet<Team> Teams { get; set; }
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<UserRating> UserRatings { get; set; }
         public DbSet<RequirementRating> RequirementRatings { get; set; }
+        public DbSet<UserRating> UserRatings { get; set; }
     
         public virtual ObjectResult<GetLatestRequirements_Result> GetLatestRequirements(Nullable<int> cellID, Nullable<System.DateTime> baselineDate, Nullable<byte> type)
         {
@@ -141,16 +141,7 @@ namespace Tigra.Database
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementDetails_Result>("GetRequirementDetails", tagParameter, baselineDateParameter);
         }
     
-        public virtual ObjectResult<GetRatingsIndex_Result> GetRatingsIndex(Nullable<int> cellID)
-        {
-            var cellIDParameter = cellID.HasValue ?
-                new ObjectParameter("CellID", cellID) :
-                new ObjectParameter("CellID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRatingsIndex_Result>("GetRatingsIndex", cellIDParameter);
-        }
-    
-        public virtual int SubmitRating(Nullable<long> revisionID, Nullable<int> userID, Nullable<byte> ratingA, Nullable<byte> ratingB, Nullable<byte> ratingC, string comments)
+        public virtual int SubmitRating(Nullable<long> revisionID, Nullable<int> userID, Nullable<bool> approved, string comments)
         {
             var revisionIDParameter = revisionID.HasValue ?
                 new ObjectParameter("RevisionID", revisionID) :
@@ -160,23 +151,24 @@ namespace Tigra.Database
                 new ObjectParameter("UserID", userID) :
                 new ObjectParameter("UserID", typeof(int));
     
-            var ratingAParameter = ratingA.HasValue ?
-                new ObjectParameter("RatingA", ratingA) :
-                new ObjectParameter("RatingA", typeof(byte));
-    
-            var ratingBParameter = ratingB.HasValue ?
-                new ObjectParameter("RatingB", ratingB) :
-                new ObjectParameter("RatingB", typeof(byte));
-    
-            var ratingCParameter = ratingC.HasValue ?
-                new ObjectParameter("RatingC", ratingC) :
-                new ObjectParameter("RatingC", typeof(byte));
+            var approvedParameter = approved.HasValue ?
+                new ObjectParameter("Approved", approved) :
+                new ObjectParameter("Approved", typeof(bool));
     
             var commentsParameter = comments != null ?
                 new ObjectParameter("Comments", comments) :
                 new ObjectParameter("Comments", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitRating", revisionIDParameter, userIDParameter, ratingAParameter, ratingBParameter, ratingCParameter, commentsParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SubmitRating", revisionIDParameter, userIDParameter, approvedParameter, commentsParameter);
+        }
+    
+        public virtual ObjectResult<GetRatingsIndex_Result> GetRatingsIndex(Nullable<int> cellID)
+        {
+            var cellIDParameter = cellID.HasValue ?
+                new ObjectParameter("CellID", cellID) :
+                new ObjectParameter("CellID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRatingsIndex_Result>("GetRatingsIndex", cellIDParameter);
         }
     }
 }

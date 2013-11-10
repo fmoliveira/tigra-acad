@@ -15,10 +15,6 @@ namespace Tigra.Database
     public partial class RequirementRating
     {
         public long RevisionID { get; set; }
-        public decimal RatingA { get; set; }
-        public decimal RatingB { get; set; }
-        public decimal RatingC { get; set; }
-        public Nullable<decimal> FinalRating { get; set; }
         public bool Approved { get; set; }
     
         public virtual RequirementRevision RequirementRevision { get; set; }
