@@ -6,17 +6,49 @@
     @Html.RouteLink("Retornar à listagem", "Menu", null, new { @class = "btn btn-lg btn-default" })
     @{
         var routevalues = new { @tag = Model.GetId() };
+        var requisito = (Tigra.Models.RequirementsDetailsModel)Model;
+
+        if (requisito.Published == false)
+        {
+            <div class="btn-group">
+                @Html.ActionLink("Editar", "Edit", routevalues, new { @class = "btn btn-lg btn-default" })
+                <a class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("Editar", "Edit", routevalues)</li>
+                    <li>@Html.ActionLink("Histórico", "History", routevalues)</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Excluir", "Delete", routevalues)</li>
+                </ul>
+            </div>
+            @Html.ActionLink("Publicar Requisito", "Publish", routevalues, new { @class = "btn btn-lg btn-primary" })
+        }
+        else
+        {
+            if (requisito.Rated == false)
+            {
+                if (Tigra.Database.Authentication.IsLoggedUserManager())
+                {
+                    <a class="btn btn-lg btn-primary" href="#">Avaliar Requisito</a>
+                }
+                else
+                {
+                    <a class="btn btn-lg btn-info">Aguardando avaliação...</a>
+                }
+            }
+            else
+            {
+                <div class="btn-group">
+                    <a class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
+                        Documentar <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Criar novo requisito", "NewRequirement", routevalues)</li>
+                        <li>@Html.ActionLink("Utilizar requisito existente", "ExistingRequirement", routevalues)</li>
+                    </ul>
+                </div>
+            }
+        }
     }
-    <div class="btn-group">
-        @Html.ActionLink("Editar", "Edit", routevalues, new { @class = "btn btn-lg btn-default" })
-        <a class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li>@Html.ActionLink("Editar", "Edit", routevalues)</li>
-            <li>@Html.ActionLink("Histórico", "History", routevalues)</li>
-            <li class="divider"></li>
-            <li>@Html.ActionLink("Excluir", "Delete", routevalues)</li>
-        </ul>
-    </div>
 </div>
