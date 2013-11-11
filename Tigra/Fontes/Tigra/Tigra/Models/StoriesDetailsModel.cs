@@ -41,8 +41,7 @@ namespace Tigra.Models
         public string Text { get; set; }
 
         public bool Published = false;
-        public bool MeRated = false;
-        public bool TeamRated = false;
+        public bool Rated = false;
         public bool Approved = false;
 
         public StoriesDetailsModel()
@@ -64,8 +63,7 @@ namespace Tigra.Models
             using (var ctx = new Entities())
             {
                 int logged = Authentication.GetLoggedUser().UserID;
-                this.MeRated = (item.UserID == logged) || (ctx.UserRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.UserID == logged) != null);
-                this.TeamRated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
+                this.Rated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
             }
 
@@ -73,13 +71,9 @@ namespace Tigra.Models
             {
                 this.Status = "Em edição";
             }
-            else if (this.MeRated == false)
+            else if (this.Rated == false)
             {
-                this.Status = "Publicado, aguardando sua avaliação";
-            }
-            else if (this.TeamRated == false)
-            {
-                this.Status = "Publicado, aguardando avaliação da equipe";
+                this.Status = "Publicado, aguardando avaliação";
             }
             else if (this.Approved == false)
             {

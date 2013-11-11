@@ -447,11 +447,6 @@
             <Parameter Name="Text" Mode="In" Type="String" />
             <Parameter Name="StoryID" Mode="In" Type="Int64" />
           </FunctionImport>
-          <FunctionImport Name="GetRequirementsIndex" ReturnType="Collection(TigraModel.GetRequirementsIndex_Result)">
-            <Parameter Name="CellID" Mode="In" Type="Int32" />
-            <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
-            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
-          </FunctionImport>
           <FunctionImport Name="GetRequirementDetails" ReturnType="Collection(TigraModel.GetRequirementDetails_Result)">
             <Parameter Name="Tag" Mode="In" Type="String" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
@@ -477,7 +472,12 @@
             <Parameter Name="Comments" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetRatingsIndex" ReturnType="Collection(TigraModel.GetRatingsIndex_Result)">
+          <Parameter Name="CellID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetRequirementsIndex" ReturnType="Collection(TigraModel.GetRequirementsIndex_Result)">
             <Parameter Name="CellID" Mode="In" Type="Int32" />
+            <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
+            <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Baseline">
@@ -706,14 +706,6 @@
           <End Type="TigraModel.RequirementRevision" Role="RequirementRevision" Multiplicity="*" />
           <End Type="TigraModel.RequirementRevision" Role="RequirementRevision1" Multiplicity="*" />
         </Association>
-        <ComplexType Name="GetRequirementsIndex_Result">
-          <Property Type="Int32" Name="RequirementID" Nullable="false" />
-          <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
-          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
-          <Property Type="Int32" Name="UserID" Nullable="false" />
-          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
-          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
-        </ComplexType>
         <ComplexType Name="GetRequirementDetails_Result">
           <Property Type="Int16" Name="ReqType" Nullable="false" />
           <Property Type="Int64" Name="RevisionID" Nullable="false" />
@@ -789,6 +781,16 @@
           <Property Type="Int32" Name="UserID" Nullable="false" />
           <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetRequirementsIndex_Result">
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int64" Name="RevisionID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="true" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Published" Nullable="false" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -926,18 +928,6 @@
             </EndProperty>
           </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="SaveRequirement" FunctionName="TigraModel.Store.SaveRequirement" />
-          <FunctionImportMapping FunctionImportName="GetRequirementsIndex" FunctionName="TigraModel.Store.GetRequirementsIndex">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="TigraModel.GetRequirementsIndex_Result">
-                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
-                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
-                <ScalarProperty Name="Tag" ColumnName="Tag" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetRequirementDetails" FunctionName="TigraModel.Store.GetRequirementDetails">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TigraModel.GetRequirementDetails_Result">
@@ -982,6 +972,20 @@
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRequirementsIndex" FunctionName="TigraModel.Store.GetRequirementsIndex">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetRequirementsIndex_Result">
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

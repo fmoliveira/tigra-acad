@@ -14,10 +14,12 @@ namespace Tigra.Database
     public partial class GetRequirementsIndex_Result
     {
         public int RequirementID { get; set; }
+        public long RevisionID { get; set; }
         public Nullable<short> RevisionNumber { get; set; }
         public System.DateTime RevisionDate { get; set; }
         public int UserID { get; set; }
         public string Tag { get; set; }
         public string Title { get; set; }
+        public bool Published { get; set; }
     }
 }

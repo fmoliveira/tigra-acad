@@ -20,8 +20,15 @@ namespace Tigra.Models
         [DisplayName("Data")]
         public DateTime Modified { get; set; }
 
+        [DisplayName("Status")]
+        public string Status { get; set; }
+
         [DisplayName("Título")]
         public string Summary { get; set; }
+
+        public bool Published = false;
+        public bool Rated = false;
+        public bool Approved = false;
 
         public StoriesIndexModel(GetRequirementsIndex_Result item)
         {
@@ -29,6 +36,33 @@ namespace Tigra.Models
             this.UserName = new UserNameModel(item.UserID);
             this.Modified = item.RevisionDate;
             this.Summary = item.Title;
+
+
+            using (var ctx = new Entities())
+            {
+                int logged = Authentication.GetLoggedUser().UserID;
+                this.Published = item.Published;
+                this.Rated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
+                this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
+            }
+
+            if (this.Published == false)
+            {
+                this.Status = "Em edição";
+            }
+            else if (this.Rated == false)
+            {
+                this.Status = "Ag. avaliação";
+            }
+            else if (this.Approved == false)
+            {
+                this.Status = "Reprovado";
+                this.Published = false;
+            }
+            else
+            {
+                this.Status = "Aprovado";
+            }
         }
 
         public static List<StoriesIndexModel> GetModels(object cell)
