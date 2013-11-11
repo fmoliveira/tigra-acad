@@ -95,6 +95,16 @@ namespace Tigra.Database
             return null;
         }
 
+        public static bool IsLoggedUserManager()
+        {
+            AuthCookieModel user = GetLoggedUser();
+            using (var ctx = new Entities())
+            {
+                var ret = from t in ctx.Teams where t.UserID == user.UserID && t.Role.RoleName.ToLower().Contains("dono") select t;
+                return (ret.Count() == 1);
+            }
+        }
+
         /// <summary>
         /// Refresh authentication cookie with updated details of the logged user.
         /// </summary>

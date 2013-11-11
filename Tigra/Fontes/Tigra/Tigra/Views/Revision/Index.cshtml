@@ -31,19 +31,7 @@
                         var routevalues = new { @tag = model.GetId() };
                         var rating = (Tigra.Models.RatingsIndexModel)model;
 
-                        if (rating.FinalRating.HasValue)
-                        {
-                            int stars = (int)Math.Floor(rating.FinalRating.Value);
-                            for (int i = 0; i < stars; i++)
-                            {
-                                <b class="glyphicon glyphicon-star"></b>
-                            }
-                            while (stars++ < 5)
-                            {
-                                <b class="glyphicon glyphicon-star-empty"></b>
-                            }
-                        }
-                        else if (rating.UserName.UserID != Tigra.Database.Authentication.GetLoggedUser().UserID)
+                        if (Tigra.Database.Authentication.IsLoggedUserManager())
                         {
                             <a class="btn btn-default" href="@Url.Action("Details", routevalues)">Avaliar Tópico</a>
                         }

@@ -26,13 +26,16 @@
         }
         else
         {
-            if (historia.MeRated == false)
+            if (historia.Rated == false)
             {
-                <a class="btn btn-lg btn-primary" href="#">Avaliar História</a>
-            }
-            else if (historia.TeamRated == false)
-            {
-                <a class="btn btn-lg btn-info">Aguardando avaliação...</a>
+                if (Tigra.Database.Authentication.IsLoggedUserManager())
+                {
+                    <a class="btn btn-lg btn-primary" href="#">Avaliar História</a>
+                }
+                else
+                {
+                    <a class="btn btn-lg btn-info">Aguardando avaliação...</a>
+                }
             }
             else
             {

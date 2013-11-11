@@ -25,7 +25,7 @@ namespace Tigra.Models
         public string Summary { get; set; }
 
         [HiddenInput]
-        public decimal? FinalRating { get; set; }
+        public bool? Approved { get; set; }
 
         public RatingsIndexModel(GetRatingsIndex_Result item)
         {
@@ -33,7 +33,7 @@ namespace Tigra.Models
             this.UserName = new UserNameModel(item.UserID);
             this.Modified = item.RevisionDate;
             this.Summary = item.Title;
-            //this.FinalRating = item.FinalRating;
+            this.Approved = item.Approved;
         }
 
         public static List<RatingsIndexModel> GetModels(object cell)
