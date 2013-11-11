@@ -95,6 +95,12 @@ BEGIN
 		END
 	END
 
+	/* Mark as done. */
+	IF (@ReqTypeID = -99)
+	BEGIN
+		UPDATE [Tigra].[RequirementRevisions] SET [BaselineDate] = SYSUTCDATETIME() WHERE [RevisionID] = @RevisionID;
+	END
+
 	/* Commits transaction. */
 	COMMIT TRANSACTION;
 

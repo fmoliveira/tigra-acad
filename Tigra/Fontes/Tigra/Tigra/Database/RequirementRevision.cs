@@ -30,6 +30,7 @@ namespace Tigra.Database
         public string Title { get; set; }
         public string Tag { get; set; }
         public bool Published { get; set; }
+        public Nullable<System.DateTime> BaselineDate { get; set; }
     
         public virtual Requirement Requirement { get; set; }
         public virtual UserAccount UserAccount { get; set; }

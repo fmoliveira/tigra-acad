@@ -52,6 +52,7 @@
           <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Tag" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Published" Type="bit" Nullable="false" />
+          <Property Name="BaselineDate" Type="datetime2" Precision="0" />
         </EntityType>
         <EntityType Name="Requirements">
           <Key>
@@ -521,6 +522,7 @@
           <Property Type="Boolean" Name="Published" Nullable="false" />
           <NavigationProperty Name="RequirementRating" Relationship="TigraModel.fk_Tigra_RequirementRatings_Rev" FromRole="RequirementRevision" ToRole="RequirementRating" />
           <NavigationProperty Name="UserRatings" Relationship="TigraModel.fk_Tigra_UserRatings_Rev" FromRole="RequirementRevision" ToRole="UserRating" />
+          <Property Name="BaselineDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -717,6 +719,7 @@
           <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
+          <Property Type="DateTime" Name="BaselineDate" Nullable="true" />
         </ComplexType>
         <EntityType Name="RequirementRating">
           <Key>
@@ -792,6 +795,7 @@
           <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
           <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
           <Property Type="Boolean" Name="Published" Nullable="false" />
+          <Property Type="DateTime" Name="BaselineDate" Nullable="true" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -823,6 +827,7 @@
           <EntitySetMapping Name="RequirementRevisions">
             <EntityTypeMapping TypeName="TigraModel.RequirementRevision">
               <MappingFragment StoreEntitySet="RequirementRevisions">
+                <ScalarProperty Name="BaselineDate" ColumnName="BaselineDate" />
                 <ScalarProperty Name="Published" ColumnName="Published" />
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="Title" ColumnName="Title" />

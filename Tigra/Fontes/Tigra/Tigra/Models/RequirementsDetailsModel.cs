@@ -43,6 +43,7 @@ namespace Tigra.Models
         public bool Published = false;
         public bool Rated = false;
         public bool Approved = false;
+        public bool Implemented = false;
 
         public RequirementsDetailsModel()
         {
@@ -67,7 +68,12 @@ namespace Tigra.Models
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
             }
 
-            if (this.Published == false)
+            if (item.BaselineDate.HasValue)
+            {
+                this.Implemented = true;
+                this.Status = "Implementado";
+            }
+            else if (this.Published == false)
             {
                 this.Status = "Em edição";
             }

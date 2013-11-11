@@ -37,8 +37,8 @@ BEGIN
 		WHERE r.[CellID] = @CellID AND v.[RevisionDate] <= @BaselineDate AND
 			(
 				(@Type = 1 AND r.[ReqType] = -1) OR
-				(@Type = 2 AND r.[ReqType] = -2) OR
-				(@Type = 3 AND v.[Published] = 1 AND t.Approved IS NULL)
+				(@Type = 2 AND r.[ReqType] = -2 AND v.[BaselineDate] IS NULL) OR
+				(@Type = 3 AND v.[Published] = 1 AND t.[Approved] IS NULL)
 			)
 		GROUP BY r.RequirementID
 		ORDER BY MAX(v.[RevisionDate]) DESC

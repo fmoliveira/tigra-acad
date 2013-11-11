@@ -45,7 +45,11 @@ namespace Tigra.Models
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
             }
 
-            if (this.Published == false)
+            if (item.BaselineDate.HasValue)
+            {
+                this.Status = "Implementado";
+            }
+            else if (this.Published == false)
             {
                 this.Status = "Em edição";
             }

@@ -21,5 +21,6 @@ namespace Tigra.Database
         public string Tag { get; set; }
         public string Title { get; set; }
         public bool Published { get; set; }
+        public Nullable<System.DateTime> BaselineDate { get; set; }
     }
 }

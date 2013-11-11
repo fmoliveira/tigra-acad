@@ -12,6 +12,7 @@ BEGIN
 		[Message] VARCHAR(250) NOT NULL CHECK(LEN([Message]) >= 10),
 		[Title] VARCHAR(100) NOT NULL CHECK(LEN([Title]) >= 10),
 		[Tag] VARCHAR(100) NOT NULL,
+		[BaselineDate] DATETIME2(0) NULL,
 		CONSTRAINT [pk_Tigra_RequirementRevisions_Key] PRIMARY KEY ([RevisionID]),
 		CONSTRAINT [fk_Tigra_RequirementRevisions_Req] FOREIGN KEY ([RequirementID]) REFERENCES [Tigra].[Requirements] ([RequirementID]),
 		CONSTRAINT [fk_Tigra_RequirementRevisions_User] FOREIGN KEY ([UserID]) REFERENCES [Tigra].[UserAccounts] ([UserID])

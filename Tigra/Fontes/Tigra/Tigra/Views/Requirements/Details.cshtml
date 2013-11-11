@@ -37,18 +37,21 @@
                     <a class="btn btn-lg btn-info">Aguardando avaliação...</a>
                 }
             }
-            else
+            else if (requisito.Implemented == false)
             {
                 <div class="btn-group">
                     <a class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
-                        Documentar <span class="caret"></span>
+                        Finalizar Requisito <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>@Html.ActionLink("Criar novo requisito", "NewRequirement", routevalues)</li>
-                        <li>@Html.ActionLink("Utilizar requisito existente", "ExistingRequirement", routevalues)</li>
+                        <li>@Html.ActionLink("Requisito implementado", "MarkAsDone", routevalues)</li>
                     </ul>
                 </div>
             }
+            else
+            {
+                <a class="btn btn-lg btn-primary" href="#" onclick="return false;"><span class="glyphicon glyphicon-lock"></span> Requisito Finalizado</a>
+            }
         }
-    }
+}
 </div>

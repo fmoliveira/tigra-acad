@@ -20,7 +20,7 @@ BEGIN
 	END
 
 	SELECT r.[ReqType], v.[RevisionID], r.[RequirementID], v.[RevisionNumber], v.[RevisionDate]
-		, v.[Published], v.[UserID], v.[Tag], v.[Title], t.[Text]
+		, v.[Published], v.[UserID], v.[Tag], v.[Title], t.[Text], v.[BaselineDate]
 	FROM [Tigra].[RequirementRevisions] AS v
 		INNER JOIN [Tigra].[Requirements] AS r ON r.[RequirementID] = v.[RequirementID]
 		INNER JOIN [Tigra].[RequirementTexts] AS t ON t.[RevisionID] = v.[RevisionID]
