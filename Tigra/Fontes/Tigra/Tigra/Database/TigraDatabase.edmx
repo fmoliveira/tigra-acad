@@ -274,6 +274,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="GetBaselineList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="CellID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetLatestRequirements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="CellID" Type="int" Mode="In" />
           <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
@@ -479,6 +482,9 @@
             <Parameter Name="CellID" Mode="In" Type="Int32" />
             <Parameter Name="ReqTypeID" Mode="In" Type="Int16" />
             <Parameter Name="BaselineDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetBaselineList" ReturnType="Collection(TigraModel.GetBaselineList_Result)">
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Baseline">
@@ -797,6 +803,12 @@
           <Property Type="Boolean" Name="Published" Nullable="false" />
           <Property Type="DateTime" Name="BaselineDate" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetBaselineList_Result">
+          <Property Type="Int32" Name="BaselineID" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="DateTime" Name="SetDate" Nullable="false" />
+          <Property Type="String" Name="Message" Nullable="false" MaxLength="500" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -993,6 +1005,16 @@
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Published" ColumnName="Published" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetBaselineList" FunctionName="TigraModel.Store.GetBaselineList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetBaselineList_Result">
+                <ScalarProperty Name="BaselineID" ColumnName="BaselineID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SetDate" ColumnName="SetDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

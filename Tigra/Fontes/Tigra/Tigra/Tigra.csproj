@@ -148,6 +148,7 @@
     <Compile Include="Controllers\BootstrapBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CellsController.cs" />
     <Compile Include="Controllers\RequirementsController.cs" />
+    <Compile Include="Controllers\BaselineController.cs" />
     <Compile Include="Controllers\RevisionController.cs" />
     <Compile Include="Controllers\StoriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\TeamsController.cs" />
@@ -160,6 +161,9 @@
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Cell.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\GetBaselineList_Result.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\GetLatestRequirements_Result.cs">
@@ -226,6 +230,7 @@
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
     <Compile Include="Models\RateTopicModel.cs" />
+    <Compile Include="Models\BaselineIndexModel.cs" />
     <Compile Include="Models\RatingsIndexModel.cs" />
     <Compile Include="Models\RequirementsDetailsModel.cs" />
     <Compile Include="Models\RequirementsIndexModel.cs" />
