@@ -49,6 +49,11 @@ namespace Tigra.Models
                 var b = ctx.GetLatestRequirements(item.CellID, null, 2).ToList();
                 b.ForEach(i => items.Add(new HomeListItemModel(i.Tag, i.Title, i.Text)));
                 this.Lists[1].Items = items.ToArray();
+
+                items = new List<HomeListItemModel>();
+                var c = ctx.GetLatestRequirements(item.CellID, null, 3).ToList();
+                c.ForEach(i => items.Add(new HomeListItemModel(i.Tag, i.Title, i.Text)));
+                this.Lists[2].Items = items.ToArray();
             }
         }
     }

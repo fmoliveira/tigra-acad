@@ -33,10 +33,12 @@ BEGIN
 		SElECT TOP 5 r.[RequirementID], MAX(v.[RevisionNumber]) AS [RevisionNumber]
 		FROM [Tigra].[Requirements] AS r
 			INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.RequirementID = r.RequirementID
+			LEFT JOIN [Tigra].[RequirementRatings] AS t ON t.RevisionID = v.RevisionID
 		WHERE r.[CellID] = @CellID AND v.[RevisionDate] <= @BaselineDate AND
 			(
 				(@Type = 1 AND r.[ReqType] = -1) OR
-				(@Type = 2 AND r.[ReqType] = -2)
+				(@Type = 2 AND r.[ReqType] = -2) OR
+				(@Type = 3 AND v.[Published] = 1 AND t.Approved IS NULL)
 			)
 		GROUP BY r.RequirementID
 		ORDER BY MAX(v.[RevisionDate]) DESC
