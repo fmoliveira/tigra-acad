@@ -37,7 +37,6 @@ namespace Tigra.Models
             this.Modified = item.RevisionDate;
             this.Summary = item.Title;
 
-
             using (var ctx = new Entities())
             {
                 int logged = Authentication.GetLoggedUser().UserID;
