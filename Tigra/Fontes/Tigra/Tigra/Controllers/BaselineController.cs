@@ -20,5 +20,12 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult Create()
+        {
+            var model = new BaselineCreateModel();
+            return View(model);
+        }
+
     }
 }

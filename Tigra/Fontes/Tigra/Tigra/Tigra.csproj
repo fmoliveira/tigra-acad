@@ -229,6 +229,7 @@
     <Compile Include="Models\AuthCookieModel.cs" />
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
+    <Compile Include="Models\BaselineCreateModel.cs" />
     <Compile Include="Models\RateTopicModel.cs" />
     <Compile Include="Models\BaselineIndexModel.cs" />
     <Compile Include="Models\RatingsIndexModel.cs" />
@@ -521,9 +522,11 @@
     <Content Include="Views\Revision\Rate.cshtml" />
     <Content Include="Views\shared\EditorTemplates\StarRating.cshtml" />
     <Content Include="Views\shared\EditorTemplates\BooleanRadio.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\List_Requirements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Baseline\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
