@@ -13,14 +13,8 @@ namespace Tigra.Models
         [Required, HiddenInput]
         public long Id { get; set; }
 
-        [DisplayName("Clareza"), DataType("StarRating"), Required]
-        public byte RatingA { get; set; }
-
-        [DisplayName("Detalhamento"), DataType("StarRating"), Required]
-        public byte RatingB { get; set; }
-
-        [DisplayName("Objetividade"), DataType("StarRating"), Required]
-        public byte RatingC { get; set; }
+        [DisplayName("Aprovar"), DataType("BooleanRadio"), Required]
+        public bool Approved { get; set; }
 
         [DisplayName("Comentários"), DataType(DataType.MultilineText), Required, MaxLength(250)]
         public string Comments { get; set; }
@@ -33,7 +27,7 @@ namespace Tigra.Models
         public UserRatingModel(long revisionId)
         {
             this.Id = revisionId;
-            this.RatingA = this.RatingB = this.RatingC = 0;
+            this.Approved = false;
         }
     }
 }

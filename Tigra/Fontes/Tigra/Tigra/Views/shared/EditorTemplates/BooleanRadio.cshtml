@@ -1,0 +1,11 @@
+﻿@model bool
+<div class="btn-group" data-toggle="buttons">
+    <label class="btn btn-default">
+        @Html.RadioButtonFor(model => model, true)
+        Sim
+    </label>
+    <label class="btn btn-default">
+        @Html.RadioButtonFor(model => model, false)
+        Não
+    </label>
+</div>

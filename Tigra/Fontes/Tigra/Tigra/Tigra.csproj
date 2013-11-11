@@ -515,6 +515,7 @@
     <Content Include="Views\Revision\Index.cshtml" />
     <Content Include="Views\Revision\Rate.cshtml" />
     <Content Include="Views\shared\EditorTemplates\StarRating.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\BooleanRadio.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
