@@ -528,10 +528,10 @@
     <Content Include="Views\shared\EditorTemplates\BooleanRadio.cshtml" />
     <Content Include="Views\shared\EditorTemplates\List_Requirements.cshtml" />
     <Content Include="Views\shared\EditorTemplates\DateTime_Display.cshtml" />
+    <Content Include="Views\Baseline\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Baseline\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
