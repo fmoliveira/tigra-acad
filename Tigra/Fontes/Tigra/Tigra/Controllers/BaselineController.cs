@@ -35,5 +35,38 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
+        [HttpPost]
+        public ActionResult Create(BaselineCreateModel model)
+        {
+            if (model.Descricao == null || model.Descricao.Trim().Length == 0)
+            {
+                Error("Digite a descrição do baseline!");
+            }
+            else
+            {
+                using (var ctx = new Entities())
+                {
+                    Baseline bl = new Baseline();
+                    bl.CellID = RouteData.Values["cell"].GetCellID();
+                    bl.UserID = Authentication.GetLoggedUser().UserID;
+                    bl.SetDate = DateTime.Parse(model.SetDate);
+                    bl.Message = model.Descricao;
+                    ctx.Baselines.Add(bl);
+
+                    if (ctx.SaveChanges() != 0)
+                    {
+                        Success("Baseline registrado com sucesso!");
+                        return RedirectToAction("Index");
+                    }
+                    else
+                    {
+                        Error("Erro ao tentar registrar o baseline!");
+                    }
+                }
+            }
+            return View(model);
+        }
+
     }
 }

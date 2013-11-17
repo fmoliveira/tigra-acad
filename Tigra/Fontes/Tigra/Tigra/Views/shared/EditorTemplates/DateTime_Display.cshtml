@@ -1,0 +1,3 @@
+﻿@model string
+@Html.HiddenFor(model => model)
+<p>@Html.Raw(@System.DateTime.Parse(Model).AddHours(-2).ToString("dd/MM/yyyy HH:mm:ss"))</p>

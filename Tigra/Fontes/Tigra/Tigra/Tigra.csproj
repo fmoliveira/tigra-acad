@@ -527,6 +527,7 @@
     <Content Include="Views\shared\EditorTemplates\StarRating.cshtml" />
     <Content Include="Views\shared\EditorTemplates\BooleanRadio.cshtml" />
     <Content Include="Views\shared\EditorTemplates\List_Requirements.cshtml" />
+    <Content Include="Views\shared\EditorTemplates\DateTime_Display.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
