@@ -44,6 +44,7 @@ namespace Tigra.Models
         public bool Rated = false;
         public bool Approved = false;
         public bool Implemented = false;
+        public string ComentarioRevisao = string.Empty;
 
         public RequirementsDetailsModel()
         {
@@ -66,6 +67,11 @@ namespace Tigra.Models
                 int logged = Authentication.GetLoggedUser().UserID;
                 this.Rated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
+
+                if (this.Rated)
+                {
+                    this.ComentarioRevisao = (ctx.UserRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID).Comments);
+                }
             }
 
             if (item.BaselineDate.HasValue)
@@ -83,7 +89,13 @@ namespace Tigra.Models
             }
             else if (this.Approved == false)
             {
-                this.Status = "Reprovado, por favor melhorar a qualidade do texto";
+                this.Status = "Reprovado";
+
+                if (this.ComentarioRevisao != null && this.ComentarioRevisao.Length != 0)
+                {
+                    this.Status += " - Comentários: " + this.ComentarioRevisao;
+                }
+
                 this.Published = false;
             }
             else
