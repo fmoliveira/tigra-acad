@@ -45,7 +45,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Criar novo requisito", "NewRequirement", routevalues)</li>
-                        <li>@Html.ActionLink("Utilizar requisito existente", "ExistingRequirement", routevalues)</li>
+                        <li>@Html.ActionLink("Utilizar requisito existente", "ExistingRequirement", routevalues, new { @data_tigra = "modal" })</li>
                     </ul>
                 </div>
             }

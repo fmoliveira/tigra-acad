@@ -88,6 +88,19 @@ namespace Tigra.Controllers
         }
 
         [Authorize]
+        public ActionResult ExistingRequirement()
+        {
+            List<ExistingRequirementsModel> reqs = new List<ExistingRequirementsModel>();
+            using (var ctx = new Entities())
+            {
+                int cellID = RouteData.Values["cell"].GetCellID();
+                List<GetExistingRequirements_Result> list = ctx.GetExistingRequirements(cellID).ToList();
+                list.ForEach(i => reqs.Add(new ExistingRequirementsModel(i)));
+            }
+            return View(reqs);
+        }
+
+        [Authorize]
         public ActionResult Create()
         {
             var model = new StoriesCreateModel();

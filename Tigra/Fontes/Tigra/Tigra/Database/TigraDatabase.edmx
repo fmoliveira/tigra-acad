@@ -277,6 +277,9 @@
         <Function Name="GetBaselineList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="CellID" Type="int" Mode="In" />
         </Function>
+        <Function Name="GetExistingRequirements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="CellID" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetLatestRequirements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="CellID" Type="int" Mode="In" />
           <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
@@ -490,7 +493,10 @@
           <Parameter Name="CellID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetRequirementsForBaseline" ReturnType="Collection(TigraModel.GetRequirementsForBaseline_Result)">
-            <Parameter Name="CellID" Mode="In" Type="Int32" />
+          <Parameter Name="CellID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetExistingRequirements" ReturnType="Collection(TigraModel.GetExistingRequirements_Result)">
+          <Parameter Name="CellID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Baseline">
@@ -826,6 +832,18 @@
           <Property Type="Boolean" Name="Published" Nullable="false" />
           <Property Type="DateTime" Name="BaselineDate" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetExistingRequirements_Result">
+          <Property Type="Int32" Name="RequirementID" Nullable="false" />
+          <Property Type="Int64" Name="RevisionID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="false" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="Boolean" Name="Published" Nullable="false" />
+          <Property Type="DateTime" Name="BaselineDate" Nullable="true" />
+          <Property Type="String" Name="Text" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1038,6 +1056,21 @@
           <FunctionImportMapping FunctionImportName="GetRequirementsForBaseline" FunctionName="TigraModel.Store.GetRequirementsForBaseline">
             <ResultMapping>
               <ComplexTypeMapping TypeName="TigraModel.GetRequirementsForBaseline_Result">
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Published" ColumnName="Published" />
+                <ScalarProperty Name="BaselineDate" ColumnName="BaselineDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetExistingRequirements" FunctionName="TigraModel.Store.GetExistingRequirements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetExistingRequirements_Result">
                 <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
                 <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
                 <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
