@@ -23,7 +23,15 @@ namespace Tigra.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            var model = new BaselineCreateModel();
+            List<BaselineRequirementsModel> reqs = new List<BaselineRequirementsModel>();
+            using (var ctx = new Entities())
+            {
+                int cellID = RouteData.Values["cell"].GetCellID();
+                List<GetRequirementsForBaseline_Result> list = ctx.GetRequirementsForBaseline(cellID).ToList();
+                list.ForEach(i => reqs.Add(new BaselineRequirementsModel(i)));
+            }
+
+            var model = new BaselineCreateModel(reqs);
             return View(model);
         }
 

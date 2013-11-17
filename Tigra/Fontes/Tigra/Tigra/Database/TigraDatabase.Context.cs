@@ -179,5 +179,14 @@ namespace Tigra.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBaselineList_Result>("GetBaselineList", cellIDParameter);
         }
+    
+        public virtual ObjectResult<GetRequirementsForBaseline_Result> GetRequirementsForBaseline(Nullable<int> cellID)
+        {
+            var cellIDParameter = cellID.HasValue ?
+                new ObjectParameter("CellID", cellID) :
+                new ObjectParameter("CellID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRequirementsForBaseline_Result>("GetRequirementsForBaseline", cellIDParameter);
+        }
     }
 }
