@@ -172,7 +172,7 @@ namespace Tigra.Controllers
 
                     if (ctx.TagExists(RequirementTypes.Story, cellID, model.Id, model.Tag))
                     {
-                        Warning("Já existe outra história com este nome!");
+                        Warning("Já existe outro tópico com este nome!");
                     }
                     else
                     {

@@ -9,7 +9,7 @@ using Tigra.Models;
 
 namespace Tigra.Controllers
 {
-    [DisplayName("Baseline"), Description("O baseline é um controle histórico do status de todos os requisitos em cada versão de software gerada.")]
+    [DisplayName("Baseline"), Description("O baseline é um controle histórico do status de todos os requisitos em cada versão lançada.")]
     public class BaselineController : BootstrapBaseController
     {
         [Authorize]

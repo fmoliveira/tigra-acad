@@ -141,7 +141,7 @@ namespace Tigra
         {
             var req = ctx.RequirementRevisions.FirstOrDefault(i => i.RevisionID == revisionId);
             int id = (req != null) ? req.RequirementID : 0;
-            var rvt = ctx.RequirementRevisions.FirstOrDefault(i => i.Requirement.ReqType == type && i.Requirement.CellID == cellId && i.RequirementID != id && i.Tag == tag);
+            var rvt = ctx.RequirementRevisions.FirstOrDefault(i => i.Requirement.CellID == cellId && i.RequirementID != id && i.Tag == tag);
             return (rvt != null);
         }
     }

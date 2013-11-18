@@ -46,10 +46,24 @@ BEGIN
 		END
 	END
 
+	/* If it's a reproved revision, mark it to increase a revision number. */
+	IF EXISTS (SELECT 1 FROM [Tigra].[RequirementRatings] WHERE [RevisionID] = @RevisionID AND [Approved] = 0)
+	BEGIN
+		SELECT @ReqTypeID = -49;
+	END
+
+	/* If it's publishing, get story ID. */
+	IF ((@ReqTypeID = -49 OR @ReqTypeID = -99) AND @RevisionID IS NOT NULL AND @StoryID IS NULL)
+	BEGIN
+		SELECT @StoryID = [LeftRevisionID] FROM [Tigra].[RequirementRelations] WHERE [RightRevisionID] = @RevisionID;
+	END
+
 	/* Determines whether revision number should be incremented. */
 	IF (COALESCE(@RevisionNumber, 0) < 1)
 		OR (DATEDIFF(MINUTE, @RevisionDate, SYSUTCDATETIME()) > 60)
 		OR (@RevisionUserID <> @UserID)
+		OR (@ReqTypeID = -49)
+		OR (@ReqTypeID = -99)
 	BEGIN
 		SELECT @RevisionID = NULL, @RevisionNumber = (COALESCE(@RevisionNumber, 0) + 1);
 	END

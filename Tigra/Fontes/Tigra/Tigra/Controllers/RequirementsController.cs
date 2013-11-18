@@ -10,7 +10,7 @@ using Tigra.Models;
 
 namespace Tigra.Controllers
 {
-    [DisplayName("Requisitos"), Description("O documento de requisitos de software é a declaração oficial do que os desenvolvedores de sistema devem implementar. Deve incluir os requisitos de usuário de um sistema e uma especificação detalhada dos requisitos do sistema. (Sommerville)")]
+    [DisplayName("Requisitos"), Description("O documento de requisitos de software é a declaração oficial do que os desenvolvedores de sistema devem implementar. Deve incluir os requisitos de usuário de um sistema e uma especificação detalhada dos requisitos do sistema.")]
     public class RequirementsController : BootstrapBaseController
     {
 
@@ -42,7 +42,7 @@ namespace Tigra.Controllers
                 int cellID = RouteData.Values["cell"].GetCellID();
 
                 int userID = Authentication.GetLoggedUser().UserID;
-                int ret = ctx.SaveRequirement(RequirementTypes.Requirement, cellID, model.RevisionId, userID, "Publicação de requisito", tag, model.Summary, model.Text, null);
+                int ret = ctx.SaveRequirement(RequirementTypes.Publish, cellID, model.RevisionId, userID, "Publicação de requisito", tag, model.Summary, model.Text, null);
 
                 if (ret != 0)
                 {
@@ -63,6 +63,65 @@ namespace Tigra.Controllers
         }
 
         [Authorize]
+        public ActionResult Edit(string tag)
+        {
+            using (var ctx = new Entities())
+            {
+                StoriesCreateModel model = new StoriesCreateModel(ctx.GetRequirementDetails(tag, null).FirstOrDefault());
+                RouteData.Values["title"] = model.Summary;
+                return View("Create", model);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(StoriesCreateModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var ctx = new Entities())
+                {
+                    model.Tag = Utils.Tagify(model.Summary);
+                    int cellID = RouteData.Values["cell"].GetCellID();
+
+                    if (ctx.TagExists(RequirementTypes.Requirement, cellID, model.Id, model.Tag))
+                    {
+                        Warning("Já existe outro tópico com este nome!");
+                    }
+                    else
+                    {
+                        int userID = Authentication.GetLoggedUser().UserID;
+                        int ret = ctx.SaveRequirement(RequirementTypes.Requirement, cellID, model.Id, userID, model.Message, model.Tag, model.Summary, model.Text, null);
+
+                        if (ret != 0)
+                        {
+                            Success("Requisito alterado com sucesso!");
+                            return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                        }
+                        else
+                        {
+                            Error("Erro ao tentar alterar o requisito!");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Warning("Preencha o formulário corretamente!");
+            }
+            return View("Create", model);
+        }
+
+        [Authorize]
+        public ActionResult History(string tag)
+        {
+            var model = StoriesHistoryModel.GetModels(tag);
+            RouteData.Values["title"] = model[0].Summary;
+            return View(model);
+        }
+
+        [Authorize]
         public ActionResult MarkAsDone(string tag)
         {
             using (var ctx = new Entities())
@@ -71,7 +130,7 @@ namespace Tigra.Controllers
                 int cellID = RouteData.Values["cell"].GetCellID();
 
                 int userID = Authentication.GetLoggedUser().UserID;
-                int ret = ctx.SaveRequirement(RequirementTypes.MarkAsDone, cellID, model.RevisionId, userID, "Implementação de requisito", tag, model.Summary, model.Text, null);
+                int ret = ctx.SaveRequirement(RequirementTypes.MarkAsDone, cellID, model.RevisionId, userID, "Requisito implementado", tag, model.Summary, model.Text, null);
 
                 if (ret != 0)
                 {

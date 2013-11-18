@@ -11,6 +11,8 @@ namespace Tigra
 
         public const short Requirement = -2;
 
+        public const short Publish = -49;
+
         public const short MarkAsDone = -99;
     }
 }
