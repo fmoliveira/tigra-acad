@@ -26,7 +26,7 @@ BEGIN
 		, v.[Published], v.[BaselineDate]
 	FROM LatestReqs AS r
 		INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = r.[RequirementID] AND v.[RevisionNumber] = r.[RevisionNumber]
-	WHERE v.[BaselineDate] IS NOT NULL AND (@LatestBaseline IS NULL OR v.[BaselineDate] < @LatestBaseline)
+	WHERE v.[BaselineDate] IS NOT NULL AND (@LatestBaseline IS NULL OR v.[BaselineDate] > @LatestBaseline)
 	ORDER BY [Title] ASC;
 
 END
