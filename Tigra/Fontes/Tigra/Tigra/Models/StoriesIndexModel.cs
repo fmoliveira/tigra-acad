@@ -20,7 +20,7 @@ namespace Tigra.Models
         [DisplayName("Data")]
         public DateTime Modified { get; set; }
 
-        [DisplayName("Status")]
+        [DisplayName("Estado")]
         public string Status { get; set; }
 
         [DisplayName("Título")]
@@ -55,12 +55,12 @@ namespace Tigra.Models
             }
             else if (this.Approved == false)
             {
-                this.Status = "Reprovado";
+                this.Status = "Reprovada";
                 this.Published = false;
             }
             else
             {
-                this.Status = "Aprovado";
+                this.Status = "Aprovada";
             }
         }
 

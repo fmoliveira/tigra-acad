@@ -38,7 +38,7 @@ BEGIN
 			(
 				(@Type = 1 AND r.[ReqType] = -1) OR
 				(@Type = 2 AND r.[ReqType] = -2 AND v.[BaselineDate] IS NULL) OR
-				(@Type = 3 AND v.[Published] = 1 AND t.[Approved] IS NULL)
+				(@Type = 3 AND v.[Published] = 1 AND t.[Approved] IS NULL AND v.[BaselineDate] IS NULL)
 			)
 		GROUP BY r.RequirementID
 		ORDER BY MAX(v.[RevisionDate]) DESC

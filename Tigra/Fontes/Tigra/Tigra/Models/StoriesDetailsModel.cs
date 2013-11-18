@@ -26,7 +26,7 @@ namespace Tigra.Models
         [DisplayName("Data da revisão")]
         public DateTime RevisionDate { get; set; }
 
-        [DisplayName("Status")]
+        [DisplayName("Estado")]
         public string Status { get; set; }
 
         [DisplayName("Título")]
@@ -43,6 +43,7 @@ namespace Tigra.Models
         public bool Published = false;
         public bool Rated = false;
         public bool Approved = false;
+        public string ComentarioRevisao = string.Empty;
 
         public StoriesDetailsModel()
         {
@@ -65,6 +66,11 @@ namespace Tigra.Models
                 int logged = Authentication.GetLoggedUser().UserID;
                 this.Rated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
+
+                if (this.Rated)
+                {
+                    this.ComentarioRevisao = (ctx.UserRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID).Comments);
+                }
             }
 
             if (this.Published == false)
@@ -73,16 +79,22 @@ namespace Tigra.Models
             }
             else if (this.Rated == false)
             {
-                this.Status = "Publicado, aguardando avaliação";
+                this.Status = "Publicada, aguardando avaliação";
             }
             else if (this.Approved == false)
             {
-                this.Status = "Reprovado, por favor melhorar a qualidade do texto";
+                this.Status = "Reprovado";
+
+                if (this.ComentarioRevisao != null && this.ComentarioRevisao.Length != 0)
+                {
+                    this.Status += " - Comentários: " + this.ComentarioRevisao;
+                }
+
                 this.Published = false;
             }
             else
             {
-                this.Status = "Aprovado, aguardando documentação";
+                this.Status = "Aprovada, aguardando documentação";
             }
         }
 

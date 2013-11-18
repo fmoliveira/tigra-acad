@@ -24,7 +24,7 @@ BEGIN
 	FROM LatestReqs AS r
 		INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = r.[RequirementID] AND v.[RevisionNumber] = r.[RevisionNumber]
 		LEFT JOIN [Tigra].[RequirementRatings] AS t ON t.[RevisionID] = v.[RevisionID]
-	WHERE v.[Published] = 1 AND t.[Approved] IS NULL
+	WHERE v.[Published] = 1 AND t.[Approved] IS NULL AND v.[BaselineDate] IS NULL
 	ORDER BY [Title] ASC;
 
 END

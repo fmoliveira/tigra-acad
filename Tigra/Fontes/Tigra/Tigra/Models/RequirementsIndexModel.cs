@@ -20,7 +20,7 @@ namespace Tigra.Models
         [DisplayName("Data")]
         public DateTime Modified { get; set; }
 
-        [DisplayName("Status")]
+        [DisplayName("Estado")]
         public string Status { get; set; }
 
         [DisplayName("Título")]
@@ -29,6 +29,7 @@ namespace Tigra.Models
         public bool Published = false;
         public bool Rated = false;
         public bool Approved = false;
+        public DateTime? LatestBaseline = null;
 
         public RequirementsIndexModel(GetRequirementsIndex_Result item)
         {
@@ -43,11 +44,27 @@ namespace Tigra.Models
                 this.Published = item.Published;
                 this.Rated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
+
+                var bl = (from i in ctx.Baselines orderby i.SetDate descending select i.SetDate).Take(1);
+
+                if (bl != null && bl.Count() == 1)
+                {
+                    this.LatestBaseline = bl.ToArray()[0];
+                }
             }
 
             if (item.BaselineDate.HasValue)
             {
                 this.Status = "Implementado";
+
+                if (this.LatestBaseline.HasValue && this.LatestBaseline.Value >= item.BaselineDate.Value)
+                {
+                    this.Status = "Baseline";
+                }
+                else
+                {
+                    this.Status = "Implementado";
+                }
             }
             else if (this.Published == false)
             {

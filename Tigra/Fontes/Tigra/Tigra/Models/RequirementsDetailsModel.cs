@@ -26,7 +26,7 @@ namespace Tigra.Models
         [DisplayName("Data da revisão")]
         public DateTime RevisionDate { get; set; }
 
-        [DisplayName("Status")]
+        [DisplayName("Estado")]
         public string Status { get; set; }
 
         [DisplayName("Título")]
@@ -45,6 +45,7 @@ namespace Tigra.Models
         public bool Approved = false;
         public bool Implemented = false;
         public string ComentarioRevisao = string.Empty;
+        public DateTime? LatestBaseline = null;
 
         public RequirementsDetailsModel()
         {
@@ -72,12 +73,27 @@ namespace Tigra.Models
                 {
                     this.ComentarioRevisao = (ctx.UserRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID).Comments);
                 }
+
+                var bl = (from i in ctx.Baselines orderby i.SetDate descending select i.SetDate).Take(1);
+
+                if (bl != null && bl.Count() == 1)
+                {
+                    this.LatestBaseline = bl.ToArray()[0];
+                }
             }
 
             if (item.BaselineDate.HasValue)
             {
                 this.Implemented = true;
-                this.Status = "Implementado";
+
+                if (this.LatestBaseline.HasValue && this.LatestBaseline.Value >= item.BaselineDate.Value)
+                {
+                    this.Status = "Baseline";
+                }
+                else
+                {
+                    this.Status = "Implementado";
+                }
             }
             else if (this.Published == false)
             {
