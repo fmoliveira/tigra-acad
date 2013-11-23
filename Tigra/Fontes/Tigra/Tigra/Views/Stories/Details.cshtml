@@ -30,7 +30,7 @@
             {
                 if (Tigra.Database.Authentication.IsLoggedUserManager())
                 {
-                    <a class="btn btn-lg btn-primary" href="#">Avaliar História</a>
+                    @Html.ActionLink("Avaliar História", "Details", "Revision", routevalues, new { @class = "btn btn-lg btn-primary" })
                 }
                 else
                 {

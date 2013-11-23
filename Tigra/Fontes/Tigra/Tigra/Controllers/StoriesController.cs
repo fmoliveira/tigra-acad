@@ -207,7 +207,7 @@ namespace Tigra.Controllers
                 int cellID = RouteData.Values["cell"].GetCellID();
 
                 int userID = Authentication.GetLoggedUser().UserID;
-                int ret = ctx.SaveRequirement(RequirementTypes.Story, cellID, model.RevisionId, userID, "Publicação de história", tag, model.Summary, model.Text, null);
+                int ret = ctx.SaveRequirement(RequirementTypes.Publish, cellID, model.RevisionId, userID, "Publicação de história", tag, model.Summary, model.Text, null);
 
                 if (ret != 0)
                 {
