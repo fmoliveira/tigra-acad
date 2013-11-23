@@ -68,5 +68,11 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult Details(int tag)
+        {
+            return View();
+        }
+
     }
 }
