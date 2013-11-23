@@ -536,6 +536,7 @@
     <Content Include="Views\shared\EditorTemplates\DateTime_Display.cshtml" />
     <Content Include="Views\Baseline\Index.cshtml" />
     <Content Include="Views\Stories\ExistingRequirement.cshtml" />
+    <Content Include="Views\Baseline\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
