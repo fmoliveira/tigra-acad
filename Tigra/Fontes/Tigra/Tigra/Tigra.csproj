@@ -265,10 +265,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="App_Data\TigraDb.mdf" />
-    <Content Include="App_Data\TigraDb_log.ldf">
-      <DependentUpon>TigraDb.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\bootstrap\bootstrap-mvc-validation.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
@@ -489,7 +485,9 @@
     <Content Include="scripts\tigra.star-rating.js" />
     <Content Include="Templates\pt-BR\Mail.LostPassword.html" />
     <Content Include="Templates\pt-BR\Mail.ConfirmAccountCreation.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -539,7 +537,9 @@
     <Content Include="Views\Baseline\Index.cshtml" />
     <Content Include="Views\Stories\ExistingRequirement.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

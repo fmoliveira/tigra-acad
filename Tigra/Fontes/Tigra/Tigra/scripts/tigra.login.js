@@ -1,5 +1,6 @@
 ﻿/* Auto focus login form when dropdown is shown. */
 $('#login-menu').on('shown.bs.dropdown', function () {
+    $('#login-menu form').find('.alert').remove();
 	setTimeout(function () { $('#login-menu :input[autofocus="autofocus"]').focus() }, 0);
 });
 
