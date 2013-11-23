@@ -2,11 +2,15 @@
 @model Tigra.Models.BaselineDetailsModel
 
 <dl class="dl-horizontal">
-    <dt>Título:</dt>
-    <dd>@Html.DisplayFor(Model => Model.Descricao)</dd>
-
     <dt>Data:</dt>
     <dd>@Html.DisplayFor(Model => Model.SetDate)</dd>
+
+    <dt>Título:</dt>
+    <dd>@Html.DisplayFor(Model => Model.Descricao)</dd>
 </dl>
 
 @Html.DisplayFor(Model => Model.Requisitos)
+
+<p>
+    @Html.ActionLink("Retornar à listagem", "Index", null, new { @class = "btn btn-lg btn-primary" })
+</p>
