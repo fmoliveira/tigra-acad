@@ -71,7 +71,8 @@ namespace Tigra.Controllers
         [Authorize]
         public ActionResult Details(int tag)
         {
-            return View();
+            BaselineDetailsModel model = new BaselineDetailsModel(tag);
+            return View(model);
         }
 
     }

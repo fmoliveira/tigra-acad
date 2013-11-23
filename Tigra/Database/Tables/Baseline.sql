@@ -7,7 +7,7 @@ BEGIN
 		[CellID] INT NOT NULL,
 		[UserID] INT NOT NULL,
 		[SetDate] DATETIME2(0) NOT NULL DEFAULT SYSUTCDATETIME(),
-		[Message] VARCHAR(500) NOT NULL,
+		[Message] VARCHAR(20) NOT NULL,
 		CONSTRAINT [pk_Tigra_Baseline_Key] PRIMARY KEY ([BaselineID])
 	);
 

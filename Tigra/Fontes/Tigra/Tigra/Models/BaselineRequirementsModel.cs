@@ -36,5 +36,14 @@ namespace Tigra.Models
             this.Revisao = res.RevisionNumber;
             this.Modificacao = res.RevisionDate;
         }
+
+        public BaselineRequirementsModel(GetBaselineRequirements_Result res)
+        {
+            this.Id = res.RevisionID;
+            this.Title = res.Title;
+            this.Autor = new UserNameModel(res.UserID);
+            this.Revisao = res.RevisionNumber;
+            this.Modificacao = res.BaselineDate;
+        }
     }
 }

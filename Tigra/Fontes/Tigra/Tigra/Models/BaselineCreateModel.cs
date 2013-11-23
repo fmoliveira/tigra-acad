@@ -16,7 +16,7 @@ namespace Tigra.Models
         [Required]
         public int Id { get; set; }
 
-        [DisplayName("Descrição")]
+        [DisplayName("Título"), MaxLength(20)]
         public string Descricao { get; set; }
 
         [DisplayName("Data do Baseline"), DataType("DateTime_Display")]

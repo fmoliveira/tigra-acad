@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a7a8642c70ea4344a0e50b7a40a2cdf9" Name="Diagram1">
+      <Diagram DiagramId="a7a8642c70ea4344a0e50b7a40a2cdf9" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="TigraModel.Baseline" Width="1.5" PointX="9.7572262500213576" PointY="29.24670614173948" />
         <EntityTypeShape EntityType="TigraModel.Cell" Width="1.5" PointX="1.2882378777899954" PointY="30.431881233319586" />
         <EntityTypeShape EntityType="TigraModel.RequirementRevision" Width="1.5" PointX="7.5713229587168076" PointY="5.6654204007542788" />

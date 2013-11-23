@@ -1,0 +1,40 @@
+﻿@using BootstrapSupport
+@model System.Collections.Generic.List<Tigra.Models.BaselineRequirementsModel>
+
+@if (Model == null || Model.Count() == 0) {
+    @:Nenhum requisito implementado.
+}
+else
+{
+<table class="table table-striped">
+    <caption></caption>
+    <thead>
+        <tr>
+            @foreach (var property in Model.VisibleProperties())
+            {
+                <th>
+                    @property.GetLabel()
+                </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    @{ int index = 0; }
+    @foreach (var model in Model)
+    {
+        ViewData[index.ToString()] = model;
+        <tr>
+            @foreach (var property in model.VisibleProperties())
+            {
+                <td>
+                    @Html.Display(index + "." + property.Name)
+                </td>
+            }
+            <td>
+                <a href="#" class="btn btn-primary">Visualizar</a>
+            </td>
+        </tr>
+        index++;
+    }
+</table>
+}

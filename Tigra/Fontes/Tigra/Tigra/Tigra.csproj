@@ -166,6 +166,9 @@
     <Compile Include="Database\GetBaselineList_Result.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\GetBaselineRequirements_Result.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\GetExistingRequirements_Result.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
@@ -236,6 +239,7 @@
     <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Areas\Admin\Models\CellModel.cs" />
     <Compile Include="Models\BaselineCreateModel.cs" />
+    <Compile Include="Models\BaselineDetailsModel.cs" />
     <Compile Include="Models\ExistingRequirementsModel.cs" />
     <Compile Include="Models\BaselineRequirementsModel.cs" />
     <Compile Include="Models\RateTopicModel.cs" />
@@ -537,6 +541,8 @@
     <Content Include="Views\Baseline\Index.cshtml" />
     <Content Include="Views\Stories\ExistingRequirement.cshtml" />
     <Content Include="Views\Baseline\Create.cshtml" />
+    <Content Include="Views\Baseline\Details.cshtml" />
+    <Content Include="Views\shared\DisplayTemplates\List_Requirements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
