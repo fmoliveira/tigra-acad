@@ -68,7 +68,7 @@ namespace Tigra.Controllers
                         if (ret != 0)
                         {
                             Success("Requisito inserido com sucesso!");
-                            return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = RouteData.Values["controller"], @tag = model.Tag, @action = "Details" });
+                            return RedirectToRoute("Details", new { @cell = RouteData.Values["cell"], @controller = "Requirements", @tag = model.Tag, @action = "Details" });
                         }
                         else
                         {
