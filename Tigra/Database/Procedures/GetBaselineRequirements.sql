@@ -17,8 +17,9 @@ BEGIN
 	WITH [BaselineRevisions] AS
 	(
 		SELECT v.[RequirementID], MAX(v.[RevisionNumber]) AS [RevisionNumber]
-		FROM [Tigra].[RequirementRevisions] AS v
-		WHERE v.[BaselineDate] <= @BaselineDate
+		FROM [Tigra].[Requirements] AS r
+			INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = r.[RequirementID]
+		WHERE v.[BaselineDate] <= @BaselineDate AND r.[ReqType] = -2
 		GROUP BY v.[RequirementID]
 	)
 	SELECT v.[RevisionID], v.[RevisionNumber], v.[UserID], v.[Title], v.[BaselineDate]

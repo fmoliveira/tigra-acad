@@ -37,7 +37,7 @@
                     <a class="btn btn-lg btn-info">Aguardando avaliação...</a>
                 }
             }
-            else
+            else if (historia.Implemented == false)
             {
                 <div class="btn-group">
                     <a class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
@@ -48,6 +48,19 @@
                         <li>@Html.ActionLink("Utilizar requisito existente", "ExistingRequirement", routevalues, new { @data_tigra = "modal" })</li>
                     </ul>
                 </div>
+        
+                <div class="btn-group">
+                    <a class="btn btn-lg btn-primary dropdown-toggle" data-toggle="dropdown" href="@Request.Url.LocalPath">
+                        Finalizar História <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("História atendida", "MarkAsDone", routevalues)</li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <a class="btn btn-lg btn-primary" href="#" onclick="return false;"><span class="glyphicon glyphicon-lock"></span> História Finalizada</a>
             }
         }
     }

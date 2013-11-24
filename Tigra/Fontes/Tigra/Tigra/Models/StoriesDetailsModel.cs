@@ -43,6 +43,7 @@ namespace Tigra.Models
         public bool Published = false;
         public bool Rated = false;
         public bool Approved = false;
+        public bool Implemented = false;
         public string ComentarioRevisao = string.Empty;
 
         public StoriesDetailsModel()
@@ -73,7 +74,12 @@ namespace Tigra.Models
                 }
             }
 
-            if (this.Published == false)
+            if(item.BaselineDate.HasValue)
+            {
+                this.Published = this.Rated = this.Implemented = true;
+                this.Status = "Atendida";
+            }
+            else if (this.Published == false)
             {
                 this.Status = "Em edição";
             }

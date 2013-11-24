@@ -29,6 +29,7 @@ namespace Tigra.Models
         public bool Published = false;
         public bool Rated = false;
         public bool Approved = false;
+        public bool Implemented = false;
 
         public StoriesIndexModel(GetRequirementsIndex_Result item)
         {
@@ -45,7 +46,12 @@ namespace Tigra.Models
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
             }
 
-            if (this.Published == false)
+            if(item.BaselineDate.HasValue)
+            {
+                this.Published = this.Rated = this.Implemented = true;
+                this.Status = "Atendida";
+            }
+            else if (this.Published == false)
             {
                 this.Status = "Em edição";
             }

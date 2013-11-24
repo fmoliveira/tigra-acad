@@ -15,14 +15,14 @@ namespace Tigra.Models
         [Required]
         public int Id { get; set; }
 
-        [DisplayName("Data")]
-        public DateTime Modified { get; set; }
-
         [DisplayName("Responsável")]
         public UserNameModel UserName { get; set; }
 
         [DisplayName("Título")]
         public string Message { get; set; }
+
+        [DisplayName("Data")]
+        public DateTime Modified { get; set; }
 
         public BaselineIndexModel(GetBaselineList_Result item)
         {
