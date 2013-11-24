@@ -1,0 +1,23 @@
+﻿@using BootstrapSupport
+@model Tigra.Models.BaselineRequirementDetailsModel
+
+@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">@Model.Title</h4>
+</div>
+<div class="modal-body">
+
+    <p><strong>Autor:</strong> @Html.DisplayFor(m => m.Autor)</p>
+    <p><strong>Revisão:</strong> @Model.Revisao</p>
+    <p><strong>Modificação:</strong> @Html.DisplayFor(m => m.Modificacao)</p>
+    
+    @Html.Raw(Model.Texto)
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+</div>

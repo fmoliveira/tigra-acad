@@ -31,7 +31,7 @@ else
                 </td>
             }
             <td>
-                <a href="#" class="btn btn-info">Visualizar</a>
+                @Html.ActionLink("Visualizar", "View", new { @tag = model.Id }, new { @class = "btn btn-info", @data_tigra = "modal" })
             </td>
         </tr>
         index++;

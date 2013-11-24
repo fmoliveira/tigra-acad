@@ -75,5 +75,16 @@ namespace Tigra.Controllers
             return View(model);
         }
 
+        [Authorize]
+        public ActionResult View(long tag)
+        {
+            using (var ctx = new Entities())
+            {
+                var item = ctx.GetBaselineRequirementDetails(tag).FirstOrDefault();
+                var model = new BaselineRequirementDetailsModel(item);
+                return View(model);
+            }
+        }
+
     }
 }

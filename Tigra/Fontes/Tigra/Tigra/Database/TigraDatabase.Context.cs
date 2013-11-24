@@ -206,5 +206,14 @@ namespace Tigra.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBaselineRequirements_Result>("GetBaselineRequirements", baselineIDParameter);
         }
+    
+        public virtual ObjectResult<GetBaselineRequirementDetails_Result> GetBaselineRequirementDetails(Nullable<long> revisionID)
+        {
+            var revisionIDParameter = revisionID.HasValue ?
+                new ObjectParameter("RevisionID", revisionID) :
+                new ObjectParameter("RevisionID", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBaselineRequirementDetails_Result>("GetBaselineRequirementDetails", revisionIDParameter);
+        }
     }
 }
