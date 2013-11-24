@@ -84,7 +84,7 @@ namespace Tigra.Models
 
             if (item.BaselineDate.HasValue)
             {
-                this.Implemented = true;
+                this.Published = this.Rated = this.Implemented = true;
 
                 if (this.LatestBaseline.HasValue && this.LatestBaseline.Value >= item.BaselineDate.Value)
                 {
