@@ -321,6 +321,13 @@
           <Parameter Name="Text" Type="text" Mode="In" />
           <Parameter Name="StoryID" Type="bigint" Mode="In" />
         </Function>
+        <Function Name="SelectRequirement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="Cell" Type="varchar" Mode="In" />
+          <Parameter Name="LeftTag" Type="varchar" Mode="In" />
+          <Parameter Name="RightTag" Type="varchar" Mode="In" />
+          <Parameter Name="UserID" Type="int" Mode="In" />
+          <Parameter Name="Message" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SubmitRating" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="RevisionID" Type="bigint" Mode="In" />
           <Parameter Name="UserID" Type="int" Mode="In" />
@@ -508,7 +515,14 @@
           <Parameter Name="BaselineID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetBaselineRequirementDetails" ReturnType="Collection(TigraModel.GetBaselineRequirementDetails_Result)">
-            <Parameter Name="RevisionID" Mode="In" Type="Int64" />
+          <Parameter Name="RevisionID" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="SelectRequirement">
+            <Parameter Name="Cell" Mode="In" Type="String" />
+            <Parameter Name="LeftTag" Mode="In" Type="String" />
+            <Parameter Name="RightTag" Mode="In" Type="String" />
+            <Parameter Name="UserID" Mode="In" Type="Int32" />
+            <Parameter Name="Message" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Baseline">
@@ -1143,6 +1157,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SelectRequirement" FunctionName="TigraModel.Store.SelectRequirement" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

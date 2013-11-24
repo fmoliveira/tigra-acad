@@ -101,6 +101,13 @@ namespace Tigra.Controllers
         }
 
         [Authorize]
+        [HttpPost]
+        public ActionResult ExistingRequirement(UseExistingRequirementModel model)
+        {
+            return View(model);
+        }
+
+        [Authorize]
         public ActionResult Create()
         {
             var model = new StoriesCreateModel();

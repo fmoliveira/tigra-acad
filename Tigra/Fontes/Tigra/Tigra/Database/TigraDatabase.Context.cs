@@ -215,5 +215,30 @@ namespace Tigra.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBaselineRequirementDetails_Result>("GetBaselineRequirementDetails", revisionIDParameter);
         }
+    
+        public virtual int SelectRequirement(string cell, string leftTag, string rightTag, Nullable<int> userID, string message)
+        {
+            var cellParameter = cell != null ?
+                new ObjectParameter("Cell", cell) :
+                new ObjectParameter("Cell", typeof(string));
+    
+            var leftTagParameter = leftTag != null ?
+                new ObjectParameter("LeftTag", leftTag) :
+                new ObjectParameter("LeftTag", typeof(string));
+    
+            var rightTagParameter = rightTag != null ?
+                new ObjectParameter("RightTag", rightTag) :
+                new ObjectParameter("RightTag", typeof(string));
+    
+            var userIDParameter = userID.HasValue ?
+                new ObjectParameter("UserID", userID) :
+                new ObjectParameter("UserID", typeof(int));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SelectRequirement", cellParameter, leftTagParameter, rightTagParameter, userIDParameter, messageParameter);
+        }
     }
 }

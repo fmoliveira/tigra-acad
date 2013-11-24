@@ -13,13 +13,13 @@
     <p>Selecione abaixo o requisito que deseja vincular a esta história:</p>
 
     @if (Model == null || Model.Count() == 0) {
-    @:Nenhum requisito implementado.
+        @:Nenhum requisito implementado.
     }
     else
     {
 		<div class="list-group" id="requirements">
 			@foreach (var m in Model) {
-				<a href="#" onclick="return false;" class="list-group-item">
+				<a href="#" data-tag="@Html.Raw(m.Tag)" onclick="return false;" class="list-group-item">
 					<p class="list-group-item-heading"><strong>@Html.Raw(m.Title)</strong></p>
 					<p class="list-group-item-text">@Html.Raw(m.Descricao)</p>
 				</a>
@@ -44,7 +44,36 @@
 
         if ($action == "SelectRequirement") {
             if ($('div#requirements > a.active').length == 1) {
-                //
+                var $uri = $('body').data('api') + $action;
+                var $data = JSON.stringify({
+                    "Cell": window.location.pathname.substring(1, window.location.pathname.substring(1).indexOf('/') + 1),
+                    "LeftTag": window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1),
+                    "RightTag": $('div#requirements > a.active').data('tag')
+                });
+
+                /* Post login data. */
+                $.ajax({
+                    url: $uri,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: $data,
+                    contentType: 'application/json; charset=utf-8',
+                    complete: function (x, y, z) {
+                        switch (x.status) {
+                            case 200:
+                                window.location = window.location.pathname.substring(0, window.location.pathname.substring(1).indexOf('/') + 2) + 'Requirements/' + $('div#requirements > a.active').data('tag') + '/Edit';
+                                break;
+
+                            case 500:
+                                alert('Erro no servidor!');
+                                break;
+
+                            default:
+                                alert('Erro inesperado (código ' + x.status + ')!');
+                                break;
+                        }
+                    }
+                });
             }
             else {
                 alert('Selecione o requisito a ser alterado!');

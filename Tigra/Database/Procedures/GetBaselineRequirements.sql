@@ -25,7 +25,7 @@ BEGIN
 	SELECT v.[RevisionID], v.[RevisionNumber], v.[UserID], v.[Title], v.[BaselineDate]
 	FROM [BaselineRevisions] AS b
 		INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = b.[RequirementID] AND v.[RevisionNumber] = b.[RevisionNumber]
-	;
+	ORDER BY Title;
 
 END
 GO

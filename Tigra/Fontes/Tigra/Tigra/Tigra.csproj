@@ -127,6 +127,7 @@
     <Compile Include="Api\LoginController.cs" />
     <Compile Include="Api\SaveProfileController.cs" />
     <Compile Include="Api\RegisterController.cs" />
+    <Compile Include="Api\SelectRequirementController.cs" />
     <Compile Include="Api\TeamManageController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Models\TeamManageModel.cs" />
@@ -265,6 +266,7 @@
     <Compile Include="Models\MyProfileModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleModel.cs" />
     <Compile Include="Models\TeamMemberModel.cs" />
+    <Compile Include="Models\UseExistingRequirementModel.cs" />
     <Compile Include="Models\UserNameModel.cs" />
     <Compile Include="Models\UserRatingModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

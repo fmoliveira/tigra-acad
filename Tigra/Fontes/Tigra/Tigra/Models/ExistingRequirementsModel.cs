@@ -26,6 +26,9 @@ namespace Tigra.Models
         [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
+        [DisplayName("Tag")]
+        public string Tag { get; set; }
+
         public ExistingRequirementsModel()
         {
             //
@@ -39,6 +42,7 @@ namespace Tigra.Models
             this.Revisao = res.RevisionNumber;
             this.Modificacao = res.RevisionDate;
             this.Descricao = res.Text;
+            this.Tag = res.Tag;
 
             string[] words = this.Descricao.Split(new char[] { ' ' });
             this.Descricao = String.Empty;
