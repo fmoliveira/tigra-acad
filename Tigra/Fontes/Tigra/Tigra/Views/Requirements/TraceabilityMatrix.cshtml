@@ -1,0 +1,33 @@
+﻿@using BootstrapSupport
+@model System.Collections.Generic.List<Tigra.Models.TraceMatrixItemModel>
+
+@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Matriz de Rastreabilidade</h4>
+</div>
+<div class="modal-body">
+
+    @if (Model == null || Model.Count() == 0)
+    {
+        @:Nenhum requisito implementado.
+    }
+    else
+    {
+        <div class="list-group" id="requirements">
+            @foreach (var m in Model)
+            {
+                <a href="@Url.Action("Details", "Requirements", new { @tag = m.Tag })" class="list-group-item">
+                    <p class="list-group-item-heading"><strong>@Html.Raw(m.Title)</strong></p>
+                    <p class="list-group-item-text">@Html.Raw(m.Descricao)</p>
+                </a>
+            }
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+</div>

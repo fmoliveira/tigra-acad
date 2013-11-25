@@ -194,6 +194,9 @@
     <Compile Include="Database\GetRequirementsIndex_Result.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\GetTraceabilityMatrix_Result.cs">
+      <DependentUpon>TigraDatabase.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Requirement.cs">
       <DependentUpon>TigraDatabase.tt</DependentUpon>
     </Compile>
@@ -266,6 +269,7 @@
     <Compile Include="Models\MyProfileModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleModel.cs" />
     <Compile Include="Models\TeamMemberModel.cs" />
+    <Compile Include="Models\TraceMatrixItemModel.cs" />
     <Compile Include="Models\UseExistingRequirementModel.cs" />
     <Compile Include="Models\UserNameModel.cs" />
     <Compile Include="Models\UserRatingModel.cs" />
@@ -553,6 +557,7 @@
     <Content Include="Views\Baseline\Details.cshtml" />
     <Content Include="Views\shared\DisplayTemplates\List_Requirements.cshtml" />
     <Content Include="Views\Baseline\View.cshtml" />
+    <Content Include="Views\Requirements\TraceabilityMatrix.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

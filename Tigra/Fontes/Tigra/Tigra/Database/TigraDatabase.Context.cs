@@ -240,5 +240,14 @@ namespace Tigra.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SelectRequirement", cellParameter, leftTagParameter, rightTagParameter, userIDParameter, messageParameter);
         }
+    
+        public virtual ObjectResult<GetTraceabilityMatrix_Result> GetTraceabilityMatrix(string tag)
+        {
+            var tagParameter = tag != null ?
+                new ObjectParameter("Tag", tag) :
+                new ObjectParameter("Tag", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTraceabilityMatrix_Result>("GetTraceabilityMatrix", tagParameter);
+        }
     }
 }

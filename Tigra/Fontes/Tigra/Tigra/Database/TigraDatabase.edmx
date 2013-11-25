@@ -310,6 +310,9 @@
           <Parameter Name="ReqTypeID" Type="smallint" Mode="In" />
           <Parameter Name="BaselineDate" Type="datetime2" Mode="In" />
         </Function>
+        <Function Name="GetTraceabilityMatrix" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="Tag" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SaveRequirement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="ReqTypeID" Type="smallint" Mode="In" />
           <Parameter Name="CellID" Type="int" Mode="In" />
@@ -523,6 +526,9 @@
             <Parameter Name="RightTag" Mode="In" Type="String" />
             <Parameter Name="UserID" Mode="In" Type="Int32" />
             <Parameter Name="Message" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetTraceabilityMatrix" ReturnType="Collection(TigraModel.GetTraceabilityMatrix_Result)">
+            <Parameter Name="Tag" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Baseline">
@@ -890,6 +896,15 @@
           <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
           <Property Type="DateTime" Name="BaselineDate" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="GetTraceabilityMatrix_Result">
+          <Property Type="Int64" Name="RevisionID" Nullable="false" />
+          <Property Type="Int16" Name="RevisionNumber" Nullable="false" />
+          <Property Type="DateTime" Name="RevisionDate" Nullable="false" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Tag" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1158,6 +1173,19 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SelectRequirement" FunctionName="TigraModel.Store.SelectRequirement" />
+          <FunctionImportMapping FunctionImportName="GetTraceabilityMatrix" FunctionName="TigraModel.Store.GetTraceabilityMatrix">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TigraModel.GetTraceabilityMatrix_Result">
+                <ScalarProperty Name="RevisionID" ColumnName="RevisionID" />
+                <ScalarProperty Name="RevisionNumber" ColumnName="RevisionNumber" />
+                <ScalarProperty Name="RevisionDate" ColumnName="RevisionDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -150,5 +150,17 @@ namespace Tigra.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult TraceabilityMatrix(string tag)
+        {
+            using (var ctx = new Entities())
+            {
+                var list = ctx.GetTraceabilityMatrix(tag).ToList();
+                var model = new List<TraceMatrixItemModel>();
+                list.ForEach(i => model.Add(new TraceMatrixItemModel(i)));
+                return View(model);
+            }
+        }
+
     }
 }
