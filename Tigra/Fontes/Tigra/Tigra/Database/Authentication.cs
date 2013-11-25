@@ -101,7 +101,7 @@ namespace Tigra.Database
             using (var ctx = new Entities())
             {
                 var ret = from t in ctx.Teams where t.UserID == user.UserID && t.Role.RoleName.ToLower().Contains("dono") select t;
-                return (ret.Count() == 1);
+                return (ret.Count() != 1);
             }
         }
 
