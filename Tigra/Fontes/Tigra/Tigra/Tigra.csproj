@@ -283,6 +283,9 @@
     <Content Include="Content\bootstrap\datepicker.css" />
     <Content Include="Content\bootstrap\jumbotron.css" />
     <Content Include="Content\carousel.css" />
+    <Content Include="Content\ico1.png" />
+    <Content Include="Content\ico2.png" />
+    <Content Include="Content\ico3.png" />
     <Content Include="Content\loading.gif" />
     <Content Include="Content\logo_email.png" />
     <Content Include="Content\themes\amelia.css" />
