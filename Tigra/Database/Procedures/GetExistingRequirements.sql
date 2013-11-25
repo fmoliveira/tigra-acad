@@ -28,6 +28,7 @@ BEGIN
 		INNER JOIN [Tigra].[RequirementRevisions] AS v ON v.[RequirementID] = r.[RequirementID] AND v.[RevisionNumber] = r.[RevisionNumber]
 		INNER JOIN [Tigra].[RequirementTexts] AS t ON t.[RevisionID] = v.[RevisionID]
 	WHERE v.[BaselineDate] IS NOT NULL AND @LatestBaseline IS NOT NULL AND v.[BaselineDate] < @LatestBaseline
+		AND v.[Archived] = 0
 	ORDER BY [Title] ASC;
 
 END

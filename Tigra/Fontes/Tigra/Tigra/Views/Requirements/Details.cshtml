@@ -45,6 +45,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>@Html.ActionLink("Requisito implementado", "MarkAsDone", routevalues)</li>
+                        <li>@Html.ActionLink("Cancelar implementação", "CancelAndArchive", routevalues, new { @data_tigra = "modal" })</li>
                     </ul>
                 </div>
             }

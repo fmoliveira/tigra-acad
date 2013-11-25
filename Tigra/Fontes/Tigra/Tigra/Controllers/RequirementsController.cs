@@ -162,5 +162,13 @@ namespace Tigra.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult CancelAndArchive(string tag)
+        {
+            int cellID = RouteData.Values["cell"].GetCellID();
+            RequirementNameModel model = new RequirementNameModel(cellID, tag);
+            return View(model);
+        }
+
     }
 }

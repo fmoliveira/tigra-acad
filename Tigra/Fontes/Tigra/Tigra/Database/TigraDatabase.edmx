@@ -53,6 +53,7 @@
           <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Tag" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="BaselineDate" Type="datetime2" Precision="0" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Requirements">
           <Key>
@@ -274,6 +275,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="ArchiveRequirement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
+          <Parameter Name="CellID" Type="int" Mode="In" />
+          <Parameter Name="Tag" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="GetBaselineList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="Tigra">
           <Parameter Name="CellID" Type="int" Mode="In" />
         </Function>
@@ -528,6 +533,10 @@
             <Parameter Name="Message" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetTraceabilityMatrix" ReturnType="Collection(TigraModel.GetTraceabilityMatrix_Result)">
+          <Parameter Name="Tag" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ArchiveRequirement">
+            <Parameter Name="CellID" Mode="In" Type="Int32" />
             <Parameter Name="Tag" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
@@ -573,6 +582,7 @@
           <NavigationProperty Name="RequirementRating" Relationship="TigraModel.fk_Tigra_RequirementRatings_Rev" FromRole="RequirementRevision" ToRole="RequirementRating" />
           <NavigationProperty Name="UserRatings" Relationship="TigraModel.fk_Tigra_UserRatings_Rev" FromRole="RequirementRevision" ToRole="UserRating" />
           <Property Name="BaselineDate" Type="DateTime" Precision="0" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -935,6 +945,7 @@
           <EntitySetMapping Name="RequirementRevisions">
             <EntityTypeMapping TypeName="TigraModel.RequirementRevision">
               <MappingFragment StoreEntitySet="RequirementRevisions">
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="BaselineDate" ColumnName="BaselineDate" />
                 <ScalarProperty Name="Published" ColumnName="Published" />
                 <ScalarProperty Name="Tag" ColumnName="Tag" />
@@ -1186,6 +1197,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ArchiveRequirement" FunctionName="TigraModel.Store.ArchiveRequirement" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

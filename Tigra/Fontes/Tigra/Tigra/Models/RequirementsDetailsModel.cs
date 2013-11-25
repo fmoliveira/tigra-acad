@@ -46,6 +46,7 @@ namespace Tigra.Models
         public bool Implemented = false;
         public string ComentarioRevisao = string.Empty;
         public DateTime? LatestBaseline = null;
+        public bool Archived = false;
 
         public RequirementsDetailsModel()
         {
@@ -68,6 +69,7 @@ namespace Tigra.Models
                 int logged = Authentication.GetLoggedUser().UserID;
                 this.Rated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
+                this.Archived = (ctx.RequirementRevisions.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Archived == true) != null);
 
                 if (this.Rated)
                 {
@@ -113,6 +115,11 @@ namespace Tigra.Models
                 }
 
                 this.Published = false;
+            }
+            else if (this.Archived)
+            {
+                this.Status = "Cancelado";
+                this.Implemented = true;
             }
             else
             {

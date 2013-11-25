@@ -249,5 +249,18 @@ namespace Tigra.Database
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetTraceabilityMatrix_Result>("GetTraceabilityMatrix", tagParameter);
         }
+    
+        public virtual int ArchiveRequirement(Nullable<int> cellID, string tag)
+        {
+            var cellIDParameter = cellID.HasValue ?
+                new ObjectParameter("CellID", cellID) :
+                new ObjectParameter("CellID", typeof(int));
+    
+            var tagParameter = tag != null ?
+                new ObjectParameter("Tag", tag) :
+                new ObjectParameter("Tag", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("ArchiveRequirement", cellIDParameter, tagParameter);
+        }
     }
 }

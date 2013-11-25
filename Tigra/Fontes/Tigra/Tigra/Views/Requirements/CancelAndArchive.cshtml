@@ -1,0 +1,58 @@
+﻿@using BootstrapSupport
+@model Tigra.Models.RequirementNameModel
+
+@{
+    Layout = null;
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Cancelar implementação</h4>
+</div>
+<div class="modal-body">
+    <p>Deseja cancelar este requisito? Isto o arquivará definitivamente, não sendo possível reverter a operação.</p>
+    <p>Você tem certeza?</p>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+    <button type="button" class="btn btn-primary" data-action="CancelAndArchive">Sim</button>
+</div>
+
+<script type="text/javascript">
+    $('button[data-action!=""]').click(function () {
+        var $action = $(this).data('action');
+
+        if ($action == "CancelAndArchive") {
+            var $uri = $('body').data('api') + $action;
+            var $data = JSON.stringify({
+                "CellID": @Html.Raw(Model.CellID),
+                "Tag": "@Html.Raw(Model.Tag)"
+            });
+
+            /* Post login data. */
+            $.ajax({
+                url: $uri,
+                type: 'POST',
+                dataType: 'json',
+                data: $data,
+                contentType: 'application/json; charset=utf-8',
+                complete: function (x, y, z) {
+                    switch (x.status) {
+                        case 200:
+                            window.location = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+                            break;
+
+                        case 500:
+                            alert('Erro no servidor!');
+                            break;
+
+                        default:
+                            alert('Erro inesperado (código ' + x.status + ')!');
+                            break;
+                    }
+                }
+            });
+        }
+    });
+</script>

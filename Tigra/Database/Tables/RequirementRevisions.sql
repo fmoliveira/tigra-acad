@@ -13,6 +13,7 @@ BEGIN
 		[Title] VARCHAR(100) NOT NULL CHECK(LEN([Title]) >= 10),
 		[Tag] VARCHAR(100) NOT NULL,
 		[BaselineDate] DATETIME2(0) NULL,
+		[Archived] BIT NOT NULL DEFAULT 0,
 		CONSTRAINT [pk_Tigra_RequirementRevisions_Key] PRIMARY KEY ([RevisionID]),
 		CONSTRAINT [fk_Tigra_RequirementRevisions_Req] FOREIGN KEY ([RequirementID]) REFERENCES [Tigra].[Requirements] ([RequirementID]),
 		CONSTRAINT [fk_Tigra_RequirementRevisions_User] FOREIGN KEY ([UserID]) REFERENCES [Tigra].[UserAccounts] ([UserID])

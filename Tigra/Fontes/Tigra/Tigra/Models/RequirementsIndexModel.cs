@@ -30,6 +30,7 @@ namespace Tigra.Models
         public bool Rated = false;
         public bool Approved = false;
         public DateTime? LatestBaseline = null;
+        public bool Archived = false;
 
         public RequirementsIndexModel(GetRequirementsIndex_Result item)
         {
@@ -44,6 +45,7 @@ namespace Tigra.Models
                 this.Published = item.Published;
                 this.Rated = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID) != null);
                 this.Approved = (ctx.RequirementRatings.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Approved == true) != null);
+                this.Archived = (ctx.RequirementRevisions.FirstOrDefault(i => i.RevisionID == item.RevisionID && i.Archived == true) != null);
 
                 var bl = (from i in ctx.Baselines orderby i.SetDate descending select i.SetDate).Take(1);
 
@@ -78,6 +80,10 @@ namespace Tigra.Models
             {
                 this.Status = "Reprovado";
                 this.Published = false;
+            }
+            else if (this.Archived)
+            {
+                this.Status = "Cancelado";
             }
             else
             {
